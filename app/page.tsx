@@ -19,6 +19,7 @@ import {
   Sofa,
   Briefcase,
   Hammer,
+  LucideIcon,
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -34,50 +35,6 @@ const colors = {
   silver: "#E5E7EB", // purity (silver/white)
   midnight: "#081A31", // darker navy for sections
 };
-
-// Inline SVG logo: shield + wave + sparkle
-function GleamLogo({ size = 42 }: { size?: number }) {
-  return (
-    <svg
-      width={size}
-      height={size}
-      viewBox="0 0 128 128"
-      fill="none"
-      xmlns="http://www.w3.org/2000/svg"
-      aria-label="Gleam Pro Cleaning logo"
-    >
-      <defs>
-        <linearGradient id="goldGrad" x1="0" y1="0" x2="128" y2="128">
-          <stop offset="0%" stopColor={colors.gold} />
-          <stop offset="100%" stopColor="#F3D98F" />
-        </linearGradient>
-      </defs>
-      {/* Shield */}
-      <path
-        d="M64 8c15 10 31 12 48 12 0 28-5 49-15 62-10 14-21 22-33 26-12-4-23-12-33-26S16 48 16 20c17 0 33-2 48-12z"
-        stroke="url(#goldGrad)"
-        strokeWidth="6"
-        fill="none"
-      />
-      {/* Wave */}
-      <path
-        d="M28 62c14-10 30-11 44 2 6 5 14 8 22 6-2 9-11 17-24 17-21 0-28-17-42-25z"
-        fill={colors.emerald}
-      />
-      <path
-        d="M36 66c10-7 22-7 32 1 6 4 13 6 19 5-3 7-10 12-20 12-17 0-23-12-31-18z"
-        fill="#0B6B4A"
-      />
-      {/* Sparkle */}
-      <path
-        d="M94 30l4 10 10 4-10 4-4 10-4-10-10-4 10-4 4-10z"
-        fill={colors.silver}
-        stroke={colors.gold}
-        strokeWidth="2"
-      />
-    </svg>
-  );
-}
 
 const nav = [
   { label: "Services", href: "#services" },
@@ -102,7 +59,7 @@ function Stat({ value, label }: { value: string; label: string }) {
   );
 }
 
-function Badge({ icon: Icon, text }: { icon: any; text: string }) {
+function Badge({ icon: Icon, text }: { icon: LucideIcon; text: string }) {
   return (
     <div className="flex items-center gap-2 bg-white/5 rounded-full px-3 py-2 border border-white/10">
       <Icon className="w-4 h-4" style={{ color: colors.emerald }} />
@@ -144,15 +101,18 @@ export default function Page() {
       <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/5 bg-white/0 border-b border-white/10">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3">
-            <GleamLogo />
+            <img
+              src="/logo-gpc.png"
+              alt="Gleam Pro Cleaning logo"
+              className="h-10 w-10"
+            />
+
             <div className="leading-tight">
               <div
                 className="font-semibold tracking-wide"
                 style={{ color: colors.gold }}
-              >
-                GLEAM PRO
-              </div>
-              <div className="text-xs uppercase text-white/80">Cleaning</div>
+              ></div>
+              <div className="text-xs uppercase text-white/80"></div>
             </div>
           </a>
           <nav className="hidden md:flex items-center gap-6">
@@ -166,10 +126,11 @@ export default function Page() {
               </a>
             ))}
             <Button
+              asChild
               className="rounded-2xl px-5"
               style={{ backgroundColor: colors.emerald }}
             >
-              Book Now
+              <a href="#quote">Book Now</a>
             </Button>
           </nav>
         </div>
@@ -177,13 +138,18 @@ export default function Page() {
 
       {/* Hero */}
       <section className="relative overflow-hidden">
+        {/* Decorative overlay (non-blocking for clicks) */}
         <div
-          className="absolute inset-0 opacity-10"
+          className="absolute inset-0 opacity-10 pointer-events-none z-0"
           style={{
-            background: `radial-gradient(600px 300px at 20% 20%, ${colors.gold}, transparent), radial-gradient(600px 300px at 80% 10%, ${colors.emerald}, transparent)`,
+            background: `radial-gradient(600px 300px at 20% 20%, ${colors.gold}, transparent),
+                   radial-gradient(600px 300px at 80% 10%, ${colors.emerald}, transparent)`,
           }}
         />
-        <div className="max-w-6xl mx-auto px-4 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center">
+
+        {/* Content */}
+        <div className="max-w-6xl mx-auto px-4 py-20 md:py-28 grid md:grid-cols-2 gap-10 items-center relative z-10">
+          {/* Left column */}
           <div>
             <motion.h1
               initial={{ opacity: 0, y: 12 }}
@@ -194,24 +160,34 @@ export default function Page() {
               Elevate your space with{" "}
               <span style={{ color: colors.gold }}>prestige</span> cleaning.
             </motion.h1>
+
             <p className="mt-4 text-white/85 max-w-xl">
               Professional. Inspiring. Trustworthy. Gleam Pro Cleaning delivers
               hotel-level brilliance and peace of mind—so you can shine in what
               matters most.
             </p>
+
             <div className="mt-6 flex flex-wrap gap-3">
               <Badge icon={Shield} text="Fully insured & vetted" />
               <Badge icon={Sparkles} text="5-Star Detail Standard" />
               <Badge icon={Star} text="Prestige Guarantee" />
             </div>
+
             <div className="mt-8 flex items-center gap-3">
+              {/* Scrolls to the quote form on the right */}
               <Button
+                asChild
                 className="rounded-2xl px-6 py-6 text-base"
                 style={{ backgroundColor: colors.emerald }}
               >
-                Get an Instant Quote <ChevronRight className="ml-1 w-4 h-4" />
+                <a href="#quote">
+                  Get an Instant Quote <ChevronRight className="ml-1 w-4 h-4" />
+                </a>
               </Button>
+
+              {/* Scrolls to Services section */}
               <Button
+                asChild
                 variant="outline"
                 className="rounded-2xl px-6 py-6 text-base border"
                 style={{
@@ -220,9 +196,10 @@ export default function Page() {
                   background: "transparent",
                 }}
               >
-                Explore Services
+                <a href="#services">Explore Services</a>
               </Button>
             </div>
+
             <div className="mt-10 grid grid-cols-3 gap-4">
               <Stat value="500+" label="Spaces Elevated" />
               <Stat value="98%" label="Repeat Clients" />
@@ -230,7 +207,9 @@ export default function Page() {
             </div>
           </div>
 
+          {/* Right column: Quote form card */}
           <motion.div
+            id="quote"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
@@ -238,26 +217,45 @@ export default function Page() {
             <Card className="bg-white/95 text-slate-900 border-0 shadow-xl rounded-2xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-xl">
-                  <GleamLogo size={28} />
+                  <img
+                    src="/logo-gpc-bg.png"
+                    alt="Gleam Pro Cleaning logo"
+                    className="h-22 w-auto"
+                  />
                   Request a Prestige Clean
                 </CardTitle>
               </CardHeader>
-              <CardContent className="space-y-3">
-                <Input placeholder="Full Name" />
-                <Input placeholder="Email" type="email" />
-                <Input placeholder="Phone" />
-                <Input placeholder="City / Neighbourhood" />
-                <Textarea placeholder="Tell us about your space (size, rooms, preferences)" />
-                <Button
-                  className="w-full rounded-xl"
-                  style={{ backgroundColor: colors.navy, color: "white" }}
-                  onClick={() => setSent(true)}
+              <CardContent>
+                <form
+                  action="https://formspree.io/f/xkgvkrgy"
+                  method="POST"
+                  className="space-y-3"
+                  onSubmit={() => setSent(true)}
                 >
-                  {sent ? "Request Sent ✓" : "Get My Quote"}
-                </Button>
-                <p className="text-xs text-slate-600">
-                  By submitting, you agree to our Terms & Privacy Policy.
-                </p>
+                  <Input name="name" placeholder="Full Name" required />
+                  <Input
+                    name="email"
+                    placeholder="Email"
+                    type="email"
+                    required
+                  />
+                  <Input name="phone" placeholder="Phone" />
+                  <Input name="city" placeholder="City / Neighbourhood" />
+                  <Textarea
+                    name="details"
+                    placeholder="Tell us about your space (size, rooms, preferences)"
+                  />
+                  <Button
+                    type="submit"
+                    className="w-full rounded-xl"
+                    style={{ backgroundColor: colors.navy, color: "white" }}
+                  >
+                    {sent ? "Request Sent ✓" : "Get My Quote"}
+                  </Button>
+                  <p className="text-xs text-slate-600">
+                    By submitting, you agree to our Terms & Privacy Policy.
+                  </p>
+                </form>
               </CardContent>
             </Card>
           </motion.div>
@@ -283,7 +281,7 @@ export default function Page() {
         </div>
       </section>
 
-      {/* Services (cards + details) */}
+      {/* Services */}
       <section id="services" className="max-w-6xl mx-auto px-4 py-16">
         <div className="text-center max-w-2xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold">
@@ -295,6 +293,7 @@ export default function Page() {
           </p>
         </div>
 
+        {/* Top service cards (overview) */}
         <div className="mt-10 grid md:grid-cols-3 gap-6">
           {[
             {
@@ -345,7 +344,7 @@ export default function Page() {
           ))}
         </div>
 
-        {/* Detailed sections with anchors */}
+        {/* Detailed sections with uniform 3-card layout */}
         <div className="mt-16 space-y-16">
           {/* Home */}
           <div id="service-home">
@@ -357,6 +356,7 @@ export default function Page() {
               A premium clean tailored to your lifestyle. Ideal for recurring
               weekly/bi-weekly service or a one-time deep refresh.
             </p>
+
             <div className="mt-6 grid md:grid-cols-3 gap-6">
               <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
                 <h4 className="font-semibold" style={{ color: colors.gold }}>
@@ -367,32 +367,33 @@ export default function Page() {
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Counters, backsplash, sinks, taps
                   </li>
                   <li className="flex gap-2">
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Appliance exteriors + stovetop
                   </li>
                   <li className="flex gap-2">
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Cabinet fronts (spot wipe)
                   </li>
                   <li className="flex gap-2">
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Floors vacuum & mop
                   </li>
                 </ul>
               </div>
+
               <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
                 <h4 className="font-semibold" style={{ color: colors.gold }}>
                   Bathrooms
@@ -402,32 +403,33 @@ export default function Page() {
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Shower/tub, tile, glass, grout edges
                   </li>
                   <li className="flex gap-2">
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Toilets in/outside + base
                   </li>
                   <li className="flex gap-2">
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Mirrors, vanities, fixtures
                   </li>
                   <li className="flex gap-2">
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Floors vacuum & mop
                   </li>
                 </ul>
               </div>
+
               <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
                 <h4 className="font-semibold" style={{ color: colors.gold }}>
                   Living / Bedrooms
@@ -437,33 +439,34 @@ export default function Page() {
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Dusting (surfaces, decor, sills)
                   </li>
                   <li className="flex gap-2">
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Vacuum carpets & rugs
                   </li>
                   <li className="flex gap-2">
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Hard floors vacuum & mop
                   </li>
                   <li className="flex gap-2">
                     <Check
                       className="w-4 h-4"
                       style={{ color: colors.emerald }}
-                    />
+                    />{" "}
                     Make beds (upon request)
                   </li>
                 </ul>
               </div>
             </div>
+
             <div className="mt-6 flex flex-wrap gap-3 text-sm">
               <span className="px-3 py-2 rounded-full bg-white/5 border border-white/10">
                 Add-ons: Inside oven/fridge • Baseboards • Blinds • Inside
@@ -472,7 +475,7 @@ export default function Page() {
             </div>
           </div>
 
-          {/* Move In/Out */}
+          {/* Move-In / Move-Out */}
           <div id="service-move">
             <h3 className="text-2xl font-bold flex items-center gap-2">
               <Shield className="w-5 h-5" style={{ color: colors.gold }} />{" "}
@@ -482,27 +485,73 @@ export default function Page() {
               Detailed vacant clean to meet landlord/strata expectations and
               listing standards. Ideal before keys exchange.
             </p>
+
             <div className="mt-6 grid md:grid-cols-3 gap-6">
-              {[
-                "Inside appliances (fridge/oven)",
-                "Cabinets & drawers inside",
-                "Baseboards, trim, switches",
-                "Vent/return covers",
-                "Closets & shelves",
-                "Spot walls (within reach)",
-              ].map((it) => (
-                <div
-                  key={it}
-                  className="flex items-start gap-2 text-white/85 text-sm"
-                >
-                  <Check
-                    className="w-4 h-4"
-                    style={{ color: colors.emerald }}
-                  />
-                  {it}
-                </div>
-              ))}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Appliances
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Inside fridge/oven
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Vent/return covers
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Cabinetry & Storage
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Cabinets & drawers inside
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Closets & shelves
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Detailing
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Baseboards, trim, switches
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Spot walls (within reach)
+                  </li>
+                </ul>
+              </div>
             </div>
+
             <p className="mt-3 text-xs text-white/60">
               Note: Excessive paint/stain removal, high ladder work, and
               hazardous waste are quoted separately.
@@ -519,26 +568,71 @@ export default function Page() {
               Professional hot-water extraction and fabric-safe treatments to
               revive carpets, sofas, chairs, and rugs.
             </p>
+
             <div className="mt-6 grid md:grid-cols-3 gap-6">
-              {[
-                "Pre-treat high-traffic areas",
-                "Hot-water extraction",
-                "Spot/stain treatment",
-                "Deodorize & neutralize",
-                "Protectant add-on available",
-                "Dry time guidance",
-              ].map((it) => (
-                <div
-                  key={it}
-                  className="flex items-start gap-2 text-white/85 text-sm"
-                >
-                  <Check
-                    className="w-4 h-4"
-                    style={{ color: colors.emerald }}
-                  />
-                  {it}
-                </div>
-              ))}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Pre-Treatment
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Assess fibres & stains
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Pre-spray high-traffic areas
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Extraction & Clean
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Hot-water extraction
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Spot/stain treatment
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  After-Care
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Deodorize & neutralize
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Protectant add-on • Dry time tips
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -552,26 +646,71 @@ export default function Page() {
               Fast, hotel-grade staging for Airbnbs and executive rentals to
               protect ratings and wow guests.
             </p>
+
             <div className="mt-6 grid md:grid-cols-3 gap-6">
-              {[
-                "Linen change & bed styling",
-                "Hotel fold towels",
-                "Amenities restock checklist",
-                "Photo-ready staging",
-                "Laundry add-on",
-                "Damage/issue report",
-              ].map((it) => (
-                <div
-                  key={it}
-                  className="flex items-start gap-2 text-white/85 text-sm"
-                >
-                  <Check
-                    className="w-4 h-4"
-                    style={{ color: colors.emerald }}
-                  />
-                  {it}
-                </div>
-              ))}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Bedroom
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Linen change & bed styling
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Vacuum & dusting
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Bath & Amenities
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Hotel-fold towels
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Amenities restock
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Final Staging
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Photo-ready surfaces
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Laundry add-on • Damage report
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -585,26 +724,71 @@ export default function Page() {
               Quiet, reliable routines for clinics, studios, and offices that
               require spotless presentation and hygiene.
             </p>
+
             <div className="mt-6 grid md:grid-cols-3 gap-6">
-              {[
-                "Reception & glass touchpoints",
-                "Sanitize washrooms & staff areas",
-                "Floors vacuum & mop",
-                "Bins & recycling",
-                "Desk-safe dusting",
-                "After-hours scheduling",
-              ].map((it) => (
-                <div
-                  key={it}
-                  className="flex items-start gap-2 text-white/85 text-sm"
-                >
-                  <Check
-                    className="w-4 h-4"
-                    style={{ color: colors.emerald }}
-                  />
-                  {it}
-                </div>
-              ))}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Reception & Common
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Glass & touchpoints
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Floors vacuum & mop
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Workspaces
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Desk-safe dusting
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Bins & recycling
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Washrooms
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Sanitize fixtures & counters
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    After-hours scheduling
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
 
@@ -618,36 +802,83 @@ export default function Page() {
               Fine-dust removal and detail work to transition from construction
               to move-in condition.
             </p>
+
             <div className="mt-6 grid md:grid-cols-3 gap-6">
-              {[
-                "Ceilings/corners dusting (extendable)",
-                "Baseboards, sills, frames",
-                "Cabinets & drawers in/out",
-                "Appliance detailing",
-                "Sticker/film peel (non-damaging)",
-                "Air vent cover wipe",
-              ].map((it) => (
-                <div
-                  key={it}
-                  className="flex items-start gap-2 text-white/85 text-sm"
-                >
-                  <Check
-                    className="w-4 h-4"
-                    style={{ color: colors.emerald }}
-                  />
-                  {it}
-                </div>
-              ))}
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Dusting & Air
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Ceilings/corners (extendable)
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Air vent cover wipe
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Cabinetry & Fixtures
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Cabinets & drawers in/out
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Appliance detailing
+                  </li>
+                </ul>
+              </div>
+              <div className="bg-white/5 border border-white/10 rounded-2xl p-5">
+                <h4 className="font-semibold" style={{ color: colors.gold }}>
+                  Floors & Finishes
+                </h4>
+                <ul className="mt-2 space-y-2 text-white/85 text-sm">
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Baseboards, sills, frames
+                  </li>
+                  <li className="flex gap-2">
+                    <Check
+                      className="w-4 h-4"
+                      style={{ color: colors.emerald }}
+                    />{" "}
+                    Sticker/film peel (non-damaging)
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
         </div>
 
+        {/* CTA to quote form */}
         <div className="mt-10 text-center">
           <Button
+            asChild
             className="rounded-2xl px-6 py-6 text-base"
             style={{ backgroundColor: colors.emerald }}
           >
-            Get an Instant Quote
+            <a href="#quote">Get an Instant Quote</a>
           </Button>
           <p className="text-xs text-white/60 mt-3">
             Custom scopes available. Tell us your priorities and we’ll tailor a
@@ -804,22 +1035,17 @@ export default function Page() {
               order, and prestige to your space.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Badge icon={Shield} text="Bonded & Insured" />
+              <Badge icon={Shield} text="Insured" />
               <Badge icon={Star} text="Client-first Culture" />
               <Badge icon={Sparkles} text="Detail Obsessed" />
             </div>
           </div>
           <div className="relative">
-            <div
-              className="aspect-video rounded-2xl border border-white/10 overflow-hidden"
-              style={{
-                background: `linear-gradient(135deg, ${colors.emerald}22, ${colors.gold}22)`,
-              }}
-            >
-              <div className="absolute inset-0 flex items-center justify-center opacity-60">
-                <GleamLogo size={120} />
-              </div>
-            </div>
+            <img
+              src="/logo-gpc.png"
+              alt="Gleam Pro Cleaning logo"
+              className="h-auto w-auto"
+            />
           </div>
         </div>
       </section>
@@ -899,7 +1125,7 @@ export default function Page() {
             {[
               {
                 q: "Are you insured and background-checked?",
-                a: "Yes. Our team is fully insured, bonded, and background-checked for your peace of mind.",
+                a: "Yes. Our team is fully insured and background-checked for your peace of mind.",
               },
               {
                 q: "Do you bring supplies and equipment?",
@@ -946,7 +1172,12 @@ export default function Page() {
         <div className="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8 text-sm">
           <div>
             <div className="flex items-center gap-2">
-              <GleamLogo />
+              <img
+                src="/logo-gpc.png"
+                alt="Gleam Pro Cleaning logo"
+                className="h-22 w-22"
+              />
+
               <div>
                 <div className="font-semibold" style={{ color: colors.gold }}>
                   Gleam Pro Cleaning
@@ -975,7 +1206,7 @@ export default function Page() {
             <ul className="space-y-2 text-white/80">
               <li className="flex items-center gap-2">
                 <MapPin className="w-4 h-4" />
-                Vancouver, BC
+                New Westminster, BC
               </li>
               <li className="flex items-center gap-2">
                 <Phone className="w-4 h-4" />
@@ -1009,7 +1240,8 @@ export default function Page() {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             name: "Gleam Pro Cleaning",
-            image: "https://www.gleamprocleaning.com/logo-gpc.png",
+            image: "/logo-gpc.png",
+
             telephone: "+1-672-970-3755",
             email: "hello@gleamprocleaning.com",
             address: {
@@ -1019,7 +1251,7 @@ export default function Page() {
               addressCountry: "CA",
             },
             areaServed: "Greater Vancouver",
-            url: "https://www.gleamprocleaning.com",
+            url: "https://www.gleampro.ca",
             sameAs: [
               "https://instagram.com/gleampro",
               "https://facebook.com/gleampro",
