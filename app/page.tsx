@@ -104,7 +104,7 @@ export default function Page() {
             <img
               src="/logo-gpc.png"
               alt="Gleam Pro Cleaning logo"
-              className="h-10 w-10"
+              className="h-8 w-auto md:h-10"
             />
 
             <div className="leading-tight">
