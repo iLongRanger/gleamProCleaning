@@ -86,7 +86,7 @@ export default function Page() {
             </div>
             <div className="flex items-center gap-2">
               <Mail className="w-4 h-4" />
-              <span>hello@gleamprocleaning.com</span>
+              <span>hello@gleamlift.ca</span>
             </div>
           </div>
           <div className="flex items-center gap-4 opacity-80">
