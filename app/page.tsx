@@ -27,6 +27,9 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 
+// ✅ import the modal
+import ChoosePlanModal from "@/components/ChoosePlanModal";
+
 // Brand palette
 const colors = {
   navy: "#0B2545", // trust
@@ -70,6 +73,10 @@ function Badge({ icon: Icon, text }: { icon: LucideIcon; text: string }) {
 
 export default function Page() {
   const [sent, setSent] = useState(false);
+
+  // ✅ modal state
+  const [open, setOpen] = useState(false);
+  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
 
   return (
     <div style={{ backgroundColor: colors.navy }} className="text-white">
@@ -1002,11 +1009,17 @@ export default function Page() {
                     <span>{it}</span>
                   </div>
                 ))}
+                {/* ✅ Choose Plan button opens modal with the plan name */}
                 <Button
                   className="w-full rounded-xl mt-2"
                   style={{
                     backgroundColor: i === 1 ? colors.emerald : colors.navy,
                     color: "white",
+                  }}
+                  type="button"
+                  onClick={() => {
+                    setSelectedPlan(t.name);
+                    setOpen(true);
                   }}
                 >
                   Choose Plan
@@ -1234,14 +1247,13 @@ export default function Page() {
 
       {/* JSON-LD LocalBusiness SEO */}
       <script
-        // biome-ignore lint/security/noDangerouslySetInnerHtml: JSON-LD requires raw injection
+        type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             name: "Gleam Pro Cleaning",
             image: "/logo-gpc.png",
-
             telephone: "+1-672-970-3755",
             email: "hello@gleamprocleaning.com",
             address: {
@@ -1260,6 +1272,21 @@ export default function Page() {
             openingHours: ["Mo-Fr 08:00-18:00", "Sa 09:00-16:00"],
           }),
         }}
+      />
+
+      {/* ✅ Mount modal once at the end so it's above everything */}
+      <ChoosePlanModal
+        open={open}
+        plan={selectedPlan}
+        onClose={() => setOpen(false)}
+        // Optional: submit to API later
+        // onSubmit={async (data) => {
+        //   await fetch("/api/choose-plan", {
+        //     method: "POST",
+        //     headers: { "Content-Type": "application/json" },
+        //     body: JSON.stringify(data),
+        //   });
+        // }}
       />
     </div>
   );

@@ -1,7 +1,6 @@
 /* optional: your custom CSS below */
 
 @import "tailwindcss";
-@import "tw-animate-css";
 
 @custom-variant dark (&:is(.dark *));
 
@@ -125,4 +124,20 @@ html {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+/* Fix input/select/textarea text color inside modal */
+.gpc-modal input,
+.gpc-modal select,
+.gpc-modal textarea {
+  background: #fff;
+  color: #0f172a; /* slate-900 */
+}
+
+.gpc-modal option {
+  color: #0f172a;
+}
+
+.gpc-modal ::placeholder {
+  color: #6b7280; /* slate-500 */
 }
