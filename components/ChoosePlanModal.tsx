@@ -23,6 +23,7 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
   const [error, setError] = useState<string | null>(null);
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
+  // Reset when closed
   useEffect(() => {
     if (!open) {
       setSubmitted(false);
@@ -42,7 +43,7 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
 
   return (
     <div className="fixed inset-0 z-[1000]">
-      {/* Backdrop */}
+      {/* Backdrop (click to close) */}
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm"
         onClick={onClose}
@@ -62,8 +63,18 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
           w-full sm:w-[36rem] md:w-[42rem]
         "
       >
-        {/* gpc-modal only affects control colors; no layout changes */}
+        {/* Only class added for readable inputs */}
         <div className="mx-auto rounded-t-2xl sm:rounded-2xl bg-white p-5 sm:p-7 shadow-2xl gpc-modal">
+          {/* Optional close "X" */}
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label="Close"
+            className="hidden sm:block absolute right-4 top-3 text-slate-500 hover:text-slate-700"
+          >
+            ×
+          </button>
+
           {submitted ? (
             <Success onClose={onClose} />
           ) : (
@@ -71,6 +82,7 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
               plan={plan ?? null}
               onSuccess={() => setSubmitted(true)}
               onError={(msg) => setError(msg)}
+              onCancel={onClose} // ✅ cancel wired straight to parent close
             />
           )}
 
@@ -89,16 +101,17 @@ function Form({
   plan,
   onSuccess,
   onError,
+  onCancel,
 }: {
   plan: string | null;
   onSuccess: () => void;
   onError: (msg: string) => void;
+  onCancel: () => void;
 }) {
   const [loading, setLoading] = useState(false);
   const [pageUrl, setPageUrl] = useState<string>("");
 
   useEffect(() => {
-    // Capture the page they were on
     if (typeof window !== "undefined") setPageUrl(window.location.href);
   }, []);
 
@@ -114,7 +127,7 @@ function Form({
           const formEl = e.currentTarget as HTMLFormElement;
           const fd = new FormData(formEl);
 
-          // Add meta fields for context (optional, helpful in email)
+          // Helpful meta
           fd.set("_subject", "Gleam Pro Cleaning — Choose Plan Inquiry");
           fd.set("source", "Choose Plan Modal");
           if (pageUrl) fd.set("pageUrl", pageUrl);
@@ -130,7 +143,7 @@ function Form({
             onSuccess();
             formEl.reset();
           } else {
-            const data = await res.json().catch(() => ({}));
+            const data = await res.json().catch(() => ({} as any));
             const msg =
               data?.errors?.[0]?.message ||
               "We couldn't send your message. Please try again.";
@@ -302,16 +315,9 @@ function Form({
       <div className="flex flex-col sm:flex-row gap-3 sm:justify-end">
         <button
           type="button"
-          onClick={onError.bind(null, "") || (() => {}) || undefined}
+          onClick={onCancel} // ✅ simple and reliable
           className="w-full sm:w-auto rounded-xl px-4 py-2 font-medium"
           style={{ backgroundColor: colors.silver, color: colors.navy }}
-          onMouseDown={(e) => e.preventDefault()}
-          onClickCapture={(e) => {
-            e.preventDefault();
-            // use provided cancel callback from parent via close icon/backdrop, but here we just close:
-            const ev = new CustomEvent("close-choose-plan");
-            window.dispatchEvent(ev);
-          }}
         >
           Cancel
         </button>
