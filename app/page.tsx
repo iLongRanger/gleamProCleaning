@@ -26,6 +26,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import Image from "next/image";
 
 // ✅ import the modal
 import ChoosePlanModal from "@/components/ChoosePlanModal";
@@ -108,10 +109,12 @@ export default function Page() {
       <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/5 bg-white/0 border-b border-white/10">
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <a href="#" className="flex items-center gap-3">
-            <img
+            <Image
               src="/logo-gpc.png"
               alt="Gleam Pro Cleaning logo"
               className="h-8 w-auto md:h-10"
+              width={150}
+              height={50}
             />
 
             <div className="leading-tight">
@@ -224,10 +227,12 @@ export default function Page() {
             <Card className="bg-white/95 text-slate-900 border-0 shadow-xl rounded-2xl">
               <CardHeader>
                 <CardTitle className="flex items-center gap-2 text-xl">
-                  <img
+                  <Image
                     src="/logo-gpc-bg.png"
                     alt="Gleam Pro Cleaning logo"
                     className="h-22 w-auto"
+                    width={150}
+              height={50}
                   />
                   Request a Prestige Clean
                 </CardTitle>
@@ -1054,10 +1059,12 @@ export default function Page() {
             </div>
           </div>
           <div className="relative">
-            <img
+            <Image
               src="/logo-gpc.png"
               alt="Gleam Pro Cleaning logo"
               className="h-auto w-auto"
+              width={150}
+              height={50}
             />
           </div>
         </div>
@@ -1185,10 +1192,12 @@ export default function Page() {
         <div className="max-w-6xl mx-auto px-4 py-10 grid md:grid-cols-4 gap-8 text-sm">
           <div>
             <div className="flex items-center gap-2">
-              <img
+              <Image
                 src="/logo-gpc.png"
                 alt="Gleam Pro Cleaning logo"
                 className="h-22 w-22"
+                width={150}
+              height={50}
               />
 
               <div>

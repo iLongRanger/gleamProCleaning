@@ -33,7 +33,7 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
 
   // ESC to close
   useEffect(() => {
-    if (!open) return;
+    if (!open) return; 
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -82,7 +82,7 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
               plan={plan ?? null}
               onSuccess={() => setSubmitted(true)}
               onError={(msg) => setError(msg)}
-              onCancel={onClose} // ✅ cancel wired straight to parent close
+              onCancel={onClose}
             />
           )}
 
@@ -143,7 +143,12 @@ function Form({
             onSuccess();
             formEl.reset();
           } else {
-            const data = await res.json().catch(() => ({} as any));
+            // Define a type for the error response
+            type FormspreeError = {
+              errors?: { message: string }[];
+            };
+
+            const data: FormspreeError = await res.json().catch(() => ({}));
             const msg =
               data?.errors?.[0]?.message ||
               "We couldn't send your message. Please try again.";

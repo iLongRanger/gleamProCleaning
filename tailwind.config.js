@@ -1,12 +1,19 @@
-/** @type {import('tailwindcss').Config} */
-module.exports = {
+import colors from "./colors";
+
+const config = {
   content: [
     "./app/**/*.{js,ts,jsx,tsx,mdx}",
-    "./components/**/*.{js,ts,jsx,tsx,mdx}",
     "./pages/**/*.{js,ts,jsx,tsx,mdx}",
+    "./components/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        ...colors,
+      },
+    },
   },
-  plugins: [require("tw-animate-css")],
+  plugins: [],
 };
+
+export default config;
