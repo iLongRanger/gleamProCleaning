@@ -33,7 +33,7 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
 
   // ESC to close
   useEffect(() => {
-    if (!open) return; 
+    if (!open) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
@@ -50,7 +50,7 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
         aria-hidden="true"
       />
 
-      {/* Panel (layout unchanged) */}
+      {/* Panel */}
       <div
         ref={dialogRef}
         role="dialog"
@@ -61,11 +61,11 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
           inset-x-0 bottom-0
           sm:inset-auto sm:top-1/2 sm:left-1/2 sm:-translate-x-1/2 sm:-translate-y-1/2
           w-full sm:w-[36rem] md:w-[42rem]
+          max-h-[90vh] overflow-y-auto   /* ✅ responsive scrolling */
         "
       >
-        {/* Only class added for readable inputs */}
-        <div className="mx-auto rounded-t-2xl sm:rounded-2xl bg-white p-5 sm:p-7 shadow-2xl gpc-modal">
-          {/* Optional close "X" */}
+        <div className="mx-auto w-full sm:w-auto rounded-t-2xl sm:rounded-2xl bg-white p-4 sm:p-7 shadow-2xl gpc-modal relative">
+          {/* Close button */}
           <button
             type="button"
             onClick={onClose}
@@ -127,7 +127,6 @@ function Form({
           const formEl = e.currentTarget as HTMLFormElement;
           const fd = new FormData(formEl);
 
-          // Helpful meta
           fd.set("_subject", "Gleam Pro Cleaning — Choose Plan Inquiry");
           fd.set("source", "Choose Plan Modal");
           if (pageUrl) fd.set("pageUrl", pageUrl);
@@ -143,11 +142,7 @@ function Form({
             onSuccess();
             formEl.reset();
           } else {
-            // Define a type for the error response
-            type FormspreeError = {
-              errors?: { message: string }[];
-            };
-
+            type FormspreeError = { errors?: { message: string }[] };
             const data: FormspreeError = await res.json().catch(() => ({}));
             const msg =
               data?.errors?.[0]?.message ||
@@ -307,7 +302,6 @@ function Form({
         name="_subject"
         value="Gleam Pro Cleaning — Choose Plan Inquiry"
       />
-      {/* Honeypot spam trap — leave blank */}
       <input
         type="text"
         name="_gotcha"
@@ -317,10 +311,10 @@ function Form({
       />
 
       {/* Buttons */}
-      <div className="flex flex-col sm:flex-row gap-3 sm:justify-end">
+      <div className="flex flex-col sm:flex-row gap-3 sm:justify-end pb-[env(safe-area-inset-bottom)]">
         <button
           type="button"
-          onClick={onCancel} // ✅ simple and reliable
+          onClick={onCancel}
           className="w-full sm:w-auto rounded-xl px-4 py-2 font-medium"
           style={{ backgroundColor: colors.silver, color: colors.navy }}
         >
