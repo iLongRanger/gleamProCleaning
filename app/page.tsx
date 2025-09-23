@@ -232,7 +232,7 @@ export default function Page() {
                     alt="Gleam Pro Cleaning logo"
                     className="h-22 w-auto"
                     width={150}
-              height={50}
+                    height={50}
                   />
                   Request a Prestige Clean
                 </CardTitle>
@@ -312,47 +312,55 @@ export default function Page() {
               icon: HomeIcon,
               title: "Prestige Home Care",
               desc: "Recurring or one-time deep cleans for lasting comfort and shine.",
+              link: "#service-home",
             },
             {
               icon: Truck,
               title: "Move-In / Move-Out",
               desc: "Meticulous vacant cleans for keys-ready transitions.",
+              link: "#service-move",
             },
             {
               icon: Sofa,
               title: "Carpet & Upholstery",
               desc: "Hot-water extraction + fabric-safe treatments.",
+              link: "#service-carpet",
             },
             {
               icon: Briefcase,
-              title: "Office & Clinic",
+              title: "Office, Clinic and Commercial Spaces",
               desc: "Discreet, hygienic routines for professional spaces.",
+              link: "#service-office",
             },
             {
               icon: Sparkles,
               title: "Short-Stay Turnovers",
               desc: "Hotel-grade resets for Airbnbs & executive rentals.",
+              link: "#service-shortstay",
             },
             {
               icon: Hammer,
               title: "Post-Renovation",
               desc: "Fine-dust removal and detailed construction resets.",
+              link: "#service-reno",
             },
-          ].map((s) => (
-            <Card
-              key={s.title}
-              className="bg-white/5 border-white/10 rounded-2xl"
-            >
-              <CardHeader>
-                <CardTitle
-                  className="flex items-center gap-2 text-lg"
-                  style={{ color: colors.gold }}
-                >
-                  <s.icon className="w-5 h-5" /> {s.title}
-                </CardTitle>
-              </CardHeader>
-              <CardContent className="text-white/85">{s.desc}</CardContent>
-            </Card>
+          ].map((service, i) => (
+            <a key={i} href={service.link}>
+              <Card className="bg-white/5 border-white/10 rounded-2xl hover:bg-white/10 transition cursor-pointer">
+                <CardHeader>
+                  <CardTitle
+                    className="flex items-center gap-2 text-lg"
+                    style={{ color: colors.gold }}
+                  >
+                    <service.icon className="w-5 h-5" />
+                    {service.title}
+                  </CardTitle>
+                </CardHeader>
+                <CardContent className="text-white/85">
+                  {service.desc}
+                </CardContent>
+              </Card>
+            </a>
           ))}
         </div>
 
@@ -730,7 +738,7 @@ export default function Page() {
           <div id="service-office">
             <h3 className="text-2xl font-bold flex items-center gap-2">
               <Shield className="w-5 h-5" style={{ color: colors.gold }} />{" "}
-              Office & Clinic
+              Offices, Clinics and Commercial Spaces
             </h3>
             <p className="mt-2 text-white/85 max-w-3xl">
               Quiet, reliable routines for clinics, studios, and offices that
@@ -805,7 +813,7 @@ export default function Page() {
           </div>
 
           {/* Post-Renovation */}
-          <div id="service-postreno">
+          <div id="service-reno">
             <h3 className="text-2xl font-bold flex items-center gap-2">
               <Sparkles className="w-5 h-5" style={{ color: colors.gold }} />{" "}
               Post-Renovation
@@ -966,7 +974,7 @@ export default function Page() {
           {[
             {
               name: "Essential Shine",
-              price: "$169",
+              price: "From $169",
               items: [
                 "1-bed / studio",
                 "Kitchen & bath detail",
@@ -975,12 +983,12 @@ export default function Page() {
             },
             {
               name: "Executive Brilliance",
-              price: "$269",
+              price: "From $269",
               items: ["2-3 beds", "Deep clean add-ons", "Appliance fronts"],
             },
             {
               name: "Prestige Elevate",
-              price: "$389",
+              price: "From $389",
               items: ["4+ beds / STR", "Inside oven/fridge", "Carpet refresh"],
             },
           ].map((t, i) => (
@@ -1047,10 +1055,10 @@ export default function Page() {
               Where Trust Meets Excellence
             </h2>
             <p className="mt-4 text-white/85">
-              Founded by Christine (Sagittarius ✨) and Ralp (Pisces 🌊), Gleam
-              Pro blends fiery dedication with flowing care. Our mission is
-              simple: elevate every environment we touch—delivering serenity,
-              order, and prestige to your space.
+              Founded by Christine and Ralp, Gleam Pro blends fiery dedication
+              with flowing care. Our mission is simple: elevate every
+              environment we touch—delivering serenity, order, and prestige to
+              your space.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
               <Badge icon={Shield} text="Insured" />
@@ -1197,7 +1205,7 @@ export default function Page() {
                 alt="Gleam Pro Cleaning logo"
                 className="h-22 w-22"
                 width={150}
-              height={50}
+                height={50}
               />
 
               <div>
