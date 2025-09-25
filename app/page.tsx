@@ -79,64 +79,6 @@ export default function Page() {
 
   return (
     <div style={{ backgroundColor: colors.navy }} className="text-white">
-      {/* Top Bar (desktop only) */}
-      <div
-        className="hidden md:block text-sm"
-        style={{ backgroundColor: colors.midnight }}
-      >
-        <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between">
-          <div className="flex items-center gap-6">
-            <div className="flex items-center gap-2">
-              <Phone className="w-4 h-4" />
-              <span>(672) 970-3755</span>
-            </div>
-            <div className="flex items-center gap-2">
-              <Mail className="w-4 h-4" />
-              <span>hello@gleamlift.ca</span>
-            </div>
-          </div>
-          <div className="flex items-center gap-4 opacity-80">
-            <Facebook className="w-4 h-4" />
-            <Instagram className="w-4 h-4" />
-            <Linkedin className="w-4 h-4" />
-          </div>
-        </div>
-      </div>
-
-      {/* Header */}
-      <header className="sticky top-0 z-40 backdrop-blur bg-white/0 border-b border-white/10">
-        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-          <a href="#" className="flex items-center gap-3">
-            <Image
-              src="/logo-gpc.png"
-              alt="Gleam Pro Cleaning logo"
-              className="h-8 w-auto sm:h-10 max-w-full"
-              width={150}
-              height={50}
-              priority
-            />
-          </a>
-          <nav className="hidden md:flex items-center gap-6">
-            {nav.map((n) => (
-              <a
-                key={n.href}
-                href={n.href}
-                className="text-sm text-white/90 hover:text-white transition-colors"
-              >
-                {n.label}
-              </a>
-            ))}
-            <Button
-              asChild
-              className="rounded-2xl px-4 py-2 text-sm sm:px-5 sm:text-base"
-              style={{ backgroundColor: colors.emerald }}
-            >
-              <a href="#quote">Book Now</a>
-            </Button>
-          </nav>
-        </div>
-      </header>
-
       {/* Hero */}
       <section className="relative overflow-hidden">
         {/* Decorative lights */}
@@ -295,7 +237,7 @@ export default function Page() {
               icon: HomeIcon,
               title: "Prestige Home Care",
               desc: "Recurring or one-time deep cleans for lasting comfort and shine.",
-              link: "#service-home",
+              link: "/prestige-home-care",
             },
             {
               icon: Truck,
@@ -982,76 +924,6 @@ export default function Page() {
       >
         Call Now
       </a>
-
-      {/* Footer */}
-      <footer
-        id="contact"
-        className="border-t border-white/10"
-        style={{ backgroundColor: colors.midnight }}
-      >
-        <div className="max-w-6xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-4 gap-8 text-sm">
-          <div>
-            <div className="flex items-center gap-2">
-              <Image
-                src="/logo-gpc.png"
-                alt="Gleam Pro Cleaning logo"
-                className="max-w-full h-auto"
-                width={150}
-                height={50}
-              />
-              <div>
-                <div className="font-semibold" style={{ color: colors.gold }}>
-                  Gleam Pro Cleaning
-                </div>
-                <div className="text-white/70">Shine • Elevate • Prestige</div>
-              </div>
-            </div>
-            <p className="mt-3 text-white/70">
-              Serving Greater Vancouver and surrounding areas.
-            </p>
-          </div>
-          <div>
-            <div className="font-semibold mb-2">Quick Links</div>
-            <ul className="space-y-2 text-white/80">
-              {nav.map((n) => (
-                <li key={n.href}>
-                  <a href={n.href} className="hover:text-white">
-                    {n.label}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div>
-            <div className="font-semibold mb-2">Contact</div>
-            <ul className="space-y-2 text-white/80">
-              <li className="flex items-center gap-2">
-                <MapPin className="w-4 h-4" />
-                New Westminster, BC
-              </li>
-              <li className="flex items-center gap-2">
-                <Phone className="w-4 h-4" />
-                (672) 970-3755
-              </li>
-              <li className="flex items-center gap-2">
-                <Mail className="w-4 h-4" />
-                hello@gleamprocleaning.com
-              </li>
-            </ul>
-          </div>
-          <div>
-            <div className="font-semibold mb-2">Hours</div>
-            <ul className="space-y-1 text-white/80">
-              <li>Mon–Fri: 8:00–18:00</li>
-              <li>Sat: 9:00–16:00</li>
-              <li>Sun: By appointment</li>
-            </ul>
-          </div>
-        </div>
-        <div className="text-center text-white/60 text-xs py-6 border-t border-white/10">
-          © {new Date().getFullYear()} Gleam Pro Cleaning. All rights reserved.
-        </div>
-      </footer>
 
       {/* LocalBusiness JSON-LD */}
       <script
