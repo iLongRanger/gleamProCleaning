@@ -1,4 +1,5 @@
 "use client";
+import HeroLogo from "@/components/HeroLogo";
 
 import Image from "next/image";
 import { Check, Shield, Sparkles, Star } from "lucide-react";
@@ -26,8 +27,9 @@ export default function PrestigeHomePage() {
         <div className="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
           <div>
             <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-              Prestige Home Care
+              <span style={{ color: "#C9A227" }}>Prestige</span> Home Care
             </h1>
+
             <p className="mt-4 text-white/85 text-lg">
               A premium residential cleaning experience designed for comfort,
               shine, and peace of mind.
@@ -45,15 +47,7 @@ export default function PrestigeHomePage() {
               </Button>
             </div>
           </div>
-          <div className="flex justify-center">
-            <Image
-              src="/residential-cleaning.jpg"
-              alt="Prestige Home Cleaning"
-              width={500}
-              height={400}
-              className="rounded-2xl shadow-lg"
-            />
-          </div>
+          <HeroLogo />
         </div>
       </section>
 
@@ -252,24 +246,11 @@ export default function PrestigeHomePage() {
         </div>
       </section>
 
-      {/* CTA */}
-      <section className="py-20 text-center">
-        <h2 className="text-3xl font-bold">Ready for Prestige Home Care?</h2>
-        <p className="mt-2 text-white/80">
-          Book your clean today and experience the Gleam Pro difference.
-        </p>
-        <Button
-          onClick={() => setOpen(true)}
-          className="mt-6 rounded-2xl px-8 py-4 text-lg"
-          style={{ backgroundColor: colors.emerald }}
-        >
-          Get Started
-        </Button>
-      </section>
-
       {/* FAQ */}
       <section id="faq" className="max-w-6xl mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center">FAQs</h2>
+        <h2 className="text-3xl md:text-4xl font-bold text-center">FAQs</h2>
+
+        {/* FAQ Cards */}
         <div className="mt-10 grid md:grid-cols-2 gap-6">
           {[
             {
@@ -308,6 +289,21 @@ export default function PrestigeHomePage() {
             </div>
           ))}
         </div>
+      </section>
+
+      {/* CTA */}
+      <section className="py-20 text-center">
+        <h2 className="text-3xl font-bold">Ready for Prestige Home Care?</h2>
+        <p className="mt-2 text-white/80">
+          Book your clean today and experience the Gleam Pro difference.
+        </p>
+        <Button
+          onClick={() => setOpen(true)}
+          className="mt-6 rounded-2xl px-8 py-4 text-lg"
+          style={{ backgroundColor: colors.emerald }}
+        >
+          Get Started
+        </Button>
       </section>
 
       {/* Modal */}
