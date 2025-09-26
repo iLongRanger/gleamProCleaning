@@ -7,12 +7,6 @@ import {
   Shield,
   Star,
   Sparkles,
-  Phone,
-  Mail,
-  MapPin,
-  Facebook,
-  Instagram,
-  Linkedin,
   ChevronRight,
   Home as HomeIcon,
   Truck,
@@ -40,14 +34,7 @@ const colors = {
   midnight: "#081A31",
 };
 
-const nav = [
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "About", href: "#about" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Contact", href: "#contact" },
-];
+
 
 function Stat({ value, label }: { value: string; label: string }) {
   return (

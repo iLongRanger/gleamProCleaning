@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.gleampro.ca
+
+# Sitemaps
+Sitemap: https://www.gleampro.ca/sitemap.xml

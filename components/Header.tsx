@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { Phone, Mail, Facebook, Instagram, Linkedin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -24,7 +25,10 @@ export default function Header() {
   return (
     <header className="sticky top-0 z-40 backdrop-blur supports-[backdrop-filter]:bg-white/5 bg-white/0 border-b border-white/10">
       {/* Top Bar */}
-      <div className="hidden md:block text-sm" style={{ backgroundColor: colors.midnight }}>
+      <div
+        className="hidden md:block text-sm"
+        style={{ backgroundColor: colors.midnight }}
+      >
         <div className="max-w-6xl mx-auto px-4 py-2 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <div className="flex items-center gap-2">
@@ -46,7 +50,7 @@ export default function Header() {
 
       {/* Main Nav */}
       <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
-        <a href="/" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <Image
             src="/logo-gpc.png"
             alt="Gleam Pro Cleaning logo"
@@ -54,23 +58,23 @@ export default function Header() {
             width={150}
             height={50}
           />
-        </a>
+        </Link>
         <nav className="hidden md:flex items-center gap-6">
           {nav.map((n) => (
-            <a
+            <Link
               key={n.href}
               href={n.href}
               className="text-sm text-white/90 hover:text-white transition-colors"
             >
               {n.label}
-            </a>
+            </Link>
           ))}
           <Button
             asChild
             className="rounded-2xl px-5"
             style={{ backgroundColor: colors.emerald }}
           >
-            <a href="#quote">Book Now</a>
+            <Link href="#quote">Book Now</Link>
           </Button>
         </nav>
       </div>

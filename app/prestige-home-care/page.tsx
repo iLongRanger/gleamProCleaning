@@ -1,7 +1,6 @@
 "use client";
 import HeroLogo from "@/components/HeroLogo";
 
-import Image from "next/image";
 import { Check, Shield, Sparkles, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ChoosePlanModal from "@/components/ChoosePlanModal";
@@ -222,7 +221,7 @@ export default function PrestigeHomePage() {
       </section>
 
       {/* Add-Ons */}
-      <section className="py-16" style={{ backgroundColor: colors.midnight }}>
+      <section className="py-16" style={{ backgroundColor: colors.navy }}>
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold">Popular Add-Ons</h2>
           <p className="text-white/85 mt-2">
