@@ -10,6 +10,8 @@ This changelog tracks notable changes to the website so development can be resum
 ### Added
 
 - Added /request-walkthrough page to support the primary CTA for commercial leads.
+- Added RESUME.md with instructions to resume development and continue the planned commit sequence.
+- Added RFQ-style walk-through request form with phone and email capture and confirmation state.
 
 ### Changed
 
