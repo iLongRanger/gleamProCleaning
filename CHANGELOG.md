@@ -19,8 +19,7 @@ This changelog tracks notable changes to the website so development can be resum
 - Repositioned homepage hero headline for commercial cleaning
 - Adjusted homepage CTA language to prioritize walk-through over instant quote
 - Aligned homepage form CTA with “Request a Free Walk-Through”
-
--
+- Updated RESUME.md to reflect current form state and next planned submission delivery commit.
 
 ### Fixed
 
