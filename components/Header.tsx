@@ -74,7 +74,7 @@ export default function Header() {
             className="rounded-2xl px-5"
             style={{ backgroundColor: colors.emerald }}
           >
-            <Link href="#quote">Request a Free Walk-Through</Link>
+            <Link href="/request-walkthrough">Request a Free Walk-Through</Link>
           </Button>
         </nav>
       </div>
