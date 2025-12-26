@@ -34,8 +34,6 @@ const colors = {
   midnight: "#081A31",
 };
 
-
-
 function Stat({ value, label }: { value: string; label: string }) {
   return (
     <div className="text-center">
@@ -85,13 +83,13 @@ export default function Page() {
               transition={{ duration: 0.6 }}
               className="text-3xl sm:text-4xl md:text-5xl font-extrabold leading-tight"
             >
-              Elevate your space with{" "}
-              <span style={{ color: colors.gold }}>prestige</span> cleaning.
+              Professional Commercial Cleaning for{" "}
+              <span style={{ color: colors.gold }}>Metro Vancouver</span>{" "}
             </motion.h1>
             <p className="mt-4 text-white/85 max-w-xl text-sm sm:text-base">
-              Professional. Inspiring. Trustworthy. Gleam Pro Cleaning delivers
-              hotel-level brilliance and peace of mind—so you can shine in what
-              matters most.
+              Reliable teams for restaurants, offices, and community facilities
+              — consistent results, clear communication, and contract-ready
+              service.
             </p>
             <div className="mt-6 flex flex-wrap gap-2 sm:gap-3">
               <Badge icon={Shield} text="Fully insured & vetted" />
@@ -105,7 +103,7 @@ export default function Page() {
                 style={{ backgroundColor: colors.emerald }}
               >
                 <a href="#quote">
-                  Get an Instant Quote{" "}
+                  Request a Free Walk-Through{" "}
                   <ChevronRight className="ml-1 w-4 h-4 inline" />
                 </a>
               </Button>
@@ -146,7 +144,7 @@ export default function Page() {
                     width={150}
                     height={50}
                   />
-                  Request a Prestige Clean
+                  Request a Free Walk-Through
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -169,12 +167,15 @@ export default function Page() {
                     name="details"
                     placeholder="Tell us about your space (size, rooms, preferences)"
                   />
+                  <p className="text-xs text-slate-600">
+                    For exact pricing, we start with an on-site walkthrough.
+                  </p>
                   <Button
                     type="submit"
                     className="w-full rounded-xl text-sm sm:text-base py-3 sm:py-4"
                     style={{ backgroundColor: colors.navy, color: "white" }}
                   >
-                    {sent ? "Request Sent ✓" : "Get My Quote"}
+                    {sent ? "Request Sent ✓" : "Get a Free Walk-Through"}
                   </Button>
                   <p className="text-xs text-slate-600">
                     By submitting, you agree to our Terms & Privacy Policy.
@@ -620,7 +621,7 @@ export default function Page() {
             className="rounded-2xl px-4 py-3 text-sm sm:px-6 sm:py-6 sm:text-base"
             style={{ backgroundColor: colors.emerald }}
           >
-            <a href="#quote">Get an Instant Quote</a>
+            <a href="#quote">Request a Free Walk-Through</a>
           </Button>
           <p className="text-xs text-white/60 mt-3">
             Custom scopes available. Tell us your priorities and we’ll tailor a

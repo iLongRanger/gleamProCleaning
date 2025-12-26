@@ -13,6 +13,11 @@ This changelog tracks notable changes to the website so development can be resum
 
 ### Changed
 
+- Updated header primary CTA to “Request a Free Walk-Through”
+- Repositioned homepage hero headline for commercial cleaning
+- Adjusted homepage CTA language to prioritize walk-through over instant quote
+- Aligned homepage form CTA with “Request a Free Walk-Through”
+
 -
 
 ### Fixed
