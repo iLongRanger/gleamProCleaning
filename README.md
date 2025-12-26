@@ -45,3 +45,5 @@ git add .
 git commit -m "feat(scope): short description"
 git push -u origin feat/short-description
 ```
+
+See `RESUME.md` for instructions on how to continue development.
