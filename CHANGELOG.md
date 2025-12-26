@@ -9,9 +9,10 @@ This changelog tracks notable changes to the website so development can be resum
 
 ### Added
 
-- Added /request-walkthrough page to support the primary CTA for commercial leads.
-- Added RESUME.md with instructions to resume development and continue the planned commit sequence.
-- Added RFQ-style walk-through request form with phone and email capture and confirmation state.
+- Added /api/walkthrough endpoint to deliver walk-through submissions via email using Resend.
+- Added RFQ-style walk-through form submission with TO + CC email delivery.
+- Added honeypot field to reduce spam submissions.
+- Added .env.example to document lead delivery configuration.
 
 ### Changed
 
@@ -20,6 +21,10 @@ This changelog tracks notable changes to the website so development can be resum
 - Adjusted homepage CTA language to prioritize walk-through over instant quote
 - Aligned homepage form CTA with “Request a Free Walk-Through”
 - Updated RESUME.md to reflect current form state and next planned submission delivery commit.
+- Documented Resend domain verification requirement for sending to business inbox recipients.
+- Updated RESUME.md to document Resend domain verification requirement for lead delivery.
+- Enabled production lead delivery after Resend domain verification.
+- Updated RESUME.md to reflect live email submission flow.
 
 ### Fixed
 

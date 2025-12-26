@@ -5,16 +5,19 @@ This file allows this project to be resumed at any time without prior chat conte
 ---
 
 ## Repository
+
 - Repo: https://github.com/iLongRanger/gleamProCleaning
 - Branch: `main`
 
 ---
 
 ## Project Objective
+
 Transform the Gleam Pro website into a **commercial-first B2B lead system**
 focused on **Request a Free Walk-Through** as the primary conversion action.
 
 ### Target Commercial Clients
+
 - Restaurants & pubs
 - Offices
 - Community facilities / schools
@@ -22,6 +25,7 @@ focused on **Request a Free Walk-Through** as the primary conversion action.
 ---
 
 ## Development Rules (IMPORTANT)
+
 - Use conventional commits (`feat:`, `chore:`, `docs:`, `fix:`)
 - Track meaningful changes in `CHANGELOG.md`
 - Keep commits small, incremental, and reversible
@@ -32,6 +36,7 @@ focused on **Request a Free Walk-Through** as the primary conversion action.
 ---
 
 ## Current State (SOURCE OF TRUTH)
+
 - Homepage repositioned for **commercial cleaning**
 - Primary CTA everywhere: **Request a Free Walk-Through**
 - `/request-walkthrough` route exists and is live
@@ -41,13 +46,13 @@ focused on **Request a Free Walk-Through** as the primary conversion action.
   - Captures **phone number and email**
   - Includes RFQ-style fields
   - Shows client-side confirmation state
-- **Form does NOT yet send submissions anywhere**
-- Security vulnerabilities patched (Next.js / React)
-- Vercel deployments are green
+- Form submits to `/api/walkthrough` and emails submissions via Resend
+- **Resend requires verified domain to send to business inbox recipients**
 
 ---
 
 ## Incomplete / Pending Work
+
 - Send walk-through submissions to email or backend
 - Decide on submission method (API route vs external service)
 - Commercial service hub page not created
@@ -57,10 +62,11 @@ focused on **Request a Free Walk-Through** as the primary conversion action.
 ---
 
 ## Next Required Commit (DO NOT SKIP)
+
 feat(form): deliver walk-through submissions (email or API)
 
-
 ### This commit must:
+
 - Send form data somewhere reliable
 - Not break existing UX
 - Update `CHANGELOG.md`
@@ -74,20 +80,22 @@ Paste the following prompt verbatim:
 
 > I am continuing a website rebuild project.  
 > Repo: https://github.com/iLongRanger/gleamProCleaning  
-> Branch: main  
->  
-> Please read `RESUME.md`, `CHANGELOG.md`, and the latest commits.  
->  
+> Branch: main
+>
+> Please read `RESUME.md`, `CHANGELOG.md`, and the latest commits.
+>
 > Current state:
+>
 > - Commercial-first site
 > - Primary CTA is “Request a Free Walk-Through”
 > - `/request-walkthrough` exists with a working RFQ form
-> - Form captures phone + email but does NOT send submissions yet  
->  
+> - Form captures phone + email but does NOT send submissions yet
+>
 > Continue with the next required commit:  
-> `feat(form): deliver walk-through submissions (email or API)`  
->  
+> `feat(form): deliver walk-through submissions (email or API)`
+>
 > Constraints:
+>
 > - Small commits only
 > - Update changelog
 > - Give exact file paths, code, and git commands
