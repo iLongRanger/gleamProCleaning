@@ -13,12 +13,22 @@ const colors = {
 };
 
 const nav = [
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "About", href: "#about" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+
+  {
+    label: "Commercial Cleaning",
+    href: "/commercial-cleaning",
+    children: [
+      { label: "Restaurants", href: "/commercial-cleaning/restaurants" },
+      { label: "Offices", href: "/commercial-cleaning/offices" },
+      {
+        label: "Community Facilities",
+        href: "/commercial-cleaning/community-facilities",
+      },
+    ],
+  },
+
+  { label: "Request Walk-Through", href: "/request-walkthrough", cta: true },
 ];
 
 export default function Header() {
@@ -59,23 +69,44 @@ export default function Header() {
             height={50}
           />
         </Link>
-        <nav className="hidden md:flex items-center gap-6">
-          {nav.map((n) => (
-            <Link
-              key={n.href}
-              href={n.href}
-              className="text-sm text-white/90 hover:text-white transition-colors"
-            >
-              {n.label}
-            </Link>
-          ))}
-          <Button
-            asChild
-            className="rounded-2xl px-5"
-            style={{ backgroundColor: colors.emerald }}
-          >
-            <Link href="/request-walkthrough">Request a Free Walk-Through</Link>
-          </Button>
+        <nav className="hidden items-center gap-6 md:flex">
+          {nav.map((item) => {
+            const isCTA = Boolean(item.cta);
+            const hasChildren =
+              Array.isArray((item as any).children) &&
+              (item as any).children.length > 0;
+
+            return (
+              <div key={item.label} className="relative group">
+                <Link
+                  href={item.href}
+                  className={
+                    isCTA
+                      ? "rounded-md bg-black px-4 py-2 text-sm font-semibold text-white"
+                      : "text-sm font-medium"
+                  }
+                >
+                  {item.label}
+                </Link>
+
+                {hasChildren && (
+                  <div className="absolute left-0 top-full z-50 pt-2 opacity-0 pointer-events-none group-hover:opacity-100 group-hover:pointer-events-auto">
+                    <div className="w-64 rounded-md border bg-white p-2 shadow-md">
+                      {(item as any).children.map((child: any) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          className="block rounded px-3 py-2 text-sm hover:bg-gray-100"
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                )}
+              </div>
+            );
+          })}
         </nav>
       </div>
     </header>
