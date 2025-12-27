@@ -45,6 +45,8 @@ Secondary niches:
 - Residential is de-emphasized
 - Primary CTA everywhere: **Request a Free Walk-Through**
 - Restaurant cleaning page expanded into a full sales page with scope overview, checklist preview, and inspection readiness messaging.
+- Office cleaning page expanded into a full sales page (scope, checklist preview, FAQs, CTA).
+- Community facilities cleaning page expanded into a full sales page with scope, checklist preview, and conversion-focused CTA.
 
 ### Lead system (LIVE)
 
@@ -73,7 +75,6 @@ Secondary niches:
   - `/commercial-cleaning/restaurants`
   - `/commercial-cleaning/offices`
   - `/commercial-cleaning/community-facilities`
-- Office cleaning page expanded into a full sales page (scope, checklist preview, FAQs, CTA).
 
 ### Navigation
 
@@ -88,25 +89,21 @@ Secondary niches:
 
 ## What Is NOT Done Yet
 
-- Community pages are placeholders
-- No testimonials / proof section yet
-- No SEO optimization yet
-- No analytics or conversion tracking yet
-
 ---
 
 ## Next Planned Commit
 
-feat(website): expand community facilities cleaning page content
+chore(website): align commercial sub-pages styling + add cross-links
 
-This will:
+This will have:
 
-- Turn the officommunity facilities page into a true sales page
-- Define scope and deliverables
-- Highlight inspection readiness
-- Preview cleaning checklist
-- Strengthen trust and conversion messaging
-- Keep CTA focused on Request a Free Walk-Through
+consistency + internal linking for SEO + conversion.
+
+Add cross-links section to /commercial-cleaning hub
+
+Unify button styles + headings across all commercial pages
+
+Add ‘Industries we serve’ block to homepage + link to commercial hub
 
 ---
 

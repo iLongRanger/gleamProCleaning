@@ -18,6 +18,7 @@ All notable changes to this project will be documented in this file.
 
 - Expanded restaurant cleaning page with detailed service content, checklist preview, and inspection-ready messaging.
 - Expanded office cleaning page into a full sales page with scope, checklist preview, FAQs, and strong walk-through CTA.
+- Expanded community facilities cleaning page into a full sales page with scope, checklist preview, FAQs, and strong walk-through CTA.
 
 ---
 
