@@ -73,6 +73,7 @@ Secondary niches:
   - `/commercial-cleaning/restaurants`
   - `/commercial-cleaning/offices`
   - `/commercial-cleaning/community-facilities`
+- Office cleaning page expanded into a full sales page (scope, checklist preview, FAQs, CTA).
 
 ### Navigation
 
@@ -87,7 +88,7 @@ Secondary niches:
 
 ## What Is NOT Done Yet
 
-- Office and Community pages are placeholders
+- Community pages are placeholders
 - No testimonials / proof section yet
 - No SEO optimization yet
 - No analytics or conversion tracking yet
@@ -96,11 +97,11 @@ Secondary niches:
 
 ## Next Planned Commit
 
-feat(website): expand office cleaning page content
+feat(website): expand community facilities cleaning page content
 
 This will:
 
-- Turn the office page into a true sales page
+- Turn the officommunity facilities page into a true sales page
 - Define scope and deliverables
 - Highlight inspection readiness
 - Preview cleaning checklist
