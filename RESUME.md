@@ -48,6 +48,12 @@ focused on **Request a Free Walk-Through** as the primary conversion action.
   - Shows client-side confirmation state
 - Form submits to `/api/walkthrough` and emails submissions via Resend
 - **Resend requires verified domain to send to business inbox recipients**
+- Commercial Cleaning hub page added at `/commercial-cleaning`.
+- Commercial niche sub-pages added:
+  - `/commercial-cleaning/restaurants`
+  - `/commercial-cleaning/offices`
+  - `/commercial-cleaning/community-facilities`
+- Header navigation updated with a dropdown under “Commercial Cleaning”.
 
 ---
 
@@ -61,16 +67,16 @@ focused on **Request a Free Walk-Through** as the primary conversion action.
 
 ---
 
-## Next Required Commit (DO NOT SKIP)
+## Next Planned Commit
 
-feat(form): deliver walk-through submissions (email or API)
+feat(website): expand restaurant cleaning page content
 
-### This commit must:
+This will:
 
-- Send form data somewhere reliable
-- Not break existing UX
-- Update `CHANGELOG.md`
-- Be testable locally
+- Add detailed restaurant cleaning scope
+- Show sample checklist / deliverables
+- Strengthen trust and conversion messaging
+- Keep CTA focused on Request a Free Walk-Through
 
 ---
 

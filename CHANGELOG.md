@@ -13,6 +13,11 @@ This changelog tracks notable changes to the website so development can be resum
 - Added RFQ-style walk-through form submission with TO + CC email delivery.
 - Added honeypot field to reduce spam submissions.
 - Added .env.example to document lead delivery configuration.
+- Added Commercial Cleaning hub page at `/commercial-cleaning`.
+- Added sub-pages for commercial niches:
+  - Restaurants
+  - Offices
+  - Community Facilities
 
 ### Changed
 
@@ -25,6 +30,8 @@ This changelog tracks notable changes to the website so development can be resum
 - Updated RESUME.md to document Resend domain verification requirement for lead delivery.
 - Enabled production lead delivery after Resend domain verification.
 - Updated RESUME.md to reflect live email submission flow.
+-Updated header navigation to include Commercial Cleaning dropdown with sub-links.
+- Improved navigation UX with stable hover dropdown behavior.
 
 ### Fixed
 
