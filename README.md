@@ -102,3 +102,18 @@ npm run dev
 
 Create .env.local based on .env.example
 ```
+
+---
+## Lead Delivery
+
+- Walk-through submissions POST to /api/walkthrough
+- Emails sent via Resend
+- Requires verified sending domain in Resend for production use
+
+## Project Status
+
+- Commercial hub and navigation complete
+- Lead system live and working
+- Ready to expand restaurant service page
+
+See RESUME.md for next steps.
