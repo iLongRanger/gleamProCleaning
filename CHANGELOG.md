@@ -16,9 +16,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Updated header navigation to include Commercial Cleaning dropdown with sub-links.
-- Stabilized dropdown hover behavior for better usability.
-- Updated RESUME.md to reflect live lead delivery and commercial structure.
+- Expanded restaurant cleaning page with detailed service content, checklist preview, and inspection-ready messaging.
 
 ---
 

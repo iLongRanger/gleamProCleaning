@@ -44,6 +44,7 @@ Secondary niches:
 - Website repositioned as **commercial cleaning**
 - Residential is de-emphasized
 - Primary CTA everywhere: **Request a Free Walk-Through**
+- Restaurant cleaning page expanded into a full sales page with scope overview, checklist preview, and inspection readiness messaging.
 
 ### Lead system (LIVE)
 
@@ -86,7 +87,6 @@ Secondary niches:
 
 ## What Is NOT Done Yet
 
-- Restaurant page is still a placeholder (needs real sales content)
 - Office and Community pages are placeholders
 - No testimonials / proof section yet
 - No SEO optimization yet
@@ -96,28 +96,16 @@ Secondary niches:
 
 ## Next Planned Commit
 
-feat(website): expand restaurant cleaning page content
+feat(website): expand office cleaning page content
 
 This will:
 
-- Turn the restaurant page into a true sales page
+- Turn the office page into a true sales page
 - Define scope and deliverables
 - Highlight inspection readiness
 - Preview cleaning checklist
 - Strengthen trust and conversion messaging
 - Keep CTA focused on Request a Free Walk-Through
-
----
-
-## How to Resume in a New Chat
-
-Paste the following:
-
-> Repo: https://github.com/iLongRanger/gleamProCleaning  
-> Branch: main  
-> Commercial Cleaning hub and nav are complete and live  
-> Please continue with the next planned commit in RESUME.md  
-> Read RESUME.md and CHANGELOG.md and proceed step-by-step
 
 ---
 
