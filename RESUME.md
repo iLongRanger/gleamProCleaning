@@ -1,6 +1,6 @@
 # Project Resume — Gleam Pro Cleaning Website
 
-This file allows this project to be resumed at any time without prior chat context.
+This file explains how to resume work on this project without prior context.
 
 ---
 
@@ -11,59 +11,86 @@ This file allows this project to be resumed at any time without prior chat conte
 
 ---
 
-## Project Objective
+## Project Goal
 
-Transform the Gleam Pro website into a **commercial-first B2B lead system**
-focused on **Request a Free Walk-Through** as the primary conversion action.
+Rebuild the Gleam Pro website as a **commercial-first cleaning business**
+with a clear B2B conversion flow focused on **Request a Free Walk-Through**.
 
-### Target Commercial Clients
+Primary niche:
 
 - Restaurants & pubs
+
+Secondary niches:
+
 - Offices
 - Community facilities / schools
 
 ---
 
-## Development Rules (IMPORTANT)
+## Development Workflow (STRICT)
 
-- Use conventional commits (`feat:`, `chore:`, `docs:`, `fix:`)
-- Track meaningful changes in `CHANGELOG.md`
-- Keep commits small, incremental, and reversible
-- Test locally before committing
-- Do not skip documented steps
-- Prefer clarity over cleverness
+- Use conventional commits (`feat:`, `fix:`, `docs:`, `chore:`)
+- Keep commits small and scoped
+- Update `CHANGELOG.md` every commit
+- Test locally before pushing
+- This file is the **source of truth** when resuming work
 
 ---
 
 ## Current State (SOURCE OF TRUTH)
 
-- Homepage repositioned for **commercial cleaning**
+### Core positioning
+
+- Website repositioned as **commercial cleaning**
+- Residential is de-emphasized
 - Primary CTA everywhere: **Request a Free Walk-Through**
-- `/request-walkthrough` route exists and is live
-- Header CTA routes correctly
-- Walk-through request form implemented:
-  - Captures business name, facility type, address
-  - Captures **phone number and email**
-  - Includes RFQ-style fields
-  - Shows client-side confirmation state
-- Form submits to `/api/walkthrough` and emails submissions via Resend
-- **Resend requires verified domain to send to business inbox recipients**
-- Commercial Cleaning hub page added at `/commercial-cleaning`.
-- Commercial niche sub-pages added:
+
+### Lead system (LIVE)
+
+- Walk-through RFQ form exists at `/request-walkthrough`
+- Form captures:
+  - Business name
+  - Facility type
+  - Address
+  - Frequency
+  - Phone number
+  - Email
+- Honeypot spam protection implemented
+- Submissions POST to `/api/walkthrough`
+- Leads are emailed via **Resend**
+  - TO: rortiz@gleamlift.ca
+  - CC: rortiz.dev@gmail.com, velezchristinemarier@gmail.com
+- Domain `gleampro.ca` verified in Resend
+- Production email delivery confirmed working
+- Vercel deployment is green
+
+### Commercial structure
+
+- Commercial Cleaning hub page added at:
+  - `/commercial-cleaning`
+- Sub-pages added:
   - `/commercial-cleaning/restaurants`
   - `/commercial-cleaning/offices`
   - `/commercial-cleaning/community-facilities`
-- Header navigation updated with a dropdown under “Commercial Cleaning”.
+
+### Navigation
+
+- Header navigation updated:
+  - “Commercial Cleaning” dropdown
+    - Restaurants
+    - Offices
+    - Community Facilities
+- Dropdown hover behavior stabilized (no flicker)
 
 ---
 
-## Incomplete / Pending Work
+## What Is NOT Done Yet
 
-- Send walk-through submissions to email or backend
-- Decide on submission method (API route vs external service)
-- Commercial service hub page not created
-- Restaurant / Office / Facility sub-pages not created
-- Analytics / conversion tracking not implemented
+- Restaurant page is still a placeholder (needs real sales content)
+- Office and Community pages are placeholders
+- No testimonials / proof section yet
+- No SEO optimization yet
+- No analytics or conversion tracking yet
 
 ---
 
@@ -73,39 +100,24 @@ feat(website): expand restaurant cleaning page content
 
 This will:
 
-- Add detailed restaurant cleaning scope
-- Show sample checklist / deliverables
+- Turn the restaurant page into a true sales page
+- Define scope and deliverables
+- Highlight inspection readiness
+- Preview cleaning checklist
 - Strengthen trust and conversion messaging
 - Keep CTA focused on Request a Free Walk-Through
 
 ---
 
-## How to Resume This Project in a New Chat
+## How to Resume in a New Chat
 
-Paste the following prompt verbatim:
+Paste the following:
 
-> I am continuing a website rebuild project.  
 > Repo: https://github.com/iLongRanger/gleamProCleaning  
-> Branch: main
->
-> Please read `RESUME.md`, `CHANGELOG.md`, and the latest commits.
->
-> Current state:
->
-> - Commercial-first site
-> - Primary CTA is “Request a Free Walk-Through”
-> - `/request-walkthrough` exists with a working RFQ form
-> - Form captures phone + email but does NOT send submissions yet
->
-> Continue with the next required commit:  
-> `feat(form): deliver walk-through submissions (email or API)`
->
-> Constraints:
->
-> - Small commits only
-> - Update changelog
-> - Give exact file paths, code, and git commands
-> - Tell me what to test locally before committing
+> Branch: main  
+> Commercial Cleaning hub and nav are complete and live  
+> Please continue with the next planned commit in RESUME.md  
+> Read RESUME.md and CHANGELOG.md and proceed step-by-step
 
 ---
 

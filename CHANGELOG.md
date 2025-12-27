@@ -1,43 +1,29 @@
-# Changelog — Gleam Pro Cleaning Website
+# Changelog
 
-This changelog tracks notable changes to the website so development can be resumed from any chat/session by referencing:
-
-- this file, and
-- GitHub commit history (in order).
+All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
 ### Added
 
-- Added /api/walkthrough endpoint to deliver walk-through submissions via email using Resend.
-- Added RFQ-style walk-through form submission with TO + CC email delivery.
-- Added honeypot field to reduce spam submissions.
-- Added .env.example to document lead delivery configuration.
 - Added Commercial Cleaning hub page at `/commercial-cleaning`.
-- Added sub-pages for commercial niches:
+- Added commercial niche sub-pages:
   - Restaurants
   - Offices
   - Community Facilities
+- Added walk-through request email delivery via Resend.
+- Added honeypot spam protection for walk-through form.
 
 ### Changed
 
-- Updated header primary CTA to “Request a Free Walk-Through”
-- Repositioned homepage hero headline for commercial cleaning
-- Adjusted homepage CTA language to prioritize walk-through over instant quote
-- Aligned homepage form CTA with “Request a Free Walk-Through”
-- Updated RESUME.md to reflect current form state and next planned submission delivery commit.
-- Documented Resend domain verification requirement for sending to business inbox recipients.
-- Updated RESUME.md to document Resend domain verification requirement for lead delivery.
-- Enabled production lead delivery after Resend domain verification.
-- Updated RESUME.md to reflect live email submission flow.
--Updated header navigation to include Commercial Cleaning dropdown with sub-links.
-- Improved navigation UX with stable hover dropdown behavior.
+- Updated header navigation to include Commercial Cleaning dropdown with sub-links.
+- Stabilized dropdown hover behavior for better usability.
+- Updated RESUME.md to reflect live lead delivery and commercial structure.
 
-### Fixed
+---
 
-- Upgraded Next.js/React to address CVE-2025-66478 (React2Shell) and restore Vercel deployments.
-- Upgraded Next.js and eslint-config-next to latest patched versions to resolve CVE-2025-66478 and unblock Vercel deployments.
+## Previous
 
-## [2025-12-26] Baseline
-
-- Established phased plan, commit conventions, and changelog workflow.
+- Homepage repositioned for commercial cleaning.
+- Walk-through RFQ form implemented.
+- Security patches applied (Next.js / React).
