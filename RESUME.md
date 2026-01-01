@@ -48,6 +48,15 @@ Secondary niches:
 - Office cleaning page expanded into a full sales page (scope, checklist preview, FAQs, CTA).
 - Community facilities cleaning page expanded into a full sales page with scope, checklist preview, and conversion-focused CTA.
 
+### Commercial styling (standardized)
+
+- Standardized commercial page styling via shared class system:
+  - `components/commercial/ui.ts`
+- Commercial hub cross-links section added (“Industries we serve”).
+- Restaurants page aligned to the same commercial design system as Offices and Community Facilities.
+- Primary CTAs and secondary buttons standardized across commercial pages.
+- Commercial hub + sub-pages aligned to the homepage prestige design (dark navy base with emerald/gold accents).
+
 ### Lead system (LIVE)
 
 - Walk-through RFQ form exists at `/request-walkthrough`
@@ -89,21 +98,23 @@ Secondary niches:
 
 ## What Is NOT Done Yet
 
+- Add “Industries we serve” block to the homepage linking to `/commercial-cleaning`.
+- Add stronger internal cross-links between commercial sub-pages (contextual links in FAQs / final CTAs).
+- SEO polish pass (optional):
+  - Ensure metadata is consistent across all commercial pages
+  - Add/verify sitemap + robots (if not already present)
+
 ---
 
 ## Next Planned Commit
 
-chore(website): align commercial sub-pages styling + add cross-links
+feat(website): add “Industries we serve” block to homepage + strengthen internal links
 
-This will have:
+This will:
 
-consistency + internal linking for SEO + conversion.
-
-Add cross-links section to /commercial-cleaning hub
-
-Unify button styles + headings across all commercial pages
-
-Add ‘Industries we serve’ block to homepage + link to commercial hub
+- Add an “Industries we serve” section to the homepage linking to `/commercial-cleaning`
+- Add lightweight contextual cross-links between commercial pages (where it naturally fits)
+- Keep CTA consistent: “Request a Free Walk-Through”
 
 ---
 
