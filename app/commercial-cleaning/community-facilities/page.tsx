@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { commercial } from "@/components/commercial/ui";
 
 export const metadata = {
   title: "Community Facility Cleaning in Metro Vancouver | Gleam Pro Cleaning",
@@ -8,18 +9,18 @@ export const metadata = {
 
 export default function CommunityFacilitiesCleaningPage() {
   return (
-    <main className="mx-auto max-w-6xl px-4 py-10 sm:px-6 lg:px-8">
+    <main className={commercial.page}>
       {/* Hero */}
       <section className="rounded-3xl border bg-white p-8 shadow-sm">
         <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
           <div className="max-w-2xl">
-            <p className="text-sm font-semibold tracking-wide text-emerald-700">
+            <p className={commercial.eyebrow}>
               Commercial Cleaning • Community Facilities
             </p>
-            <h1 className="mt-2 text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">
+            <h1 className={commercial.h1}>
               Cleaning support for shared spaces with unpredictable traffic.
             </h1>
-            <p className="mt-4 text-base leading-7 text-slate-600">
+            <p className={commercial.lead}>
               Community facilities need a scope that adapts: high-traffic
               restrooms, multi-purpose rooms, entrances, and common touchpoints.
               We deliver consistent results using clear checklists, quality
@@ -27,15 +28,12 @@ export default function CommunityFacilitiesCleaningPage() {
             </p>
 
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link
-                href="/request-walkthrough"
-                className="inline-flex items-center justify-center rounded-full bg-emerald-700 px-6 py-3 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:ring-offset-2"
-              >
+              <Link href="/request-walkthrough" className={commercial.cta}>
                 Request a Free Walk-Through
               </Link>
               <Link
                 href="/commercial-cleaning"
-                className="inline-flex items-center justify-center rounded-full border px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-50"
+                className={commercial.secondary}
               >
                 Back to Commercial Cleaning
               </Link>
@@ -48,10 +46,7 @@ export default function CommunityFacilitiesCleaningPage() {
                 "Entryways, mats, floors, and glass",
                 "Issue reporting + quality checks",
               ].map((item) => (
-                <li
-                  key={item}
-                  className="rounded-2xl border bg-slate-50 px-4 py-3 text-sm text-slate-700"
-                >
+                <li key={item} className={commercial.listItem}>
                   {item}
                 </li>
               ))}
@@ -61,9 +56,7 @@ export default function CommunityFacilitiesCleaningPage() {
           {/* Proof / Fit card */}
           <div className="w-full md:w-[360px]">
             <div className="rounded-3xl border bg-slate-50 p-6">
-              <h2 className="text-base font-semibold text-slate-900">
-                Good fit for
-              </h2>
+              <h2 className={commercial.h3}>Good fit for</h2>
               <ul className="mt-3 space-y-2 text-sm text-slate-700">
                 <li>• Community centres + rec facilities</li>
                 <li>• Shared-use buildings + common areas</li>
@@ -94,7 +87,7 @@ export default function CommunityFacilitiesCleaningPage() {
       {/* Problems / Outcomes */}
       <section className="mt-10 grid gap-6 md:grid-cols-2">
         <div className="rounded-3xl border bg-white p-7 shadow-sm">
-          <h2 className="text-xl font-bold text-slate-900">
+          <h2 className={commercial.h2}>
             Common challenges in shared facilities
           </h2>
           <ul className="mt-4 space-y-3 text-slate-700">
@@ -107,9 +100,7 @@ export default function CommunityFacilitiesCleaningPage() {
         </div>
 
         <div className="rounded-3xl border bg-white p-7 shadow-sm">
-          <h2 className="text-xl font-bold text-slate-900">
-            What we aim to deliver
-          </h2>
+          <h2 className={commercial.h2}>What we aim to deliver</h2>
           <ul className="mt-4 space-y-3 text-slate-700">
             <li>• Clear scope by room + frequency (daily/weekly/monthly)</li>
             <li>
@@ -124,10 +115,10 @@ export default function CommunityFacilitiesCleaningPage() {
 
       {/* Scope */}
       <section className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
-        <h2 className="text-2xl font-bold text-slate-900">
+        <h2 className={commercial.h2Large}>
           What’s included (typical facility scope)
         </h2>
-        <p className="mt-3 text-slate-600">
+        <p className={commercial.lead}>
           Your scope is customized during the walk-through. Here’s a typical
           baseline for community and shared facilities.
         </p>
@@ -166,7 +157,7 @@ export default function CommunityFacilitiesCleaningPage() {
         </div>
 
         <div className="mt-8 rounded-2xl bg-slate-50 p-5">
-          <h3 className="text-base font-semibold text-slate-900">
+          <h3 className={commercial.h3}>
             Optional add-ons (monthly / seasonal)
           </h3>
           <div className="mt-3 grid gap-2 sm:grid-cols-2 text-sm text-slate-700">
@@ -182,7 +173,7 @@ export default function CommunityFacilitiesCleaningPage() {
 
       {/* Checklist preview */}
       <section className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
-        <h2 className="text-2xl font-bold text-slate-900">
+        <h2 className={commercial.h2Large}>
           Checklist preview (how we prevent “scope drift”)
         </h2>
         <p className="mt-3 text-slate-600">
@@ -217,10 +208,7 @@ export default function CommunityFacilitiesCleaningPage() {
           <p className="text-sm font-medium text-emerald-900">
             Want a room-by-room scope built around your facility schedule?
           </p>
-          <Link
-            href="/request-walkthrough"
-            className="inline-flex items-center justify-center rounded-full bg-emerald-700 px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition hover:bg-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-700 focus:ring-offset-2"
-          >
+          <Link href="/request-walkthrough" className={commercial.cta}>
             Request a Free Walk-Through
           </Link>
         </div>
@@ -228,7 +216,7 @@ export default function CommunityFacilitiesCleaningPage() {
 
       {/* How it works */}
       <section className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
-        <h2 className="text-2xl font-bold text-slate-900">How it works</h2>
+        <h2 className={commercial.h2Large}>How it works</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-3">
           <StepCard
             step="1"
@@ -250,7 +238,7 @@ export default function CommunityFacilitiesCleaningPage() {
 
       {/* FAQ */}
       <section className="mt-10 rounded-3xl border bg-white p-8 shadow-sm">
-        <h2 className="text-2xl font-bold text-slate-900">FAQ</h2>
+        <h2 className={commercial.h2Large}>FAQ</h2>
         <div className="mt-6 grid gap-4 md:grid-cols-2">
           <Faq
             q="Do you handle event resets?"
@@ -281,10 +269,7 @@ export default function CommunityFacilitiesCleaningPage() {
           on your rooms, traffic, and schedule.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
-          <Link
-            href="/request-walkthrough"
-            className="inline-flex items-center justify-center rounded-full bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition hover:bg-slate-200"
-          >
+          <Link href="/request-walkthrough" className={commercial.ctaLight}>
             Request a Free Walk-Through
           </Link>
           <Link
@@ -302,7 +287,7 @@ export default function CommunityFacilitiesCleaningPage() {
 function ScopeCard({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="rounded-3xl border bg-slate-50 p-6">
-      <h3 className="text-base font-semibold text-slate-900">{title}</h3>
+      <h3 className={commercial.h3}>{title}</h3>
       <ul className="mt-3 space-y-2 text-sm text-slate-700">
         {items.map((t) => (
           <li key={t}>• {t}</li>
@@ -315,7 +300,7 @@ function ScopeCard({ title, items }: { title: string; items: string[] }) {
 function PreviewList({ title, items }: { title: string; items: string[] }) {
   return (
     <div className="rounded-3xl border bg-slate-50 p-6">
-      <h3 className="text-base font-semibold text-slate-900">{title}</h3>
+      <h3 className={commercial.h3}>{title}</h3>
       <ul className="mt-3 space-y-2 text-sm text-slate-700">
         {items.map((t) => (
           <li key={t}>• {t}</li>
@@ -340,7 +325,7 @@ function StepCard({
         <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-700 text-sm font-bold text-white">
           {step}
         </span>
-        <h3 className="text-base font-semibold text-slate-900">{title}</h3>
+        <h3 className={commercial.h3}>{title}</h3>
       </div>
       <p className="mt-3 text-sm leading-6 text-slate-700">{text}</p>
     </div>
