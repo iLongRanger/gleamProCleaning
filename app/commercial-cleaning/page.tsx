@@ -43,6 +43,109 @@ export default function CommercialCleaningHubPage() {
         </div>
       </div>
 
+      <section className="mt-12 rounded-2xl border p-6 md:p-8">
+        <h2 className="text-xl font-semibold md:text-2xl">
+          Industries we serve
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Explore our most common commercial cleaning scopes. All services
+          include a free walk-through and a tailored checklist.
+        </p>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <a
+            href="/commercial-cleaning/restaurants"
+            className="rounded-xl border p-4 transition hover:shadow-sm"
+          >
+            <div className="font-medium">Restaurants &amp; Pubs</div>
+            <div className="mt-1 text-sm text-muted-foreground">
+              Grease, high-touch surfaces, washrooms, and inspection-ready
+              routines.
+            </div>
+          </a>
+
+          <a
+            href="/commercial-cleaning/offices"
+            className="rounded-xl border p-4 transition hover:shadow-sm"
+          >
+            <div className="font-medium">Offices</div>
+            <div className="mt-1 text-sm text-muted-foreground">
+              Desks, meeting rooms, kitchens, restrooms, and consistent
+              day-to-day presentation.
+            </div>
+          </a>
+
+          <a
+            href="/commercial-cleaning/community-facilities"
+            className="rounded-xl border p-4 transition hover:shadow-sm"
+          >
+            <div className="font-medium">Community Facilities</div>
+            <div className="mt-1 text-sm text-muted-foreground">
+              Multi-room facilities, higher foot traffic, and dependable
+              sanitation standards.
+            </div>
+          </a>
+        </div>
+
+        <div className="mt-6">
+          <a
+            href="/request-walkthrough"
+            className="inline-flex items-center justify-center rounded-xl px-5 py-3 font-medium shadow-sm transition hover:opacity-90"
+          >
+            Request a Free Walk-Through
+          </a>
+        </div>
+      </section>
+
+      <section className="mx-auto max-w-5xl px-4 py-10">
+        <h2 className="text-xl font-semibold md:text-2xl">
+          Industries we serve
+        </h2>
+        <p className="mt-2 text-sm text-muted-foreground">
+          Commercial-first cleaning focused on reliable routines and
+          inspection-ready standards.
+        </p>
+
+        <div className="mt-6 grid gap-4 md:grid-cols-3">
+          <div className="rounded-2xl border p-5">
+            <div className="font-medium">Restaurants &amp; Pubs</div>
+            <div className="mt-1 text-sm text-muted-foreground">
+              Grease control, high-touch disinfection, washrooms, and closing
+              support.
+            </div>
+          </div>
+          <div className="rounded-2xl border p-5">
+            <div className="font-medium">Offices</div>
+            <div className="mt-1 text-sm text-muted-foreground">
+              Consistent presentation for teams and clients — daily, weekly, or
+              custom.
+            </div>
+          </div>
+          <div className="rounded-2xl border p-5">
+            <div className="font-medium">Community Facilities</div>
+            <div className="mt-1 text-sm text-muted-foreground">
+              Multi-room facilities with higher traffic and sanitation
+              requirements.
+            </div>
+          </div>
+        </div>
+
+        <div className="mt-6 flex gap-3">
+          <a
+            href="/commercial-cleaning"
+            className="inline-flex items-center justify-center rounded-xl border px-5 py-3 font-medium transition hover:shadow-sm"
+          >
+            Explore Commercial Cleaning
+          </a>
+          <a
+            href="/request-walkthrough"
+            className="inline-flex items-center justify-center rounded-xl px-5 py-3 font-medium shadow-sm transition hover:opacity-90"
+          >
+            Request a Free Walk-Through
+          </a>
+        </div>
+      </section>
+
       {/* Featured vertical: Restaurants */}
       <section className="mt-16 rounded-xl border p-8">
         <div className="grid gap-10 lg:grid-cols-2 lg:items-center">

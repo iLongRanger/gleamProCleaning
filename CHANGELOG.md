@@ -16,9 +16,9 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Expanded restaurant cleaning page with detailed service content, checklist preview, and inspection-ready messaging.
-- Expanded office cleaning page into a full sales page with scope, checklist preview, FAQs, and strong walk-through CTA.
-- Expanded community facilities cleaning page into a full sales page with scope, checklist preview, FAQs, and strong walk-through CTA.
+- Aligned styling across commercial sub-pages for consistent headings, spacing, and CTAs.
+- Added “Industries we serve” cross-links on the Commercial Cleaning hub page.
+- Added “Industries we serve” block on the homepage linking to the commercial hub.
 
 ---
 

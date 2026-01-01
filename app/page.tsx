@@ -1,5 +1,5 @@
 "use client";
-
+import Link from "next/link";
 import { useState } from "react";
 import { motion } from "framer-motion";
 import {
@@ -102,10 +102,9 @@ export default function Page() {
                 className="rounded-2xl px-4 py-3 text-sm sm:px-6 sm:py-6 sm:text-base"
                 style={{ backgroundColor: colors.emerald }}
               >
-                <a href="#quote">
-                  Request a Free Walk-Through{" "}
-                  <ChevronRight className="ml-1 w-4 h-4 inline" />
-                </a>
+                <Link href="/request-walkthrough">
+                  Request a Free Walk-Through
+                </Link>
               </Button>
               <Button
                 asChild
@@ -144,7 +143,9 @@ export default function Page() {
                     width={150}
                     height={50}
                   />
-                  Request a Free Walk-Through
+                  <Link href="/request-walkthrough">
+                    Request a Free Walk-Through
+                  </Link>
                 </CardTitle>
               </CardHeader>
               <CardContent>
@@ -621,7 +622,7 @@ export default function Page() {
             className="rounded-2xl px-4 py-3 text-sm sm:px-6 sm:py-6 sm:text-base"
             style={{ backgroundColor: colors.emerald }}
           >
-            <a href="#quote">Request a Free Walk-Through</a>
+            <Link href="/request-walkthrough">Request a Free Walk-Through</Link>
           </Button>
           <p className="text-xs text-white/60 mt-3">
             Custom scopes available. Tell us your priorities and we’ll tailor a
