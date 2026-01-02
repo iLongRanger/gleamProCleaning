@@ -44,9 +44,6 @@ Secondary niches:
 - Website repositioned as **commercial cleaning**
 - Residential is supported as a secondary lane (not a pricing-first offering)
 - Primary conversion action: **Lead capture** (walk-through / estimate form)
-- Restaurant cleaning page expanded into a full sales page with scope overview, checklist preview, and inspection readiness messaging.
-- Office cleaning page expanded into a full sales page (scope, checklist preview, FAQs, CTA).
-- Community facilities cleaning page expanded into a full sales page with scope, checklist preview, and conversion-focused CTA.
 
 ### Homepage (dual-lane hero)
 
@@ -70,9 +67,33 @@ Secondary niches:
 - Standardized commercial page styling via shared class system:
   - `components/commercial/ui.ts`
 - Commercial hub cross-links section added (“Industries we serve”).
-- Restaurants page aligned to the same commercial design system as Offices and Community Facilities.
-- Primary CTAs and secondary buttons standardized across commercial pages.
 - Commercial hub + sub-pages aligned to the homepage prestige design (dark navy base with emerald/gold accents).
+
+### Commercial pages (aligned sales-page layout)
+
+All three commercial niche pages are aligned to the same conversion-focused structure:
+
+- `/commercial-cleaning/restaurants`
+- `/commercial-cleaning/offices`
+- `/commercial-cleaning/community-facilities`
+
+Shared structure includes:
+
+- Hero + fit/proof card
+- Problems / outcomes
+- Scope (cards) + optional add-ons
+- Checklist preview (per-visit + weekly/rotating)
+- How it works (3-step)
+- FAQ
+- Final CTA
+
+### Contextual cross-links (commercial internal navigation)
+
+- Contextual cross-links were added between commercial pages to improve flow between niches:
+  - Restaurants ↔ Offices
+  - Offices ↔ Community Facilities
+  - Community Facilities ↔ Restaurants
+- Links are placed in conversion sections (final CTAs) to keep navigation relevant.
 
 ### Lead system (LIVE)
 
@@ -88,9 +109,9 @@ Secondary niches:
 
 ### Commercial structure
 
-- Commercial Cleaning hub page added at:
+- Commercial Cleaning hub page:
   - `/commercial-cleaning`
-- Sub-pages added:
+- Sub-pages:
   - `/commercial-cleaning/restaurants`
   - `/commercial-cleaning/offices`
   - `/commercial-cleaning/community-facilities`
@@ -106,7 +127,6 @@ Secondary niches:
 
 ## What Is NOT Done Yet
 
-- Add stronger internal cross-links between commercial sub-pages (contextual links in FAQs / final CTAs).
 - SEO polish pass (optional):
   - Ensure metadata is consistent across all commercial pages
   - Add/verify sitemap + robots (if not already present)
@@ -115,12 +135,12 @@ Secondary niches:
 
 ## Next Planned Commit
 
-feat(website): add contextual cross-links between commercial pages
+feat(website): seo polish pass for commercial pages
 
 This will:
 
-- Add contextual links between `/commercial-cleaning/*` pages in FAQs and end-of-page CTA sections
-- Improve conversion flow between niches (restaurants → offices → community facilities)
+- Review/standardize metadata across `/commercial-cleaning/*` pages
+- Confirm sitemap + robots configuration (only if files exist in repo)
 
 ---
 

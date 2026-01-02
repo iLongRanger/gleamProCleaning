@@ -16,6 +16,7 @@ All notable changes to this project will be documented in this file.
 - Added homepage dual-lane hero toggle (Commercial / Residential) with lead form.
 - Added mobile navigation with collapsible menu (Commercial sub-links included).
 - Added “Call Us” button in header (desktop + mobile) using tel: link.
+- Added contextual cross-links between commercial service pages to improve internal navigation and conversion flow.
 
 ### Changed
 
@@ -24,6 +25,7 @@ All notable changes to this project will be documented in this file.
 - Improved hero background rendering across breakpoints (mobile/tablet/desktop) using responsive scaling + object positioning.
 - Homepage hero uses a frosted-glass lead card, maintaining “lead generator only” (no pricing tables).
 - Improved header dropdown usability and accessibility (click + hover support on desktop).
+- Aligned the Restaurants commercial page to the same sales-page layout system as Offices and Community Facilities (scope, checklist preview, how-it-works, FAQ, and conversion-focused final CTA).
 
 ---
 
