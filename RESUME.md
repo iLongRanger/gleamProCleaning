@@ -118,12 +118,14 @@ Secondary niches:
 
 ## Next Planned Commit
 
-feat(website): add homepage industries section + strengthen cross-links
+feat(website): fix navigation bar
 
 This will:
-- Add an “Industries we serve” section to the homepage linking to `/commercial-cleaning`
-- Add lightweight contextual cross-links between commercial pages (where it naturally fits)
-- Keep CTA consistent: “Request a Free Walk-Through”
+
+- fix navigation bar links
+- add link for mobile phone size
+  = add collapsable menu
+- add call us button
 
 ---
 
