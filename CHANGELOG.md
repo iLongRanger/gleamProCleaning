@@ -26,7 +26,7 @@ All notable changes to this project will be documented in this file.
 - Homepage hero uses a frosted-glass lead card, maintaining “lead generator only” (no pricing tables).
 - Improved header dropdown usability and accessibility (click + hover support on desktop).
 - Aligned the Restaurants commercial page to the same sales-page layout system as Offices and Community Facilities (scope, checklist preview, how-it-works, FAQ, and conversion-focused final CTA).
-- Standardized SEO metadata for the Commercial Cleaning hub page to match commercial service pages.
+- Cleaned up README content (removed placeholder sections; documented current routes, lead flow, and local dev commands).
 
 ---
 

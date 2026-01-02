@@ -87,10 +87,6 @@ Shared structure includes:
 - FAQ
 - Final CTA
 
-### Commercial hub SEO metadata
-
-- Commercial Cleaning hub page (`/commercial-cleaning`) includes page metadata (title + description) aligned with the commercial service pages.
-
 ### Contextual cross-links (commercial internal navigation)
 
 - Contextual cross-links were added between commercial pages to improve flow between niches:
@@ -105,43 +101,34 @@ Shared structure includes:
 - Honeypot spam protection implemented
 - Submissions POST to `/api/walkthrough`
 - Leads are emailed via **Resend**
-  - TO: rortiz@gleamlift.ca
-  - CC: rortiz.dev@gmail.com, velezchristinemarier@gmail.com
-- Domain `gleampro.ca` verified in Resend
 - Production email delivery confirmed working
 - Vercel deployment is green
 
-### Commercial structure
+### Documentation
 
-- Commercial Cleaning hub page:
-  - `/commercial-cleaning`
-- Sub-pages:
-  - `/commercial-cleaning/restaurants`
-  - `/commercial-cleaning/offices`
-  - `/commercial-cleaning/community-facilities`
-
-### Navigation
-
-- Header navigation includes:
-  - Desktop navigation with Commercial dropdown
-  - Mobile navigation with collapsible menu (Commercial sub-links included)
-  - “Call Us” button (desktop + mobile) using tel: link
+- `README.md` has been cleaned up to remove placeholders and document:
+  - routes, lead flow, and local dev commands
+  - high-level structure and workflow expectations
 
 ---
 
 ## What Is NOT Done Yet
 
-- SEO polish pass (optional):
-  - Add/verify sitemap + robots (only if files already exist in repo)
+- Finish Residential pages (copy + structure + visuals)
+- SEO infra (robots/sitemap) — intentionally deferred until commercial + residential structure is final
 
 ---
 
 ## Next Planned Commit
 
-TBD (pick one)
+1. Verify commercial navigation entries are consistent (desktop + mobile) for:
 
-- If sitemap/robots files already exist: verify and polish them.
-- Docs cleanup: remove duplication in `README.md` (docs-only commit).
+- `/commercial-cleaning`
+- `/commercial-cleaning/restaurants`
+- `/commercial-cleaning/offices`
+- `/commercial-cleaning/community-facilities`
+
+Then proceed with a small fix commit only if links are missing or inconsistent.
 
 ---
 
