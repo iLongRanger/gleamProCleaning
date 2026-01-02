@@ -13,16 +13,14 @@ All notable changes to this project will be documented in this file.
   - Community Facilities
 - Added walk-through request email delivery via Resend.
 - Added honeypot spam protection for walk-through form.
+- Added homepage dual-lane hero toggle (Commercial / Residential) with lead form.
 
 ### Changed
 
-- Expanded restaurant cleaning page with detailed service content, checklist preview, and inspection-ready messaging.
-- Expanded office cleaning page into a full sales page with scope, checklist preview, FAQs, and strong walk-through CTA.
-- Expanded community facilities cleaning page into a full sales page with scope, checklist preview, FAQs, and strong walk-through CTA.
-- Aligned styling across commercial sub-pages for consistent headings, spacing, and CTAs.
-- Added “Industries we serve” cross-links section on the Commercial Cleaning hub page.
-- Standardized commercial CTA/button classes across hub and sub-pages.
-- Aligned Commercial Cleaning hub + sub-pages with the homepage prestige design (dark navy base with emerald/gold accents).
+- Redesigned homepage hero into a full-screen, background-swapping layout for Commercial/Residential.
+- Upgraded the Commercial/Residential toggle to a larger, premium segmented control with gold glow styling.
+- Improved hero background rendering across breakpoints (mobile/tablet/desktop) using responsive scaling + object positioning.
+- Homepage hero uses a frosted-glass lead card, maintaining “lead generator only” (no pricing tables).
 
 ---
 

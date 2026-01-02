@@ -42,11 +42,28 @@ Secondary niches:
 ### Core positioning
 
 - Website repositioned as **commercial cleaning**
-- Residential is de-emphasized
-- Primary CTA everywhere: **Request a Free Walk-Through**
+- Residential is supported as a secondary lane (not a pricing-first offering)
+- Primary conversion action: **Lead capture** (walk-through / estimate form)
 - Restaurant cleaning page expanded into a full sales page with scope overview, checklist preview, and inspection readiness messaging.
 - Office cleaning page expanded into a full sales page (scope, checklist preview, FAQs, CTA).
 - Community facilities cleaning page expanded into a full sales page with scope, checklist preview, and conversion-focused CTA.
+
+### Homepage (dual-lane hero)
+
+- Homepage is a **full-screen hero** that switches between:
+  - **Commercial** lane (default on load)
+  - **Residential** lane (second lane)
+- Background image swaps per lane:
+  - Commercial hero: `/images/home/commercial-hero.png`
+  - Residential hero: `/images/home/residential-hero.png`
+- Hero background is optimized per breakpoint using responsive `scale[...]` and `object-[x_y]` to avoid awkward cropping on tablet/mobile.
+- Premium segmented toggle (Commercial/Residential) is larger and includes a gold glow treatment.
+- Right side uses a frosted-glass lead form:
+  - Commercial collects: business name + facility type + shared fields
+  - Residential collects: shared fields only
+- Both lanes submit to the same endpoint:
+  - POST `/api/walkthrough`
+  - Includes `leadType: "commercial" | "residential"`
 
 ### Commercial styling (standardized)
 
@@ -60,13 +77,6 @@ Secondary niches:
 ### Lead system (LIVE)
 
 - Walk-through RFQ form exists at `/request-walkthrough`
-- Form captures:
-  - Business name
-  - Facility type
-  - Address
-  - Frequency
-  - Phone number
-  - Email
 - Honeypot spam protection implemented
 - Submissions POST to `/api/walkthrough`
 - Leads are emailed via **Resend**
@@ -93,12 +103,12 @@ Secondary niches:
     - Offices
     - Community Facilities
 - Dropdown hover behavior stabilized (no flicker)
+- Add top-level “Residential Cleaning” in nav (if not already present)
 
 ---
 
 ## What Is NOT Done Yet
 
-- Add “Industries we serve” block to the homepage linking to `/commercial-cleaning`.
 - Add stronger internal cross-links between commercial sub-pages (contextual links in FAQs / final CTAs).
 - SEO polish pass (optional):
   - Ensure metadata is consistent across all commercial pages
@@ -108,10 +118,9 @@ Secondary niches:
 
 ## Next Planned Commit
 
-feat(website): add “Industries we serve” block to homepage + strengthen internal links
+feat(website): add homepage industries section + strengthen cross-links
 
 This will:
-
 - Add an “Industries we serve” section to the homepage linking to `/commercial-cleaning`
 - Add lightweight contextual cross-links between commercial pages (where it naturally fits)
 - Keep CTA consistent: “Request a Free Walk-Through”

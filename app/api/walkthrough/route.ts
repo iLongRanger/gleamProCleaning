@@ -9,41 +9,37 @@ function parseCc(value?: string) {
     .filter(Boolean);
 }
 
+type LeadType = "commercial" | "residential";
+
 export async function POST(req: Request) {
   try {
     const body = await req.json();
 
     const {
-      businessName,
-      facilityType,
-      address,
-      sqft,
-      frequency,
-      painPoints,
-      phone,
-      email,
+      leadType = "commercial",
       // Honeypot (bots fill this, humans won’t)
       website,
+
+      // Commercial
+      businessName,
+      facilityType,
+
+      // Shared
+      fullName,
+      address,
+      frequency,
+      phone,
+      email,
+
+      // Optional details
+      notes,
+      sqft,
+      painPoints,
     } = body ?? {};
 
     // Honeypot: if filled, pretend success (do nothing)
     if (website && String(website).trim().length > 0) {
       return NextResponse.json({ ok: true });
-    }
-
-    // Minimal required fields
-    if (
-      !businessName ||
-      !facilityType ||
-      !address ||
-      !frequency ||
-      !phone ||
-      !email
-    ) {
-      return NextResponse.json(
-        { ok: false, error: "Missing required fields." },
-        { status: 400 }
-      );
     }
 
     const RESEND_API_KEY = process.env.RESEND_API_KEY;
@@ -58,24 +54,69 @@ export async function POST(req: Request) {
       );
     }
 
+    const normalizedLeadType: LeadType =
+      leadType === "residential" ? "residential" : "commercial";
+
+    // Validation rules per lead type
+    if (normalizedLeadType === "commercial") {
+      if (
+        !businessName ||
+        !facilityType ||
+        !address ||
+        !frequency ||
+        !phone ||
+        !email
+      ) {
+        return NextResponse.json(
+          { ok: false, error: "Missing required fields." },
+          { status: 400 }
+        );
+      }
+    } else {
+      if (!fullName || !address || !frequency || !phone || !email) {
+        return NextResponse.json(
+          { ok: false, error: "Missing required fields." },
+          { status: 400 }
+        );
+      }
+    }
+
     const resend = new Resend(RESEND_API_KEY);
 
-    const subject = `New Walk-Through Request — ${businessName} (${facilityType})`;
+    const subject =
+      normalizedLeadType === "commercial"
+        ? `Commercial Lead — Walk-Through Request — ${businessName} (${facilityType})`
+        : `Residential Lead — Quote Request — ${fullName}`;
 
-    const text = [
-      "New Walk-Through Request",
-      "------------------------",
-      `Business/Facility: ${businessName}`,
-      `Facility Type: ${facilityType}`,
-      `Address: ${address}`,
-      `Approx. Size (sqft): ${sqft || "N/A"}`,
-      `Cleaning Frequency: ${frequency}`,
-      `Phone: ${phone}`,
-      `Email: ${email}`,
-      `Pain Points: ${painPoints || "N/A"}`,
-      "",
-      "Submitted from: /request-walkthrough",
-    ].join("\n");
+    const text =
+      normalizedLeadType === "commercial"
+        ? [
+            "Commercial Lead — Walk-Through Request",
+            "-------------------------------------",
+            `Business/Facility: ${businessName}`,
+            `Facility Type: ${facilityType}`,
+            `Address: ${address}`,
+            `Approx. Size (sqft): ${sqft || "N/A"}`,
+            `Cleaning Frequency: ${frequency}`,
+            `Phone: ${phone}`,
+            `Email: ${email}`,
+            `Pain Points: ${painPoints || "N/A"}`,
+            `Notes: ${notes || "N/A"}`,
+            "",
+            "Submitted from: / (homepage)",
+          ].join("\n")
+        : [
+            "Residential Lead — Quote Request",
+            "-------------------------------",
+            `Name: ${fullName}`,
+            `Address: ${address}`,
+            `Cleaning Frequency: ${frequency}`,
+            `Phone: ${phone}`,
+            `Email: ${email}`,
+            `Notes: ${notes || "N/A"}`,
+            "",
+            "Submitted from: / (homepage)",
+          ].join("\n");
 
     const result = await resend.emails.send({
       from: FROM,
@@ -93,22 +134,6 @@ export async function POST(req: Request) {
           ok: false,
           error: `Email failed: ${result.error.message ?? "unknown error"}`,
         },
-        { status: 502 }
-      );
-    }
-
-    const { error } = await resend.emails.send({
-      from: FROM,
-      to: TO,
-      cc: CC.length ? CC : undefined,
-      subject,
-      text,
-      replyTo: email, // so you can reply directly to the lead
-    });
-
-    if (error) {
-      return NextResponse.json(
-        { ok: false, error: "Email failed to send." },
         { status: 502 }
       );
     }
