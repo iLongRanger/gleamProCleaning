@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useState } from "react";
+import { useEffect, useId, useMemo, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -28,10 +28,15 @@ const PHONE_TEL = "tel:+16729703755";
 const EMAIL_DISPLAY = "hello@gleamprocleaning.com";
 const EMAIL_MAILTO = "mailto:hello@gleamprocleaning.com";
 
+// small delay prevents “menu disappears before click” when moving from trigger → menu
+const DESKTOP_CLOSE_DELAY_MS = 180;
+
 export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileCommercialOpen, setMobileCommercialOpen] = useState(false);
   const [desktopCommercialOpen, setDesktopCommercialOpen] = useState(false);
+
+  const closeTimerRef = useRef<number | null>(null);
 
   const mobilePanelId = useId();
   const desktopCommercialMenuId = useId();
@@ -60,6 +65,20 @@ export default function Header() {
     []
   );
 
+  const clearDesktopCloseTimer = () => {
+    if (closeTimerRef.current) {
+      window.clearTimeout(closeTimerRef.current);
+      closeTimerRef.current = null;
+    }
+  };
+
+  const scheduleDesktopClose = () => {
+    clearDesktopCloseTimer();
+    closeTimerRef.current = window.setTimeout(() => {
+      setDesktopCommercialOpen(false);
+    }, DESKTOP_CLOSE_DELAY_MS);
+  };
+
   // Close on Escape
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
@@ -81,6 +100,11 @@ export default function Header() {
       document.body.style.overflow = prev;
     };
   }, [mobileOpen]);
+
+  // Cleanup timer on unmount
+  useEffect(() => {
+    return () => clearDesktopCloseTimer();
+  }, []);
 
   const ctaItem = nav.find((n) => n.cta);
   const nonCtaItems = nav.filter((n) => !n.cta);
@@ -113,7 +137,7 @@ export default function Header() {
             </a>
           </div>
 
-          {/* Social icons exist in your current header but without URLs — keeping that behavior (no assumptions). */}
+          {/* Keeping icons (no URLs assumed). */}
           <div className="flex items-center gap-4 opacity-80">
             <Facebook className="h-4 w-4" />
             <Instagram className="h-4 w-4" />
@@ -124,7 +148,7 @@ export default function Header() {
 
       {/* Main Nav */}
       <div className="relative">
-        {/* subtle prestige glow behind the header row (matches commercial ui glow style) */}
+        {/* subtle prestige glow behind the header row */}
         <div className="pointer-events-none absolute inset-0 opacity-20 [background:radial-gradient(400px_200px_at_20%_0%,#C9A227,transparent),radial-gradient(400px_200px_at_80%_0%,#0FA36B,transparent)]" />
 
         <div className="relative mx-auto flex max-w-6xl items-center justify-between px-4 py-3">
@@ -165,8 +189,15 @@ export default function Header() {
                 <div
                   key={item.label}
                   className="relative"
-                  onMouseEnter={() => setDesktopCommercialOpen(true)}
-                  onMouseLeave={() => setDesktopCommercialOpen(false)}
+                  // Hover behavior with delay (prevents menu vanishing before click)
+                  onMouseEnter={() => {
+                    clearDesktopCloseTimer();
+                    setDesktopCommercialOpen(true);
+                  }}
+                  onMouseLeave={() => {
+                    // Delay close so cursor can travel into menu
+                    scheduleDesktopClose();
+                  }}
                 >
                   <button
                     type="button"
@@ -174,7 +205,10 @@ export default function Header() {
                     aria-haspopup="menu"
                     aria-expanded={desktopCommercialOpen}
                     aria-controls={desktopCommercialMenuId}
-                    onClick={() => setDesktopCommercialOpen((v) => !v)}
+                    onClick={() => {
+                      clearDesktopCloseTimer();
+                      setDesktopCommercialOpen((v) => !v);
+                    }}
                   >
                     {item.label}
                     <ChevronDown className="h-4 w-4 opacity-80" />
@@ -183,6 +217,7 @@ export default function Header() {
                   <div
                     id={desktopCommercialMenuId}
                     role="menu"
+                    // NOTE: keep it mounted + pointer-enabled when open
                     className={[
                       "absolute left-0 top-full z-50 mt-2 w-72 rounded-2xl border border-white/10 bg-[#081A31] p-2 shadow-xl",
                       desktopCommercialOpen
@@ -190,6 +225,15 @@ export default function Header() {
                         : "pointer-events-none opacity-0",
                       "transition-opacity",
                     ].join(" ")}
+                    onMouseEnter={() => {
+                      // If we’re over the menu, cancel any scheduled close
+                      clearDesktopCloseTimer();
+                      setDesktopCommercialOpen(true);
+                    }}
+                    onMouseLeave={() => {
+                      // If leaving menu, close with delay (feels smoother)
+                      scheduleDesktopClose();
+                    }}
                   >
                     {/* Parent landing link */}
                     <Link
@@ -264,12 +308,11 @@ export default function Header() {
         {/* Mobile menu panel */}
         <div
           id={mobilePanelId}
-          className={["md:hidden", mobileOpen ? "block" : "hidden"].join(" ")}
+          className={mobileOpen ? "block md:hidden" : "hidden md:hidden"}
         >
           <div className="border-t border-white/10 bg-[#081A31]">
             <div className="mx-auto max-w-6xl px-4 py-4">
               <div className="space-y-2">
-                {/* Home */}
                 <Link
                   href="/"
                   className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10"
@@ -278,7 +321,6 @@ export default function Header() {
                   Home
                 </Link>
 
-                {/* Commercial accordion */}
                 <button
                   type="button"
                   className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10"
@@ -327,13 +369,11 @@ export default function Header() {
                   </div>
                 )}
 
-                {/* Call Us (mobile full button) */}
                 <a href={PHONE_TEL} className={commercial.secondary}>
                   <Phone className="mr-2 h-4 w-4" />
                   Call Us
                 </a>
 
-                {/* Primary CTA (mobile) */}
                 {ctaItem ? (
                   <Link
                     href={ctaItem.href}
@@ -344,7 +384,6 @@ export default function Header() {
                   </Link>
                 ) : null}
 
-                {/* Email (mobile helper) */}
                 <a
                   href={EMAIL_MAILTO}
                   className="mt-3 flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
