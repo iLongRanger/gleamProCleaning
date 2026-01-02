@@ -14,6 +14,8 @@ All notable changes to this project will be documented in this file.
 - Added walk-through request email delivery via Resend.
 - Added honeypot spam protection for walk-through form.
 - Added homepage dual-lane hero toggle (Commercial / Residential) with lead form.
+- Added mobile navigation with collapsible menu (Commercial sub-links included).
+- Added “Call Us” button in header (desktop + mobile) using tel: link.
 
 ### Changed
 
@@ -21,6 +23,7 @@ All notable changes to this project will be documented in this file.
 - Upgraded the Commercial/Residential toggle to a larger, premium segmented control with gold glow styling.
 - Improved hero background rendering across breakpoints (mobile/tablet/desktop) using responsive scaling + object positioning.
 - Homepage hero uses a frosted-glass lead card, maintaining “lead generator only” (no pricing tables).
+- Improved header dropdown usability and accessibility (click + hover support on desktop).
 
 ---
 

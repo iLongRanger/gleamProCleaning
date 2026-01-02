@@ -97,13 +97,10 @@ Secondary niches:
 
 ### Navigation
 
-- Header navigation updated:
-  - “Commercial Cleaning” dropdown
-    - Restaurants
-    - Offices
-    - Community Facilities
-- Dropdown hover behavior stabilized (no flicker)
-- Add top-level “Residential Cleaning” in nav (if not already present)
+- Header navigation includes:
+  - Desktop navigation with Commercial dropdown
+  - Mobile navigation with collapsible menu (Commercial sub-links included)
+  - “Call Us” button (desktop + mobile) using tel: link
 
 ---
 
@@ -118,14 +115,12 @@ Secondary niches:
 
 ## Next Planned Commit
 
-feat(website): fix navigation bar
+feat(website): add contextual cross-links between commercial pages
 
 This will:
 
-- fix navigation bar links
-- add link for mobile phone size
-  = add collapsable menu
-- add call us button
+- Add contextual links between `/commercial-cleaning/*` pages in FAQs and end-of-page CTA sections
+- Improve conversion flow between niches (restaurants → offices → community facilities)
 
 ---
 
