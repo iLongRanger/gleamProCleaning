@@ -87,6 +87,10 @@ Shared structure includes:
 - FAQ
 - Final CTA
 
+### Commercial hub SEO metadata
+
+- Commercial Cleaning hub page (`/commercial-cleaning`) includes page metadata (title + description) aligned with the commercial service pages.
+
 ### Contextual cross-links (commercial internal navigation)
 
 - Contextual cross-links were added between commercial pages to improve flow between niches:
@@ -128,19 +132,16 @@ Shared structure includes:
 ## What Is NOT Done Yet
 
 - SEO polish pass (optional):
-  - Ensure metadata is consistent across all commercial pages
-  - Add/verify sitemap + robots (if not already present)
+  - Add/verify sitemap + robots (only if files already exist in repo)
 
 ---
 
 ## Next Planned Commit
 
-feat(website): seo polish pass for commercial pages
+TBD (pick one)
 
-This will:
-
-- Review/standardize metadata across `/commercial-cleaning/*` pages
-- Confirm sitemap + robots configuration (only if files exist in repo)
+- If sitemap/robots files already exist: verify and polish them.
+- Docs cleanup: remove duplication in `README.md` (docs-only commit).
 
 ---
 
