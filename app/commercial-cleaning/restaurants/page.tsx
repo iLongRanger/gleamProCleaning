@@ -174,9 +174,21 @@ export default function RestaurantCleaningPage() {
               on your space, schedule, and operational needs.
             </p>
 
-            <div className="mt-6">
+            <div className="mt-6 flex flex-wrap justify-center gap-3">
               <Link href="/request-walkthrough" className={commercial.ctaLight}>
                 Request a Free Walk-Through
+              </Link>
+              <Link
+                href="/commercial-cleaning/offices"
+                className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                See Office Cleaning
+              </Link>
+              <Link
+                href="/commercial-cleaning/community-facilities"
+                className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                See Community Facility Cleaning
               </Link>
             </div>
           </section>

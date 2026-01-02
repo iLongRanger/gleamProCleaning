@@ -275,6 +275,12 @@ export default function OfficeCleaningPage() {
               >
                 See Restaurant Cleaning
               </Link>
+              <Link
+                href="/commercial-cleaning/community-facilities"
+                className="inline-flex items-center justify-center rounded-full border border-white/30 px-6 py-3 text-sm font-semibold text-white transition hover:bg-white/10"
+              >
+                See Community Facility Cleaning
+              </Link>
             </div>
           </section>
         </main>
