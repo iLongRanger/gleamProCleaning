@@ -101,6 +101,11 @@ export default function Header() {
     };
   }, [mobileOpen]);
 
+  // Reset mobile submenu when closing the mobile menu
+  useEffect(() => {
+    if (!mobileOpen) setMobileCommercialOpen(false);
+  }, [mobileOpen]);
+
   // Cleanup timer on unmount
   useEffect(() => {
     return () => clearDesktopCloseTimer();
@@ -189,13 +194,11 @@ export default function Header() {
                 <div
                   key={item.label}
                   className="relative"
-                  // Hover behavior with delay (prevents menu vanishing before click)
                   onMouseEnter={() => {
                     clearDesktopCloseTimer();
                     setDesktopCommercialOpen(true);
                   }}
                   onMouseLeave={() => {
-                    // Delay close so cursor can travel into menu
                     scheduleDesktopClose();
                   }}
                 >
@@ -217,7 +220,6 @@ export default function Header() {
                   <div
                     id={desktopCommercialMenuId}
                     role="menu"
-                    // NOTE: keep it mounted + pointer-enabled when open
                     className={[
                       "absolute left-0 top-full z-50 mt-2 w-72 rounded-2xl border border-white/10 bg-[#081A31] p-2 shadow-xl",
                       desktopCommercialOpen
@@ -226,16 +228,13 @@ export default function Header() {
                       "transition-opacity",
                     ].join(" ")}
                     onMouseEnter={() => {
-                      // If we’re over the menu, cancel any scheduled close
                       clearDesktopCloseTimer();
                       setDesktopCommercialOpen(true);
                     }}
                     onMouseLeave={() => {
-                      // If leaving menu, close with delay (feels smoother)
                       scheduleDesktopClose();
                     }}
                   >
-                    {/* Parent landing link */}
                     <Link
                       href={item.href}
                       role="menuitem"
@@ -279,7 +278,6 @@ export default function Header() {
 
           {/* Mobile actions */}
           <div className="flex items-center gap-2 md:hidden">
-            {/* Call (mobile quick action) */}
             <a
               href={PHONE_TEL}
               className="inline-flex items-center justify-center rounded-full border border-white/10 bg-white/5 px-3 py-2 text-sm font-semibold text-[#C9A227] transition hover:bg-white/10"
@@ -305,10 +303,24 @@ export default function Header() {
           </div>
         </div>
 
-        {/* Mobile menu panel */}
+        {/* Mobile overlay (behind panel) */}
+        {mobileOpen ? (
+          <button
+            type="button"
+            aria-label="Close menu overlay"
+            className="fixed inset-0 z-40 bg-black/40 md:hidden"
+            onClick={() => setMobileOpen(false)}
+          />
+        ) : null}
+
+        {/* Mobile menu panel (fixed, above overlay) */}
         <div
           id={mobilePanelId}
-          className={mobileOpen ? "block md:hidden" : "hidden md:hidden"}
+          className={
+            mobileOpen
+              ? "fixed left-0 right-0 top-[56px] z-50 block md:hidden"
+              : "hidden md:hidden"
+          }
         >
           <div className="border-t border-white/10 bg-[#081A31]">
             <div className="mx-auto max-w-6xl px-4 py-4">
@@ -396,16 +408,6 @@ export default function Header() {
             </div>
           </div>
         </div>
-
-        {/* Mobile overlay (tap outside to close) */}
-        {mobileOpen ? (
-          <button
-            type="button"
-            aria-label="Close menu overlay"
-            className="fixed inset-0 z-30 bg-black/40 md:hidden"
-            onClick={() => setMobileOpen(false)}
-          />
-        ) : null}
       </div>
     </header>
   );
