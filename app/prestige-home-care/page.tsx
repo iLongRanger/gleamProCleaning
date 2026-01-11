@@ -1,5 +1,3 @@
-"use client";
-
 import Link from "next/link";
 import { Shield, Sparkles, Star, Home, Calendar, Sofa } from "lucide-react";
 import { residential } from "@/components/residential/ui";
