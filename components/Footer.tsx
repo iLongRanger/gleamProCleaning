@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import { MapPin, Phone, Mail } from "lucide-react";
 
 const colors = {
@@ -9,12 +10,9 @@ const colors = {
 };
 
 const nav = [
-  { label: "Services", href: "#services" },
-  { label: "Process", href: "#process" },
-  { label: "Pricing", href: "#pricing" },
-  { label: "About", href: "#about" },
-  { label: "Reviews", href: "#reviews" },
-  { label: "Contact", href: "#contact" },
+  { label: "Home", href: "/" },
+  { label: "Commercial Cleaning", href: "/commercial-cleaning" },
+  { label: "Request Walk-Through", href: "/request-walkthrough" },
 ];
 
 export default function Footer() {
@@ -47,9 +45,9 @@ export default function Footer() {
           <ul className="space-y-2 text-white/80">
             {nav.map((n) => (
               <li key={n.href}>
-                <a href={n.href} className="hover:text-white">
+                <Link href={n.href} className="hover:text-white">
                   {n.label}
-                </a>
+                </Link>
               </li>
             ))}
           </ul>

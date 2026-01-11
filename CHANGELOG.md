@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Fixed
+
+- Fixed footer navigation links to match current application structure
+- Updated footer Quick Links to use proper Next.js Link components
+- Removed outdated anchor links (#services, #process, etc.) that don't exist
+
 ### Added
 
 - Added Commercial Cleaning hub page at `/commercial-cleaning`.
