@@ -24,6 +24,8 @@ type NavItem = {
   children?: Array<{ label: string; href: string }>;
 };
 
+type DesktopMenu = "commercial" | "residential" | null;
+
 const PHONE_DISPLAY = "(672) 970-3755";
 const PHONE_TEL = "tel:+16729703755";
 const EMAIL_DISPLAY = "hello@gleamprocleaning.com";
@@ -32,6 +34,12 @@ const EMAIL_MAILTO = "mailto:hello@gleamprocleaning.com";
 // small delay prevents “menu disappears before click” when moving from trigger → menu
 const DESKTOP_CLOSE_DELAY_MS = 180;
 
+function getDesktopMenuKey(label: string): DesktopMenu {
+  if (label === "Commercial Cleaning") return "commercial";
+  if (label === "Residential Cleaning") return "residential";
+  return null;
+}
+
 export default function Header() {
   const headerRef = useRef<HTMLElement | null>(null);
 
@@ -39,14 +47,14 @@ export default function Header() {
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileCommercialOpen, setMobileCommercialOpen] = useState(false);
   const [mobileResidentialOpen, setMobileResidentialOpen] = useState(false);
-  const [desktopCommercialOpen, setDesktopCommercialOpen] = useState(false);
-  const [desktopResidentialOpen, setDesktopResidentialOpen] = useState(false);
+  const [desktopMenuOpen, setDesktopMenuOpen] = useState<DesktopMenu>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
 
   const closeTimerRef = useRef<number | null>(null);
 
   const mobilePanelId = useId();
   const desktopCommercialMenuId = useId();
+  const desktopResidentialMenuId = useId();
 
   const nav: NavItem[] = useMemo(
     () => [
@@ -67,11 +75,14 @@ export default function Header() {
         label: "Residential Cleaning",
         href: "/residential-cleaning",
         children: [
-          { label: "Overview", href: "/prestige-home-care" },
+          { label: "Prestige Home Care", href: "/prestige-home-care" },
           { label: "Recurring Cleaning", href: "/residential-cleaning/recurring" },
           { label: "Deep Cleaning", href: "/residential-cleaning/deep-cleaning" },
           { label: "Move-In/Out", href: "/residential-cleaning/move-in-out" },
-          { label: "Carpet & Upholstery", href: "/residential-cleaning/carpet-upholstery" },
+          {
+            label: "Carpet & Upholstery",
+            href: "/residential-cleaning/carpet-upholstery",
+          },
         ],
       },
       {
@@ -93,7 +104,7 @@ export default function Header() {
   const scheduleDesktopClose = () => {
     clearDesktopCloseTimer();
     closeTimerRef.current = window.setTimeout(() => {
-      setDesktopCommercialOpen(false);
+      setDesktopMenuOpen(null);
     }, DESKTOP_CLOSE_DELAY_MS);
   };
 
@@ -106,8 +117,7 @@ export default function Header() {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
         setMobileOpen(false);
-        setDesktopCommercialOpen(false);
-        setDesktopResidentialOpen(false);
+        setDesktopMenuOpen(null);
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -196,7 +206,13 @@ export default function Header() {
                       type="button"
                       className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10"
                       aria-expanded={mobileCommercialOpen}
-                      onClick={() => setMobileCommercialOpen((v) => !v)}
+                      onClick={() => {
+                        setMobileCommercialOpen((v) => {
+                          const next = !v;
+                          if (next) setMobileResidentialOpen(false);
+                          return next;
+                        });
+                      }}
                     >
                       <span>Commercial Cleaning</span>
                       <ChevronDown
@@ -243,26 +259,39 @@ export default function Header() {
                     <button
                       type="button"
                       className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10"
-                      aria-expanded={mobileCommercialOpen}
-                      onClick={() => setMobileCommercialOpen((v) => !v)}
+                      aria-expanded={mobileResidentialOpen}
+                      onClick={() => {
+                        setMobileResidentialOpen((v) => {
+                          const next = !v;
+                          if (next) setMobileCommercialOpen(false);
+                          return next;
+                        });
+                      }}
                     >
                       <span>Residential Cleaning</span>
                       <ChevronDown
                         className={[
                           "h-4 w-4 transition-transform",
-                          mobileCommercialOpen ? "rotate-180" : "",
+                          mobileResidentialOpen ? "rotate-180" : "",
                         ].join(" ")}
                       />
                     </button>
 
-                    {mobileCommercialOpen && (
+                    {mobileResidentialOpen && (
                       <div className="space-y-2 pl-2">
+                        <Link
+                          href="/residential-cleaning"
+                          className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          Overview
+                        </Link>
                         <Link
                           href="/prestige-home-care"
                           className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
                           onClick={() => setMobileOpen(false)}
                         >
-                          Overview
+                          Prestige Home Care
                         </Link>
                         <Link
                           href="/residential-cleaning/recurring"
@@ -407,14 +436,24 @@ export default function Header() {
                   );
                 }
 
+                const menuKey = getDesktopMenuKey(item.label);
+                if (!menuKey) {
+                  return null;
+                }
+
+                const isOpen = desktopMenuOpen === menuKey;
+                const menuId =
+                  menuKey === "commercial"
+                    ? desktopCommercialMenuId
+                    : desktopResidentialMenuId;
+
                 return (
                   <div
                     key={item.label}
                     className="relative"
                     onMouseEnter={() => {
                       clearDesktopCloseTimer();
-        setDesktopCommercialOpen(true);
-        setDesktopResidentialOpen(true);
+                      setDesktopMenuOpen(menuKey);
                     }}
                     onMouseLeave={() => {
                       scheduleDesktopClose();
@@ -424,11 +463,13 @@ export default function Header() {
                       type="button"
                       className="inline-flex items-center gap-1 text-sm font-medium text-white/90 transition hover:text-white"
                       aria-haspopup="menu"
-                      aria-expanded={desktopCommercialOpen}
-                      aria-controls={desktopCommercialMenuId}
+                      aria-expanded={isOpen}
+                      aria-controls={menuId}
                       onClick={() => {
                         clearDesktopCloseTimer();
-                        setDesktopCommercialOpen((v) => !v);
+                        setDesktopMenuOpen((prev) =>
+                          prev === menuKey ? null : menuKey
+                        );
                       }}
                     >
                       {item.label}
@@ -436,18 +477,16 @@ export default function Header() {
                     </button>
 
                     <div
-                      id={desktopCommercialMenuId}
+                      id={menuId}
                       role="menu"
                       className={[
                         "absolute left-0 top-full z-50 mt-2 w-72 rounded-2xl border border-white/10 bg-[#081A31] p-2 shadow-xl",
-                        desktopCommercialOpen
-                          ? "opacity-100"
-                          : "pointer-events-none opacity-0",
+                        isOpen ? "opacity-100" : "pointer-events-none opacity-0",
                         "transition-opacity",
                       ].join(" ")}
                       onMouseEnter={() => {
                         clearDesktopCloseTimer();
-                        setDesktopCommercialOpen(true);
+                        setDesktopMenuOpen(menuKey);
                       }}
                       onMouseLeave={() => {
                         scheduleDesktopClose();
@@ -457,7 +496,7 @@ export default function Header() {
                         href={item.href}
                         role="menuitem"
                         className="block rounded-xl px-3 py-2 text-sm font-semibold text-white/90 hover:bg-white/10"
-                        onClick={() => setDesktopCommercialOpen(false)}
+                        onClick={() => setDesktopMenuOpen(null)}
                       >
                         Overview
                       </Link>
@@ -470,54 +509,7 @@ export default function Header() {
                           href={child.href}
                           role="menuitem"
                           className="block rounded-xl px-3 py-2 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setDesktopCommercialOpen(false)}
-                        >
-                          {child.label}
-                        </Link>
-                      ))}
-                    </div>
-
-                    {/* Residential dropdown */}
-                    <div
-                      role="menu"
-                      className={[
-                        "absolute left-0 top-full z-50 mt-2 w-72 rounded-2xl border border-white/10 bg-[#081A31] p-2 shadow-xl",
-                        desktopResidentialOpen
-                          ? "opacity-100"
-                          : "pointer-events-none opacity-0",
-                        "transition-opacity",
-                      ].join(" ")}
-                      onMouseEnter={() => {
-                        clearDesktopCloseTimer();
-                        setDesktopResidentialOpen(true);
-                      }}
-                      onMouseLeave={() => {
-                        scheduleDesktopClose();
-                      }}
-                    >
-                      <Link
-                        href="/prestige-home-care"
-                        role="menuitem"
-                        className="block rounded-xl px-3 py-2 text-sm font-semibold text-white/90 hover:bg-white/10"
-                        onClick={() => setDesktopResidentialOpen(false)}
-                      >
-                        Overview
-                      </Link>
-
-                      <div className="my-2 h-px bg-white/10" />
-
-                      {[
-                        { label: "Recurring Cleaning", href: "/residential-cleaning/recurring" },
-                        { label: "Deep Cleaning", href: "/residential-cleaning/deep-cleaning" },
-                        { label: "Move-In/Out", href: "/residential-cleaning/move-in-out" },
-                        { label: "Carpet & Upholstery", href: "/residential-cleaning/carpet-upholstery" },
-                      ].map((child) => (
-                        <Link
-                          key={child.href}
-                          href={child.href}
-                          role="menuitem"
-                          className="block rounded-xl px-3 py-2 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setDesktopResidentialOpen(false)}
+                          onClick={() => setDesktopMenuOpen(null)}
                         >
                           {child.label}
                         </Link>
@@ -559,11 +551,7 @@ export default function Header() {
                 aria-controls={mobilePanelId}
                 onClick={() => setMobileOpen((v) => !v)}
               >
-                {mobileOpen ? (
-                  <X className="h-5 w-5" />
-                ) : (
-                  <Menu className="h-5 w-5" />
-                )}
+                {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>
             </div>
           </div>

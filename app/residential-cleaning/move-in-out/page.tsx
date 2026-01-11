@@ -22,7 +22,7 @@ export default function MoveInOutPage() {
                 </p>
                 <h1 className={residential.h1}>
                   Smooth transition cleaning{" "}
-                  <span style={{ color: "#D4A574" }}">for your next move</span>
+                  <span style={{ color: "#D4A574" }}>for your next move</span>
                 </h1>
                 <p className={residential.lead}>
                   Whether you're moving in or out, our turnover service ensures
