@@ -38,7 +38,9 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileCommercialOpen, setMobileCommercialOpen] = useState(false);
+  const [mobileResidentialOpen, setMobileResidentialOpen] = useState(false);
   const [desktopCommercialOpen, setDesktopCommercialOpen] = useState(false);
+  const [desktopResidentialOpen, setDesktopResidentialOpen] = useState(false);
   const [headerHeight, setHeaderHeight] = useState(0);
 
   const closeTimerRef = useRef<number | null>(null);
@@ -59,6 +61,17 @@ export default function Header() {
             label: "Community Facilities",
             href: "/commercial-cleaning/community-facilities",
           },
+        ],
+      },
+      {
+        label: "Residential Cleaning",
+        href: "/residential-cleaning",
+        children: [
+          { label: "Overview", href: "/prestige-home-care" },
+          { label: "Recurring Cleaning", href: "/residential-cleaning/recurring" },
+          { label: "Deep Cleaning", href: "/residential-cleaning/deep-cleaning" },
+          { label: "Move-In/Out", href: "/residential-cleaning/move-in-out" },
+          { label: "Carpet & Upholstery", href: "/residential-cleaning/carpet-upholstery" },
         ],
       },
       {
@@ -94,6 +107,7 @@ export default function Header() {
       if (e.key === "Escape") {
         setMobileOpen(false);
         setDesktopCommercialOpen(false);
+        setDesktopResidentialOpen(false);
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -112,7 +126,10 @@ export default function Header() {
 
   // Reset mobile submenu when closing the mobile menu
   useEffect(() => {
-    if (!mobileOpen) setMobileCommercialOpen(false);
+    if (!mobileOpen) {
+      setMobileCommercialOpen(false);
+      setMobileResidentialOpen(false);
+    }
   }, [mobileOpen]);
 
   // Measure header height (so mobile panel can sit below it without assuming a pixel value)
@@ -219,6 +236,61 @@ export default function Header() {
                           onClick={() => setMobileOpen(false)}
                         >
                           Community Facilities
+                        </Link>
+                      </div>
+                    )}
+
+                    <button
+                      type="button"
+                      className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10"
+                      aria-expanded={mobileCommercialOpen}
+                      onClick={() => setMobileCommercialOpen((v) => !v)}
+                    >
+                      <span>Residential Cleaning</span>
+                      <ChevronDown
+                        className={[
+                          "h-4 w-4 transition-transform",
+                          mobileCommercialOpen ? "rotate-180" : "",
+                        ].join(" ")}
+                      />
+                    </button>
+
+                    {mobileCommercialOpen && (
+                      <div className="space-y-2 pl-2">
+                        <Link
+                          href="/prestige-home-care"
+                          className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          Overview
+                        </Link>
+                        <Link
+                          href="/residential-cleaning/recurring"
+                          className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          Recurring Cleaning
+                        </Link>
+                        <Link
+                          href="/residential-cleaning/deep-cleaning"
+                          className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          Deep Cleaning
+                        </Link>
+                        <Link
+                          href="/residential-cleaning/move-in-out"
+                          className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          Move-In/Out
+                        </Link>
+                        <Link
+                          href="/residential-cleaning/carpet-upholstery"
+                          className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          Carpet & Upholstery
                         </Link>
                       </div>
                     )}
@@ -341,7 +413,8 @@ export default function Header() {
                     className="relative"
                     onMouseEnter={() => {
                       clearDesktopCloseTimer();
-                      setDesktopCommercialOpen(true);
+        setDesktopCommercialOpen(true);
+        setDesktopResidentialOpen(true);
                     }}
                     onMouseLeave={() => {
                       scheduleDesktopClose();
@@ -398,6 +471,53 @@ export default function Header() {
                           role="menuitem"
                           className="block rounded-xl px-3 py-2 text-sm text-white/80 hover:bg-white/10 hover:text-white"
                           onClick={() => setDesktopCommercialOpen(false)}
+                        >
+                          {child.label}
+                        </Link>
+                      ))}
+                    </div>
+
+                    {/* Residential dropdown */}
+                    <div
+                      role="menu"
+                      className={[
+                        "absolute left-0 top-full z-50 mt-2 w-72 rounded-2xl border border-white/10 bg-[#081A31] p-2 shadow-xl",
+                        desktopResidentialOpen
+                          ? "opacity-100"
+                          : "pointer-events-none opacity-0",
+                        "transition-opacity",
+                      ].join(" ")}
+                      onMouseEnter={() => {
+                        clearDesktopCloseTimer();
+                        setDesktopResidentialOpen(true);
+                      }}
+                      onMouseLeave={() => {
+                        scheduleDesktopClose();
+                      }}
+                    >
+                      <Link
+                        href="/prestige-home-care"
+                        role="menuitem"
+                        className="block rounded-xl px-3 py-2 text-sm font-semibold text-white/90 hover:bg-white/10"
+                        onClick={() => setDesktopResidentialOpen(false)}
+                      >
+                        Overview
+                      </Link>
+
+                      <div className="my-2 h-px bg-white/10" />
+
+                      {[
+                        { label: "Recurring Cleaning", href: "/residential-cleaning/recurring" },
+                        { label: "Deep Cleaning", href: "/residential-cleaning/deep-cleaning" },
+                        { label: "Move-In/Out", href: "/residential-cleaning/move-in-out" },
+                        { label: "Carpet & Upholstery", href: "/residential-cleaning/carpet-upholstery" },
+                      ].map((child) => (
+                        <Link
+                          key={child.href}
+                          href={child.href}
+                          role="menuitem"
+                          className="block rounded-xl px-3 py-2 text-sm text-white/80 hover:bg-white/10 hover:text-white"
+                          onClick={() => setDesktopResidentialOpen(false)}
                         >
                           {child.label}
                         </Link>

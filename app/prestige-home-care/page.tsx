@@ -1,316 +1,264 @@
 "use client";
-import HeroLogo from "@/components/HeroLogo";
 
-import { Check, Shield, Sparkles, Star } from "lucide-react";
-import { Button } from "@/components/ui/button";
-import ChoosePlanModal from "@/components/ChoosePlanModal";
-import { useState } from "react";
+import Link from "next/link";
+import { Shield, Sparkles, Star, Home, Calendar, Sofa } from "lucide-react";
+import { residential } from "@/components/residential/ui";
 
-// ✅ Brand colors
-const colors = {
-  navy: "#0B2545",
-  emerald: "#0FA36B",
-  gold: "#C9A227",
-  silver: "#E5E7EB",
-  white: "#FFFFFF",
+export const metadata = {
+  title: "Premium Home Cleaning in Metro Vancouver | Gleam Pro Cleaning",
+  description:
+    "Professional residential cleaning services including recurring, deep cleaning, move-in/out, and carpet care. Estimate-based pricing for your unique home needs.",
 };
 
 export default function PrestigeHomePage() {
-  const [open, setOpen] = useState(false);
-  const [selectedPlan, setSelectedPlan] = useState<string | null>(null);
-
   return (
-    <div style={{ backgroundColor: colors.navy }} className="text-white">
-      {/* Hero Section */}
-      <section className="relative">
-        <div className="max-w-6xl mx-auto px-4 py-16 grid md:grid-cols-2 gap-10 items-center">
-          <div>
-            <h1 className="text-4xl md:text-5xl font-extrabold leading-tight">
-              <span style={{ color: "#C9A227" }}>Prestige</span> Home Care
-            </h1>
+    <div className={residential.shell}>
+      <div className="relative">
+        <div className={residential.glow} />
+        <main className={`relative z-10 ${residential.page}`}>
+          {/* Hero */}
+          <section className={residential.section}>
+            <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
+              <div className="max-w-2xl">
+                <p className={residential.eyebrow}>
+                  Residential Cleaning • Premium Home Care
+                </p>
+                <h1 className={residential.h1}>
+                  Premium home cleaning{" "}
+                  <span style={{ color: "#D4A574" }}>tailored to your space</span>
+                </h1>
+                <p className={residential.lead}>
+                  From recurring maintenance to deep cleans and move-in/out services,
+                  we deliver hotel-level brilliance for your home. Every service is
+                  estimate-based to match your specific needs.
+                </p>
 
-            <p className="mt-4 text-white/85 text-lg">
-              A premium residential cleaning experience designed for comfort,
-              shine, and peace of mind.
-            </p>
-            <div className="mt-6 flex gap-3">
-              <Button
-                className="rounded-2xl px-6 py-3"
-                style={{ backgroundColor: colors.emerald }}
-                onClick={() => {
-                  setSelectedPlan("Prestige Home Care");
-                  setOpen(true);
-                }}
-              >
-                Book Now
-              </Button>
-            </div>
-          </div>
-          <HeroLogo />
-        </div>
-      </section>
-
-      {/* Why Choose Us */}
-      <section className="py-16" style={{ backgroundColor: "#081A31" }}>
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold">Why Choose Us</h2>
-          <div className="mt-10 grid md:grid-cols-4 gap-6">
-            {[
-              {
-                icon: Shield,
-                title: "Licensed & Insured",
-                text: "Your home is always protected.",
-              },
-              {
-                icon: Sparkles,
-                title: "Detail Obsessed",
-                text: "Every surface polished to perfection.",
-              },
-              {
-                icon: Star,
-                title: "Prestige Guarantee",
-                text: "Satisfaction backed by our 24h promise.",
-              },
-              {
-                icon: Check,
-                title: "Eco-Forward",
-                text: "Safe products for your family & pets.",
-              },
-            ].map((item, i) => (
-              <div
-                key={i}
-                className="bg-white/5 border border-white/10 rounded-2xl p-6"
-              >
-                <item.icon
-                  className="w-8 h-8 mb-3"
-                  style={{ color: colors.gold }}
-                />
-                <h3
-                  className="font-semibold mb-2"
-                  style={{ color: colors.gold }}
-                >
-                  {item.title}
-                </h3>
-                <p className="text-white/80 text-sm">{item.text}</p>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Packages */}
-      <section id="packages" className="max-w-6xl mx-auto px-4 py-16">
-        <h2 className="text-3xl font-bold text-center">
-          Prestige Home Care Packages
-        </h2>
-        <p className="text-center text-white/80 mt-2">
-          Transparent pricing, flexible options, tailored to your home.
-        </p>
-
-        <div className="mt-10 grid md:grid-cols-3 gap-6">
-          {[
-            {
-              name: "Essential Shine",
-              price: "From $169",
-              items: ["Kitchen & Bath", "Floors & Surfaces", "1-Bed / Studio"],
-            },
-            {
-              name: "Executive Brilliance",
-              price: "From $269",
-              items: ["2-3 Bedrooms", "Deep Clean Add-ons", "Appliance Fronts"],
-            },
-            {
-              name: "Prestige Elevate",
-              price: "From $389",
-              items: ["4+ Bedrooms", "Inside Oven/Fridge", "Carpet Refresh"],
-            },
-          ].map((pkg, i) => (
-            <div
-              key={pkg.name}
-              className={`rounded-2xl p-6 border ${
-                i === 1 ? "bg-white text-slate-900" : "bg-white/5 text-white"
-              }`}
-              style={{ borderColor: colors.gold }}
-            >
-              <h3 className="text-xl font-bold flex justify-between">
-                {pkg.name}
-                <span
-                  style={{
-                    color: i === 1 ? colors.emerald : colors.gold,
-                  }}
-                >
-                  {pkg.price}
-                </span>
-              </h3>
-              <ul className="mt-4 space-y-2 text-sm">
-                {pkg.items.map((item) => (
-                  <li key={item} className="flex gap-2 items-center">
-                    <Check
-                      className="w-4 h-4"
-                      style={{
-                        color: i === 1 ? colors.emerald : colors.gold,
-                      }}
-                    />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-              <Button
-                className="w-full mt-4 rounded-xl"
-                style={{
-                  backgroundColor: i === 1 ? colors.emerald : colors.navy,
-                  color: "white",
-                }}
-                onClick={() => {
-                  setSelectedPlan(pkg.name);
-                  setOpen(true);
-                }}
-              >
-                Choose Plan
-              </Button>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* Booking Process */}
-      <section className="py-16" style={{ backgroundColor: "#081A31" }}>
-        <div className="max-w-6xl mx-auto px-4 text-center">
-          <h2 className="text-3xl font-bold">How to Book</h2>
-          <div className="mt-10 grid md:grid-cols-4 gap-6">
-            {[
-              {
-                step: "01",
-                title: "Request a Quote",
-                text: "Tell us about your home & needs.",
-              },
-              {
-                step: "02",
-                title: "Customize Plan",
-                text: "Choose your package & add-ons.",
-              },
-              {
-                step: "03",
-                title: "Schedule Service",
-                text: "Pick a date that works best for you.",
-              },
-              {
-                step: "04",
-                title: "Relax & Shine",
-                text: "Our team delivers hotel-level brilliance.",
-              },
-            ].map((s) => (
-              <div
-                key={s.step}
-                className="bg-white/5 border border-white/10 rounded-2xl p-6"
-              >
-                <div
-                  className="inline-block px-3 py-1 rounded-lg mb-3"
-                  style={{ backgroundColor: colors.emerald }}
-                >
-                  {s.step}
+                <div className="mt-6 flex flex-wrap gap-3">
+                  <Link href="/request-walkthrough" className={residential.cta}>
+                    Get a Free Home Estimate
+                  </Link>
+                  <Link
+                    href="/residential-cleaning"
+                    className={residential.secondary}
+                  >
+                    See Residential Services
+                  </Link>
                 </div>
-                <h3 className="font-semibold" style={{ color: colors.gold }}>
-                  {s.title}
-                </h3>
-                <p className="text-white/80 mt-2 text-sm">{s.text}</p>
+
+                <ul className="mt-6 grid gap-3 sm:grid-cols-2">
+                  {[
+                    "Recurring weekly/bi-weekly cleaning",
+                    "One-time deep cleaning services",
+                    "Move-in/out specialty services", 
+                    "Carpet & upholstery care",
+                  ].map((item) => (
+                    <li key={item} className={residential.listItem}>
+                      {item}
+                    </li>
+                  ))}
+                </ul>
               </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
-      {/* Add-Ons */}
-      <section className="py-16" style={{ backgroundColor: colors.navy }}>
-        <div className="max-w-4xl mx-auto px-4 text-center">
-          <h2 className="text-3xl md:text-4xl font-bold">Popular Add-Ons</h2>
-          <p className="text-white/85 mt-2">
-            Enhance your clean with these tailored extras.
-          </p>
-          <ul className="mt-6 grid sm:grid-cols-2 gap-3 text-sm text-white/90">
-            {[
-              "Inside oven & fridge",
-              "Baseboards & blinds",
-              "Balcony cleaning",
-              "Laundry service (select areas)",
-            ].map((addon) => (
-              <li
-                key={addon}
-                className="px-4 py-3 bg-white/5 border border-white/10 rounded-xl"
-              >
-                {addon}
-              </li>
-            ))}
-          </ul>
-        </div>
-      </section>
+              {/* Proof / Fit card */}
+              <div className="w-full md:w-[360px]">
+                <div className={residential.cardSoft}>
+                  <h2 className={`${residential.h3} ${residential.accent}`}>
+                    Ideal for
+                  </h2>
+                  <ul className="mt-3 space-y-2 text-sm text-white/80">
+                    <li>• Busy families & professionals</li>
+                    <li>• Homeowners seeking consistent quality</li>
+                    <li>• Life transitions (moving, events)</li>
+                    <li>• Anyone needing trusted, vetted cleaners</li>
+                  </ul>
 
-      {/* FAQ */}
-      <section id="faq" className="max-w-6xl mx-auto px-4 py-16">
-        <h2 className="text-3xl md:text-4xl font-bold text-center">FAQs</h2>
+                  <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
+                    <p className={`text-sm font-semibold ${residential.accent}`}>
+                      How it works
+                    </p>
+                    <p className="mt-2 text-sm text-white/80">
+                      Start with a free estimate. We'll assess your space,
+                      discuss your needs, and provide a clear quote based on
+                      scope and frequency.
+                    </p>
+                  </div>
 
-        {/* FAQ Cards */}
-        <div className="mt-10 grid md:grid-cols-2 gap-6">
-          {[
-            {
-              q: "Do I need to be home during the cleaning?",
-              a: "No, many of our clients provide entry instructions. Your home is secure with our insured and vetted team.",
-            },
-            {
-              q: "Are your cleaning products safe for kids and pets?",
-              a: "Yes. We use eco-forward, family-safe cleaning solutions. Let us know if you have specific sensitivities.",
-            },
-            {
-              q: "Do you bring your own equipment?",
-              a: "Absolutely. Our team arrives with professional-grade vacuums, microfiber cloths, and eco-friendly supplies.",
-            },
-            {
-              q: "Can I book recurring cleanings?",
-              a: "Yes, we offer weekly, bi-weekly, and monthly residential cleaning plans at a discounted rate.",
-            },
-            {
-              q: "What if I need a special add-on service?",
-              a: "You can request add-ons like inside oven/fridge, blinds, baseboards, or balcony cleaning when booking.",
-            },
-            {
-              q: "What is your satisfaction guarantee?",
-              a: "If something isn’t right, contact us within 24 hours and we’ll make it right—free of charge.",
-            },
-          ].map((faq, i) => (
-            <div
-              key={i}
-              className="bg-white/5 border border-white/10 rounded-2xl p-5"
-            >
-              <h3 className="font-semibold" style={{ color: colors.gold }}>
-                {faq.q}
-              </h3>
-              <p className="mt-2 text-white/80">{faq.a}</p>
+                  <p className="mt-4 text-xs text-white/60">
+                      No pricing tables - every home is unique.
+                  </p>
+                </div>
+              </div>
             </div>
-          ))}
-        </div>
-      </section>
+          </section>
 
-      {/* CTA */}
-      <section className="py-20 text-center">
-        <h2 className="text-3xl font-bold">Ready for Prestige Home Care?</h2>
-        <p className="mt-2 text-white/80">
-          Book your clean today and experience the Gleam Pro difference.
-        </p>
-        <Button
-          onClick={() => setOpen(true)}
-          className="mt-6 rounded-2xl px-8 py-4 text-lg"
-          style={{ backgroundColor: colors.emerald }}
-        >
-          Get Started
-        </Button>
-      </section>
+          {/* Services Overview */}
+          <section className="mt-16">
+            <h2 className={residential.h2Large}>Residential Services</h2>
+            <p className={residential.lead}>
+              Choose the service that best matches your needs.
+            </p>
 
-      {/* Modal */}
-      <ChoosePlanModal
-        open={open}
-        plan={selectedPlan}
-        onClose={() => setOpen(false)}
-      />
+            <div className="mt-8 grid gap-6 md:grid-cols-2">
+              <Link
+                href="/residential-cleaning/recurring"
+                className={residential.linkCard}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <Home className={`w-6 h-6 ${residential.accent}`} />
+                  <h3 className={`text-lg font-semibold ${residential.accent}`}>
+                    Recurring Cleaning
+                  </h3>
+                </div>
+                <p className="text-white/80">
+                  Weekly, bi-weekly, or monthly maintenance to keep your home
+                  consistently clean and comfortable.
+                </p>
+              </Link>
+
+              <Link
+                href="/residential-cleaning/deep-cleaning"
+                className={residential.linkCard}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <Sparkles className={`w-6 h-6 ${residential.accent}`} />
+                  <h3 className={`text-lg font-semibold ${residential.accent}`}>
+                    Deep Cleaning
+                  </h3>
+                </div>
+                <p className="text-white/80">
+                  Intensive one-time cleaning for spring refresh, before events,
+                  or when your home needs extra attention.
+                </p>
+              </Link>
+
+              <Link
+                href="/residential-cleaning/move-in-out"
+                className={residential.linkCard}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <Calendar className={`w-6 h-6 ${residential.accent}`} />
+                  <h3 className={`text-lg font-semibold ${residential.accent}`}>
+                    Move-In/Out
+                  </h3>
+                </div>
+                <p className="text-white/80">
+                  Professional turnover service for renters, homeowners, and
+                  property managers.
+                </p>
+              </Link>
+
+              <Link
+                href="/residential-cleaning/carpet-upholstery"
+                className={residential.linkCard}
+              >
+                <div className="flex items-center gap-3 mb-3">
+                  <Sofa className={`w-6 h-6 ${residential.accent}`} />
+                  <h3 className={`text-lg font-semibold ${residential.accent}`}>
+                    Carpet & Upholstery
+                  </h3>
+                </div>
+                <p className="text-white/80">
+                  Professional extraction and fabric-safe cleaning methods for
+                  stains, refresh, or allergy concerns.
+                </p>
+              </Link>
+            </div>
+          </section>
+
+          {/* How it works */}
+          <section className={residential.section}>
+            <h2 className={residential.h2Large}>How it works</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              <StepCard
+                step="1"
+                title="Free Estimate"
+                text="We assess your space, discuss needs, and understand your priorities."
+              />
+              <StepCard
+                step="2"
+                title="Custom Quote"
+                text="You receive a clear estimate based on scope, frequency, and unique requirements."
+              />
+              <StepCard
+                step="3"
+                title="Premium Service"
+                text="Our insured team delivers consistent quality with attention to detail."
+              />
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section className={residential.section}>
+            <h2 className={residential.h2Large}>FAQ</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <Faq
+                q="How is residential pricing determined?"
+                a="Every home is unique. We provide custom estimates based on square footage, condition, frequency, and specific services needed."
+              />
+              <Faq
+                q="Do I need to be home during cleaning?"
+                a="Not necessarily. Many clients provide entry instructions. Our team is fully insured and background-checked."
+              />
+              <Faq
+                q="Are your products safe for kids and pets?"
+                a="Yes. We use eco-forward, family-safe cleaning products and can accommodate specific sensitivities."
+              />
+              <Faq
+                q="Do you bring your own supplies?"
+                a="We bring professional equipment and core cleaning supplies. We can use your preferred products if desired."
+              />
+            </div>
+          </section>
+
+          {/* Final CTA */}
+          <section className={residential.sectionDark}>
+            <h2 className={residential.h2Large}>
+              Ready for a premium home cleaning experience?
+            </h2>
+            <p className="mx-auto mt-3 max-w-2xl text-white/80">
+              Start with a free estimate and let us create a cleaning plan
+              tailored to your home and lifestyle.
+            </p>
+
+            <div className="mt-6">
+              <Link href="/request-walkthrough" className={residential.ctaLight}>
+                Get a Free Home Estimate
+              </Link>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  );
+}
+
+function StepCard({
+  step,
+  title,
+  text,
+}: {
+  step: string;
+  title: string;
+  text: string;
+}) {
+  return (
+    <div className={residential.cardSoft}>
+      <div className="flex items-center gap-3">
+        <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-emerald-700 text-sm font-bold text-white">
+          {step}
+        </span>
+        <h3 className={`${residential.h3} ${residential.accent}`}>{title}</h3>
+      </div>
+      <p className="mt-3 text-sm leading-6 text-white/80">{text}</p>
+    </div>
+  );
+}
+
+function Faq({ q, a }: { q: string; a: string }) {
+  return (
+    <div className={residential.cardSoft}>
+      <p className={`text-sm font-semibold ${residential.accent}`}>{q}</p>
+      <p className="mt-2 text-sm leading-6 text-white/80">{a}</p>
     </div>
   );
 }

@@ -4,6 +4,25 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- Added residential UI styling system in `components/residential/ui.ts`
+- Updated `prestige-home-care` page with estimate-first approach
+- Added comprehensive residential cleaning hub at `/residential-cleaning`
+- Added recurring cleaning page at `/residential-cleaning/recurring`
+- Added deep cleaning page at `/residential-cleaning/deep-cleaning`
+- Added move-in/out service page at `/residential-cleaning/move-in-out`
+- Added carpet & upholstery care page at `/residential-cleaning/carpet-upholstery`
+- Updated Header navigation to include residential dropdown menu
+- Updated Footer navigation to include residential services
+
+### Changed
+
+- Converted residential pages from pricing-first to estimate-first approach
+- Aligned residential styling with commercial design system
+- Replaced modal-based booking with request-walkthrough flow
+- Updated homepage residential lane to route to new hub
+
 ### Fixed
 
 - Fixed footer navigation links to match current application structure

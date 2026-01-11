@@ -12,6 +12,7 @@ const colors = {
 const nav = [
   { label: "Home", href: "/" },
   { label: "Commercial Cleaning", href: "/commercial-cleaning" },
+  { label: "Residential Cleaning", href: "/prestige-home-care" },
   { label: "Request Walk-Through", href: "/request-walkthrough" },
 ];
 
