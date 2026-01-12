@@ -31,7 +31,7 @@ export default function MoveInOutPage() {
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href="/request-walkthrough" className={residential.cta}>
+                  <Link href="/request-walkthrough?type=residential" className={residential.cta}>
                     Get a Free Home Estimate
                   </Link>
                   <Link
@@ -223,7 +223,7 @@ export default function MoveInOutPage() {
               cleaning plan that meets your timeline and standards.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/request-walkthrough" className={residential.ctaLight}>
+              <Link href="/request-walkthrough?type=residential" className={residential.ctaLight}>
                 Get a Free Home Estimate
               </Link>
               <Link

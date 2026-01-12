@@ -31,7 +31,7 @@ export default function CarpetUpholsteryPage() {
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href="/request-walkthrough" className={residential.cta}>
+                  <Link href="/request-walkthrough?type=residential" className={residential.cta}>
                     Get a Free Home Estimate
                   </Link>
                   <Link
@@ -215,7 +215,7 @@ export default function CarpetUpholsteryPage() {
               plan tailored to your specific needs and concerns.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/request-walkthrough" className={residential.ctaLight}>
+              <Link href="/request-walkthrough?type=residential" className={residential.ctaLight}>
                 Get a Free Home Estimate
               </Link>
               <Link

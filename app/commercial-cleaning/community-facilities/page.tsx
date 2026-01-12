@@ -32,7 +32,7 @@ export default function CommunityFacilitiesCleaningPage() {
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href="/request-walkthrough" className={commercial.cta}>
+                  <Link href="/request-walkthrough?type=commercial" className={commercial.cta}>
                     Request a Free Walk-Through
                   </Link>
                   <Link
@@ -216,7 +216,7 @@ export default function CommunityFacilitiesCleaningPage() {
               <p className={commercial.noticeText}>
                 Want a room-by-room scope built around your facility schedule?
               </p>
-              <Link href="/request-walkthrough" className={commercial.cta}>
+              <Link href="/request-walkthrough?type=commercial" className={commercial.cta}>
                 Request a Free Walk-Through
               </Link>
             </div>
@@ -277,7 +277,7 @@ export default function CommunityFacilitiesCleaningPage() {
               based on your rooms, traffic, and schedule.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/request-walkthrough" className={commercial.ctaLight}>
+              <Link href="/request-walkthrough?type=commercial" className={commercial.ctaLight}>
                 Request a Free Walk-Through
               </Link>
               <Link

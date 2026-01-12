@@ -87,7 +87,7 @@ export default function Header() {
       },
       {
         label: "Request Walk-Through",
-        href: "/request-walkthrough",
+        href: "/request-walkthrough?type=commercial",
         cta: true,
       },
     ],

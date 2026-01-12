@@ -31,7 +31,7 @@ export default function RestaurantCleaningPage() {
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href="/request-walkthrough" className={commercial.cta}>
+                  <Link href="/request-walkthrough?type=commercial" className={commercial.cta}>
                     Request a Free Walk-Through
                   </Link>
                   <Link
@@ -209,7 +209,7 @@ export default function RestaurantCleaningPage() {
               <p className={commercial.noticeText}>
                 Want a scope built around your hours and inspection priorities?
               </p>
-              <Link href="/request-walkthrough" className={commercial.cta}>
+              <Link href="/request-walkthrough?type=commercial" className={commercial.cta}>
                 Request a Free Walk-Through
               </Link>
             </div>
@@ -270,7 +270,7 @@ export default function RestaurantCleaningPage() {
               on your space, schedule, and operational needs.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/request-walkthrough" className={commercial.ctaLight}>
+              <Link href="/request-walkthrough?type=commercial" className={commercial.ctaLight}>
                 Request a Free Walk-Through
               </Link>
               <Link

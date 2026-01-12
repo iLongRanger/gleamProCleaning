@@ -31,7 +31,7 @@ export default function OfficeCleaningPage() {
                 </p>
 
                 <div className="mt-6 flex flex-wrap gap-3">
-                  <Link href="/request-walkthrough" className={commercial.cta}>
+                  <Link href="/request-walkthrough?type=commercial" className={commercial.cta}>
                     Request a Free Walk-Through
                   </Link>
                   <Link
@@ -205,7 +205,7 @@ export default function OfficeCleaningPage() {
               <p className={commercial.noticeText}>
                 Want the full scope customized to your layout and traffic?
               </p>
-              <Link href="/request-walkthrough" className={commercial.cta}>
+              <Link href="/request-walkthrough?type=commercial" className={commercial.cta}>
                 Request a Free Walk-Through
               </Link>
             </div>
@@ -266,7 +266,7 @@ export default function OfficeCleaningPage() {
               built around your schedule and traffic.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
-              <Link href="/request-walkthrough" className={commercial.ctaLight}>
+              <Link href="/request-walkthrough?type=commercial" className={commercial.ctaLight}>
                 Request a Free Walk-Through
               </Link>
               <Link
