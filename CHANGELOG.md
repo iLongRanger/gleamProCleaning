@@ -6,6 +6,15 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- Implemented query parameter-based lane selection for request-walkthrough form
+- Added `?type=commercial` and `?type=residential` query parameters to pre-select form mode
+- Updated all CTA links across commercial and residential pages to include appropriate type parameter
+- Applied uniform styling to request-walkthrough page using commercial design system
+- Added commercial/residential segmented toggle on request-walkthrough page (same design as homepage)
+- Form now dynamically shows fields based on selected lane type
+- Commercial: business name, facility type, sqft, pain points
+- Residential: full name
+
 - Added residential UI styling system in `components/residential/ui.ts`
 - Updated `prestige-home-care` page with estimate-first approach
 - Added comprehensive residential cleaning hub at `/residential-cleaning`
