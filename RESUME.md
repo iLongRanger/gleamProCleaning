@@ -116,6 +116,11 @@ Shared structure includes:
 - Production email delivery confirmed working
 - Vercel deployment is green
 
+### SEO infrastructure (implemented)
+
+- `robots.txt` generated via `next-sitemap`
+- `sitemap.xml` and `sitemap-0.xml` generated for public routes
+
 ### Documentation
 
 - `README.md` has been cleaned up to remove placeholders and document:
@@ -126,7 +131,7 @@ Shared structure includes:
 
 ## What Is NOT Done Yet
 
-- SEO infra (robots/sitemap) - intentionally deferred until commercial + residential structure is final
+- No open items listed. Regenerate sitemap assets on build when routes change.
 
 ---
 

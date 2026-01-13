@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 - Form now dynamically shows fields based on selected lane type
 - Commercial: business name, facility type, sqft, pain points
 - Residential: full name
+- Generated robots.txt and sitemap assets via next-sitemap
 
 - Added residential UI styling system in `components/residential/ui.ts`
 - Updated `prestige-home-care` page with estimate-first approach
