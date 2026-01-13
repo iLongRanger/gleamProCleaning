@@ -12,7 +12,8 @@ const colors = {
 const nav = [
   { label: "Home", href: "/" },
   { label: "Commercial Cleaning", href: "/commercial-cleaning" },
-  { label: "Residential Cleaning", href: "/prestige-home-care" },
+  { label: "Residential Cleaning", href: "/residential-cleaning" },
+  { label: "Prestige Home Care", href: "/prestige-home-care" },
   { label: "Request Walk-Through", href: "/request-walkthrough?type=commercial" },
 ];
 

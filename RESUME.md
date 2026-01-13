@@ -95,11 +95,23 @@ Shared structure includes:
   - Community Facilities ↔ Restaurants
 - Links are placed in conversion sections (final CTAs) to keep navigation relevant.
 
+### Residential pages (implemented)
+
+- Residential cleaning hub at `/residential-cleaning`
+- Residential service pages:
+  - `/residential-cleaning/recurring`
+  - `/residential-cleaning/deep-cleaning`
+  - `/residential-cleaning/move-in-out`
+  - `/residential-cleaning/carpet-upholstery`
+- Residential overview page at `/prestige-home-care`
+- Residential styling system in `components/residential/ui.ts`
+
 ### Lead system (LIVE)
 
 - Walk-through RFQ form exists at `/request-walkthrough`
 - Honeypot spam protection implemented
 - Submissions POST to `/api/walkthrough`
+- Supports preselect via `?type=commercial` or `?type=residential`
 - Leads are emailed via **Resend**
 - Production email delivery confirmed working
 - Vercel deployment is green
@@ -114,22 +126,31 @@ Shared structure includes:
 
 ## What Is NOT Done Yet
 
-- Finish Residential pages (copy + structure + visuals)
-- SEO infra (robots/sitemap) — intentionally deferred until commercial + residential structure is final
+- SEO infra (robots/sitemap) - intentionally deferred until commercial + residential structure is final
 
 ---
 
 ## Next Planned Commit
 
-1. Verify commercial navigation entries are consistent (desktop + mobile) for:
+1. Verify navigation entries are consistent (desktop + mobile) for:
 
 - `/commercial-cleaning`
 - `/commercial-cleaning/restaurants`
 - `/commercial-cleaning/offices`
 - `/commercial-cleaning/community-facilities`
+- `/residential-cleaning`
+- `/residential-cleaning/recurring`
+- `/residential-cleaning/deep-cleaning`
+- `/residential-cleaning/move-in-out`
+- `/residential-cleaning/carpet-upholstery`
+- `/prestige-home-care`
 
 Then proceed with a small fix commit only if links are missing or inconsistent.
 
 ---
 
 End of file.
+
+
+
+

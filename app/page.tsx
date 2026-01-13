@@ -1,4 +1,4 @@
-"use client";
+﻿"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -122,9 +122,9 @@ export default function Page() {
           </>
         ),
         subhead:
-          "Reliable teams for restaurants, offices, and community facilities — consistent results, clear communication, and contract-ready service.",
+          "Reliable teams for restaurants, offices, and community facilities GÇö consistent results, clear communication, and contract-ready service.",
         primaryCtaText: "Request a Free Walk-Through",
-        primaryCtaHref: "/request-walkthrough",
+        primaryCtaHref: "/request-walkthrough?type=commercial",
         secondaryCtaText: "Explore Commercial Services",
         secondaryCtaHref: "/commercial-cleaning",
         formTitle: "Request a Free Walk-Through",
@@ -146,14 +146,14 @@ export default function Page() {
         </>
       ),
       subhead:
-        "Recurring, deep cleans, move-in/out, short-stay turnovers, carpet & upholstery, and post-renovation — tailored to your home and schedule.",
+        "Recurring, deep cleans, move-in/out, short-stay turnovers, carpet & upholstery, and post-renovation GÇö tailored to your home and schedule.",
       primaryCtaText: "Get a Free Home Estimate",
       primaryCtaHref: "/residential-cleaning",
       secondaryCtaText: "See Residential Services",
       secondaryCtaHref: "/residential-cleaning#services",
       formTitle: "Get a Free Home Estimate",
       formHelper:
-        "Tell us what you need and we’ll respond with the next steps for an estimate.",
+        "Tell us what you need and weGÇÖll respond with the next steps for an estimate.",
       submitText: "Send Estimate Request",
       heroImgSrc: "/images/home/residential-hero.png",
       heroImgAlt: "Residential cleaning team in a modern home setting",
@@ -449,9 +449,9 @@ export default function Page() {
                       disabled={sending}
                     >
                       {sending
-                        ? "Sending…"
+                        ? "SendingGÇª"
                         : sentOk === true
-                        ? "Request Sent ✓"
+                        ? "Request Sent G£ô"
                         : laneCopy.submitText}
                     </Button>
 
@@ -516,7 +516,7 @@ export default function Page() {
             Cleaning Built on Trust & Standards
           </h2>
           <p className="mt-2 text-white/85">
-            Commercial-first systems with premium residential care — consistent
+            Commercial-first systems with premium residential care GÇö consistent
             teams, clear communication, and detail-driven routines.
           </p>
         </div>
@@ -525,18 +525,18 @@ export default function Page() {
           {[
             {
               title: "Commercial Cleaning",
-              desc: "Restaurants, offices, and community facilities — walkthrough-first, scope-driven service.",
+              desc: "Restaurants, offices, and community facilities GÇö walkthrough-first, scope-driven service.",
               href: "/commercial-cleaning",
             },
             {
               title: "Residential Cleaning",
-              desc: "Recurring, deep cleans, move-in/out, turnovers, carpets, and post-reno — estimate-first, no pricing tables.",
+              desc: "Recurring, deep cleans, move-in/out, turnovers, carpets, and post-reno GÇö estimate-first, no pricing tables.",
               href: "/residential-cleaning",
             },
             {
               title: "Request a Walk-Through",
               desc: "For commercial spaces, we start with a walkthrough to quote accurately and set expectations.",
-              href: "/request-walkthrough",
+              href: "/request-walkthrough?type=commercial",
             },
           ].map((c) => (
             <Card
@@ -599,3 +599,4 @@ export default function Page() {
     </div>
   );
 }
+

@@ -71,7 +71,7 @@ export default function CommercialCleaningHubPage() {
                   >
                     View Restaurant Cleaning
                   </Link>
-                  <Link href="/request-walkthrough" className={commercial.cta}>
+                  <Link href="/request-walkthrough?type=commercial" className={commercial.cta}>
                     Request Walk-Through
                   </Link>
                 </div>
@@ -143,7 +143,7 @@ export default function CommercialCleaningHubPage() {
                 </p>
               </Link>
 
-              <Link href="/request-walkthrough" className={commercial.linkCard}>
+              <Link href="/request-walkthrough?type=commercial" className={commercial.linkCard}>
                 <h3 className={`text-lg font-semibold ${commercial.accent}`}>
                   Request a Walk-Through
                 </h3>
@@ -220,7 +220,7 @@ export default function CommercialCleaningHubPage() {
             </div>
 
             <div className="mt-6">
-              <Link href="/request-walkthrough" className={commercial.cta}>
+              <Link href="/request-walkthrough?type=commercial" className={commercial.cta}>
                 Request a Free Walk-Through
               </Link>
             </div>
@@ -237,7 +237,7 @@ export default function CommercialCleaningHubPage() {
             </p>
 
             <div className="mt-6">
-              <Link href="/request-walkthrough" className={commercial.ctaLight}>
+              <Link href="/request-walkthrough?type=commercial" className={commercial.ctaLight}>
                 Request a Free Walk-Through
               </Link>
             </div>
@@ -247,3 +247,4 @@ export default function CommercialCleaningHubPage() {
     </div>
   );
 }
+
