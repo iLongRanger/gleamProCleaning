@@ -6,6 +6,9 @@ export const metadata = {
   title: "Premium Home Cleaning in Metro Vancouver | Gleam Pro Cleaning",
   description:
     "Professional residential cleaning services including recurring, deep cleaning, move-in/out, and carpet care. Estimate-based pricing for your unique home needs.",
+  alternates: {
+    canonical: "/prestige-home-care",
+  },
 };
 
 export default function PrestigeHomePage() {
@@ -260,3 +263,4 @@ function Faq({ q, a }: { q: string; a: string }) {
     </div>
   );
 }
+

@@ -5,6 +5,9 @@ export const metadata = {
   title: "Residential Cleaning Services | Gleam Pro Cleaning",
   description:
     "Professional residential cleaning services in Metro Vancouver including recurring maintenance, deep cleaning, move-in/out, and carpet & upholstery care.",
+  alternates: {
+    canonical: "/residential-cleaning",
+  },
 };
 
 export default function ResidentialCleaningHubPage() {
@@ -268,3 +271,4 @@ export default function ResidentialCleaningHubPage() {
     </div>
   );
 }
+

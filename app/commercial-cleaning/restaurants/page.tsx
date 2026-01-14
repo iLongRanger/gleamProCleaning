@@ -5,6 +5,9 @@ export const metadata = {
   title: "Restaurant Cleaning in Metro Vancouver | Gleam Pro Cleaning",
   description:
     "Consistent, inspection-ready cleaning for restaurants, pubs, cafés, and food service spaces across Metro Vancouver. Clear scope, repeatable checklists, and reliable after-hours service.",
+  alternates: {
+    canonical: "/commercial-cleaning/restaurants",
+  },
 };
 
 export default function RestaurantCleaningPage() {
@@ -349,3 +352,5 @@ function Faq({ q, a }: { q: string; a: string }) {
     </div>
   );
 }
+
+

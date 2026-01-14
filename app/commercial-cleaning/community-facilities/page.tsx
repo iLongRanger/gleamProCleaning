@@ -5,6 +5,9 @@ export const metadata = {
   title: "Community Facility Cleaning in Metro Vancouver | Gleam Pro Cleaning",
   description:
     "Reliable cleaning for community centres, shared facilities, and multi-use spaces across Metro Vancouver. Clear scope, repeatable checklists, and inspection-ready results.",
+  alternates: {
+    canonical: "/commercial-cleaning/community-facilities",
+  },
 };
 
 export default function CommunityFacilitiesCleaningPage() {
@@ -356,3 +359,5 @@ function Faq({ q, a }: { q: string; a: string }) {
     </div>
   );
 }
+
+

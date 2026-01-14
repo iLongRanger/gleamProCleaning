@@ -11,6 +11,9 @@ export const metadata: Metadata = {
   },
   description:
     "Commercial-first cleaning for restaurants, offices, and community facilities in Metro Vancouver, with premium residential estimates available.",
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     title: "Gleam Pro Cleaning | Commercial Cleaning in Metro Vancouver",
     description:

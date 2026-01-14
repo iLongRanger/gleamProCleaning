@@ -5,6 +5,9 @@ export const metadata = {
   title: "Deep Home Cleaning in Metro Vancouver | Gleam Pro Cleaning",
   description:
     "Intensive one-time deep cleaning services in Metro Vancouver. Perfect for spring refresh, before events, or when your home needs extra attention.",
+  alternates: {
+    canonical: "/residential-cleaning/deep-cleaning",
+  },
 };
 
 export default function DeepCleaningPage() {
@@ -288,3 +291,4 @@ function Faq({ q, a }: { q: string; a: string }) {
     </div>
   );
 }
+

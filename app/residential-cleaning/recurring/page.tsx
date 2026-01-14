@@ -5,6 +5,9 @@ export const metadata = {
   title: "Recurring Home Cleaning in Metro Vancouver | Gleam Pro Cleaning",
   description:
     "Weekly, bi-weekly, and monthly residential cleaning services. Consistent quality, trusted team, and custom schedules for your home.",
+  alternates: {
+    canonical: "/residential-cleaning/recurring",
+  },
 };
 
 export default function RecurringCleaningPage() {
@@ -288,3 +291,4 @@ function Faq({ q, a }: { q: string; a: string }) {
     </div>
   );
 }
+

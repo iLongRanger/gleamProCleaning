@@ -5,6 +5,9 @@ export const metadata = {
   title: "Commercial Cleaning Services in Metro Vancouver",
   description:
     "Commercial-first cleaning for restaurants, offices, and community facilities. Request a free walk-through for a tailored proposal.",
+  alternates: {
+    canonical: "/commercial-cleaning",
+  },
 };
 
 const serviceAreas = [

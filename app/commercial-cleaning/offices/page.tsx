@@ -5,6 +5,9 @@ export const metadata = {
   title: "Office Cleaning in Metro Vancouver | Gleam Pro Cleaning",
   description:
     "Reliable after-hours office cleaning for Metro Vancouver. Consistent checklists, quality checks, and a simple walk-through to get a tailored quote.",
+  alternates: {
+    canonical: "/commercial-cleaning/offices",
+  },
 };
 
 export default function OfficeCleaningPage() {
@@ -345,3 +348,5 @@ function Faq({ q, a }: { q: string; a: string }) {
     </div>
   );
 }
+
+

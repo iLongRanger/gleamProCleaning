@@ -5,6 +5,9 @@ export const metadata = {
   title: "Move-In/Out Cleaning in Metro Vancouver | Gleam Pro Cleaning",
   description:
     "Professional move-in and move-out cleaning services in Metro Vancouver. Thorough turnover cleaning for renters, homeowners, and property managers.",
+  alternates: {
+    canonical: "/residential-cleaning/move-in-out",
+  },
 };
 
 export default function MoveInOutPage() {
@@ -289,3 +292,4 @@ function Faq({ q, a }: { q: string; a: string }) {
     </div>
   );
 }
+

@@ -34,6 +34,7 @@ All notable changes to this project will be documented in this file.
 - Updated homepage residential lane to route to new hub
 - Refined global metadata to emphasize commercial-first positioning with social previews
 - Added metadata for the commercial cleaning hub
+- Added canonical URLs across service pages and the request walkthrough flow
 - Refreshed README/RESUME to reflect current residential pages and dev instructions
 - Updated footer quick links to include the residential hub and Prestige Home Care
 

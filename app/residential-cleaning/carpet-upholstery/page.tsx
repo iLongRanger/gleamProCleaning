@@ -5,6 +5,9 @@ export const metadata = {
   title: "Carpet & Upholstery Cleaning in Metro Vancouver | Gleam Pro Cleaning",
   description:
     "Professional carpet cleaning and upholstery care in Metro Vancouver. Safe extraction methods, stain removal, and fabric-safe cleaning for all furniture types.",
+  alternates: {
+    canonical: "/residential-cleaning/carpet-upholstery",
+  },
 };
 
 export default function CarpetUpholsteryPage() {
@@ -281,3 +284,4 @@ function Faq({ q, a }: { q: string; a: string }) {
     </div>
   );
 }
+
