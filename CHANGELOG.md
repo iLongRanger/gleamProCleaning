@@ -32,6 +32,8 @@ All notable changes to this project will be documented in this file.
 - Aligned residential styling with commercial design system
 - Replaced modal-based booking with request-walkthrough flow
 - Updated homepage residential lane to route to new hub
+- Refined global metadata to emphasize commercial-first positioning with social previews
+- Added metadata for the commercial cleaning hub
 - Refreshed README/RESUME to reflect current residential pages and dev instructions
 - Updated footer quick links to include the residential hub and Prestige Home Care
 
