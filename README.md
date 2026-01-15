@@ -18,6 +18,10 @@ The site is designed as a B2B lead generator with a single primary call-to-actio
 
 ## Key Features
 
+- **Service areas hub** at `/service-areas`
+- Service area pages at `/service-areas/[city]`
+- LocalBusiness schema on the homepage and service area pages
+- Google Maps embed in the footer
 - **Commercial cleaning hub** at `/commercial-cleaning`
 - Commercial niche pages:
   - `/commercial-cleaning/restaurants`
@@ -88,6 +92,7 @@ npm run start
 Project Structure (high-level)
 
 - app/
+  - service-areas/ (hub + city pages)
   - commercial-cleaning/ (hub + niche pages)
   - residential-cleaning/ (hub + service pages)
   - request-walkthrough/ (lead form page)

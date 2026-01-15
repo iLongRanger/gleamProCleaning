@@ -11,6 +11,7 @@ const colors = {
 
 const nav = [
   { label: "Home", href: "/" },
+  { label: "Service Areas", href: "/service-areas" },
   { label: "Commercial Cleaning", href: "/commercial-cleaning" },
   { label: "Residential Cleaning", href: "/residential-cleaning" },
   { label: "Prestige Home Care", href: "/prestige-home-care" },
@@ -80,6 +81,25 @@ export default function Footer() {
             <li>Sat: 9:00–16:00</li>
             <li>Sun: By appointment</li>
           </ul>
+        </div>
+      </div>
+      <div className="max-w-6xl mx-auto px-4 pb-10">
+        <div className="rounded-2xl border border-white/10 bg-white/5 p-4">
+          <div className="text-sm font-semibold text-white/90">
+            Service Area Map
+          </div>
+          <div className="mt-3 overflow-hidden rounded-xl border border-white/10">
+            <iframe
+              title="Gleam Pro Cleaning service area map"
+              src="https://www.google.com/maps?q=New%20Westminster%2C%20BC&output=embed"
+              className="h-64 w-full"
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+            />
+          </div>
+          <p className="mt-2 text-xs text-white/60">
+            Serving Metro Vancouver and surrounding areas.
+          </p>
         </div>
       </div>
       <div className="text-center text-white/60 text-xs py-6 border-t border-white/10">

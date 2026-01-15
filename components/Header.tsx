@@ -59,6 +59,7 @@ export default function Header() {
   const nav: NavItem[] = useMemo(
     () => [
       { label: "Home", href: "/" },
+      { label: "Service Areas", href: "/service-areas" },
       {
         label: "Commercial Cleaning",
         href: "/commercial-cleaning",
@@ -200,6 +201,13 @@ export default function Header() {
                       onClick={() => setMobileOpen(false)}
                     >
                       Home
+                    </Link>
+                    <Link
+                      href="/service-areas"
+                      className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10"
+                      onClick={() => setMobileOpen(false)}
+                    >
+                      Service Areas
                     </Link>
 
                     <button

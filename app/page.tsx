@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import Image from "next/image";
@@ -14,6 +14,7 @@ import {
 } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
+import { serviceAreas } from "@/lib/service-areas";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -89,6 +90,8 @@ function Segmented({
 
 export default function Page() {
   const [lane, setLane] = useState<Lane>("commercial");
+
+  const areaNames = useMemo(() => serviceAreas.map((area) => area.name), []);
 
   // Form state
   const [sending, setSending] = useState(false);
@@ -576,17 +579,18 @@ export default function Page() {
             "@context": "https://schema.org",
             "@type": "LocalBusiness",
             name: "Gleam Pro Cleaning",
-            image: "/logo-gpc.png",
+            image: "https://www.gleampro.ca/logo-gpc.png",
             telephone: "+1-672-970-3755",
             email: "hello@gleamprocleaning.com",
+            areaServed: areaNames,
             address: {
               "@type": "PostalAddress",
-              addressLocality: "Vancouver",
+              addressLocality: "New Westminster",
               addressRegion: "BC",
               addressCountry: "CA",
             },
-            areaServed: "Greater Vancouver",
             url: "https://www.gleampro.ca",
+            hasMap: "https://www.google.com/maps?q=New+Westminster,+BC",
             sameAs: [
               "https://instagram.com/gleampro",
               "https://facebook.com/gleampro",
