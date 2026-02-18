@@ -6,6 +6,11 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { commercial } from "@/components/commercial/ui";
 import { residential } from "@/components/residential/ui";
+import {
+  FIELD_LIMITS,
+  PHONE_INPUT_PATTERN,
+  validateLeadPayload,
+} from "@/lib/validation/lead";
 
 type Lane = "commercial" | "residential";
 
@@ -70,6 +75,7 @@ export default function RequestWalkthroughPage() {
   const [submitted, setSubmitted] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   const [form, setForm] = useState({
     leadType: "commercial" as "commercial" | "residential",
@@ -125,23 +131,64 @@ export default function RequestWalkthroughPage() {
               e.preventDefault();
               setError(null);
               setLoading(true);
+              setFieldErrors({});
 
               try {
+                const payload = {
+                  ...form,
+                  leadType: lane,
+                  source: "walkthrough-page",
+                  pageUrl:
+                    typeof window !== "undefined"
+                      ? window.location.href
+                      : undefined,
+                };
+                const validation = validateLeadPayload(payload);
+                if (!validation.ok) {
+                  setError("Please fix the highlighted form fields.");
+                  setFieldErrors(
+                    validation.errors.reduce<Record<string, string>>(
+                      (acc, issue) => {
+                        if (!acc[issue.field]) {
+                          acc[issue.field] = issue.message;
+                        }
+                        return acc;
+                      },
+                      {}
+                    )
+                  );
+                  return;
+                }
+
                 const res = await fetch("/api/walkthrough", {
                   method: "POST",
                   headers: { "Content-Type": "application/json" },
-                  body: JSON.stringify({
-                    ...form,
-                    leadType: lane,
-                  }),
+                  body: JSON.stringify(validation.data),
                 });
 
-                const data = await res.json().catch(() => null);
+                const data = (await res.json().catch(() => null)) as {
+                  ok?: boolean;
+                  error?: string;
+                  details?: { field: string; message: string }[];
+                } | null;
 
                 if (!res.ok || !data?.ok) {
                   setError(
                     data?.error || "Something went wrong. Please try again."
                   );
+                  if (Array.isArray(data?.details)) {
+                    setFieldErrors(
+                      data.details.reduce<Record<string, string>>(
+                        (acc, issue) => {
+                          if (!acc[issue.field]) {
+                            acc[issue.field] = issue.message;
+                          }
+                          return acc;
+                        },
+                        {}
+                      )
+                    );
+                  }
                   return;
                 }
 
@@ -175,8 +222,15 @@ export default function RequestWalkthroughPage() {
                     onChange={(e) =>
                       setForm({ ...form, businessName: e.target.value })
                     }
+                    minLength={FIELD_LIMITS.businessName.min}
+                    maxLength={FIELD_LIMITS.businessName.max}
                     className="mt-1 border-white/10 bg-white/5 text-white placeholder:text-white/40 focus:border-emerald-400/50"
                   />
+                  {fieldErrors.businessName ? (
+                    <p className="mt-1 text-xs text-red-200">
+                      {fieldErrors.businessName}
+                    </p>
+                  ) : null}
                 </div>
 
                 <div>
@@ -207,6 +261,11 @@ export default function RequestWalkthroughPage() {
                       Other
                     </option>
                   </select>
+                  {fieldErrors.facilityType ? (
+                    <p className="mt-1 text-xs text-red-200">
+                      {fieldErrors.facilityType}
+                    </p>
+                  ) : null}
                 </div>
               </>
             )}
@@ -222,8 +281,16 @@ export default function RequestWalkthroughPage() {
                   onChange={(e) =>
                     setForm({ ...form, fullName: e.target.value })
                   }
+                  minLength={FIELD_LIMITS.fullName.min}
+                  maxLength={FIELD_LIMITS.fullName.max}
+                  autoComplete="name"
                   className="mt-1 border-white/10 bg-white/5 text-white placeholder:text-white/40 focus:border-emerald-400/50"
                 />
+                {fieldErrors.fullName ? (
+                  <p className="mt-1 text-xs text-red-200">
+                    {fieldErrors.fullName}
+                  </p>
+                ) : null}
               </div>
             )}
 
@@ -235,8 +302,14 @@ export default function RequestWalkthroughPage() {
                 required
                 value={form.address}
                 onChange={(e) => setForm({ ...form, address: e.target.value })}
+                minLength={FIELD_LIMITS.address.min}
+                maxLength={FIELD_LIMITS.address.max}
+                autoComplete="street-address"
                 className="mt-1 border-white/10 bg-white/5 text-white placeholder:text-white/40 focus:border-emerald-400/50"
               />
+              {fieldErrors.address ? (
+                <p className="mt-1 text-xs text-red-200">{fieldErrors.address}</p>
+              ) : null}
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
@@ -249,8 +322,17 @@ export default function RequestWalkthroughPage() {
                     required
                     value={form.sqft}
                     onChange={(e) => setForm({ ...form, sqft: e.target.value })}
+                    inputMode="numeric"
+                    pattern="^[0-9]{3,7}$"
+                    minLength={3}
+                    maxLength={7}
                     className="mt-1 border-white/10 bg-white/5 text-white placeholder:text-white/40 focus:border-emerald-400/50"
                   />
+                  {fieldErrors.sqft ? (
+                    <p className="mt-1 text-xs text-red-200">
+                      {fieldErrors.sqft}
+                    </p>
+                  ) : null}
                 </div>
               )}
 
@@ -288,6 +370,11 @@ export default function RequestWalkthroughPage() {
                     Custom
                   </option>
                 </select>
+                {fieldErrors.frequency ? (
+                  <p className="mt-1 text-xs text-red-200">
+                    {fieldErrors.frequency}
+                  </p>
+                ) : null}
               </div>
             </div>
 
@@ -303,8 +390,14 @@ export default function RequestWalkthroughPage() {
                   onChange={(e) =>
                     setForm({ ...form, painPoints: e.target.value })
                   }
+                  maxLength={FIELD_LIMITS.painPoints.max}
                   placeholder="Missed cleans, inspection concerns, unreliable staff, etc."
                 />
+                {fieldErrors.painPoints ? (
+                  <p className="mt-1 text-xs text-red-200">
+                    {fieldErrors.painPoints}
+                  </p>
+                ) : null}
               </div>
             )}
 
@@ -317,12 +410,16 @@ export default function RequestWalkthroughPage() {
                 className="mt-1 border-white/10 bg-white/5 text-white placeholder:text-white/40 focus:border-emerald-400/50"
                 value={form.notes}
                 onChange={(e) => setForm({ ...form, notes: e.target.value })}
+                maxLength={FIELD_LIMITS.notes.max}
                 placeholder={
                   lane === "commercial"
                     ? "Any other details you'd like us to know..."
                     : "Special requests, number of bedrooms/bathrooms, pets, etc."
                 }
               />
+              {fieldErrors.notes ? (
+                <p className="mt-1 text-xs text-red-200">{fieldErrors.notes}</p>
+              ) : null}
             </div>
 
             <div className="grid gap-6 md:grid-cols-2">
@@ -335,8 +432,13 @@ export default function RequestWalkthroughPage() {
                   required
                   value={form.email}
                   onChange={(e) => setForm({ ...form, email: e.target.value })}
+                  maxLength={FIELD_LIMITS.email.max}
+                  autoComplete="email"
                   className="mt-1 border-white/10 bg-white/5 text-white placeholder:text-white/40 focus:border-emerald-400/50"
                 />
+                {fieldErrors.email ? (
+                  <p className="mt-1 text-xs text-red-200">{fieldErrors.email}</p>
+                ) : null}
               </div>
 
               <div>
@@ -349,8 +451,16 @@ export default function RequestWalkthroughPage() {
                   value={form.phone}
                   onChange={(e) => setForm({ ...form, phone: e.target.value })}
                   placeholder="e.g. 604-555-1234"
+                  minLength={FIELD_LIMITS.phone.min}
+                  maxLength={FIELD_LIMITS.phone.max}
+                  pattern={PHONE_INPUT_PATTERN}
+                  inputMode="tel"
+                  autoComplete="tel"
                   className="mt-1 border-white/10 bg-white/5 text-white placeholder:text-white/40 focus:border-emerald-400/50"
                 />
+                {fieldErrors.phone ? (
+                  <p className="mt-1 text-xs text-red-200">{fieldErrors.phone}</p>
+                ) : null}
               </div>
             </div>
 
@@ -380,7 +490,7 @@ export default function RequestWalkthroughPage() {
                 : "Estimate Request Received"}
             </h2>
             <p className={designTokens.lead}>
-              Thank you. We'll contact you shortly (same business day).
+              Thank you. We&apos;ll contact you shortly (same business day).
             </p>
           </div>
         )}

@@ -18,6 +18,11 @@ import { serviceAreas } from "@/lib/service-areas";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import {
+  FIELD_LIMITS,
+  PHONE_INPUT_PATTERN,
+  validateLeadPayload,
+} from "@/lib/validation/lead";
 
 const colors = {
   navy: "#0B2545",
@@ -97,6 +102,7 @@ export default function Page() {
   const [sending, setSending] = useState(false);
   const [sentOk, setSentOk] = useState<null | boolean>(null);
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
+  const [fieldErrors, setFieldErrors] = useState<Record<string, string>>({});
 
   // Honeypot
   const [website, setWebsite] = useState("");
@@ -168,35 +174,73 @@ export default function Page() {
     setSending(true);
     setSentOk(null);
     setErrorMsg(null);
+    setFieldErrors({});
 
     try {
-      const payload: any = {
-        leadType: lane, // "commercial" | "residential"
-        website, // honeypot
+      const payload = {
+        leadType: lane,
+        website,
         fullName,
         address,
         frequency,
         phone,
         email,
         notes,
+        source: "homepage-hero-form",
+        pageUrl:
+          typeof window !== "undefined" ? window.location.href : undefined,
       };
 
-      if (lane === "commercial") {
-        payload.businessName = businessName;
-        payload.facilityType = facilityType;
+      const finalPayload =
+        lane === "commercial"
+          ? {
+              ...payload,
+              businessName,
+              facilityType,
+            }
+          : payload;
+
+      const validation = validateLeadPayload(finalPayload);
+      if (!validation.ok) {
+        setSending(false);
+        setSentOk(false);
+        setErrorMsg("Please fix the highlighted form fields.");
+        setFieldErrors(
+          validation.errors.reduce<Record<string, string>>((acc, issue) => {
+            if (!acc[issue.field]) {
+              acc[issue.field] = issue.message;
+            }
+            return acc;
+          }, {})
+        );
+        return;
       }
 
       const res = await fetch("/api/walkthrough", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
+        body: JSON.stringify(validation.data),
       });
 
-      const data = await res.json().catch(() => ({}));
+      const data = (await res.json().catch(() => ({}))) as {
+        ok?: boolean;
+        error?: string;
+        details?: { field: string; message: string }[];
+      };
 
       if (!res.ok || !data?.ok) {
         setSentOk(false);
         setErrorMsg(data?.error || "Something went wrong. Please try again.");
+        if (Array.isArray(data?.details)) {
+          setFieldErrors(
+            data.details.reduce<Record<string, string>>((acc, issue) => {
+              if (!acc[issue.field]) {
+                acc[issue.field] = issue.message;
+              }
+              return acc;
+            }, {})
+          );
+        }
         return;
       }
 
@@ -210,6 +254,7 @@ export default function Page() {
       setEmail("");
       setNotes("");
       setWebsite("");
+      setFieldErrors({});
     } catch {
       setSentOk(false);
       setErrorMsg("Network error. Please try again.");
@@ -370,16 +415,35 @@ export default function Page() {
                           value={businessName}
                           onChange={(e) => setBusinessName(e.target.value)}
                           required
+                          minLength={FIELD_LIMITS.businessName.min}
+                          maxLength={FIELD_LIMITS.businessName.max}
                           className="bg-white/80"
                         />
-                        <Input
+                        {fieldErrors.businessName ? (
+                          <p className="text-xs text-red-200">
+                            {fieldErrors.businessName}
+                          </p>
+                        ) : null}
+                        <select
                           name="facilityType"
-                          placeholder="Facility Type (Restaurant, Office, Community Facility)"
                           value={facilityType}
                           onChange={(e) => setFacilityType(e.target.value)}
                           required
-                          className="bg-white/80"
-                        />
+                          className="w-full rounded-md border border-white/10 bg-white/80 px-3 py-2 text-slate-900 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20"
+                        >
+                          <option value="">Select facility type</option>
+                          <option value="restaurant">Restaurant / Pub</option>
+                          <option value="office">Office</option>
+                          <option value="community">
+                            Community Facility / School
+                          </option>
+                          <option value="other">Other</option>
+                        </select>
+                        {fieldErrors.facilityType ? (
+                          <p className="text-xs text-red-200">
+                            {fieldErrors.facilityType}
+                          </p>
+                        ) : null}
                       </>
                     ) : null}
 
@@ -389,8 +453,16 @@ export default function Page() {
                       value={fullName}
                       onChange={(e) => setFullName(e.target.value)}
                       required
+                      minLength={FIELD_LIMITS.fullName.min}
+                      maxLength={FIELD_LIMITS.fullName.max}
+                      autoComplete="name"
                       className="bg-white/80"
                     />
+                    {fieldErrors.fullName ? (
+                      <p className="text-xs text-red-200">
+                        {fieldErrors.fullName}
+                      </p>
+                    ) : null}
 
                     <Input
                       name="email"
@@ -399,8 +471,13 @@ export default function Page() {
                       value={email}
                       onChange={(e) => setEmail(e.target.value)}
                       required
+                      maxLength={FIELD_LIMITS.email.max}
+                      autoComplete="email"
                       className="bg-white/80"
                     />
+                    {fieldErrors.email ? (
+                      <p className="text-xs text-red-200">{fieldErrors.email}</p>
+                    ) : null}
 
                     <Input
                       name="phone"
@@ -408,8 +485,16 @@ export default function Page() {
                       value={phone}
                       onChange={(e) => setPhone(e.target.value)}
                       required
+                      minLength={FIELD_LIMITS.phone.min}
+                      maxLength={FIELD_LIMITS.phone.max}
+                      pattern={PHONE_INPUT_PATTERN}
+                      inputMode="tel"
+                      autoComplete="tel"
                       className="bg-white/80"
                     />
+                    {fieldErrors.phone ? (
+                      <p className="text-xs text-red-200">{fieldErrors.phone}</p>
+                    ) : null}
 
                     <Input
                       name="address"
@@ -417,17 +502,36 @@ export default function Page() {
                       value={address}
                       onChange={(e) => setAddress(e.target.value)}
                       required
+                      minLength={FIELD_LIMITS.address.min}
+                      maxLength={FIELD_LIMITS.address.max}
+                      autoComplete="street-address"
                       className="bg-white/80"
                     />
+                    {fieldErrors.address ? (
+                      <p className="text-xs text-red-200">{fieldErrors.address}</p>
+                    ) : null}
 
-                    <Input
+                    <select
                       name="frequency"
-                      placeholder="Frequency (One-time, Weekly, Bi-weekly, Monthly)"
                       value={frequency}
                       onChange={(e) => setFrequency(e.target.value)}
                       required
-                      className="bg-white/80"
-                    />
+                      className="w-full rounded-md border border-white/10 bg-white/80 px-3 py-2 text-slate-900 focus:border-emerald-400/50 focus:outline-none focus:ring-2 focus:ring-emerald-400/20"
+                    >
+                      <option value="">Select frequency</option>
+                      <option value="one-time">One-time</option>
+                      <option value="daily">Daily</option>
+                      <option value="5x-week">5x per week</option>
+                      <option value="weekly">Weekly</option>
+                      <option value="bi-weekly">Bi-weekly</option>
+                      <option value="monthly">Monthly</option>
+                      <option value="custom">Custom</option>
+                    </select>
+                    {fieldErrors.frequency ? (
+                      <p className="text-xs text-red-200">
+                        {fieldErrors.frequency}
+                      </p>
+                    ) : null}
 
                     <Textarea
                       name="notes"
@@ -438,8 +542,12 @@ export default function Page() {
                       }
                       value={notes}
                       onChange={(e) => setNotes(e.target.value)}
+                      maxLength={FIELD_LIMITS.notes.max}
                       className="bg-white/80"
                     />
+                    {fieldErrors.notes ? (
+                      <p className="text-xs text-red-200">{fieldErrors.notes}</p>
+                    ) : null}
 
                     <p className="text-xs text-white/80">
                       {laneCopy.formHelper}

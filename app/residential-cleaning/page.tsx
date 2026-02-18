@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { residential } from "@/components/residential/ui";
+import { serviceAreas as allServiceAreas } from "@/lib/service-areas";
 
 export const metadata = {
   title: "Residential Cleaning Services | Gleam Pro Cleaning",
@@ -158,28 +159,21 @@ export default function ResidentialCleaningHubPage() {
             </div>
           </section>
 
-          {/* Service areas */}
-          <section className={residential.section}>
-            <h2 className={residential.h2Large}>Service Areas</h2>
-            <p className={residential.lead}>
-              Serving Metro Vancouver including:
-            </p>
+           {/* Service areas */}
+           <section className={residential.section}>
+             <h2 className={residential.h2Large}>Service Areas</h2>
+             <p className={residential.lead}>
+               Serving Metro Vancouver including:
+             </p>
 
-            <div className="mt-5 flex flex-wrap gap-2">
-              {[
-                "Vancouver",
-                "Burnaby",
-                "New Westminster",
-                "Surrey",
-                "Delta",
-                "Coquitlam",
-              ].map((area) => (
-                <span key={area} className={residential.pill}>
-                  {area}
-                </span>
-              ))}
-            </div>
-          </section>
+             <div className="mt-5 flex flex-wrap gap-2">
+               {allServiceAreas.map((area) => (
+                 <span key={area.slug} className={residential.pill}>
+                   {area.name}
+                 </span>
+               ))}
+             </div>
+           </section>
 
           {/* Cross-links */}
           <section className={residential.section}>

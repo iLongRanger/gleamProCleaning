@@ -95,6 +95,16 @@ export const serviceAreas: ServiceArea[] = [
     image: "/images/home/residential-hero.png",
     imageAlt: "Cleaning service in West Vancouver",
   },
+  {
+    slug: "delta",
+    name: "Delta",
+    headline: "Delta commercial and residential cleaning",
+    description:
+      "We serve Delta clients with reliable teams for commercial facilities, offices, and residential properties across Ladner, Tsawwassen, and North Delta.",
+    neighborhoods: ["Ladner", "Tsawwassen", "North Delta", "Scottsdale"],
+    image: "/images/home/commercial-hero.png",
+    imageAlt: "Cleaning service in Delta",
+  },
 ];
 
 export function getServiceArea(slug: string): ServiceArea | undefined {

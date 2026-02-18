@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useId, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useId, useMemo, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import Image from "next/image";
 import Link from "next/link";
@@ -43,12 +43,12 @@ function getDesktopMenuKey(label: string): DesktopMenu {
 export default function Header() {
   const headerRef = useRef<HTMLElement | null>(null);
 
-  const [mounted, setMounted] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileCommercialOpen, setMobileCommercialOpen] = useState(false);
   const [mobileResidentialOpen, setMobileResidentialOpen] = useState(false);
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<DesktopMenu>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
+  const mounted = typeof window !== "undefined";
 
   const closeTimerRef = useRef<number | null>(null);
 
@@ -109,21 +109,23 @@ export default function Header() {
     }, DESKTOP_CLOSE_DELAY_MS);
   };
 
-  useEffect(() => {
-    setMounted(true);
+  const closeMobileMenu = useCallback(() => {
+    setMobileOpen(false);
+    setMobileCommercialOpen(false);
+    setMobileResidentialOpen(false);
   }, []);
 
   // Close on Escape
   useEffect(() => {
     const onKeyDown = (e: KeyboardEvent) => {
       if (e.key === "Escape") {
-        setMobileOpen(false);
+        closeMobileMenu();
         setDesktopMenuOpen(null);
       }
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, []);
+  }, [closeMobileMenu]);
 
   // Lock body scroll when mobile menu is open
   useEffect(() => {
@@ -133,14 +135,6 @@ export default function Header() {
     return () => {
       document.body.style.overflow = prev;
     };
-  }, [mobileOpen]);
-
-  // Reset mobile submenu when closing the mobile menu
-  useEffect(() => {
-    if (!mobileOpen) {
-      setMobileCommercialOpen(false);
-      setMobileResidentialOpen(false);
-    }
   }, [mobileOpen]);
 
   // Measure header height (so mobile panel can sit below it without assuming a pixel value)
@@ -183,7 +177,7 @@ export default function Header() {
               type="button"
               aria-label="Close menu overlay"
               className="fixed inset-0 z-[60] bg-black/40 md:hidden"
-              onClick={() => setMobileOpen(false)}
+              onClick={closeMobileMenu}
             />
 
             {/* Panel (above overlay) */}
@@ -198,14 +192,14 @@ export default function Header() {
                     <Link
                       href="/"
                       className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10"
-                      onClick={() => setMobileOpen(false)}
+                      onClick={closeMobileMenu}
                     >
                       Home
                     </Link>
                     <Link
                       href="/service-areas"
                       className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm font-semibold text-white/90 hover:bg-white/10"
-                      onClick={() => setMobileOpen(false)}
+                      onClick={closeMobileMenu}
                     >
                       Service Areas
                     </Link>
@@ -236,28 +230,28 @@ export default function Header() {
                         <Link
                           href="/commercial-cleaning"
                           className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setMobileOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           Overview
                         </Link>
                         <Link
                           href="/commercial-cleaning/restaurants"
                           className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setMobileOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           Restaurants
                         </Link>
                         <Link
                           href="/commercial-cleaning/offices"
                           className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setMobileOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           Offices
                         </Link>
                         <Link
                           href="/commercial-cleaning/community-facilities"
                           className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setMobileOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           Community Facilities
                         </Link>
@@ -290,42 +284,42 @@ export default function Header() {
                         <Link
                           href="/residential-cleaning"
                           className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setMobileOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           Overview
                         </Link>
                         <Link
                           href="/prestige-home-care"
                           className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setMobileOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           Prestige Home Care
                         </Link>
                         <Link
                           href="/residential-cleaning/recurring"
                           className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setMobileOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           Recurring Cleaning
                         </Link>
                         <Link
                           href="/residential-cleaning/deep-cleaning"
                           className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setMobileOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           Deep Cleaning
                         </Link>
                         <Link
                           href="/residential-cleaning/move-in-out"
                           className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setMobileOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           Move-In/Out
                         </Link>
                         <Link
                           href="/residential-cleaning/carpet-upholstery"
                           className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                          onClick={() => setMobileOpen(false)}
+                          onClick={closeMobileMenu}
                         >
                           Carpet & Upholstery
                         </Link>
@@ -341,7 +335,7 @@ export default function Header() {
                       <Link
                         href={ctaItem.href}
                         className={commercial.cta}
-                        onClick={() => setMobileOpen(false)}
+                        onClick={closeMobileMenu}
                       >
                         {ctaItem.label}
                       </Link>
@@ -350,7 +344,7 @@ export default function Header() {
                     <a
                       href={EMAIL_MAILTO}
                       className="mt-3 flex items-center gap-2 rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
-                      onClick={() => setMobileOpen(false)}
+                      onClick={closeMobileMenu}
                     >
                       <Mail className="h-4 w-4" />
                       {EMAIL_DISPLAY}
@@ -557,7 +551,13 @@ export default function Header() {
                 aria-label={mobileOpen ? "Close menu" : "Open menu"}
                 aria-expanded={mobileOpen}
                 aria-controls={mobilePanelId}
-                onClick={() => setMobileOpen((v) => !v)}
+                onClick={() => {
+                  if (mobileOpen) {
+                    closeMobileMenu();
+                  } else {
+                    setMobileOpen(true);
+                  }
+                }}
               >
                 {mobileOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
               </button>

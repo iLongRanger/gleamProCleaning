@@ -121,7 +121,7 @@ export default function RecurringCleaningPage() {
               What’s included (typical recurring scope)
             </h2>
             <p className={residential.lead}>
-              Your scope is customized during estimate. Here's a typical
+              Your scope is customized during estimate. Here&apos;s a typical
               baseline for recurring home cleaning.
             </p>
 
@@ -206,7 +206,7 @@ export default function RecurringCleaningPage() {
               />
               <Faq
                 q="What if I need to reschedule?"
-                a="Just give us 24-48 hours notice and we'll happily reschedule at no extra charge."
+                a="Just give us 24-48 hours notice and we&apos;ll happily reschedule at no extra charge."
               />
               <Faq
                 q="Do you bring your own supplies?"
@@ -221,7 +221,7 @@ export default function RecurringCleaningPage() {
               Ready for consistent home cleaning?
             </h2>
             <p className="mt-3 max-w-2xl text-white/80">
-              Start with a free estimate and we'll create a cleaning plan
+              Start with a free estimate and we&apos;ll create a cleaning plan
               tailored to your home, family, and schedule.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">

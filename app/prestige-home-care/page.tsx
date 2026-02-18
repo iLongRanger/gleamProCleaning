@@ -78,7 +78,7 @@ export default function PrestigeHomePage() {
                       How it works
                     </p>
                     <p className="mt-2 text-sm text-white/80">
-                      Start with a free estimate. We'll assess your space,
+                      Start with a free estimate. We&apos;ll assess your space,
                       discuss your needs, and provide a clear quote based on
                       scope and frequency.
                     </p>

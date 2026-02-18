@@ -69,7 +69,7 @@ export default function DeepCleaningPage() {
                     <li>• Spring cleaning refresh</li>
                     <li>• Before/after special events</li>
                     <li>• Post-renovation cleanup</li>
-                    <li>• When routine maintenance isn't enough</li>
+                    <li>• When routine maintenance isn&apos;t enough</li>
                   </ul>
 
                   <div className="mt-5 rounded-2xl border border-white/10 bg-white/5 p-4">
@@ -82,7 +82,7 @@ export default function DeepCleaningPage() {
                   </div>
 
                   <p className="mt-4 text-xs text-white/60">
-                    Scope customized based on your home's specific needs.
+                    Scope customized based on your home&apos;s specific needs.
                   </p>
                 </div>
               </div>
@@ -117,7 +117,7 @@ export default function DeepCleaningPage() {
           {/* Scope */}
           <section className={residential.section}>
             <h2 className={residential.h2Large}>
-              What's included (comprehensive deep clean)
+              What&apos;s included (comprehensive deep clean)
             </h2>
             <p className={residential.lead}>
               Deep cleaning covers all regular areas plus detailed work on spaces
@@ -202,7 +202,7 @@ export default function DeepCleaningPage() {
               />
               <Faq
                 q="How long does deep cleaning take?"
-                a="Typically 4-8 hours depending on home size and condition. We'll provide time estimate during consultation."
+                a="Typically 4-8 hours depending on home size and condition. we&apos;ll provide time estimate during consultation."
               />
               <Faq
                 q="Do I need to move furniture?"
@@ -210,7 +210,7 @@ export default function DeepCleaningPage() {
               />
               <Faq
                 q="What should I do before the deep cleaning?"
-                a="Please pick up personal items, valuables, and clutter. We'll handle everything else including moving light furniture as needed."
+                a="Please pick up personal items, valuables, and clutter. we&apos;ll handle everything else including moving light furniture as needed."
               />
             </div>
           </section>
@@ -221,7 +221,7 @@ export default function DeepCleaningPage() {
               Ready for a comprehensive home refresh?
             </h2>
             <p className="mt-3 max-w-2xl text-white/80">
-              Start with a free consultation and we'll create a detailed deep
+              Start with a free consultation and we&apos;ll create a detailed deep
               cleaning plan tailored to your home.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">

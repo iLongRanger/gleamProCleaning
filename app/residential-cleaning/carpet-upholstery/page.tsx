@@ -119,7 +119,7 @@ export default function CarpetUpholsteryPage() {
           {/* Scope */}
           <section className={residential.section}>
             <h2 className={residential.h2Large}>
-              What's included (professional fabric care)
+              What&apos;s included (professional fabric care)
             </h2>
             <p className={residential.lead}>
               Thorough cleaning using industry-standard methods with proper
@@ -214,7 +214,7 @@ export default function CarpetUpholsteryPage() {
               Ready to refresh your carpets and furniture?
             </h2>
             <p className="mt-3 max-w-2xl text-white/80">
-              Start with a free consultation and We'll create a fabric care
+              Start with a free consultation and we&apos;ll create a fabric care
               plan tailored to your specific needs and concerns.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">

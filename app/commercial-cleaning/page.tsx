@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { commercial } from "@/components/commercial/ui";
+import { serviceAreas as allServiceAreas } from "@/lib/service-areas";
 
 export const metadata = {
   title: "Commercial Cleaning Services in Metro Vancouver",
@@ -10,14 +11,7 @@ export const metadata = {
   },
 };
 
-const serviceAreas = [
-  "Vancouver",
-  "Burnaby",
-  "New Westminster",
-  "Surrey",
-  "Delta",
-  "Coquitlam",
-];
+const serviceAreas = allServiceAreas.map((area) => area.name);
 
 export default function CommercialCleaningHubPage() {
   return (

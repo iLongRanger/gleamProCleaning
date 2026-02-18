@@ -1,6 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import {
+  FIELD_LIMITS,
+  PHONE_INPUT_PATTERN,
+} from "@/lib/validation/lead";
 
 type Props = {
   open: boolean;
@@ -23,21 +27,19 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
   const [error, setError] = useState<string | null>(null);
   const dialogRef = useRef<HTMLDivElement | null>(null);
 
-  // Reset when closed
-  useEffect(() => {
-    if (!open) {
-      setSubmitted(false);
-      setError(null);
-    }
-  }, [open]);
+  const handleClose = useCallback(() => {
+    setSubmitted(false);
+    setError(null);
+    onClose();
+  }, [onClose]);
 
   // ESC to close
   useEffect(() => {
     if (!open) return;
-    const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
+    const onKey = (e: KeyboardEvent) => e.key === "Escape" && handleClose();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [open, onClose]);
+  }, [open, handleClose]);
 
   if (!open) return null;
 
@@ -46,7 +48,7 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
       {/* Backdrop (click to close) */}
       <div
         className="fixed inset-0 bg-black/60 backdrop-blur-sm"
-        onClick={onClose}
+        onClick={handleClose}
         aria-hidden="true"
       />
 
@@ -68,7 +70,7 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
           {/* Close button */}
           <button
             type="button"
-            onClick={onClose}
+            onClick={handleClose}
             aria-label="Close"
             className="hidden sm:block absolute right-4 top-3 text-slate-500 hover:text-slate-700"
           >
@@ -76,13 +78,13 @@ export default function ChoosePlanModal({ open, plan, onClose }: Props) {
           </button>
 
           {submitted ? (
-            <Success onClose={onClose} />
+            <Success onClose={handleClose} />
           ) : (
             <Form
               plan={plan ?? null}
               onSuccess={() => setSubmitted(true)}
               onError={(msg) => setError(msg)}
-              onCancel={onClose}
+              onCancel={handleClose}
             />
           )}
 
@@ -237,6 +239,7 @@ function Form({
             type="text"
             required
             placeholder="e.g., 1,500 sq ft"
+            maxLength={20}
             className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
           />
         </div>
@@ -252,6 +255,9 @@ function Form({
             name="name"
             required
             placeholder="Full name"
+            minLength={FIELD_LIMITS.fullName.min}
+            maxLength={FIELD_LIMITS.fullName.max}
+            autoComplete="name"
             className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
           />
         </div>
@@ -264,6 +270,11 @@ function Form({
             type="tel"
             required
             placeholder="(###) ###-####"
+            minLength={FIELD_LIMITS.phone.min}
+            maxLength={FIELD_LIMITS.phone.max}
+            pattern={PHONE_INPUT_PATTERN}
+            inputMode="tel"
+            autoComplete="tel"
             className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
           />
         </div>
@@ -279,6 +290,8 @@ function Form({
           type="email"
           required
           placeholder="you@example.com"
+          maxLength={FIELD_LIMITS.email.max}
+          autoComplete="email"
           className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
         />
       </div>
@@ -291,6 +304,7 @@ function Form({
           name="notes"
           rows={3}
           placeholder="Any specifics we should know?"
+          maxLength={FIELD_LIMITS.notes.max}
           className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-2"
         />
       </div>

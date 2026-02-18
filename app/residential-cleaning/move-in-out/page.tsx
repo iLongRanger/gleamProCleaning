@@ -28,7 +28,7 @@ export default function MoveInOutPage() {
                   <span style={{ color: "#D4A574" }}>for your next move</span>
                 </h1>
                 <p className={residential.lead}>
-                  Whether you're moving in or out, our turnover service ensures
+                  Whether you&apos;re moving in or out, our turnover service ensures
                   the space is perfectly clean for the next chapter. We handle
                   everything from detailed cleaning to final walkthrough.
                 </p>
@@ -118,7 +118,7 @@ export default function MoveInOutPage() {
           {/* Scope */}
           <section className={residential.section}>
             <h2 className={residential.h2Large}>
-              What's included (comprehensive turnover cleaning)
+              What&apos;s included (comprehensive turnover cleaning)
             </h2>
             <p className={residential.lead}>
               Complete cleaning to ensure space is ready for next occupancy.
@@ -222,7 +222,7 @@ export default function MoveInOutPage() {
               Ready for a seamless move?
             </h2>
             <p className="mt-3 max-w-2xl text-white/80">
-              Start with a free consultation and We'll create a turnover
+              Start with a free consultation and We&apos;ll create a turnover
               cleaning plan that meets your timeline and standards.
             </p>
             <div className="mt-6 flex flex-wrap gap-3">
