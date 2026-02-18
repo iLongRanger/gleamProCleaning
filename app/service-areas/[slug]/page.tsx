@@ -116,7 +116,7 @@ export default function ServiceAreaPage({ params }: ServiceAreaParams) {
               url: `https://www.gleampro.ca/service-areas/${area.slug}`,
               image: "https://www.gleampro.ca/logo-gpc.png",
               telephone: "+1-672-970-3755",
-              email: "hello@gleamprocleaning.com",
+              email: "services@gleampro.ca",
               areaServed: area.name,
               address: {
                 "@type": "PostalAddress",

@@ -28,8 +28,8 @@ type DesktopMenu = "commercial" | "residential" | null;
 
 const PHONE_DISPLAY = "(672) 970-3755";
 const PHONE_TEL = "tel:+16729703755";
-const EMAIL_DISPLAY = "hello@gleamprocleaning.com";
-const EMAIL_MAILTO = "mailto:hello@gleamprocleaning.com";
+const EMAIL_DISPLAY = "services@gleampro.ca";
+const EMAIL_MAILTO = "mailto:services@gleampro.ca";
 
 // small delay prevents “menu disappears before click” when moving from trigger → menu
 const DESKTOP_CLOSE_DELAY_MS = 180;

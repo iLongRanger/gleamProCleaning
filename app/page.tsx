@@ -689,7 +689,7 @@ export default function Page() {
             name: "Gleam Pro Cleaning",
             image: "https://www.gleampro.ca/logo-gpc.png",
             telephone: "+1-672-970-3755",
-            email: "hello@gleamprocleaning.com",
+            email: "services@gleampro.ca",
             areaServed: areaNames,
             address: {
               "@type": "PostalAddress",
