@@ -146,6 +146,16 @@ export default function CommercialCleaningHubPage() {
                 </p>
               </Link>
 
+              <Link href="/commercial-cleaning/faq" className={commercial.linkCard}>
+                <h3 className={`text-lg font-semibold ${commercial.accent}`}>
+                  Commercial Cleaning FAQ
+                </h3>
+                <p className="mt-2 text-white/80">
+                  Answers to common questions about pricing, scope, scheduling,
+                  and onboarding.
+                </p>
+              </Link>
+
               <Link href="/request-walkthrough?type=commercial" className={commercial.linkCard}>
                 <h3 className={`text-lg font-semibold ${commercial.accent}`}>
                   Request a Walk-Through

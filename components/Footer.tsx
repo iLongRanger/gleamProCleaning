@@ -14,6 +14,7 @@ const commercialLinks = [
   { label: "Restaurants", href: "/commercial-cleaning/restaurants" },
   { label: "Offices", href: "/commercial-cleaning/offices" },
   { label: "Community Facilities", href: "/commercial-cleaning/community-facilities" },
+  { label: "Commercial FAQ", href: "/commercial-cleaning/faq" },
 ];
 
 const residentialLinks = [

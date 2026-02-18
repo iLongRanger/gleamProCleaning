@@ -70,6 +70,7 @@ export default function Header() {
             label: "Community Facilities",
             href: "/commercial-cleaning/community-facilities",
           },
+          { label: "Commercial FAQ", href: "/commercial-cleaning/faq" },
         ],
       },
       {
@@ -254,6 +255,13 @@ export default function Header() {
                           onClick={closeMobileMenu}
                         >
                           Community Facilities
+                        </Link>
+                        <Link
+                          href="/commercial-cleaning/faq"
+                          className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
+                          onClick={closeMobileMenu}
+                        >
+                          Commercial FAQ
                         </Link>
                       </div>
                     )}
