@@ -85,6 +85,7 @@ export default function Header() {
             label: "Carpet & Upholstery",
             href: "/residential-cleaning/carpet-upholstery",
           },
+          { label: "Residential FAQ", href: "/residential-cleaning/faq" },
         ],
       },
       {
@@ -330,6 +331,13 @@ export default function Header() {
                           onClick={closeMobileMenu}
                         >
                           Carpet & Upholstery
+                        </Link>
+                        <Link
+                          href="/residential-cleaning/faq"
+                          className="block rounded-2xl border border-white/10 bg-white/5 px-4 py-3 text-sm text-white/80 hover:bg-white/10 hover:text-white"
+                          onClick={closeMobileMenu}
+                        >
+                          Residential FAQ
                         </Link>
                       </div>
                     )}

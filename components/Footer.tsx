@@ -24,6 +24,7 @@ const residentialLinks = [
   { label: "Deep Cleaning", href: "/residential-cleaning/deep-cleaning" },
   { label: "Move-In/Out", href: "/residential-cleaning/move-in-out" },
   { label: "Carpet & Upholstery", href: "/residential-cleaning/carpet-upholstery" },
+  { label: "Residential FAQ", href: "/residential-cleaning/faq" },
 ];
 
 const companyLinks = [

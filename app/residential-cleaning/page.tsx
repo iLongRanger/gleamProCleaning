@@ -156,6 +156,16 @@ export default function ResidentialCleaningHubPage() {
                   refresh, or allergy concerns.
                 </p>
               </Link>
+
+              <Link href="/residential-cleaning/faq" className={residential.linkCard}>
+                <h3 className={`text-lg font-semibold ${residential.accent}`}>
+                  Residential Cleaning FAQ
+                </h3>
+                <p className="mt-2 text-white/80">
+                  Answers to common questions about pricing, service scope,
+                  scheduling, and home preparation.
+                </p>
+              </Link>
             </div>
           </section>
 
@@ -233,6 +243,19 @@ export default function ResidentialCleaningHubPage() {
                 <div className="mt-1 text-sm text-white/75">
                   Specialized cleaning for fabrics, carpets, and
                   upholstery using safe, effective methods.
+                </div>
+              </Link>
+
+              <Link
+                href="/residential-cleaning/faq"
+                className={residential.linkCard}
+              >
+                <div className={`font-medium ${residential.accent}`}>
+                  Residential Cleaning FAQ
+                </div>
+                <div className="mt-1 text-sm text-white/75">
+                  Quick answers to booking, pricing, prep, and service details
+                  for homeowners.
                 </div>
               </Link>
             </div>
