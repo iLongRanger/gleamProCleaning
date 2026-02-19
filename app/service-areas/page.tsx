@@ -56,6 +56,19 @@ export default function ServiceAreasPage() {
         </section>
 
         <section className={commercial.sectionAlt}>
+          <h2 className={commercial.h2Large}>Search by service type</h2>
+          <p className={commercial.body}>
+            Compare commercial and residential services by city using our
+            service-type area index.
+          </p>
+          <div className="mt-4">
+            <Link href="/service-areas/by-service" className={commercial.secondary}>
+              Browse Service Areas by Service
+            </Link>
+          </div>
+        </section>
+
+        <section className={commercial.sectionAlt}>
           <h2 className={commercial.h2Large}>Need a walkthrough or estimate?</h2>
           <p className={commercial.body}>
             We start commercial quotes with a walkthrough. Residential estimates

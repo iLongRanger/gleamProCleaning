@@ -22,7 +22,7 @@ export const serviceAreas: ServiceArea[] = [
       "East Vancouver",
       "South Granville",
     ],
-    image: "/images/home/commercial-hero.png",
+    image: "/images/service-areas/vancouver.jpg",
     imageAlt: "Commercial cleaning in Vancouver",
   },
   {
@@ -32,7 +32,7 @@ export const serviceAreas: ServiceArea[] = [
     description:
       "From business parks to community facilities, we help Burnaby clients keep spaces guest-ready with clear scopes and responsive service.",
     neighborhoods: ["Metrotown", "Brentwood", "Lougheed", "Edmonds"],
-    image: "/images/home/1.png",
+    image: "/images/service-areas/burnaby.jpg",
     imageAlt: "Cleaning service in Burnaby",
   },
   {
@@ -42,7 +42,7 @@ export const serviceAreas: ServiceArea[] = [
     description:
       "We are based in New Westminster and support local offices, restaurants, and residential properties with consistent, premium cleaning.",
     neighborhoods: ["Uptown", "Downtown", "Sapperton", "Queens Park"],
-    image: "/images/home/residential-hero.png",
+    image: "/images/service-areas/new-westminster.jpg",
     imageAlt: "Cleaning service in New Westminster",
   },
   {
@@ -52,7 +52,7 @@ export const serviceAreas: ServiceArea[] = [
     description:
       "Growing teams across Surrey let us cover multi-site businesses while keeping the same inspection standard.",
     neighborhoods: ["Central City", "Guildford", "Fleetwood", "South Surrey"],
-    image: "/images/home/commercial-hero.png",
+    image: "/images/service-areas/surrey.jpg",
     imageAlt: "Commercial cleaning in Surrey",
   },
   {
@@ -62,7 +62,7 @@ export const serviceAreas: ServiceArea[] = [
     description:
       "We serve Richmond clients with reliable teams for retail, offices, and facilities that need after-hours care.",
     neighborhoods: ["City Centre", "Steveston", "Bridgeport"],
-    image: "/images/home/1.png",
+    image: "/images/service-areas/richmond.jpg",
     imageAlt: "Cleaning service in Richmond",
   },
   {
@@ -72,7 +72,7 @@ export const serviceAreas: ServiceArea[] = [
     description:
       "Commercial-first systems work well for Coquitlam offices and multi-tenant facilities with recurring schedules.",
     neighborhoods: ["Town Centre", "Maillardville", "Westwood Plateau"],
-    image: "/images/home/commercial-hero.png",
+    image: "/images/service-areas/coquitlam.jpg",
     imageAlt: "Cleaning service in Coquitlam",
   },
   {
@@ -82,7 +82,7 @@ export const serviceAreas: ServiceArea[] = [
     description:
       "We support North Vancouver clients with trusted teams for offices, clinics, and premium homes.",
     neighborhoods: ["Lower Lonsdale", "Lynn Valley", "Edgemont"],
-    image: "/images/home/residential-hero.png",
+    image: "/images/service-areas/north-vancouver.jpg",
     imageAlt: "Cleaning service in North Vancouver",
   },
   {
@@ -92,7 +92,7 @@ export const serviceAreas: ServiceArea[] = [
     description:
       "Premium care and reliable crews for West Vancouver businesses and residences that demand detail.",
     neighborhoods: ["Ambleside", "Dundarave", "British Properties"],
-    image: "/images/home/residential-hero.png",
+    image: "/images/service-areas/west-vancouver.jpg",
     imageAlt: "Cleaning service in West Vancouver",
   },
   {
@@ -102,7 +102,7 @@ export const serviceAreas: ServiceArea[] = [
     description:
       "We serve Delta clients with reliable teams for commercial facilities, offices, and residential properties across Ladner, Tsawwassen, and North Delta.",
     neighborhoods: ["Ladner", "Tsawwassen", "North Delta", "Scottsdale"],
-    image: "/images/home/commercial-hero.png",
+    image: "/images/service-areas/delta.jpg",
     imageAlt: "Cleaning service in Delta",
   },
 ];
