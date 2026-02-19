@@ -7,10 +7,10 @@ import { getServiceBySlug, serviceCatalog } from "@/lib/service-catalog";
 import { getServiceArea, serviceAreas } from "@/lib/service-areas";
 
 type ServiceAreaServiceParams = {
-  params: {
+  params: Promise<{
     slug: string;
     service: string;
-  };
+  }>;
 };
 
 export function generateStaticParams() {
@@ -22,11 +22,12 @@ export function generateStaticParams() {
   );
 }
 
-export function generateMetadata({
+export async function generateMetadata({
   params,
-}: ServiceAreaServiceParams): Metadata {
-  const area = getServiceArea(params.slug);
-  const service = getServiceBySlug(params.service);
+}: ServiceAreaServiceParams): Promise<Metadata> {
+  const { slug, service: serviceSlug } = await params;
+  const area = getServiceArea(slug);
+  const service = getServiceBySlug(serviceSlug);
   if (!area || !service) {
     return { title: "Service Area | Gleam Pro Cleaning" };
   }
@@ -40,11 +41,12 @@ export function generateMetadata({
   };
 }
 
-export default function ServiceAreaServicePage({
+export default async function ServiceAreaServicePage({
   params,
 }: ServiceAreaServiceParams) {
-  const area = getServiceArea(params.slug);
-  const service = getServiceBySlug(params.service);
+  const { slug, service: serviceSlug } = await params;
+  const area = getServiceArea(slug);
+  const service = getServiceBySlug(serviceSlug);
   if (!area || !service) {
     notFound();
   }

@@ -5,17 +5,20 @@ import { commercial } from "@/components/commercial/ui";
 import { getServiceArea, serviceAreas } from "@/lib/service-areas";
 
 type ServiceAreaParams = {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 };
 
 export function generateStaticParams() {
   return serviceAreas.map((area) => ({ slug: area.slug }));
 }
 
-export function generateMetadata({ params }: ServiceAreaParams): Metadata {
-  const area = getServiceArea(params.slug);
+export async function generateMetadata({
+  params,
+}: ServiceAreaParams): Promise<Metadata> {
+  const { slug } = await params;
+  const area = getServiceArea(slug);
   if (!area) {
     return { title: "Service Area | Gleam Pro Cleaning" };
   }
@@ -172,8 +175,9 @@ const CITY_PROOF: Record<
   },
 };
 
-export default function ServiceAreaPage({ params }: ServiceAreaParams) {
-  const area = getServiceArea(params.slug);
+export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
+  const { slug } = await params;
+  const area = getServiceArea(slug);
   if (!area) {
     notFound();
   }
