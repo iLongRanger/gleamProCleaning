@@ -1,13 +1,24 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { residential } from "@/components/residential/ui";
 import { serviceAreas as allServiceAreas } from "@/lib/service-areas";
 
-export const metadata = {
+const serviceAreaNames = allServiceAreas.map((area) => area.name);
+
+export const metadata: Metadata = {
   title: "Residential Cleaning Services | Gleam Pro Cleaning",
   description:
     "Professional residential cleaning services in Metro Vancouver including recurring maintenance, deep cleaning, move-in/out, and carpet & upholstery care.",
   alternates: {
     canonical: "/residential-cleaning",
+  },
+  openGraph: {
+    title: "Residential Cleaning Services in Metro Vancouver | Gleam Pro",
+    description:
+      "Recurring, deep, move-in/out, and carpet & upholstery cleaning — tailored to your home.",
+    url: "/residential-cleaning",
+    type: "website",
+    images: [{ url: "/images/home/residential-hero.png", width: 1200, height: 630, alt: "Residential cleaning by Gleam Pro" }],
   },
 };
 
@@ -178,9 +189,13 @@ export default function ResidentialCleaningHubPage() {
 
              <div className="mt-5 flex flex-wrap gap-2">
                {allServiceAreas.map((area) => (
-                 <span key={area.slug} className={residential.pill}>
+                 <Link
+                   key={area.slug}
+                   href={`/service-areas/${area.slug}/residential-cleaning`}
+                   className={`${residential.pill} hover:bg-white/10 transition`}
+                 >
                    {area.name}
-                 </span>
+                 </Link>
                ))}
              </div>
            </section>
@@ -267,6 +282,88 @@ export default function ResidentialCleaningHubPage() {
             </div>
           </section>
 
+          {/* What to expect */}
+          <section className={residential.section}>
+            <h2 className={residential.h2Large}>What to expect</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              <div className={residential.cardSoft}>
+                <div className={`text-sm font-semibold ${residential.accent}`}>Response time</div>
+                <p className="mt-2 text-sm text-white/80">
+                  Estimate replied within one business day. Recurring visits
+                  scheduled around your week and confirmed in writing.
+                </p>
+              </div>
+              <div className={residential.cardSoft}>
+                <div className={`text-sm font-semibold ${residential.accent}`}>Pricing approach</div>
+                <p className="mt-2 text-sm text-white/80">
+                  Flat per-visit pricing based on home size, scope, and
+                  frequency. Service starts from $150.
+                </p>
+              </div>
+              <div className={residential.cardSoft}>
+                <div className={`text-sm font-semibold ${residential.accent}`}>Insured & vetted</div>
+                <p className="mt-2 text-sm text-white/80">
+                  $1M commercial general liability insurance.
+                  Reference-checked cleaners. Same faces, every visit.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section className={residential.section}>
+            <h2 className={residential.h2Large}>Common questions</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <div className={residential.cardSoft}>
+                <p className={`text-sm font-semibold ${residential.accent}`}>
+                  Do I need to be home during the cleaning?
+                </p>
+                <p className="mt-2 text-sm text-white/80">
+                  No. Most clients give us a one-time code or key for recurring
+                  visits. We confirm the entry method during onboarding and never
+                  share access info between teams.
+                </p>
+              </div>
+              <div className={residential.cardSoft}>
+                <p className={`text-sm font-semibold ${residential.accent}`}>
+                  What&apos;s the difference between a deep clean and a recurring clean?
+                </p>
+                <p className="mt-2 text-sm text-white/80">
+                  Deep cleans cover baseboards, inside cabinets, behind
+                  appliances, and detail work that recurring visits don&apos;t
+                  reach. Most new clients start with a deep clean, then move to
+                  weekly or bi-weekly maintenance.
+                </p>
+              </div>
+              <div className={residential.cardSoft}>
+                <p className={`text-sm font-semibold ${residential.accent}`}>
+                  Are your products safe for pets and kids?
+                </p>
+                <p className="mt-2 text-sm text-white/80">
+                  By default we use low-fragrance, child- and pet-safe products.
+                  Tell us about allergies or sensitivities during the estimate
+                  and we&apos;ll match the chemistry.
+                </p>
+              </div>
+              <div className={residential.cardSoft}>
+                <p className={`text-sm font-semibold ${residential.accent}`}>
+                  What if I&apos;m not happy with a visit?
+                </p>
+                <p className="mt-2 text-sm text-white/80">
+                  Let us know within 24 hours and we return to re-clean the
+                  missed area at no charge. Your satisfaction is the standard
+                  every visit is measured against.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <Link href="/residential-cleaning/faq" className={residential.secondary}>
+                See full residential FAQ
+              </Link>
+            </div>
+          </section>
+
           {/* Final CTA */}
           <section className={residential.sectionDark}>
             <h2 className={residential.h2Large}>
@@ -284,6 +381,101 @@ export default function ResidentialCleaningHubPage() {
             </div>
           </section>
         </main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Service",
+                  serviceType: "Residential Cleaning",
+                  name: "Residential Cleaning Services in Metro Vancouver",
+                  description:
+                    "Recurring, deep, move-in/out, and carpet & upholstery cleaning for homes across Metro Vancouver.",
+                  url: "https://www.gleampro.ca/residential-cleaning",
+                  provider: { "@id": "https://www.gleampro.ca/#localbusiness" },
+                  areaServed: serviceAreaNames.map((name) => ({ "@type": "City", name })),
+                  hasOfferCatalog: {
+                    "@type": "OfferCatalog",
+                    name: "Residential Cleaning Services",
+                    itemListElement: [
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Recurring Cleaning",
+                          url: "https://www.gleampro.ca/residential-cleaning/recurring",
+                        },
+                      },
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Deep Cleaning",
+                          url: "https://www.gleampro.ca/residential-cleaning/deep-cleaning",
+                        },
+                      },
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Move-In / Move-Out Cleaning",
+                          url: "https://www.gleampro.ca/residential-cleaning/move-in-out",
+                        },
+                      },
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Carpet & Upholstery Cleaning",
+                          url: "https://www.gleampro.ca/residential-cleaning/carpet-upholstery",
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  "@type": "FAQPage",
+                  mainEntity: [
+                    {
+                      "@type": "Question",
+                      name: "Do I need to be home during the cleaning?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "No. Most clients give us a one-time code or key for recurring visits. We confirm the entry method during onboarding and never share access info between teams.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "What is the difference between a deep clean and a recurring clean?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Deep cleans cover baseboards, inside cabinets, behind appliances, and detail work that recurring visits do not reach. Most new clients start with a deep clean, then move to weekly or bi-weekly maintenance.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Are your cleaning products safe for pets and kids?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "By default we use low-fragrance, child- and pet-safe products. Tell us about allergies or sensitivities during the estimate and we will match the chemistry.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "What if I am not happy with a visit?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Let us know within 24 hours and we return to re-clean the missed area at no charge. Your satisfaction is the standard every visit is measured against.",
+                      },
+                    },
+                  ],
+                },
+              ],
+            }),
+          }}
+        />
       </div>
     </div>
   );

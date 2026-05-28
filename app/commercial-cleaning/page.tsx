@@ -1,17 +1,26 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { commercial } from "@/components/commercial/ui";
 import { serviceAreas as allServiceAreas } from "@/lib/service-areas";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Commercial Cleaning Services in Metro Vancouver",
   description:
     "Commercial-first cleaning for restaurants, offices, and community facilities. Request a free walk-through for a tailored proposal.",
   alternates: {
     canonical: "/commercial-cleaning",
   },
+  openGraph: {
+    title: "Commercial Cleaning Services in Metro Vancouver | Gleam Pro",
+    description:
+      "Restaurants, offices, and community facilities — walk-through quoted, named-team executed.",
+    url: "/commercial-cleaning",
+    type: "website",
+    images: [{ url: "/images/home/commercial-hero.png", width: 1200, height: 630, alt: "Commercial cleaning by Gleam Pro" }],
+  },
 };
 
-const serviceAreas = allServiceAreas.map((area) => area.name);
+const serviceAreaNames = allServiceAreas.map((area) => area.name);
 
 export default function CommercialCleaningHubPage() {
   return (
@@ -175,10 +184,14 @@ export default function CommercialCleaningHubPage() {
             </p>
 
             <div className="mt-5 flex flex-wrap gap-2">
-              {serviceAreas.map((area) => (
-                <span key={area} className={commercial.pill}>
-                  {area}
-                </span>
+              {allServiceAreas.map((area) => (
+                <Link
+                  key={area.slug}
+                  href={`/service-areas/${area.slug}/commercial-cleaning`}
+                  className={`${commercial.pill} hover:bg-white/10 transition`}
+                >
+                  {area.name}
+                </Link>
               ))}
             </div>
           </section>
@@ -239,6 +252,88 @@ export default function CommercialCleaningHubPage() {
             </div>
           </section>
 
+          {/* What to expect */}
+          <section className={commercial.section}>
+            <h2 className={commercial.h2Large}>What to expect</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-3">
+              <div className={commercial.cardSoft}>
+                <div className={`text-sm font-semibold ${commercial.accent}`}>Response time</div>
+                <p className="mt-2 text-sm text-white/80">
+                  Walk-through booked within one business day. Written proposal
+                  delivered within 48 hours of the site visit.
+                </p>
+              </div>
+              <div className={commercial.cardSoft}>
+                <div className={`text-sm font-semibold ${commercial.accent}`}>Pricing approach</div>
+                <p className="mt-2 text-sm text-white/80">
+                  Fixed monthly proposals based on actual scope from a
+                  walk-through — no square-footage calculator, no surprise
+                  add-ons. Service starts from $250.
+                </p>
+              </div>
+              <div className={commercial.cardSoft}>
+                <div className={`text-sm font-semibold ${commercial.accent}`}>Insured</div>
+                <p className="mt-2 text-sm text-white/80">
+                  $1M commercial general liability insurance.
+                  Certificate of insurance available on request before the first visit.
+                </p>
+              </div>
+            </div>
+          </section>
+
+          {/* FAQ */}
+          <section className={commercial.section}>
+            <h2 className={commercial.h2Large}>Common questions</h2>
+            <div className="mt-6 grid gap-4 md:grid-cols-2">
+              <div className={commercial.cardSoft}>
+                <p className={`text-sm font-semibold ${commercial.accent}`}>
+                  How quickly can you start?
+                </p>
+                <p className="mt-2 text-sm text-white/80">
+                  Most accounts onboard within 5–10 business days after the
+                  walk-through. Rush starts are available for urgent openings or
+                  facility transitions.
+                </p>
+              </div>
+              <div className={commercial.cardSoft}>
+                <p className={`text-sm font-semibold ${commercial.accent}`}>
+                  Do you bring your own supplies?
+                </p>
+                <p className="mt-2 text-sm text-white/80">
+                  Yes. Standard supplies and equipment are included. We&apos;ll
+                  also use your preferred chemistry (eco-cert, fragrance-free,
+                  hospital-grade) if you have an in-house standard.
+                </p>
+              </div>
+              <div className={commercial.cardSoft}>
+                <p className={`text-sm font-semibold ${commercial.accent}`}>
+                  Can you clean after hours?
+                </p>
+                <p className="mt-2 text-sm text-white/80">
+                  Most commercial accounts run early-morning or evening. Hours
+                  are confirmed in the written scope and don&apos;t change without
+                  notice.
+                </p>
+              </div>
+              <div className={commercial.cardSoft}>
+                <p className={`text-sm font-semibold ${commercial.accent}`}>
+                  What happens if something is missed?
+                </p>
+                <p className="mt-2 text-sm text-white/80">
+                  Flag it within 24 hours and we return to make it right at no
+                  additional charge. Recurring accounts include weekly quality
+                  audits.
+                </p>
+              </div>
+            </div>
+
+            <div className="mt-6">
+              <Link href="/commercial-cleaning/faq" className={commercial.secondary}>
+                See full commercial FAQ
+              </Link>
+            </div>
+          </section>
+
           {/* Final CTA */}
           <section className={commercial.sectionDark}>
             <h2 className={commercial.h2Large}>
@@ -256,6 +351,93 @@ export default function CommercialCleaningHubPage() {
             </div>
           </section>
         </main>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@graph": [
+                {
+                  "@type": "Service",
+                  serviceType: "Commercial Cleaning",
+                  name: "Commercial Cleaning Services in Metro Vancouver",
+                  description:
+                    "Commercial-first cleaning for restaurants, offices, and community facilities across Metro Vancouver.",
+                  url: "https://www.gleampro.ca/commercial-cleaning",
+                  provider: { "@id": "https://www.gleampro.ca/#localbusiness" },
+                  areaServed: serviceAreaNames.map((name) => ({ "@type": "City", name })),
+                  hasOfferCatalog: {
+                    "@type": "OfferCatalog",
+                    name: "Commercial Cleaning Services",
+                    itemListElement: [
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Restaurant & Pub Cleaning",
+                          url: "https://www.gleampro.ca/commercial-cleaning/restaurants",
+                        },
+                      },
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Office Cleaning",
+                          url: "https://www.gleampro.ca/commercial-cleaning/offices",
+                        },
+                      },
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Community Facility Cleaning",
+                          url: "https://www.gleampro.ca/commercial-cleaning/community-facilities",
+                        },
+                      },
+                    ],
+                  },
+                },
+                {
+                  "@type": "FAQPage",
+                  mainEntity: [
+                    {
+                      "@type": "Question",
+                      name: "How quickly can you start commercial cleaning service?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Most accounts onboard within 5–10 business days after the walk-through. Rush starts are available for urgent openings or facility transitions.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Do you bring your own cleaning supplies?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Yes. Standard supplies and equipment are included. We can also use your preferred chemistry (eco-cert, fragrance-free, hospital-grade) if you have an in-house standard.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "Can you clean after business hours?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Most commercial accounts run early-morning or evening. Hours are confirmed in the written scope and do not change without notice.",
+                      },
+                    },
+                    {
+                      "@type": "Question",
+                      name: "What happens if something is missed?",
+                      acceptedAnswer: {
+                        "@type": "Answer",
+                        text: "Flag it within 24 hours and we return to make it right at no additional charge. Recurring accounts include weekly quality audits.",
+                      },
+                    },
+                  ],
+                },
+              ],
+            }),
+          }}
+        />
       </div>
     </div>
   );
