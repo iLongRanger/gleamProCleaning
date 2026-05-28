@@ -32,8 +32,8 @@ const faqItems = [
     a: "We can provide cleaning tools and products. Many clients prefer to supply consumables like paper products, liners, and soap. This is finalized during onboarding.",
   },
   {
-    q: "Are your cleaners insured and bonded?",
-    a: "Professional commercial cleaning providers should carry liability coverage and worker protection. We review coverage details and site requirements before service starts.",
+    q: "Are your cleaners insured?",
+    a: "Yes — Gleam Pro Cleaning carries $1M commercial general liability insurance. A certificate of insurance is available on request before service starts. Cleaning is performed by vetted independent contractors.",
   },
   {
     q: "Do I need to sign a long-term contract?",

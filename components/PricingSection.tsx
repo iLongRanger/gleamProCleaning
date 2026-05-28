@@ -9,7 +9,7 @@ const plans = [
     price: "$149+",
     blurb:
       "Perfect for studios & 1BR. High-touch surfaces, kitchen, bath, vacuum & mop.",
-    features: ["Supplies included", "Eco-friendly", "Insured & bonded"],
+    features: ["Supplies included", "Eco-friendly", "$1M liability insured"],
   },
   {
     name: "Prestige",
