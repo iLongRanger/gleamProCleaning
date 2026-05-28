@@ -102,6 +102,7 @@ export default function RequestWalkthroughPage() {
   return (
     <main className={designTokens.shell}>
       <div className={designTokens.page}>
+       <div className="mx-auto max-w-2xl">
         <p className={designTokens.eyebrow}>
           {lane === "commercial"
             ? "Commercial Cleaning • Metro Vancouver"
@@ -494,6 +495,7 @@ export default function RequestWalkthroughPage() {
             </p>
           </div>
         )}
+       </div>
       </div>
     </main>
   );
