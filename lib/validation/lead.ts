@@ -15,6 +15,7 @@ export const FIELD_LIMITS = {
 
 export const PHONE_INPUT_PATTERN = "^\\+?[0-9()\\-\\s.]{10,20}$";
 const PHONE_VALIDATION_PATTERN = /^\+?[0-9()\-\s.]{10,20}$/;
+const PHONE_DIGIT_PATTERN = /\d/g;
 const EMAIL_VALIDATION_PATTERN =
   /^[A-Za-z0-9.!#$%&'*+/=?^_`{|}~-]+@[A-Za-z0-9-]+(?:\.[A-Za-z0-9-]+)+$/;
 
@@ -41,8 +42,8 @@ type LeadPayload = {
   businessName?: string;
   facilityType?: string;
   fullName?: string;
-  address: string;
-  frequency: string;
+  address?: string;
+  frequency?: string;
   phone: string;
   email: string;
   notes?: string;
@@ -178,7 +179,6 @@ export function validateLeadPayload(input: unknown): ValidationResult {
       });
     }
   } else {
-    pushRequired(errors, "fullName", fullName);
     pushLength(
       errors,
       "fullName",
@@ -188,8 +188,6 @@ export function validateLeadPayload(input: unknown): ValidationResult {
     );
   }
 
-  pushRequired(errors, "address", address);
-  pushRequired(errors, "frequency", frequency);
   pushRequired(errors, "phone", phone);
   pushRequired(errors, "email", email);
 
@@ -220,8 +218,15 @@ export function validateLeadPayload(input: unknown): ValidationResult {
     });
   }
 
-  if (phone && !PHONE_VALIDATION_PATTERN.test(phone)) {
-    errors.push({ field: "phone", message: "Invalid phone format." });
+  if (phone) {
+    if (!PHONE_VALIDATION_PATTERN.test(phone)) {
+      errors.push({ field: "phone", message: "Invalid phone format." });
+    } else {
+      const digitCount = (phone.match(PHONE_DIGIT_PATTERN) ?? []).length;
+      if (digitCount < 10 || digitCount > 15) {
+        errors.push({ field: "phone", message: "Phone must contain 10–15 digits." });
+      }
+    }
   }
 
   if (email && !EMAIL_VALIDATION_PATTERN.test(email)) {
@@ -258,8 +263,8 @@ export function validateLeadPayload(input: unknown): ValidationResult {
       businessName,
       facilityType,
       fullName,
-      address: address as string,
-      frequency: frequency as string,
+      address,
+      frequency,
       phone: phone as string,
       email: email as string,
       notes,

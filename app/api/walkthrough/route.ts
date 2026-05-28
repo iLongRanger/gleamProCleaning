@@ -11,9 +11,37 @@ function parseCc(value?: string) {
     .filter(Boolean);
 }
 
+const ALLOWED_ORIGINS = new Set([
+  "https://www.gleampro.ca",
+  "https://gleampro.ca",
+  ...(process.env.NODE_ENV !== "production"
+    ? ["http://localhost:3002", "http://127.0.0.1:3002"]
+    : []),
+]);
+
+function isAllowedOrigin(origin: string | null): boolean {
+  if (!origin) return false;
+  try {
+    const url = new URL(origin);
+    return ALLOWED_ORIGINS.has(`${url.protocol}//${url.host}`);
+  } catch {
+    return false;
+  }
+}
+
 type LeadType = "commercial" | "residential";
 
 export async function POST(req: Request) {
+  const origin = req.headers.get("origin");
+  const referer = req.headers.get("referer");
+  const originToCheck = origin ?? (referer ? new URL(referer).origin : null);
+  if (!isAllowedOrigin(originToCheck)) {
+    return NextResponse.json(
+      { ok: false, error: "Request blocked." },
+      { status: 403 }
+    );
+  }
+
   const contentLength = Number(req.headers.get("content-length") ?? "0");
   if (Number.isFinite(contentLength) && contentLength > 20_000) {
     return NextResponse.json(
