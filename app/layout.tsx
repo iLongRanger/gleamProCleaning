@@ -1,7 +1,30 @@
 import type { Metadata } from "next";
+import Script from "next/script";
+import { Fraunces, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+
+const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["opsz", "SOFT"],
+});
+
+const geistSans = Geist({
+  subsets: ["latin"],
+  variable: "--font-geist-sans",
+  display: "swap",
+});
+
+const geistMono = Geist_Mono({
+  subsets: ["latin"],
+  variable: "--font-geist-mono",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://www.gleampro.ca"),
@@ -46,11 +69,31 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en">
-      <body className="bg-[#0B2545] text-white">
+    <html lang="en" className={`${fraunces.variable} ${geistSans.variable} ${geistMono.variable}`}>
+      <body className="bg-[#0B2545] text-white font-sans antialiased">
         <Header />
         <main>{children}</main>
         <Footer />
+        {GA_ID ? (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="ga-init" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){dataLayer.push(arguments);}
+                gtag('js', new Date());
+                gtag('config', '${GA_ID}', { send_page_view: true });
+                document.addEventListener('click', function(e) {
+                  var a = e.target.closest && e.target.closest('a[href^="tel:"]');
+                  if (a) gtag('event', 'phone_click', { phone: a.getAttribute('href').replace('tel:','') });
+                });
+              `}
+            </Script>
+          </>
+        ) : null}
       </body>
     </html>
   );

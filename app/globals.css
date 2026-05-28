@@ -8,6 +8,26 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Editorial display utility — Fraunces with optical sizing tuned for headlines */
+.font-display {
+  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  font-optical-sizing: auto;
+  font-variation-settings: "opsz" 144, "SOFT" 30;
+  letter-spacing: -0.02em;
+}
+
+/* Subtle grain overlay — SVG noise inlined as data URI */
+.bg-grain {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.55 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+  background-size: 160px 160px;
+}
+
+/* Hairline divider used in stat rows */
+.hairline { background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent); }
+
+/* Number tabular for stat alignment */
+.tabular { font-variant-numeric: tabular-nums; }
+
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
