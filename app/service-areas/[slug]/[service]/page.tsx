@@ -171,7 +171,7 @@ export default async function ServiceAreaServicePage({
                 "@type": "LocalBusiness",
                 name: "Gleam Pro Cleaning",
                 url: "https://www.gleampro.ca",
-                telephone: "+1-672-970-3755",
+                telephone: "+1-778-681-0922",
                 email: "services@gleampro.ca",
               },
               description: `${service.label} available in ${area.name}.`,

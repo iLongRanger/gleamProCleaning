@@ -23,11 +23,19 @@ export async function generateMetadata({
     return { title: "Service Area | Gleam Pro Cleaning" };
   }
 
+  const ogImage = area.image || `/images/service-areas/${area.slug}.jpg`;
   return {
     title: `${area.name} Cleaning Services | Gleam Pro Cleaning`,
     description: area.description,
     alternates: {
       canonical: `/service-areas/${area.slug}`,
+    },
+    openGraph: {
+      title: `${area.name} Cleaning Services | Gleam Pro`,
+      description: area.description,
+      url: `/service-areas/${area.slug}`,
+      type: "website",
+      images: [{ url: ogImage, width: 1200, height: 630, alt: `${area.name} — Gleam Pro Cleaning` }],
     },
   };
 }
@@ -292,7 +300,7 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
               className={commercial.linkCard}
             >
               <div className={`font-medium ${commercial.accent}`}>
-                Commercial Cleaning
+                Commercial Cleaning in {area.name}
               </div>
               <p className="mt-1 text-sm text-white/75">
                 Offices, restaurants, and community facility cleaning support.
@@ -303,14 +311,45 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
               className={commercial.linkCard}
             >
               <div className={`font-medium ${commercial.accent}`}>
-                Residential Cleaning
+                Residential Cleaning in {area.name}
               </div>
               <p className="mt-1 text-sm text-white/75">
                 Recurring, deep cleaning, and move-in/out services for homes.
               </p>
             </Link>
           </div>
-          <div className="mt-4">
+
+          <h3 className="mt-8 text-sm font-medium uppercase tracking-[0.18em] text-white/55">
+            Browse by service
+          </h3>
+          <div className="mt-3 grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
+            <Link href="/commercial-cleaning/restaurants" className={commercial.linkCard}>
+              <div className="text-sm font-medium text-white">Restaurants &amp; Pubs</div>
+              <div className="mt-1 text-xs text-white/60">Inspection-ready cleaning</div>
+            </Link>
+            <Link href="/commercial-cleaning/offices" className={commercial.linkCard}>
+              <div className="text-sm font-medium text-white">Office Cleaning</div>
+              <div className="mt-1 text-xs text-white/60">Daily and recurring scopes</div>
+            </Link>
+            <Link href="/commercial-cleaning/community-facilities" className={commercial.linkCard}>
+              <div className="text-sm font-medium text-white">Community Facilities</div>
+              <div className="mt-1 text-xs text-white/60">Reliable janitorial support</div>
+            </Link>
+            <Link href="/residential-cleaning/recurring" className={commercial.linkCard}>
+              <div className="text-sm font-medium text-white">Recurring Home Cleaning</div>
+              <div className="mt-1 text-xs text-white/60">Weekly / bi-weekly / monthly</div>
+            </Link>
+            <Link href="/residential-cleaning/deep-cleaning" className={commercial.linkCard}>
+              <div className="text-sm font-medium text-white">Deep Cleaning</div>
+              <div className="mt-1 text-xs text-white/60">One-time top-to-bottom resets</div>
+            </Link>
+            <Link href="/residential-cleaning/move-in-out" className={commercial.linkCard}>
+              <div className="text-sm font-medium text-white">Move-In / Move-Out</div>
+              <div className="mt-1 text-xs text-white/60">Spotless turnover cleans</div>
+            </Link>
+          </div>
+
+          <div className="mt-6">
             <Link href="/service-areas/by-service" className={commercial.secondary}>
               Browse All Areas by Service Type
             </Link>
@@ -349,12 +388,12 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
                 "https://www.gleampro.ca/logo-gpc.png",
                 `https://www.gleampro.ca${area.image}`,
               ],
-              telephone: "+1-672-970-3755",
+              telephone: "+1-778-681-0922",
               email: "services@gleampro.ca",
               contactPoint: [
                 {
                   "@type": "ContactPoint",
-                  telephone: "+1-672-970-3755",
+                  telephone: "+1-778-681-0922",
                   contactType: "customer service",
                   areaServed: area.name,
                   availableLanguage: ["English"],
