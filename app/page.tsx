@@ -4,14 +4,14 @@ import HomeJsonLd from "./_home-jsonld";
 import { serviceAreas } from "@/lib/service-areas";
 
 export const metadata: Metadata = {
-  title: "Commercial & Residential Cleaning in Metro Vancouver",
+  title: "Commercial Cleaning in Metro Vancouver",
   description:
-    "Premium commercial and residential cleaning across Metro Vancouver — restaurants, offices, community facilities, and homes. Same-day response, walk-through quoted.",
+    "Family-owned commercial cleaning across Metro Vancouver. Free 15-minute walkthrough, written quote in 24 hours, 30-day no-lock-in trial.",
   alternates: { canonical: "/" },
   openGraph: {
-    title: "Commercial & Residential Cleaning in Metro Vancouver | Gleam Pro",
+    title: "Commercial Cleaning in Metro Vancouver | Gleam Pro",
     description:
-      "Walk-through quoted, named-team executed. Restaurants, offices, community facilities, and homes across Metro Vancouver.",
+      "Owner-led night crews for breweries, kitchens, clinics, offices, and community facilities across Metro Vancouver.",
     url: "/",
     type: "website",
   },

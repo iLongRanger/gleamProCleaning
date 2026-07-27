@@ -30,6 +30,8 @@ const ALLOWED_FREQUENCIES = new Set([
 ]);
 
 const ALLOWED_FACILITY_TYPES = new Set([
+  "brewery",
+  "clinic",
   "restaurant",
   "office",
   "community",

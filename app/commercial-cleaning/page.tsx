@@ -34,17 +34,32 @@ export default function CommercialCleaningHubPage() {
             </p>
 
             <h1 className={commercial.h1}>
-              Commercial Cleaning Services for Businesses
+              Commercial Cleaning Services{" "}
+              <span style={{ color: "#D4A574" }}>for Businesses</span>
             </h1>
 
             <p className={commercial.lead}>
               Reliable teams, consistent results, and clear communication —
-              designed for restaurants, offices, and community facilities.
+              designed for breweries, kitchens, clinics, offices, and community facilities.
             </p>
 
             <div className="mt-8 flex flex-wrap gap-3">
               <Link href="/request-walkthrough?type=commercial" className={commercial.cta}>
                 Request a Free Walk-Through
+              </Link>
+
+              <Link
+                href="/breweries"
+                className={commercial.secondary}
+              >
+                Brewery Cleaning
+              </Link>
+
+              <Link
+                href="/clinics"
+                className={commercial.secondary}
+              >
+                Clinic Cleaning
               </Link>
 
               <Link
@@ -129,6 +144,31 @@ export default function CommercialCleaningHubPage() {
             </p>
 
             <div className="mt-8 grid gap-6 md:grid-cols-3">
+              <Link
+                href="/breweries"
+                className={commercial.linkCard}
+              >
+                <h3 className={`text-lg font-semibold ${commercial.accent}`}>
+                  Breweries &amp; Taprooms
+                </h3>
+                <p className="mt-2 text-white/80">
+                  Nightly cleaning for taproom floors, back-of-house, washrooms,
+                  and patio-season traffic.
+                </p>
+              </Link>
+
+              <Link
+                href="/clinics"
+                className={commercial.linkCard}
+              >
+                <h3 className={`text-lg font-semibold ${commercial.accent}`}>
+                  Clinics &amp; Medical Offices
+                </h3>
+                <p className="mt-2 text-white/80">
+                  Discreet cleaning with hygiene routines for spaces that get inspected.
+                </p>
+              </Link>
+
               <Link
                 href="/commercial-cleaning/offices"
                 className={commercial.linkCard}
@@ -260,7 +300,7 @@ export default function CommercialCleaningHubPage() {
                 <div className={`text-sm font-semibold ${commercial.accent}`}>Response time</div>
                 <p className="mt-2 text-sm text-white/80">
                   Walk-through booked within one business day. Written proposal
-                  delivered within 48 hours of the site visit.
+                  delivered within 24 hours of the site visit.
                 </p>
               </div>
               <div className={commercial.cardSoft}>
@@ -370,6 +410,22 @@ export default function CommercialCleaningHubPage() {
                     "@type": "OfferCatalog",
                     name: "Commercial Cleaning Services",
                     itemListElement: [
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Brewery & Taproom Cleaning",
+                          url: "https://www.gleampro.ca/breweries",
+                        },
+                      },
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Clinic & Medical Office Cleaning",
+                          url: "https://www.gleampro.ca/clinics",
+                        },
+                      },
                       {
                         "@type": "Offer",
                         itemOffered: {

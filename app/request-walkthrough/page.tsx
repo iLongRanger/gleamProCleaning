@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState } from "react";
 import { useSearchParams } from "next/navigation";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -15,7 +15,7 @@ import {
 type Lane = "commercial" | "residential";
 
 const colors = {
-  gold: "#C9A227",
+  gold: "#D4A574",
 };
 
 function SegmentedToggle({
@@ -34,14 +34,14 @@ function SegmentedToggle({
         }}
       />
 
-      <div className="inline-flex items-center rounded-full border border-white/15 bg-white/10 p-2 backdrop-blur-xl shadow-[0_0_30px_rgba(201,162,39,0.25)]">
+      <div className="inline-flex items-center rounded-full border border-white/15 bg-white/10 p-2 backdrop-blur-xl shadow-[0_0_30px_rgba(212,165,116,0.25)]">
         <button
           type="button"
           onClick={() => onChange("commercial")}
           className={`px-6 sm:px-8 py-3 rounded-full text-sm sm:text-base font-semibold transition
             ${
               value === "commercial"
-                ? "bg-white/15 text-white shadow-[0_0_18px_rgba(201,162,39,0.25)]"
+                ? "bg-white/15 text-white shadow-[0_0_18px_rgba(212,165,116,0.25)]"
                 : "text-white/75 hover:text-white"
             }
           `}
@@ -55,7 +55,7 @@ function SegmentedToggle({
           className={`px-6 sm:px-8 py-3 rounded-full text-sm sm:text-base font-semibold transition
             ${
               value === "residential"
-                ? "bg-white/15 text-white shadow-[0_0_18px_rgba(201,162,39,0.25)]"
+                ? "bg-white/15 text-white shadow-[0_0_18px_rgba(212,165,116,0.25)]"
                 : "text-white/75 hover:text-white"
             }
           `}
@@ -70,6 +70,11 @@ function SegmentedToggle({
 export default function RequestWalkthroughPage() {
   const searchParams = useSearchParams();
   const typeParam = searchParams?.get("type") as Lane | null;
+  const facilityParam = searchParams?.get("facility");
+  const initialFacilityType =
+    facilityParam === "brewery" || facilityParam === "clinic"
+      ? facilityParam
+      : "";
 
   const [lane, setLane] = useState<Lane>(typeParam === "residential" ? "residential" : "commercial");
   const [submitted, setSubmitted] = useState(false);
@@ -80,7 +85,7 @@ export default function RequestWalkthroughPage() {
   const [form, setForm] = useState({
     leadType: "commercial" as "commercial" | "residential",
     businessName: "",
-    facilityType: "",
+    facilityType: initialFacilityType,
     fullName: "",
     address: "",
     sqft: "",
@@ -110,14 +115,22 @@ export default function RequestWalkthroughPage() {
         </p>
 
         <h1 className={designTokens.h1}>
-          {lane === "commercial"
-            ? "Request a Free Walk-Through"
-            : "Request a Free Estimate"}
+          {lane === "commercial" ? (
+            <>
+              Request a Free{" "}
+              <span style={{ color: "#D4A574" }}>Walk-Through</span>
+            </>
+          ) : (
+            <>
+              Request a Free{" "}
+              <span style={{ color: "#D4A574" }}>Estimate</span>
+            </>
+          )}
         </h1>
 
         <p className={designTokens.lead}>
           {lane === "commercial"
-            ? "Tell us about your facility and we'll schedule a no-obligation walk-through. After visit, you'll receive a clear, fixed monthly proposal."
+            ? "Tell us about your facility and we'll schedule a no-obligation walk-through. After the visit, you'll receive a clear, fixed monthly proposal within 24 hours."
             : "Tell us about your home and we'll provide a detailed cleaning estimate based on your needs."}
         </p>
 
@@ -248,6 +261,12 @@ export default function RequestWalkthroughPage() {
                   >
                     <option value="" className="bg-[#0B2545]">
                       Select one
+                    </option>
+                    <option value="brewery" className="bg-[#0B2545]">
+                      Brewery / Taproom
+                    </option>
+                    <option value="clinic" className="bg-[#0B2545]">
+                      Clinic / Medical
                     </option>
                     <option value="restaurant" className="bg-[#0B2545]">
                       Restaurant / Pub
@@ -482,6 +501,9 @@ export default function RequestWalkthroughPage() {
                   ? "Submit Walk-Through Request"
                   : "Submit Estimate Request"}
             </button>
+            <p className="text-sm text-white/70">
+              Start with a 30-day trial. No lock-in, cancel anytime.
+            </p>
           </form>
         ) : (
           <div className={designTokens.section}>

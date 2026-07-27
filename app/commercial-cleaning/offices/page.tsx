@@ -24,7 +24,8 @@ export default function OfficeCleaningPage() {
                   Commercial Cleaning • Offices
                 </p>
                 <h1 className={commercial.h1}>
-                  Office cleaning that stays consistent week after week.
+                  Office cleaning{" "}
+                  <span style={{ color: "#D4A574" }}>that stays consistent week after week.</span>
                 </h1>
                 <p className={commercial.lead}>
                   Gleam Pro Cleaning provides dependable after-hours office

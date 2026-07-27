@@ -24,7 +24,8 @@ export default function RestaurantCleaningPage() {
                   Commercial Cleaning • Restaurants &amp; Pubs
                 </p>
                 <h1 className={commercial.h1}>
-                  Restaurant &amp; pub cleaning that stays inspection-ready.
+                  Restaurant &amp; pub cleaning{" "}
+                  <span style={{ color: "#D4A574" }}>that stays inspection-ready.</span>
                 </h1>
                 <p className={commercial.lead}>
                   Restaurants operate on tight schedules, high traffic, and

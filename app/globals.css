@@ -8,12 +8,12 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Editorial display utility — Fraunces with optical sizing tuned for headlines */
+/* Premium display utility for headings and titles */
 .font-display {
-  font-family: var(--font-fraunces), ui-serif, Georgia, serif;
+  font-family: var(--font-cormorant), ui-serif, Georgia, serif;
   font-optical-sizing: auto;
-  font-variation-settings: "opsz" 144, "SOFT" 30;
-  letter-spacing: -0.02em;
+  font-weight: 600;
+  letter-spacing: 0;
 }
 
 /* Subtle grain overlay — SVG noise inlined as data URI */

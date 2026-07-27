@@ -70,7 +70,8 @@ export default function CommercialCleaningFaqPage() {
           <section className={commercial.section}>
             <p className={commercial.eyebrow}>Commercial Cleaning FAQ</p>
             <h1 className={commercial.h1}>
-              Most asked commercial cleaning questions
+              Most asked commercial cleaning{" "}
+              <span style={{ color: "#D4A574" }}>questions</span>
             </h1>
             <p className={commercial.lead}>
               This page answers the questions businesses ask most before hiring

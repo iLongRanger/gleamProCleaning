@@ -85,7 +85,8 @@ export default async function ServiceAreaServicePage({
           <div className={commercial.glow} />
           <p className={commercial.eyebrow}>Service Area + Service</p>
           <h1 className={commercial.h1}>
-            {service.label} in {area.name}
+            {service.label}{" "}
+            <span style={{ color: "#D4A574" }}>in {area.name}</span>
           </h1>
           <p className={commercial.lead}>
             {service.description} We serve {area.name} neighborhoods including{" "}

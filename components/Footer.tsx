@@ -6,6 +6,8 @@ import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
 
 const commercialLinks = [
   { label: "Overview", href: "/commercial-cleaning" },
+  { label: "Breweries & Taprooms", href: "/breweries" },
+  { label: "Clinics & Medical Offices", href: "/clinics" },
   { label: "Restaurants", href: "/commercial-cleaning/restaurants" },
   { label: "Offices", href: "/commercial-cleaning/offices" },
   { label: "Community Facilities", href: "/commercial-cleaning/community-facilities" },
@@ -14,12 +16,6 @@ const commercialLinks = [
 
 const residentialLinks = [
   { label: "Overview", href: "/residential-cleaning" },
-  { label: "Prestige Home Care", href: "/prestige-home-care" },
-  { label: "Recurring Cleaning", href: "/residential-cleaning/recurring" },
-  { label: "Deep Cleaning", href: "/residential-cleaning/deep-cleaning" },
-  { label: "Move-In/Out", href: "/residential-cleaning/move-in-out" },
-  { label: "Carpet & Upholstery", href: "/residential-cleaning/carpet-upholstery" },
-  { label: "Residential FAQ", href: "/residential-cleaning/faq" },
 ];
 
 const companyLinks = [
@@ -56,14 +52,14 @@ export default function Footer() {
         {/* Wordmark row */}
         <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 pb-12 border-b border-white/10">
           <div className="max-w-xl">
-            <div className={eyebrow}>Gleam Pro Cleaning · Est. 2019</div>
+            <div className={eyebrow}>7 years of professional cleaning · Owner-operated every night</div>
             <h2 className="mt-4 font-display text-4xl sm:text-5xl md:text-6xl leading-[1.02] text-white">
               Spaces that open ready,{" "}
-              <span className="italic text-white/60">homes that feel settled.</span>
+              <span className="italic text-white/60">before the first shift.</span>
             </h2>
             <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
-              Premium commercial and residential cleaning across Metro Vancouver.
-              Walk-through quoted, named-team executed.
+              Family-owned commercial cleaning across Metro Vancouver.
+              Free walkthrough, written quote in 24 hours.
             </p>
           </div>
           <Link
@@ -92,7 +88,7 @@ export default function Footer() {
                   Gleam Pro
                 </div>
                 <div className="text-[11px] uppercase tracking-[0.22em] text-white/50">
-                  Shine · Elevate · Prestige
+                  Owner-led night crews
                 </div>
               </div>
             </div>

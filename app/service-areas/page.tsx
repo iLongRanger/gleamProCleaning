@@ -16,7 +16,10 @@ export default function ServiceAreasPage() {
         <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8">
           <div className={commercial.glow} />
           <p className={commercial.eyebrow}>Service Areas</p>
-          <h1 className={commercial.h1}>Metro Vancouver cleaning coverage</h1>
+          <h1 className={commercial.h1}>
+            Metro Vancouver{" "}
+            <span style={{ color: "#D4A574" }}>cleaning coverage</span>
+          </h1>
           <p className={commercial.lead}>
             We serve commercial and residential clients across Metro Vancouver.
             Choose your city to see local coverage and the fastest way to get a

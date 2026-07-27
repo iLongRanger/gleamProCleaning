@@ -217,7 +217,10 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
         <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8">
           <div className={commercial.glow} />
           <p className={commercial.eyebrow}>Service Area</p>
-          <h1 className={commercial.h1}>{area.name} Cleaning Services</h1>
+          <h1 className={commercial.h1}>
+            {area.name}{" "}
+            <span style={{ color: "#D4A574" }}>Cleaning Services</span>
+          </h1>
           <p className={commercial.lead}>{area.description}</p>
           <div className="mt-6 flex flex-wrap gap-3">
             <Link

@@ -27,7 +27,8 @@ export default function ServiceAreasByServicePage() {
           <div className={commercial.glow} />
           <p className={commercial.eyebrow}>Service Areas by Service</p>
           <h1 className={commercial.h1}>
-            Find cleaning services by city and service type
+            Find cleaning services{" "}
+            <span style={{ color: "#D4A574" }}>by city and service type</span>
           </h1>
           <p className={commercial.lead}>
             Use this page to explore where each commercial and residential

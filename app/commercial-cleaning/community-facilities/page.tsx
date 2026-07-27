@@ -24,7 +24,8 @@ export default function CommunityFacilitiesCleaningPage() {
                   Commercial Cleaning • Community Facilities
                 </p>
                 <h1 className={commercial.h1}>
-                  Cleaning support for shared spaces with unpredictable traffic.
+                  Cleaning support for shared spaces{" "}
+                  <span style={{ color: "#D4A574" }}>with unpredictable traffic.</span>
                 </h1>
                 <p className={commercial.lead}>
                   Community facilities need a scope that adapts: high-traffic

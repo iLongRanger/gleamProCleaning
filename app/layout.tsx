@@ -1,17 +1,17 @@
 import type { Metadata } from "next";
 import Script from "next/script";
-import { Fraunces, Geist, Geist_Mono } from "next/font/google";
+import { Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
-const fraunces = Fraunces({
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-fraunces",
+  variable: "--font-cormorant",
   display: "swap",
-  axes: ["opsz", "SOFT"],
+  weight: ["400", "500", "600", "700"],
 });
 
 const geistSans = Geist({
@@ -69,7 +69,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${fraunces.variable} ${geistSans.variable} ${geistMono.variable}`}>
+    <html lang="en" className={`${cormorant.variable} ${geistSans.variable} ${geistMono.variable}`}>
       <body className="bg-[#0B2545] text-white font-sans antialiased">
         <Header />
         <main>{children}</main>

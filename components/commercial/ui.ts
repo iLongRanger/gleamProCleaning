@@ -8,7 +8,7 @@ export const brand = {
   midnight: "#081A31",
   emerald: "#0FA36B",
   emeraldDeep: "#0B7F54",
-  gold: "#C9A227",
+  gold: "#D4A574",
   bone: "#F4EFE6",
 };
 
@@ -22,12 +22,12 @@ export const commercial = {
   /* Atmospheric glow for hero/top areas — pair with a relative parent and bg-grain overlay */
   glow:
     "absolute inset-0 pointer-events-none z-0 " +
-    "[background:radial-gradient(900px_480px_at_12%_8%,rgba(15,163,107,0.18),transparent_60%),radial-gradient(800px_500px_at_92%_12%,rgba(201,162,39,0.14),transparent_65%)] " +
+    "[background:radial-gradient(900px_480px_at_12%_8%,rgba(15,163,107,0.18),transparent_60%),radial-gradient(800px_500px_at_92%_12%,rgba(212,165,116,0.14),transparent_65%)] " +
     "before:content-[''] before:absolute before:inset-0 before:bg-grain before:opacity-[0.30] before:mix-blend-overlay before:pointer-events-none",
 
   /* Typography */
   eyebrow:
-    "text-[11px] font-medium uppercase tracking-[0.28em] text-[#C9A227]/90",
+    "text-[11px] font-medium uppercase tracking-[0.28em] text-[#D4A574]/90",
   h1:
     "font-display mt-5 text-[40px] leading-[1.02] sm:text-5xl md:text-6xl lg:text-[80px] lg:leading-[0.98] font-light text-white",
   lead:
@@ -38,7 +38,7 @@ export const commercial = {
     "font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] text-white",
   h3: "font-display text-lg sm:text-xl leading-tight text-white",
 
-  accent: "text-[#C9A227]",
+  accent: "text-[#D4A574]",
   italic: "italic text-white/70",
   muted: "text-white/65",
   body: "text-white/75 leading-relaxed",
@@ -81,6 +81,6 @@ export const commercial = {
   /* New helpers */
   hairline: "h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent",
   numeral:
-    "font-display tabular text-5xl sm:text-6xl text-[#C9A227]/30 leading-none",
-  divider: "inline-block h-px w-8 bg-[#C9A227]/60 align-middle",
+    "font-display tabular text-5xl sm:text-6xl text-[#D4A574]/30 leading-none",
+  divider: "inline-block h-px w-8 bg-[#D4A574]/60 align-middle",
 };

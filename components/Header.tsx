@@ -23,7 +23,7 @@ type NavItem = {
   children?: Array<{ label: string; href: string }>;
 };
 
-type DesktopMenu = "commercial" | "residential" | null;
+type DesktopMenu = "commercial" | null;
 
 const PHONE_DISPLAY = "(778) 681-0922";
 const PHONE_TEL = "tel:+17786810922";
@@ -34,7 +34,6 @@ const DESKTOP_CLOSE_DELAY_MS = 180;
 
 function getDesktopMenuKey(label: string): DesktopMenu {
   if (label === "Commercial Cleaning") return "commercial";
-  if (label === "Residential Cleaning") return "residential";
   return null;
 }
 
@@ -50,7 +49,6 @@ export default function Header() {
 
   const [mobileOpen, setMobileOpen] = useState(false);
   const [mobileCommercialOpen, setMobileCommercialOpen] = useState(false);
-  const [mobileResidentialOpen, setMobileResidentialOpen] = useState(false);
   const [desktopMenuOpen, setDesktopMenuOpen] = useState<DesktopMenu>(null);
   const [headerHeight, setHeaderHeight] = useState(0);
   const [mounted, setMounted] = useState(false);
@@ -64,7 +62,6 @@ export default function Header() {
 
   const mobilePanelId = useId();
   const desktopCommercialMenuId = useId();
-  const desktopResidentialMenuId = useId();
 
   const nav: NavItem[] = useMemo(
     () => [
@@ -74,22 +71,12 @@ export default function Header() {
         label: "Commercial Cleaning",
         href: "/commercial-cleaning",
         children: [
+          { label: "Breweries & Taprooms", href: "/breweries" },
+          { label: "Clinics & Medical Offices", href: "/clinics" },
           { label: "Restaurants", href: "/commercial-cleaning/restaurants" },
           { label: "Offices", href: "/commercial-cleaning/offices" },
           { label: "Community Facilities", href: "/commercial-cleaning/community-facilities" },
           { label: "Commercial FAQ", href: "/commercial-cleaning/faq" },
-        ],
-      },
-      {
-        label: "Residential Cleaning",
-        href: "/residential-cleaning",
-        children: [
-          { label: "Prestige Home Care", href: "/prestige-home-care" },
-          { label: "Recurring Cleaning", href: "/residential-cleaning/recurring" },
-          { label: "Deep Cleaning", href: "/residential-cleaning/deep-cleaning" },
-          { label: "Move-In/Out", href: "/residential-cleaning/move-in-out" },
-          { label: "Carpet & Upholstery", href: "/residential-cleaning/carpet-upholstery" },
-          { label: "Residential FAQ", href: "/residential-cleaning/faq" },
         ],
       },
       {
@@ -118,7 +105,6 @@ export default function Header() {
   const closeMobileMenu = useCallback(() => {
     setMobileOpen(false);
     setMobileCommercialOpen(false);
-    setMobileResidentialOpen(false);
   }, []);
 
   useEffect(() => {
@@ -202,9 +188,7 @@ export default function Header() {
                       aria-expanded={mobileCommercialOpen}
                       onClick={() => {
                         setMobileCommercialOpen((v) => {
-                          const next = !v;
-                          if (next) setMobileResidentialOpen(false);
-                          return next;
+                          return !v;
                         });
                       }}
                     >
@@ -222,6 +206,12 @@ export default function Header() {
                         <Link href="/commercial-cleaning" className={mobileSubLinkCls} onClick={closeMobileMenu}>
                           Overview
                         </Link>
+                        <Link href="/breweries" className={mobileSubLinkCls} onClick={closeMobileMenu}>
+                          Breweries &amp; Taprooms
+                        </Link>
+                        <Link href="/clinics" className={mobileSubLinkCls} onClick={closeMobileMenu}>
+                          Clinics &amp; Medical Offices
+                        </Link>
                         <Link href="/commercial-cleaning/restaurants" className={mobileSubLinkCls} onClick={closeMobileMenu}>
                           Restaurants
                         </Link>
@@ -233,53 +223,6 @@ export default function Header() {
                         </Link>
                         <Link href="/commercial-cleaning/faq" className={mobileSubLinkCls} onClick={closeMobileMenu}>
                           Commercial FAQ
-                        </Link>
-                      </div>
-                    )}
-
-                    <button
-                      type="button"
-                      className="flex w-full items-center justify-between rounded-2xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm font-medium text-white/85 hover:bg-white/[0.06] hover:text-white transition"
-                      aria-expanded={mobileResidentialOpen}
-                      onClick={() => {
-                        setMobileResidentialOpen((v) => {
-                          const next = !v;
-                          if (next) setMobileCommercialOpen(false);
-                          return next;
-                        });
-                      }}
-                    >
-                      <span>Residential Cleaning</span>
-                      <ChevronDown
-                        className={[
-                          "h-4 w-4 transition-transform text-white/50",
-                          mobileResidentialOpen ? "rotate-180" : "",
-                        ].join(" ")}
-                      />
-                    </button>
-
-                    {mobileResidentialOpen && (
-                      <div className="space-y-1 pl-2 py-1">
-                        <Link href="/residential-cleaning" className={mobileSubLinkCls} onClick={closeMobileMenu}>
-                          Overview
-                        </Link>
-                        <Link href="/prestige-home-care" className={mobileSubLinkCls} onClick={closeMobileMenu}>
-                          Prestige Home Care
-                        </Link>
-                        <Link href="/residential-cleaning/recurring" className={mobileSubLinkCls} onClick={closeMobileMenu}>
-                          Recurring Cleaning
-                        </Link>
-                        <Link href="/residential-cleaning/deep-cleaning" className={mobileSubLinkCls} onClick={closeMobileMenu}>
-                          Deep Cleaning
-                        </Link>
-                        <Link href="/residential-cleaning/move-in-out" className={mobileSubLinkCls} onClick={closeMobileMenu}>
-                          Move-In/Out
-                        </Link>
-                        <Link href="/residential-cleaning/carpet-upholstery" className={mobileSubLinkCls} onClick={closeMobileMenu}>
-                          Carpet & Upholstery
-                        </Link>
-                        <Link href="/residential-cleaning/faq" className={mobileSubLinkCls} onClick={closeMobileMenu}>
-                          Residential FAQ
                         </Link>
                       </div>
                     )}
@@ -407,10 +350,7 @@ export default function Header() {
                 if (!menuKey) return null;
 
                 const isOpen = desktopMenuOpen === menuKey;
-                const menuId =
-                  menuKey === "commercial"
-                    ? desktopCommercialMenuId
-                    : desktopResidentialMenuId;
+                const menuId = desktopCommercialMenuId;
 
                 return (
                   <div

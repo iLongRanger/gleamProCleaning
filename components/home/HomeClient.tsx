@@ -22,48 +22,30 @@ const colors = {
   ink: "#050E1F",
   emerald: "#0FA36B",
   emeraldDeep: "#0B7F54",
-  gold: "#C9A227",
+  gold: "#D4A574",
   bone: "#F4EFE6",
 };
 
 type Lane = "commercial" | "residential";
 
-const LANE_TOGGLE: { value: Lane; label: string }[] = [
-  { value: "commercial", label: "Commercial" },
-  { value: "residential", label: "Residential" },
-];
-
-function LaneToggle({ value, onChange }: { value: Lane; onChange: (v: Lane) => void }) {
-  return (
-    <div
-      role="tablist"
-      className="inline-flex items-stretch rounded-full border border-white/15 bg-white/[0.04] p-1 backdrop-blur-md"
-    >
-      {LANE_TOGGLE.map((opt) => {
-        const active = value === opt.value;
-        return (
-          <button
-            key={opt.value}
-            role="tab"
-            aria-selected={active}
-            type="button"
-            onClick={() => onChange(opt.value)}
-            className={`relative px-5 sm:px-7 py-2.5 rounded-full text-sm font-medium tracking-wide transition-all duration-300 ${
-              active
-                ? "text-[#0B2545] bg-[#F4EFE6] shadow-[0_8px_30px_-8px_rgba(244,239,230,0.5)]"
-                : "text-white/65 hover:text-white"
-            }`}
-          >
-            {opt.label}
-          </button>
-        );
-      })}
-    </div>
-  );
-}
+const routeAreaSlugs = ["burnaby", "new-westminster", "vancouver"];
+const routeCardImages: Record<string, { src: string; alt: string }> = {
+  burnaby: {
+    src: "/images/service-areas/burnaby-night-route.png",
+    alt: "After-hours commercial cleaning route in Burnaby",
+  },
+  "new-westminster": {
+    src: "/images/service-areas/new-westminster-night-route.png",
+    alt: "After-hours commercial cleaning route in New Westminster",
+  },
+  vancouver: {
+    src: "/images/service-areas/vancouver-night-route.png",
+    alt: "After-hours commercial cleaning route in Vancouver",
+  },
+};
 
 export default function HomeClient() {
-  const [lane, setLane] = useState<Lane>("commercial");
+  const lane: Lane = "commercial";
 
   const [sending, setSending] = useState(false);
   const [sentOk, setSentOk] = useState<null | boolean>(null);
@@ -93,7 +75,9 @@ export default function HomeClient() {
     setQuickErrorMsg(null);
     try {
       const payload = {
-        leadType: "residential" as const,
+        leadType: "commercial" as const,
+        businessName: "Callback request",
+        facilityType: "other",
         website: quickWebsite,
         email: quickEmail,
         phone: quickPhone,
@@ -123,7 +107,7 @@ export default function HomeClient() {
       if (typeof window !== "undefined" && typeof (window as unknown as { gtag?: (...a: unknown[]) => void }).gtag === "function") {
         (window as unknown as { gtag: (...a: unknown[]) => void }).gtag("event", "generate_lead", {
           source: "homepage-final-cta",
-          lead_type: "residential",
+          lead_type: "commercial",
         });
       }
     } catch {
@@ -139,11 +123,11 @@ export default function HomeClient() {
       return {
         eyebrow: "Commercial cleaning · Metro Vancouver",
         subhead:
-          "Restaurants, offices, and community facilities — quoted from a walk-through, run by named teams, audited weekly.",
+          "Family-owned commercial cleaning. Free 15-minute walkthrough, written quote in 24 hours, 30-day no-lock-in trial.",
         primaryCta: "Request walk-through",
         primaryHref: "/request-walkthrough?type=commercial",
         formTitle: "Free walk-through",
-        formSub: "On-site, 30 minutes, no obligation.",
+        formSub: "On-site, 15 minutes, no obligation.",
         submit: "Send walk-through request",
         showcaseSrc: "/images/home/commercial-hero.png",
         showcaseAlt: "Gleam Pro team servicing a corporate lobby before opening hours",
@@ -250,9 +234,9 @@ export default function HomeClient() {
   }
 
   const inputCls =
-    "w-full rounded-xl bg-white/[0.06] border border-white/10 px-4 py-3 text-[15px] text-white placeholder:text-white/40 focus:border-[#C9A227]/60 focus:bg-white/[0.09] focus:outline-none focus:ring-0 transition";
+    "w-full rounded-xl bg-white/[0.06] border border-white/10 px-4 py-3 text-[15px] text-white placeholder:text-white/40 focus:border-[#D4A574]/60 focus:bg-white/[0.09] focus:outline-none focus:ring-0 transition";
   const selectCls =
-    "w-full appearance-none rounded-xl bg-white/[0.06] border border-white/10 px-4 py-3 text-[15px] text-white focus:border-[#C9A227]/60 focus:bg-white/[0.09] focus:outline-none transition";
+    "w-full appearance-none rounded-xl bg-white/[0.06] border border-white/10 px-4 py-3 text-[15px] text-white focus:border-[#D4A574]/60 focus:bg-white/[0.09] focus:outline-none transition";
   const labelCls = "block text-[11px] font-medium uppercase tracking-[0.18em] text-white/50 mb-1.5";
   const errCls = "mt-1 text-xs text-rose-300";
 
@@ -276,7 +260,7 @@ export default function HomeClient() {
             className="absolute inset-0 opacity-70"
             style={{
               background: `radial-gradient(900px 480px at 12% 8%, rgba(15,163,107,0.18), transparent 60%),
-                           radial-gradient(800px 500px at 92% 12%, rgba(201,162,39,0.14), transparent 65%),
+                           radial-gradient(800px 500px at 92% 12%, rgba(212,165,116,0.14), transparent 65%),
                            radial-gradient(900px 600px at 50% 110%, rgba(11,37,69,0.9), transparent 60%)`,
             }}
           />
@@ -293,9 +277,8 @@ export default function HomeClient() {
           >
             <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-white/55">
               <span className="inline-block h-px w-8 bg-white/30" />
-              Est. 2019 · Metro Vancouver
+              On the floor since 2019 · Incorporated 2024 · 10 commercial sites serviced nightly
             </div>
-            <LaneToggle value={lane} onChange={setLane} />
           </motion.div>
 
           <div className="mt-12 sm:mt-16 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
@@ -310,7 +293,7 @@ export default function HomeClient() {
             >
               <motion.p
                 variants={{ hidden: { opacity: 0, y: 8 }, show: { opacity: 1, y: 0 } }}
-                className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#C9A227]/90"
+                className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#D4A574]/90"
               >
                 {laneCopy.eyebrow}
               </motion.p>
@@ -319,10 +302,10 @@ export default function HomeClient() {
                 variants={{ hidden: { opacity: 0, y: 14 }, show: { opacity: 1, y: 0 } }}
                 className="font-display text-[44px] leading-[1.02] sm:text-6xl md:text-7xl lg:text-[88px] lg:leading-[0.96] font-light text-white"
               >
-                Spaces that open ready,
+                Your space, ready before you open.
                 <br />
-                <span className="italic font-normal" style={{ color: colors.bone }}>
-                  homes that feel settled.
+                <span className="italic font-normal" style={{ color: colors.gold }}>
+                  Same crew every night, owner on site.
                 </span>
               </motion.h1>
 
@@ -348,7 +331,7 @@ export default function HomeClient() {
                   href="tel:+17786810922"
                   className="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white"
                 >
-                  <Phone className="w-4 h-4 text-[#C9A227]" />
+                  <Phone className="w-4 h-4 text-[#D4A574]" />
                   <span className="tabular">(778) 681-0922</span>
                 </a>
               </motion.div>
@@ -363,13 +346,13 @@ export default function HomeClient() {
                 </span>
                 <span className="hidden sm:inline text-white/20">·</span>
                 <span className="inline-flex items-center gap-1.5">
-                  <span className="h-1.5 w-1.5 rounded-full bg-[#C9A227]" />
-                  Named teams · owner-led routes
+                  <span className="h-1.5 w-1.5 rounded-full bg-[#D4A574]" />
+                  Owner-led night crews
                 </span>
                 <span className="hidden sm:inline text-white/20">·</span>
                 <span className="inline-flex items-center gap-1.5">
                   <span className="h-1.5 w-1.5 rounded-full bg-[#0FA36B]" />
-                  Walk-through quoted · no calculator
+                  Nightly service, 7 days
                 </span>
               </motion.div>
 
@@ -378,9 +361,9 @@ export default function HomeClient() {
                 className="mt-6 grid grid-cols-3 gap-px rounded-2xl border border-white/10 bg-white/[0.025] overflow-hidden"
               >
                 {[
-                  { k: "9", v: "Cities served" },
-                  { k: "6 AM", v: "Pre-open ready" },
-                  { k: "Est. 2019", v: "Operating in Metro Vancouver" },
+                  { k: "10", v: "Commercial sites serviced nightly" },
+                  { k: "24 hr", v: "Written quote after walkthrough" },
+                  { k: "30 days", v: "Trial, no lock-in" },
                 ].map((s) => (
                   <div key={s.v} className="px-4 py-5 bg-[#050E1F]/40">
                     <div className="font-display text-3xl sm:text-4xl tabular text-white">
@@ -405,13 +388,13 @@ export default function HomeClient() {
                   className="absolute -inset-px rounded-[28px] opacity-60 blur-2xl pointer-events-none"
                   style={{
                     background:
-                      "linear-gradient(160deg, rgba(15,163,107,0.25), rgba(201,162,39,0.18))",
+                      "linear-gradient(160deg, rgba(15,163,107,0.25), rgba(212,165,116,0.18))",
                   }}
                 />
                 <div className="relative rounded-[26px] border border-white/12 bg-[#0B2545]/85 backdrop-blur-xl shadow-[0_30px_80px_-30px_rgba(0,0,0,0.6)]">
                   <div className="px-6 sm:px-7 pt-6 pb-5 border-b border-white/10 flex items-baseline justify-between gap-4">
                     <div>
-                      <div className="text-[11px] uppercase tracking-[0.22em] text-[#C9A227]">
+                      <div className="text-[11px] uppercase tracking-[0.22em] text-[#D4A574]">
                         Step 01
                       </div>
                       <h2 className="mt-1 font-display text-2xl sm:text-[28px] leading-tight">
@@ -465,6 +448,8 @@ export default function HomeClient() {
                             className={selectCls}
                           >
                             <option value="" className="text-slate-900">Select type</option>
+                            <option value="brewery" className="text-slate-900">Brewery / Taproom</option>
+                            <option value="clinic" className="text-slate-900">Clinic / Medical</option>
                             <option value="restaurant" className="text-slate-900">Restaurant / Pub</option>
                             <option value="office" className="text-slate-900">Office</option>
                             <option value="community" className="text-slate-900">Community / School</option>
@@ -602,7 +587,7 @@ export default function HomeClient() {
                     )}
 
                     <p className="text-[11px] text-white/50 leading-relaxed">
-                      We respond within one business day. By submitting you agree to our{" "}
+                      Start with a 30-day trial. No lock-in, cancel anytime. We respond within one business day. By submitting you agree to our{" "}
                       <Link href="/terms" className="text-white/75 underline hover:text-white">
                         Terms
                       </Link>{" "}
@@ -637,15 +622,15 @@ export default function HomeClient() {
 
           <div className="relative h-full max-w-[1280px] mx-auto px-5 sm:px-8 flex items-end pb-12 sm:pb-16">
             <div className="max-w-xl">
-              <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#C9A227]">
-                <span className="inline-block h-px w-8 bg-[#C9A227]/60" />
+              <div className="flex items-center gap-3 text-[11px] uppercase tracking-[0.22em] text-[#D4A574]">
+                <span className="inline-block h-px w-8 bg-[#D4A574]/60" />
                 On the ground
               </div>
               <p className="mt-4 font-display text-3xl sm:text-5xl leading-[1.05] text-white">
                 {laneCopy.showcaseLine}
               </p>
               <p className="mt-4 max-w-md text-[15px] text-white/70 leading-relaxed">
-                Branded, named teams. Owner-led routes. The same faces every visit so
+                Branded, named teams. Owner-led night crews. The same faces every visit so
                 your space is known, not just cleaned.
               </p>
             </div>
@@ -658,50 +643,50 @@ export default function HomeClient() {
         <div className="max-w-[1280px] mx-auto px-5 sm:px-8 py-24 sm:py-32">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-14">
             <div>
-              <div className="text-[11px] uppercase tracking-[0.28em] text-[#C9A227]">
+              <div className="text-[11px] uppercase tracking-[0.28em] text-[#D4A574]">
                 What we do
               </div>
               <h2 className="mt-3 font-display text-4xl sm:text-5xl md:text-6xl leading-[1.02] max-w-3xl">
-                Two disciplines.{" "}
-                <span className="italic text-white/70">One standard.</span>
+                Commercial cleaning,{" "}
+                <span className="italic text-[#D4A574]">built around opening time.</span>
               </h2>
             </div>
             <Link
-              href="/service-areas/by-service"
+              href="/commercial-cleaning"
               className="inline-flex items-center gap-2 text-sm text-white/70 hover:text-white border-b border-white/20 hover:border-white pb-1 self-start"
             >
-              All services × all cities
+              Explore commercial services
               <ArrowUpRight className="w-4 h-4" />
             </Link>
           </div>
 
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-5 lg:gap-6">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-5 lg:gap-6">
             <Link
               href="/commercial-cleaning"
               className="group relative rounded-3xl overflow-hidden border border-white/10 bg-[#0B2545]/40 hover:border-white/25 transition flex flex-col"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
-                  src="/images/home/commercial-hero.png"
-                  alt="Commercial cleaning"
+                  src="/images/home/commercial-overview-cleaning.png"
+                  alt="Clean commercial reception, office, and hospitality space"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                   className="object-cover scale-[1.02] group-hover:scale-[1.06] transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050E1F] via-[#050E1F]/30 to-transparent" />
               </div>
               <div className="p-7 sm:p-9 flex flex-col flex-1">
-                <div className="text-[11px] uppercase tracking-[0.22em] text-[#C9A227]">
+                <div className="text-[11px] uppercase tracking-[0.22em] text-[#D4A574]">
                   Commercial
                 </div>
                 <h3 className="mt-2 font-display text-3xl sm:text-4xl leading-tight">
-                  Restaurants, offices, community facilities.
+                  Restaurants, Clinics and Offices.
                 </h3>
                 <ul className="mt-5 space-y-2 text-sm text-white/70">
                   {[
-                    "Pre-open kitchen resets",
-                    "Daily office routines",
-                    "Floor strip & wax",
+                    "Owner-led night crews",
+                    "Same crew every visit",
+                    "Written quotes in 24 hours",
                   ].map((x) => (
                     <li key={x} className="flex items-center gap-2">
                       <span className="h-1 w-1 rounded-full bg-[#0FA36B]" />
@@ -717,38 +702,76 @@ export default function HomeClient() {
             </Link>
 
             <Link
-              href="/residential-cleaning"
+              href="/breweries"
               className="group relative rounded-3xl overflow-hidden border border-white/10 bg-[#0B2545]/40 hover:border-white/25 transition flex flex-col"
             >
               <div className="relative aspect-[4/3] overflow-hidden">
                 <Image
-                  src="/images/home/residential-hero.png"
-                  alt="Residential cleaning"
+                  src="/images/home/taproom-cleaning.png"
+                  alt="Brewery and taproom cleaning"
                   fill
-                  sizes="(max-width: 1024px) 100vw, 50vw"
+                  sizes="(max-width: 1024px) 100vw, 33vw"
                   className="object-cover scale-[1.02] group-hover:scale-[1.06] transition-transform duration-700"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-[#050E1F] via-[#050E1F]/30 to-transparent" />
               </div>
               <div className="p-7 sm:p-9 flex flex-col flex-1">
-                <div className="text-[11px] uppercase tracking-[0.22em] text-[#C9A227]">
-                  Residential
+                <div className="text-[11px] uppercase tracking-[0.22em] text-[#D4A574]">
+                  Breweries
                 </div>
                 <h3 className="mt-2 font-display text-3xl sm:text-4xl leading-tight">
-                  Homes that feel taken care of.
+                  Taproom floors, back-of-house, washrooms.
                 </h3>
                 <ul className="mt-5 space-y-2 text-sm text-white/70">
-                  {["Recurring & deep cleans", "Move-in / move-out", "Carpet & upholstery"].map(
+                  {["Sticky-floor resets", "Patio-season traffic", "Open-ready by morning"].map(
                     (x) => (
                       <li key={x} className="flex items-center gap-2">
-                        <span className="h-1 w-1 rounded-full bg-[#C9A227]" />
+                        <span className="h-1 w-1 rounded-full bg-[#D4A574]" />
                         {x}
                       </li>
                     )
                   )}
                 </ul>
                 <div className="mt-auto pt-7 inline-flex items-center gap-2 text-sm text-white/85 group-hover:text-white">
-                  Explore residential
+                  Explore breweries
+                  <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                </div>
+              </div>
+            </Link>
+
+            <Link
+              href="/clinics"
+              className="group relative rounded-3xl overflow-hidden border border-white/10 bg-[#0B2545]/40 hover:border-white/25 transition flex flex-col"
+            >
+              <div className="relative aspect-[4/3] overflow-hidden">
+                <Image
+                  src="/images/home/clinic-cleaning.png"
+                  alt="Clinic and medical office cleaning"
+                  fill
+                  sizes="(max-width: 1024px) 100vw, 33vw"
+                  className="object-cover scale-[1.02] group-hover:scale-[1.06] transition-transform duration-700"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#050E1F] via-[#050E1F]/30 to-transparent" />
+              </div>
+              <div className="p-7 sm:p-9 flex flex-col flex-1">
+                <div className="text-[11px] uppercase tracking-[0.22em] text-[#D4A574]">
+                  Clinics
+                </div>
+                <h3 className="mt-2 font-display text-3xl sm:text-4xl leading-tight">
+                  Cleaning for spaces that get inspected.
+                </h3>
+                <ul className="mt-5 space-y-2 text-sm text-white/70">
+                  {["Disinfection protocol", "Discreet night service", "Insured commercial crews"].map(
+                    (x) => (
+                      <li key={x} className="flex items-center gap-2">
+                        <span className="h-1 w-1 rounded-full bg-[#D4A574]" />
+                        {x}
+                      </li>
+                    )
+                  )}
+                </ul>
+                <div className="mt-auto pt-7 inline-flex items-center gap-2 text-sm text-white/85 group-hover:text-white">
+                  Explore clinics
                   <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                 </div>
               </div>
@@ -763,16 +786,16 @@ export default function HomeClient() {
         <div className="relative max-w-[1280px] mx-auto px-5 sm:px-8 py-24 sm:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
             <div className="lg:col-span-4">
-              <div className="text-[11px] uppercase tracking-[0.28em] text-[#C9A227]">
+              <div className="text-[11px] uppercase tracking-[0.28em] text-[#D4A574]">
                 The walk-through
               </div>
               <h2 className="mt-3 font-display text-4xl sm:text-5xl leading-[1.02]">
                 Quoted on what we{" "}
-                <span className="italic text-white/70">actually see.</span>
+                <span className="italic text-[#D4A574]">actually see.</span>
               </h2>
               <p className="mt-5 text-white/65 leading-relaxed max-w-md">
                 No square-footage calculator. No surprise add-ons. We meet you on-site,
-                build a scope to match, and deliver a written quote within 48 hours.
+                build a scope to match, and deliver a written quote within 24 hours.
               </p>
             </div>
             <div className="lg:col-span-8">
@@ -791,14 +814,14 @@ export default function HomeClient() {
                   {
                     n: "03",
                     t: "Quote & start",
-                    d: "Written scope and price within 48 hours. Named team assigned before kickoff.",
+                    d: "Written scope and price within 24 hours. Named team assigned before kickoff.",
                   },
                 ].map((s) => (
                   <li
                     key={s.n}
                     className="bg-[#081A31] p-7 sm:p-8 hover:bg-[#0B2545] transition"
                   >
-                    <div className="font-display tabular text-5xl sm:text-6xl text-[#C9A227]/30 leading-none">
+                    <div className="font-display tabular text-5xl sm:text-6xl text-[#D4A574]/30 leading-none">
                       {s.n}
                     </div>
                     <div className="mt-5 font-display text-xl text-white">{s.t}</div>
@@ -816,11 +839,11 @@ export default function HomeClient() {
         <div className="max-w-[1280px] mx-auto px-5 sm:px-8 py-24 sm:py-32">
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-6 mb-12">
             <div>
-              <div className="text-[11px] uppercase tracking-[0.28em] text-[#C9A227]">
+              <div className="text-[11px] uppercase tracking-[0.28em] text-[#D4A574]">
                 Coverage
               </div>
               <h2 className="mt-3 font-display text-4xl sm:text-5xl md:text-6xl leading-[1.02] max-w-3xl">
-                Across the Lower Mainland.
+                Our nightly routes.
               </h2>
             </div>
             <Link
@@ -833,7 +856,10 @@ export default function HomeClient() {
           </div>
 
           <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-3 sm:gap-4">
-            {serviceAreas.slice(0, 9).map((area, i) => (
+            {serviceAreas
+              .filter((area) => routeAreaSlugs.includes(area.slug))
+              .sort((a, b) => routeAreaSlugs.indexOf(a.slug) - routeAreaSlugs.indexOf(b.slug))
+              .map((area, i) => (
               <Link
                 key={area.slug}
                 href={`/service-areas/${area.slug}`}
@@ -847,8 +873,12 @@ export default function HomeClient() {
                   } overflow-hidden`}
                 >
                   <Image
-                    src={area.image || `/images/service-areas/${area.slug}.jpg`}
-                    alt={area.imageAlt || area.name}
+                    src={
+                      routeCardImages[area.slug]?.src ||
+                      area.image ||
+                      `/images/service-areas/${area.slug}.jpg`
+                    }
+                    alt={routeCardImages[area.slug]?.alt || area.imageAlt || area.name}
                     fill
                     sizes="(max-width: 768px) 50vw, 33vw"
                     className="object-cover scale-[1.02] group-hover:scale-[1.08] transition-transform duration-[900ms]"
@@ -858,7 +888,7 @@ export default function HomeClient() {
                 </div>
                 <div className="absolute inset-x-0 bottom-0 p-4 sm:p-5 flex items-end justify-between gap-3">
                   <div>
-                    <div className="text-[10px] uppercase tracking-[0.22em] text-[#C9A227]/90">
+                    <div className="text-[10px] uppercase tracking-[0.22em] text-[#D4A574]/90">
                       {String(i + 1).padStart(2, "0")}
                     </div>
                     <div className="mt-1 font-display text-xl sm:text-2xl text-white">
@@ -870,6 +900,14 @@ export default function HomeClient() {
               </Link>
             ))}
           </div>
+          <p className="mt-6 text-sm leading-relaxed text-white/60">
+            Also serving{" "}
+            {serviceAreas
+              .filter((area) => !routeAreaSlugs.includes(area.slug))
+              .map((area) => area.name)
+              .join(", ")}
+            .
+          </p>
         </div>
       </section>
 
@@ -881,7 +919,7 @@ export default function HomeClient() {
         <div className="absolute inset-0 bg-grain mix-blend-overlay opacity-20 pointer-events-none" />
         <div
           className="absolute -top-24 -right-24 w-[600px] h-[600px] rounded-full blur-3xl opacity-20 pointer-events-none"
-          style={{ background: "radial-gradient(closest-side, #C9A227, transparent)" }}
+          style={{ background: "radial-gradient(closest-side, #D4A574, transparent)" }}
         />
         <div className="relative max-w-[1280px] mx-auto px-5 sm:px-8 py-24 sm:py-28">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
@@ -891,7 +929,7 @@ export default function HomeClient() {
                   className="absolute -inset-3 rounded-3xl opacity-30 blur-2xl"
                   style={{
                     background:
-                      "linear-gradient(135deg, rgba(15,163,107,0.6), rgba(201,162,39,0.4))",
+                      "linear-gradient(135deg, rgba(15,163,107,0.6), rgba(212,165,116,0.4))",
                   }}
                 />
                 <div className="relative aspect-[3/4] rounded-3xl overflow-hidden border border-white/15">
@@ -903,7 +941,7 @@ export default function HomeClient() {
                     className="object-cover"
                   />
                   <div className="absolute inset-x-0 bottom-0 p-4 bg-gradient-to-t from-[#050E1F] to-transparent">
-                    <div className="text-[10px] uppercase tracking-[0.22em] text-[#C9A227]">
+                    <div className="text-[10px] uppercase tracking-[0.22em] text-[#D4A574]">
                       Crew lead · Vancouver
                     </div>
                     <div className="mt-1 text-white text-sm font-medium">
@@ -915,7 +953,7 @@ export default function HomeClient() {
             </div>
 
             <div className="lg:col-span-8">
-              <div className="text-[11px] uppercase tracking-[0.28em] text-[#C9A227]">
+              <div className="text-[11px] uppercase tracking-[0.28em] text-[#D4A574]">
                 What clients say
               </div>
               <blockquote className="mt-5 font-display text-3xl sm:text-4xl md:text-5xl leading-[1.15] text-white">
@@ -945,18 +983,18 @@ export default function HomeClient() {
               className="absolute inset-0 opacity-90"
               style={{
                 background:
-                  "radial-gradient(700px 380px at 0% 0%, rgba(15,163,107,0.18), transparent 60%), radial-gradient(700px 380px at 100% 100%, rgba(201,162,39,0.18), transparent 60%), linear-gradient(180deg, #0B2545, #081A31)",
+                  "radial-gradient(700px 380px at 0% 0%, rgba(15,163,107,0.18), transparent 60%), radial-gradient(700px 380px at 100% 100%, rgba(212,165,116,0.18), transparent 60%), linear-gradient(180deg, #0B2545, #081A31)",
               }}
             />
             <div className="absolute inset-0 bg-grain mix-blend-overlay opacity-25" />
             <div className="relative grid grid-cols-1 lg:grid-cols-12 gap-10 items-end">
               <div className="lg:col-span-7">
-                <div className="text-[11px] uppercase tracking-[0.28em] text-[#C9A227]">
+                <div className="text-[11px] uppercase tracking-[0.28em] text-[#D4A574]">
                   Ready when you are
                 </div>
                 <h2 className="mt-4 font-display text-4xl sm:text-5xl md:text-6xl lg:text-7xl leading-[0.98]">
                   Book a walk-through.<br />
-                  <span className="italic text-white/70">We&apos;ll handle the rest.</span>
+                  <span className="italic text-[#D4A574]">We&apos;ll handle the rest.</span>
                 </h2>
                 <p className="mt-5 max-w-md text-[15px] text-white/65">
                   Leave your email and phone — we&apos;ll reply within one business day with next steps.
@@ -1031,7 +1069,7 @@ export default function HomeClient() {
                     <p className="mt-2 text-xs text-rose-300">{quickErrorMsg}</p>
                   ) : null}
                   <p className="mt-3 text-[11px] text-white/45 leading-relaxed">
-                    Or call{" "}
+                    Start with a 30-day trial. No lock-in, cancel anytime. Or call{" "}
                     <a href="tel:+17786810922" className="text-white/70 hover:text-white tabular">
                       (778) 681-0922
                     </a>{" "}
