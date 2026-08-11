@@ -328,11 +328,11 @@ export default function HomeClient() {
                   <ArrowUpRight className="w-4 h-4 transition-transform group-hover:rotate-45" />
                 </Link>
                 <a
-                  href="tel:+17786810922"
+                  href="tel:+17782230719"
                   className="inline-flex items-center gap-2 text-sm text-white/80 hover:text-white"
                 >
                   <Phone className="w-4 h-4 text-[#D4A574]" />
-                  <span className="tabular">(778) 681-0922</span>
+                  <span className="tabular">778 223 0719</span>
                 </a>
               </motion.div>
 
@@ -1070,8 +1070,8 @@ export default function HomeClient() {
                   ) : null}
                   <p className="mt-3 text-[11px] text-white/45 leading-relaxed">
                     Start with a 30-day trial. No lock-in, cancel anytime. Or call{" "}
-                    <a href="tel:+17786810922" className="text-white/70 hover:text-white tabular">
-                      (778) 681-0922
+                    <a href="tel:+17782230719" className="text-white/70 hover:text-white tabular">
+                      778 223 0719
                     </a>{" "}
                     · Mon–Sat. By submitting you agree to our{" "}
                     <Link href="/terms" className="text-white/70 underline hover:text-white">

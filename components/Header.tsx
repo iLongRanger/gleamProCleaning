@@ -25,8 +25,8 @@ type NavItem = {
 
 type DesktopMenu = "commercial" | null;
 
-const PHONE_DISPLAY = "(778) 681-0922";
-const PHONE_TEL = "tel:+17786810922";
+const PHONE_DISPLAY = "778 223 0719";
+const PHONE_TEL = "tel:+17782230719";
 const EMAIL_DISPLAY = "services@gleampro.ca";
 const EMAIL_MAILTO = "mailto:services@gleampro.ca";
 

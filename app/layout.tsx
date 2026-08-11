@@ -4,6 +4,7 @@ import { Cormorant_Garamond, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import GoogleAnalyticsPageView from "../components/GoogleAnalyticsPageView";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -84,14 +85,16 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               {`
                 window.dataLayer = window.dataLayer || [];
                 function gtag(){dataLayer.push(arguments);}
+                window.gtag = gtag;
                 gtag('js', new Date());
-                gtag('config', '${GA_ID}', { send_page_view: true });
+                gtag('config', '${GA_ID}', { send_page_view: false });
                 document.addEventListener('click', function(e) {
                   var a = e.target.closest && e.target.closest('a[href^="tel:"]');
                   if (a) gtag('event', 'phone_click', { phone: a.getAttribute('href').replace('tel:','') });
                 });
               `}
             </Script>
+            <GoogleAnalyticsPageView measurementId={GA_ID} />
           </>
         ) : null}
       </body>

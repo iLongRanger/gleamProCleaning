@@ -16,7 +16,7 @@
 - [ ] **Add the trial line directly beside/under the walkthrough form and the callback form:**
   > "Start with a 30-day trial. No lock-in, cancel anytime."
 - [ ] **Retire "Shine · Elevate · Prestige"** motto (fluff, says nothing to a facilities buyer).
-- [ ] Check phone handling: (778) 681-0922 must ring someone or hit a voicemail that says "leave your address — we'll confirm your walkthrough within one business day."
+- [ ] Check phone handling: 778 223 0719 must ring someone or hit a voicemail that says "leave your address — we'll confirm your walkthrough within one business day."
 
 ## Phase 2 — Commercial-first repositioning (≈1 evening)
 

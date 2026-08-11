@@ -9,7 +9,7 @@ export default function HomeJsonLd({ areaNames }: { areaNames: string[] }) {
     url: SITE,
     image: `${SITE}/logo-gpc.png`,
     logo: `${SITE}/logo-gpc.png`,
-    telephone: "+1-778-681-0922",
+    telephone: "+1-778-223-0719",
     email: "services@gleampro.ca",
     priceRange: "$$",
     address: {
@@ -28,7 +28,7 @@ export default function HomeJsonLd({ areaNames }: { areaNames: string[] }) {
     contactPoint: [
       {
         "@type": "ContactPoint",
-        telephone: "+1-778-681-0922",
+        telephone: "+1-778-223-0719",
         contactType: "customer service",
         areaServed: "CA-BC",
         availableLanguage: ["English"],

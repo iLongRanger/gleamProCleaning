@@ -33,8 +33,8 @@ export default function PrivacyPage() {
                 services@gleampro.ca
               </a>{" "}
               or{" "}
-              <a href="tel:+17786810922" className="text-white underline">
-                (778) 681-0922
+              <a href="tel:+17782230719" className="text-white underline">
+                778 223 0719
               </a>
               .
             </p>

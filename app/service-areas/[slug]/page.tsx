@@ -391,12 +391,12 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
                 "https://www.gleampro.ca/logo-gpc.png",
                 `https://www.gleampro.ca${area.image}`,
               ],
-              telephone: "+1-778-681-0922",
+              telephone: "+1-778-223-0719",
               email: "services@gleampro.ca",
               contactPoint: [
                 {
                   "@type": "ContactPoint",
-                  telephone: "+1-778-681-0922",
+                  telephone: "+1-778-223-0719",
                   contactType: "customer service",
                   areaServed: area.name,
                   availableLanguage: ["English"],
