@@ -191,7 +191,7 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
   }
   const cityCoordinates = CITY_COORDINATES[area.slug];
   const cityProof = CITY_PROOF[area.slug];
-  const areaUrl = `https://www.gleampro.ca/service-areas/${area.slug}`;
+  const areaUrl = `https://gleampro.ca/service-areas/${area.slug}`;
 
   return (
     <main className={commercial.shell}>
@@ -388,8 +388,8 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
               name: "Gleam Pro Cleaning",
               url: areaUrl,
               image: [
-                "https://www.gleampro.ca/logo-gpc.png",
-                `https://www.gleampro.ca${area.image}`,
+                "https://gleampro.ca/logo-gpc.png",
+                `https://gleampro.ca${area.image}`,
               ],
               telephone: "+1-778-223-0719",
               email: "services@gleampro.ca",
@@ -478,13 +478,13 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
                   "@type": "ListItem",
                   position: 1,
                   name: "Home",
-                  item: "https://www.gleampro.ca/",
+                  item: "https://gleampro.ca/",
                 },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: "Service Areas",
-                  item: "https://www.gleampro.ca/service-areas",
+                  item: "https://gleampro.ca/service-areas",
                 },
                 {
                   "@type": "ListItem",

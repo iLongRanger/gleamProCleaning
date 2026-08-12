@@ -12,8 +12,8 @@ function parseCc(value?: string) {
 }
 
 const ALLOWED_ORIGINS = new Set([
-  "https://www.gleampro.ca",
   "https://gleampro.ca",
+  "https://www.gleampro.ca",
   ...(process.env.NODE_ENV !== "production"
     ? ["http://localhost:3002", "http://127.0.0.1:3002"]
     : []),

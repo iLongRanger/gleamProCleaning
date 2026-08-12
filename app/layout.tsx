@@ -28,7 +28,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://www.gleampro.ca"),
+  metadataBase: new URL("https://gleampro.ca"),
   title: {
     default: "Gleam Pro Cleaning | Commercial Cleaning in Metro Vancouver",
     template: "%s | Gleam Pro Cleaning",

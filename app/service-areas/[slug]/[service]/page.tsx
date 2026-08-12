@@ -52,7 +52,7 @@ export default async function ServiceAreaServicePage({
   }
 
   const requestType = service.category === "commercial" ? "commercial" : "residential";
-  const pageUrl = `https://www.gleampro.ca/service-areas/${area.slug}/${service.slug}`;
+  const pageUrl = `https://gleampro.ca/service-areas/${area.slug}/${service.slug}`;
 
   return (
     <main className={commercial.shell}>
@@ -171,7 +171,7 @@ export default async function ServiceAreaServicePage({
               provider: {
                 "@type": "LocalBusiness",
                 name: "Gleam Pro Cleaning",
-                url: "https://www.gleampro.ca",
+                url: "https://gleampro.ca",
                 telephone: "+1-778-223-0719",
                 email: "services@gleampro.ca",
               },
@@ -191,19 +191,19 @@ export default async function ServiceAreaServicePage({
                   "@type": "ListItem",
                   position: 1,
                   name: "Home",
-                  item: "https://www.gleampro.ca/",
+                  item: "https://gleampro.ca/",
                 },
                 {
                   "@type": "ListItem",
                   position: 2,
                   name: "Service Areas",
-                  item: "https://www.gleampro.ca/service-areas",
+                  item: "https://gleampro.ca/service-areas",
                 },
                 {
                   "@type": "ListItem",
                   position: 3,
                   name: area.name,
-                  item: `https://www.gleampro.ca/service-areas/${area.slug}`,
+                  item: `https://gleampro.ca/service-areas/${area.slug}`,
                 },
                 {
                   "@type": "ListItem",

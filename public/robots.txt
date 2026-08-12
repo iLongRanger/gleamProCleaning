@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://www.gleampro.ca
+Host: https://gleampro.ca
 
 # Sitemaps
-Sitemap: https://www.gleampro.ca/sitemap.xml
+Sitemap: https://gleampro.ca/sitemap.xml

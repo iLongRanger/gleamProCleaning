@@ -403,8 +403,8 @@ export default function CommercialCleaningHubPage() {
                   name: "Commercial Cleaning Services in Metro Vancouver",
                   description:
                     "Commercial-first cleaning for restaurants, offices, and community facilities across Metro Vancouver.",
-                  url: "https://www.gleampro.ca/commercial-cleaning",
-                  provider: { "@id": "https://www.gleampro.ca/#localbusiness" },
+                  url: "https://gleampro.ca/commercial-cleaning",
+                  provider: { "@id": "https://gleampro.ca/#localbusiness" },
                   areaServed: serviceAreaNames.map((name) => ({ "@type": "City", name })),
                   hasOfferCatalog: {
                     "@type": "OfferCatalog",
@@ -415,7 +415,7 @@ export default function CommercialCleaningHubPage() {
                         itemOffered: {
                           "@type": "Service",
                           name: "Brewery & Taproom Cleaning",
-                          url: "https://www.gleampro.ca/breweries",
+                          url: "https://gleampro.ca/breweries",
                         },
                       },
                       {
@@ -423,7 +423,7 @@ export default function CommercialCleaningHubPage() {
                         itemOffered: {
                           "@type": "Service",
                           name: "Clinic & Medical Office Cleaning",
-                          url: "https://www.gleampro.ca/clinics",
+                          url: "https://gleampro.ca/clinics",
                         },
                       },
                       {
@@ -431,7 +431,7 @@ export default function CommercialCleaningHubPage() {
                         itemOffered: {
                           "@type": "Service",
                           name: "Restaurant & Pub Cleaning",
-                          url: "https://www.gleampro.ca/commercial-cleaning/restaurants",
+                          url: "https://gleampro.ca/commercial-cleaning/restaurants",
                         },
                       },
                       {
@@ -439,7 +439,7 @@ export default function CommercialCleaningHubPage() {
                         itemOffered: {
                           "@type": "Service",
                           name: "Office Cleaning",
-                          url: "https://www.gleampro.ca/commercial-cleaning/offices",
+                          url: "https://gleampro.ca/commercial-cleaning/offices",
                         },
                       },
                       {
@@ -447,7 +447,7 @@ export default function CommercialCleaningHubPage() {
                         itemOffered: {
                           "@type": "Service",
                           name: "Community Facility Cleaning",
-                          url: "https://www.gleampro.ca/commercial-cleaning/community-facilities",
+                          url: "https://gleampro.ca/commercial-cleaning/community-facilities",
                         },
                       },
                     ],

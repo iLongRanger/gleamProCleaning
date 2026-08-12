@@ -393,8 +393,8 @@ export default function ResidentialCleaningHubPage() {
                   name: "Residential Cleaning Services in Metro Vancouver",
                   description:
                     "Recurring, deep, move-in/out, and carpet & upholstery cleaning for homes across Metro Vancouver.",
-                  url: "https://www.gleampro.ca/residential-cleaning",
-                  provider: { "@id": "https://www.gleampro.ca/#localbusiness" },
+                  url: "https://gleampro.ca/residential-cleaning",
+                  provider: { "@id": "https://gleampro.ca/#localbusiness" },
                   areaServed: serviceAreaNames.map((name) => ({ "@type": "City", name })),
                   hasOfferCatalog: {
                     "@type": "OfferCatalog",
@@ -405,7 +405,7 @@ export default function ResidentialCleaningHubPage() {
                         itemOffered: {
                           "@type": "Service",
                           name: "Recurring Cleaning",
-                          url: "https://www.gleampro.ca/residential-cleaning/recurring",
+                          url: "https://gleampro.ca/residential-cleaning/recurring",
                         },
                       },
                       {
@@ -413,7 +413,7 @@ export default function ResidentialCleaningHubPage() {
                         itemOffered: {
                           "@type": "Service",
                           name: "Deep Cleaning",
-                          url: "https://www.gleampro.ca/residential-cleaning/deep-cleaning",
+                          url: "https://gleampro.ca/residential-cleaning/deep-cleaning",
                         },
                       },
                       {
@@ -421,7 +421,7 @@ export default function ResidentialCleaningHubPage() {
                         itemOffered: {
                           "@type": "Service",
                           name: "Move-In / Move-Out Cleaning",
-                          url: "https://www.gleampro.ca/residential-cleaning/move-in-out",
+                          url: "https://gleampro.ca/residential-cleaning/move-in-out",
                         },
                       },
                       {
@@ -429,7 +429,7 @@ export default function ResidentialCleaningHubPage() {
                         itemOffered: {
                           "@type": "Service",
                           name: "Carpet & Upholstery Cleaning",
-                          url: "https://www.gleampro.ca/residential-cleaning/carpet-upholstery",
+                          url: "https://gleampro.ca/residential-cleaning/carpet-upholstery",
                         },
                       },
                     ],

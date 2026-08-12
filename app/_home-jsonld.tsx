@@ -1,4 +1,4 @@
-const SITE = "https://www.gleampro.ca";
+const SITE = "https://gleampro.ca";
 
 export default function HomeJsonLd({ areaNames }: { areaNames: string[] }) {
   const data = {

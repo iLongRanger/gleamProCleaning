@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-  siteUrl: "https://www.gleampro.ca",
+  siteUrl: "https://gleampro.ca",
   generateRobotsTxt: true,
   sitemapSize: 7000,
   changefreq: "weekly",
