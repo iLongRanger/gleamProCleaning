@@ -10,6 +10,7 @@ const commercialLinks = [
   { label: "Clinics & Medical Offices", href: "/clinics" },
   { label: "Restaurants", href: "/commercial-cleaning/restaurants" },
   { label: "Offices", href: "/commercial-cleaning/offices" },
+  { label: "Property Management", href: "/commercial-cleaning/property-management" },
   { label: "Community Facilities", href: "/commercial-cleaning/community-facilities" },
   { label: "Commercial FAQ", href: "/commercial-cleaning/faq" },
 ];

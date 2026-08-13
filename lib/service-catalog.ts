@@ -42,6 +42,14 @@ export const serviceCatalog: ServiceCatalogItem[] = [
       "Flexible routines for high-traffic public and multi-room community spaces.",
   },
   {
+    slug: "property-management",
+    label: "Property Management Cleaning",
+    href: "/commercial-cleaning/property-management",
+    category: "commercial",
+    description:
+      "Recurring common-area cleaning for strata, rental, and multi-tenant properties.",
+  },
+  {
     slug: "residential-cleaning",
     label: "Residential Cleaning",
     href: "/residential-cleaning",

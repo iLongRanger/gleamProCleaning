@@ -75,6 +75,7 @@ export default function Header() {
           { label: "Clinics & Medical Offices", href: "/clinics" },
           { label: "Restaurants", href: "/commercial-cleaning/restaurants" },
           { label: "Offices", href: "/commercial-cleaning/offices" },
+          { label: "Property Management", href: "/commercial-cleaning/property-management" },
           { label: "Community Facilities", href: "/commercial-cleaning/community-facilities" },
           { label: "Commercial FAQ", href: "/commercial-cleaning/faq" },
         ],
@@ -217,6 +218,9 @@ export default function Header() {
                         </Link>
                         <Link href="/commercial-cleaning/offices" className={mobileSubLinkCls} onClick={closeMobileMenu}>
                           Offices
+                        </Link>
+                        <Link href="/commercial-cleaning/property-management" className={mobileSubLinkCls} onClick={closeMobileMenu}>
+                          Property Management
                         </Link>
                         <Link href="/commercial-cleaning/community-facilities" className={mobileSubLinkCls} onClick={closeMobileMenu}>
                           Community Facilities

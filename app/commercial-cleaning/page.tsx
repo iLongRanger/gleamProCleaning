@@ -195,6 +195,19 @@ export default function CommercialCleaningHubPage() {
                 </p>
               </Link>
 
+              <Link
+                href="/commercial-cleaning/property-management"
+                className={commercial.linkCard}
+              >
+                <h3 className={`text-lg font-semibold ${commercial.accent}`}>
+                  Property Management
+                </h3>
+                <p className="mt-2 text-white/80">
+                  Recurring common-area cleaning for strata, rental, and
+                  multi-tenant properties.
+                </p>
+              </Link>
+
               <Link href="/commercial-cleaning/faq" className={commercial.linkCard}>
                 <h3 className={`text-lg font-semibold ${commercial.accent}`}>
                   Commercial Cleaning FAQ
@@ -448,6 +461,14 @@ export default function CommercialCleaningHubPage() {
                           "@type": "Service",
                           name: "Community Facility Cleaning",
                           url: "https://gleampro.ca/commercial-cleaning/community-facilities",
+                        },
+                      },
+                      {
+                        "@type": "Offer",
+                        itemOffered: {
+                          "@type": "Service",
+                          name: "Property Management Cleaning",
+                          url: "https://gleampro.ca/commercial-cleaning/property-management",
                         },
                       },
                     ],
