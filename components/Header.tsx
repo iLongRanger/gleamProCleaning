@@ -67,6 +67,7 @@ export default function Header() {
     () => [
       { label: "Home", href: "/" },
       { label: "Service Areas", href: "/service-areas" },
+      { label: "Insights", href: "/insights" },
       {
         label: "Commercial Cleaning",
         href: "/commercial-cleaning",
@@ -181,6 +182,9 @@ export default function Header() {
                     </Link>
                     <Link href="/service-areas" className={mobileLinkCls} onClick={closeMobileMenu}>
                       Service Areas
+                    </Link>
+                    <Link href="/insights" className={mobileLinkCls} onClick={closeMobileMenu}>
+                      Insights
                     </Link>
 
                     <button

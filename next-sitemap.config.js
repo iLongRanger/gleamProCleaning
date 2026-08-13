@@ -25,6 +25,12 @@ module.exports = {
     if (path.startsWith("/commercial-cleaning/") || path.startsWith("/residential-cleaning/")) {
       return { loc: path, changefreq: "monthly", priority: 0.8, lastmod: new Date().toISOString() };
     }
+    if (path === "/insights") {
+      return { loc: path, changefreq: "monthly", priority: 0.75, lastmod: new Date().toISOString() };
+    }
+    if (path.startsWith("/insights/")) {
+      return { loc: path, changefreq: "monthly", priority: 0.7, lastmod: new Date().toISOString() };
+    }
     if (path === "/privacy" || path === "/terms") {
       return { loc: path, changefreq: "yearly", priority: 0.2, lastmod: new Date().toISOString() };
     }

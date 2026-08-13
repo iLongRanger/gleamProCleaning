@@ -23,6 +23,7 @@ const companyLinks = [
   { label: "Home", href: "/" },
   { label: "Service Areas", href: "/service-areas" },
   { label: "Areas by Service", href: "/service-areas/by-service" },
+  { label: "Insights", href: "/insights" },
   { label: "Request Walk-Through", href: "/request-walkthrough?type=commercial" },
 ];
 

@@ -279,6 +279,27 @@ export default function PropertyManagementCleaningPage() {
             </div>
           </section>
 
+          <section className={commercial.sectionAlt}>
+            <p className={commercial.eyebrow}>Planning resource</p>
+            <div className="mt-4 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-3xl">
+                <h2 className={commercial.h2Large}>
+                  Build a cleaning scope your team can inspect.
+                </h2>
+                <p className="mt-4 leading-7 text-white/70">
+                  Use our daily, weekly, monthly, and seasonal checklist to map
+                  the common-area work your property actually needs.
+                </p>
+              </div>
+              <Link
+                href="/insights/property-manager-cleaning-checklist"
+                className={commercial.secondary}
+              >
+                Read the Checklist
+              </Link>
+            </div>
+          </section>
+
           <section className={commercial.sectionDark}>
             <p className={commercial.eyebrow}>A clearer building-wide scope</p>
             <h2 className={commercial.h2Large}>
