@@ -220,6 +220,28 @@ export default function RestaurantCleaningPage() {
           </section>
 
           {/* How it works */}
+          <section className={commercial.sectionAlt}>
+            <p className={commercial.eyebrow}>Planning resource</p>
+            <div className="mt-4 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
+              <div className="max-w-3xl">
+                <h2 className={commercial.h2Large}>
+                  Give closing staff and cleaners one clear handoff.
+                </h2>
+                <p className="mt-4 leading-7 text-white/70">
+                  Use our nightly restaurant cleaning checklist to define
+                  front-of-house, washroom, floor, high-touch, and back-of-house responsibilities.
+                </p>
+              </div>
+              <Link
+                href="/insights/restaurant-cleaning-checklist"
+                className={commercial.secondary}
+              >
+                Read the Checklist
+              </Link>
+            </div>
+          </section>
+
+          {/* How it works */}
           <section className={commercial.section}>
             <h2 className={commercial.h2Large}>How it works</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
