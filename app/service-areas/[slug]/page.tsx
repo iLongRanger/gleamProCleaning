@@ -299,7 +299,7 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
           <h2 className={commercial.h2Large}>Explore services in {area.name}</h2>
           <div className="mt-4 grid gap-3 md:grid-cols-2">
             <Link
-              href={`/service-areas/${area.slug}/commercial-cleaning`}
+              href="/commercial-cleaning"
               className={commercial.linkCard}
             >
               <div className={`font-medium ${commercial.accent}`}>
@@ -310,7 +310,7 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
               </p>
             </Link>
             <Link
-              href={`/service-areas/${area.slug}/residential-cleaning`}
+              href="/residential-cleaning"
               className={commercial.linkCard}
             >
               <div className={`font-medium ${commercial.accent}`}>

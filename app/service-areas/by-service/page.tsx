@@ -65,7 +65,7 @@ export default function ServiceAreasByServicePage() {
                   {serviceAreas.map((area) => (
                     <Link
                       key={`${service.slug}-${area.slug}`}
-                      href={`/service-areas/${area.slug}/${service.slug}`}
+                      href={`/service-areas/${area.slug}`}
                       className={commercial.pill}
                     >
                       {area.name}
@@ -95,7 +95,7 @@ export default function ServiceAreasByServicePage() {
                   {serviceAreas.map((area) => (
                     <Link
                       key={`${service.slug}-${area.slug}`}
-                      href={`/service-areas/${area.slug}/${service.slug}`}
+                      href={`/service-areas/${area.slug}`}
                       className={commercial.pill}
                     >
                       {area.name}

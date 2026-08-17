@@ -256,7 +256,7 @@ export default function PropertyManagementCleaningPage() {
               {serviceAreas.map((area) => (
                 <Link
                   key={area.slug}
-                  href={`/service-areas/${area.slug}/property-management`}
+                  href={`/service-areas/${area.slug}`}
                   className={commercial.pill}
                 >
                   {area.name}

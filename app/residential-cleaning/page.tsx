@@ -191,7 +191,7 @@ export default function ResidentialCleaningHubPage() {
                {allServiceAreas.map((area) => (
                  <Link
                    key={area.slug}
-                   href={`/service-areas/${area.slug}/residential-cleaning`}
+                   href={`/service-areas/${area.slug}`}
                    className={`${residential.pill} hover:bg-white/10 transition`}
                  >
                    {area.name}
@@ -480,4 +480,3 @@ export default function ResidentialCleaningHubPage() {
     </div>
   );
 }
-

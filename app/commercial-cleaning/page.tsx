@@ -240,7 +240,7 @@ export default function CommercialCleaningHubPage() {
               {allServiceAreas.map((area) => (
                 <Link
                   key={area.slug}
-                  href={`/service-areas/${area.slug}/commercial-cleaning`}
+                  href={`/service-areas/${area.slug}`}
                   className={`${commercial.pill} hover:bg-white/10 transition`}
                 >
                   {area.name}

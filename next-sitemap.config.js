@@ -5,7 +5,7 @@ module.exports = {
   sitemapSize: 7000,
   changefreq: "weekly",
   priority: 0.7,
-  exclude: ["/api/*"],
+  exclude: ["/api/*", "/service-areas/*/*"],
   transform: async (config, path) => {
     // High-priority money pages
     if (path === "/") {
