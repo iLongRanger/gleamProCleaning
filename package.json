@@ -8,6 +8,7 @@
     "start": "next start -p 3002",
     "lint": "eslint",
     "test": "node --experimental-specifier-resolution=node --test --experimental-strip-types tests/**/*.test.ts",
+    "test:lisa": "node --experimental-specifier-resolution=node --test --experimental-strip-types tests/lisa-chat.test.ts tests/lisa-evaluation.test.ts",
     "postbuild": "next-sitemap"
   },
   "dependencies": {

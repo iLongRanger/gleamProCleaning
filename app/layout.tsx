@@ -5,8 +5,10 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GoogleAnalyticsPageView from "../components/GoogleAnalyticsPageView";
+import LisaChat from "../components/LisaChat";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
+const LISA_ENABLED = process.env.LISA_ENABLED === "true";
 
 const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
@@ -75,6 +77,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main>{children}</main>
         <Footer />
+        {LISA_ENABLED ? <LisaChat /> : null}
         {GA_ID ? (
           <>
             <Script

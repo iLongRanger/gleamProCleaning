@@ -14,6 +14,7 @@ import {
   answerLisaQuestion,
   lisaSuggestions,
   type LisaAction,
+  type LisaConversationContext,
 } from "@/lib/chat/lisa";
 
 type ChatMessage = {
@@ -42,7 +43,6 @@ function trackLisaEvent(name: string, params?: Record<string, string>) {
 
 export default function LisaChat() {
   const [open, setOpen] = useState(false);
-  const [showGreeting, setShowGreeting] = useState(false);
   const [mode, setMode] = useState<"chat" | "lead">("chat");
   const [messages, setMessages] = useState<ChatMessage[]>([initialMessage]);
   const [question, setQuestion] = useState("");
@@ -63,13 +63,21 @@ export default function LisaChat() {
   const scrollRef = useRef<HTMLDivElement>(null);
   const inputRef = useRef<HTMLInputElement>(null);
   const nextMessageId = useRef(2);
+  const conversationContext = useRef<LisaConversationContext>({});
 
   useEffect(() => {
     const timer = window.setTimeout(() => {
-      if (window.sessionStorage.getItem("lisa-greeting-dismissed") !== "1") {
-        setShowGreeting(true);
+      const hasOpened = window.sessionStorage.getItem("lisa-auto-opened") === "1";
+      const wasDismissed =
+        window.sessionStorage.getItem("lisa-greeting-dismissed") === "1";
+
+      if (!hasOpened && !wasDismissed) {
+        setOpen(true);
+        window.sessionStorage.setItem("lisa-auto-opened", "1");
+        window.sessionStorage.setItem("lisa-greeting-dismissed", "1");
+        trackLisaEvent("lisa_chat_open", { trigger: "automatic" });
       }
-    }, 5000);
+    }, 2000);
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -91,7 +99,6 @@ export default function LisaChat() {
 
   const openChat = () => {
     setOpen(true);
-    setShowGreeting(false);
     window.sessionStorage.setItem("lisa-greeting-dismissed", "1");
     trackLisaEvent("lisa_chat_open");
     window.setTimeout(() => inputRef.current?.focus(), 100);
@@ -99,7 +106,6 @@ export default function LisaChat() {
 
   const closeChat = () => {
     setOpen(false);
-    setShowGreeting(false);
     window.sessionStorage.setItem("lisa-greeting-dismissed", "1");
   };
 
@@ -117,7 +123,8 @@ export default function LisaChat() {
     const trimmed = value.trim().slice(0, 300);
     if (!trimmed) return;
 
-    const reply = answerLisaQuestion(trimmed);
+    const reply = answerLisaQuestion(trimmed, conversationContext.current);
+    conversationContext.current = reply.context ?? conversationContext.current;
     const visitorMessageId = nextMessageId.current;
     nextMessageId.current += 2;
     setMessages((current) => [
@@ -206,34 +213,6 @@ export default function LisaChat() {
 
   return (
     <div className="fixed bottom-3 right-3 z-[80] sm:bottom-5 sm:right-5">
-      {showGreeting && !open ? (
-        <div
-          role="status"
-          className="absolute bottom-[68px] right-0 w-[min(310px,calc(100vw-24px))] border border-white/15 bg-[#071629] p-4 text-white shadow-[0_18px_60px_rgba(0,0,0,0.42)]"
-        >
-          <button
-            type="button"
-            onClick={closeChat}
-            className="absolute right-2 top-2 flex h-7 w-7 items-center justify-center text-white/55 transition hover:text-white"
-            aria-label="Dismiss Lisa's greeting"
-            title="Dismiss"
-          >
-            <X className="h-4 w-4" />
-          </button>
-          <div className="flex gap-3 pr-5">
-            <LisaMark />
-            <button type="button" onClick={openChat} className="text-left">
-              <span className="block text-xs font-semibold uppercase tracking-[0.14em] text-[#D4A574]">
-                Lisa
-              </span>
-              <span className="mt-1 block text-sm leading-5 text-white/80">
-                Hi! How can I help with your cleaning needs?
-              </span>
-            </button>
-          </div>
-        </div>
-      ) : null}
-
       {open ? (
         <section
           role="dialog"
