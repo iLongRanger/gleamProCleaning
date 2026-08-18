@@ -25,7 +25,7 @@ const knowledgeBase: KnowledgeEntry[] = [
     phrases: ["how much", "what does it cost", "commercial cleaning price", "cleaning rates", "get a quote"],
     keywords: ["price", "pricing", "cost", "quote", "estimate", "rate"],
     answer:
-      "Commercial pricing depends on square footage, traffic, washrooms, floor types, service frequency, and the agreed scope. Gleam Pro provides a fixed monthly proposal after a free on-site walk-through; Lisa cannot calculate or promise a price in chat.",
+      "Commercial pricing depends on square footage, traffic, washrooms, floor types, service frequency, and the agreed scope. Gleam Pro provides a fixed monthly proposal after a free on-site walk-through. I can't calculate or promise a price in chat, but I'd be happy to help you request a walk-through.",
     actions: [walkthroughAction],
     answered: true,
   },
@@ -34,7 +34,7 @@ const knowledgeBase: KnowledgeEntry[] = [
     phrases: ["house cleaning cost", "home cleaning cost", "residential cleaning price", "price for my home"],
     keywords: ["house", "home", "residential", "pricing", "cost", "estimate"],
     answer:
-      "Residential pricing depends on the home's size, condition, bathrooms, service type, and frequency. The team provides a tailored estimate after reviewing your needs; Lisa cannot calculate or promise a price in chat.",
+      "Residential pricing depends on the home's size, condition, bathrooms, service type, and frequency. The team provides a tailored estimate after reviewing your needs. I can't calculate or promise a price in chat, but I'd be happy to help you request an estimate.",
     actions: [walkthroughAction],
     answered: true,
   },
@@ -79,7 +79,7 @@ const knowledgeBase: KnowledgeEntry[] = [
     phrases: ["clinic cleaning", "medical office cleaning", "healthcare cleaning"],
     keywords: ["clinic", "clinics", "medical", "healthcare", "treatment"],
     answer:
-      "Gleam Pro provides recurring cleaning for clinics and medical offices. The exact hygiene, disinfection, access, and product requirements must be documented during the walk-through; Lisa will not assume a clinical protocol or compliance standard.",
+      "Gleam Pro provides recurring cleaning for clinics and medical offices. The exact hygiene, disinfection, access, and product requirements are documented during the walk-through. I won't guess about a clinical protocol or compliance standard, but the team will be happy to review your requirements.",
     actions: [
       { label: "Clinic cleaning", href: "/clinics", kind: "link" },
       walkthroughAction,
@@ -250,7 +250,7 @@ const knowledgeBase: KnowledgeEntry[] = [
     phrases: ["phone number", "email address", "contact you", "talk to someone", "speak to a person"],
     keywords: ["phone", "call", "email", "contact", "person", "human", "team"],
     answer:
-      "You can call Gleam Pro at 778 223 0719 or email services@gleampro.ca. You can also leave your details here and the team will follow up within one business day.",
+      "You're welcome to call Gleam Pro at 778 223 0719 or email services@gleampro.ca. You can also leave your details here, and the team will follow up within one business day.",
     actions: [
       { label: "Call 778 223 0719", href: "tel:+17782230719", kind: "link" },
       walkthroughAction,
@@ -352,7 +352,7 @@ export function answerLisaQuestion(rawQuestion: string): LisaReply {
   if (!question) {
     return {
       intent: "empty",
-      answer: "Please type a question about Gleam Pro's cleaning services.",
+      answer: "Please send me a question about Gleam Pro's cleaning services, and I'll be happy to help.",
       answered: false,
     };
   }
@@ -361,7 +361,7 @@ export function answerLisaQuestion(rawQuestion: string): LisaReply {
     return {
       intent: "greeting",
       answer:
-        "Hi, I'm Lisa, Gleam Pro's virtual assistant. I can help with services, service areas, scheduling basics, and walk-through requests.",
+        "Hi, I'm Lisa, Gleam Pro's virtual assistant! I'd be happy to help with services, service areas, scheduling basics, and walk-through requests.",
       answered: true,
     };
   }
@@ -370,7 +370,7 @@ export function answerLisaQuestion(rawQuestion: string): LisaReply {
     return {
       intent: "guardrail-manipulation",
       answer:
-        "I can only help with approved information about Gleam Pro's cleaning services. I cannot change or reveal my operating rules.",
+        "I'm here to help with approved information about Gleam Pro's cleaning services. I can't change or reveal my operating rules, but you're welcome to ask me about our services or request a walk-through.",
       answered: false,
     };
   }
@@ -379,7 +379,7 @@ export function answerLisaQuestion(rawQuestion: string): LisaReply {
     return {
       intent: "guardrail-specialist",
       answer:
-        "I cannot confirm hazardous or specialist remediation work. Please contact the team so they can assess the request and tell you whether a qualified provider is required.",
+        "I can't confirm hazardous or specialist remediation work, and I don't want to give you the wrong answer. Please contact the team so they can assess the request and let you know whether a qualified provider is required.",
       actions: [
         { label: "Call 778 223 0719", href: "tel:+17782230719", kind: "link" },
       ],
@@ -391,7 +391,7 @@ export function answerLisaQuestion(rawQuestion: string): LisaReply {
     return {
       intent: "guardrail-availability",
       answer:
-        "Lisa cannot see the live schedule or guarantee a start date. Leave your details and the Gleam Pro team will confirm route availability and timing directly.",
+        "I'd be happy to help you check. I can't see the live schedule or guarantee a start date, but you can leave your details and the Gleam Pro team will confirm route availability and timing directly.",
       actions: [walkthroughAction],
       answered: false,
     };
@@ -405,7 +405,7 @@ export function answerLisaQuestion(rawQuestion: string): LisaReply {
     return {
       intent: "unknown",
       answer:
-        "I don't have confirmed information for that question, so I won't guess. I can help you contact the Gleam Pro team for an accurate answer.",
+        "I don't have a confirmed answer for that yet, and I don't want to guess. I'd be happy to help you contact the Gleam Pro team for an accurate answer.",
       actions: [
         { label: "Call 778 223 0719", href: "tel:+17782230719", kind: "link" },
         walkthroughAction,

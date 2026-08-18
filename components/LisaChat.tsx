@@ -28,7 +28,7 @@ type LeadType = "commercial" | "residential";
 const initialMessage: ChatMessage = {
   id: 1,
   role: "lisa",
-  text: "Hi, I'm Lisa. How can I help with your cleaning needs today? I use approved Gleam Pro information and hand anything uncertain to the team.",
+  text: "Hi, I'm Lisa! I'd be happy to help with your cleaning needs today. I use approved Gleam Pro information, and I can connect you with the team whenever something needs a personal answer.",
 };
 
 const fieldClass =
@@ -227,7 +227,7 @@ export default function LisaChat() {
                 Lisa
               </span>
               <span className="mt-1 block text-sm leading-5 text-white/80">
-                Hi, how can I help with your cleaning needs?
+                Hi! How can I help with your cleaning needs?
               </span>
             </button>
           </div>
@@ -259,7 +259,7 @@ export default function LisaChat() {
                 <h2 className="font-display text-xl leading-none text-white">Lisa</h2>
                 <p className="mt-1 flex items-center gap-1.5 text-[11px] text-white/55">
                   <span className="h-1.5 w-1.5 bg-emerald-400" aria-hidden="true" />
-                  Gleam Pro virtual assistant
+                  Gleam Pro&apos;s virtual assistant
                 </p>
               </div>
             </div>
@@ -401,9 +401,9 @@ export default function LisaChat() {
                   <span className="flex h-12 w-12 items-center justify-center border border-emerald-400/30 bg-emerald-400/10 text-emerald-300">
                     <Check className="h-6 w-6" />
                   </span>
-                  <h3 className="mt-5 font-display text-2xl text-white">Request received</h3>
+                  <h3 className="mt-5 font-display text-2xl text-white">Thanks! We received it.</h3>
                   <p className="mt-2 max-w-xs text-sm leading-6 text-white/65">
-                    The Gleam Pro team will follow up within one business day to confirm the next step.
+                    The Gleam Pro team will be in touch within one business day to help with the next step.
                   </p>
                   <button
                     type="button"
@@ -422,7 +422,7 @@ export default function LisaChat() {
                     Tell the team about your space
                   </h3>
                   <p className="mt-2 text-xs leading-5 text-white/55">
-                    No pricing or schedule is confirmed in chat. The team will review your details and contact you directly.
+                    I&apos;ll pass your details to the team. They&apos;ll personally confirm pricing, availability, and the best next step.
                   </p>
 
                   <form onSubmit={submitLead} className="mt-5 space-y-4">

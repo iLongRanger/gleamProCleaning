@@ -10,7 +10,7 @@ test("answers commercial pricing without inventing a number", () => {
 
   assert.equal(reply.intent, "commercial-pricing");
   assert.match(reply.answer, /depends on/i);
-  assert.match(reply.answer, /cannot calculate or promise a price/i);
+  assert.match(reply.answer, /can't calculate or promise a price/i);
 });
 
 test("answers questions about published service areas", () => {
@@ -25,7 +25,7 @@ test("does not promise live availability", () => {
 
   assert.equal(reply.intent, "guardrail-availability");
   assert.equal(reply.answered, false);
-  assert.match(reply.answer, /cannot see the live schedule/i);
+  assert.match(reply.answer, /can't see the live schedule/i);
 });
 
 test("rejects attempts to override Lisa's rules", () => {
@@ -49,7 +49,7 @@ test("refuses unrelated questions instead of guessing", () => {
 
   assert.equal(reply.intent, "unknown");
   assert.equal(reply.answered, false);
-  assert.match(reply.answer, /won't guess/i);
+  assert.match(reply.answer, /don't want to guess/i);
 });
 
 test("answers every suggested question with approved information", () => {
