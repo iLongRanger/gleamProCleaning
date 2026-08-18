@@ -135,6 +135,7 @@ export async function POST(req: Request) {
         ? [
             "Commercial Lead - Walk-Through Request",
             "-------------------------------------",
+            `Contact: ${fullName || "N/A"}`,
             `Business/Facility: ${businessName}`,
             `Facility Type: ${facilityType}`,
             `Address: ${address}`,

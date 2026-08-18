@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import GoogleAnalyticsPageView from "../components/GoogleAnalyticsPageView";
+import LisaChat from "../components/LisaChat";
 
 const GA_ID = process.env.NEXT_PUBLIC_GA_ID;
 
@@ -75,6 +76,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Header />
         <main>{children}</main>
         <Footer />
+        <LisaChat />
         {GA_ID ? (
           <>
             <Script

@@ -8,7 +8,7 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
 };
 
-const updated = "May 26, 2026";
+const updated = "August 18, 2026";
 
 export default function PrivacyPage() {
   return (
@@ -48,9 +48,13 @@ export default function PrivacyPage() {
               When you request a walk-through or estimate we collect the
               information you provide: name, business name (commercial requests),
               email, phone number, service address, preferred frequency, and any
-              notes about your space. We also collect basic technical data when
-              you visit our site (browser type, pages viewed, approximate
-              location based on IP) for analytics.
+              notes about your space. If you submit a request through Lisa, our
+              website assistant, we collect the contact and service details you
+              enter in that request. Ordinary questions asked in Lisa are matched
+              to approved website answers in your browser and are not stored or
+              sent to an external AI provider. We also collect basic technical
+              data when you visit our site (browser type, pages viewed,
+              approximate location based on IP) for analytics.
             </p>
           </section>
 
@@ -61,6 +65,7 @@ export default function PrivacyPage() {
             <p className="mt-3">We use the information you provide to:</p>
             <ul className="mt-3 space-y-2 list-disc pl-5">
               <li>Respond to your walk-through or estimate request</li>
+              <li>Answer common service questions through Lisa</li>
               <li>Schedule and deliver the cleaning services you book</li>
               <li>Send service-related communications and invoices</li>
               <li>Improve our website and service offerings</li>
