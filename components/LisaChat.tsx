@@ -1,14 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { FormEvent, useEffect, useRef, useState } from "react";
 import {
   ArrowLeft,
   Check,
-  MessageCircle,
   Send,
   ShieldCheck,
-  Sparkles,
   X,
 } from "lucide-react";
 import {
@@ -292,8 +291,16 @@ export default function LisaChat() {
                         }`}
                       >
                         {message.role === "lisa" ? (
-                          <span className="mb-1.5 flex items-center gap-1.5 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#D4A574]">
-                            <Sparkles className="h-3 w-3" /> Lisa
+                          <span className="mb-1.5 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#D4A574]">
+                            <Image
+                              src="/logo-gpc-32x32.png"
+                              alt=""
+                              width={14}
+                              height={14}
+                              className="h-3.5 w-3.5"
+                              aria-hidden="true"
+                            />
+                            Lisa
                           </span>
                         ) : null}
                         <p>{message.text}</p>
@@ -580,12 +587,26 @@ export default function LisaChat() {
       <button
         type="button"
         onClick={open ? closeChat : openChat}
-        className="flex h-14 w-14 items-center justify-center bg-[#D4A574] text-[#071629] shadow-[0_12px_36px_rgba(0,0,0,0.38)] transition hover:bg-[#E5BB8F] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#050E1F]"
+        className={`relative flex h-14 w-14 items-center justify-center border border-[#D4A574]/45 bg-[#071629] text-white shadow-[0_12px_36px_rgba(0,0,0,0.38)] transition hover:border-[#E5BB8F] hover:bg-[#0B2545] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#050E1F] ${
+          open ? "" : "lisa-active-pulse"
+        }`}
         aria-label={open ? "Close Lisa chat" : "Chat with Lisa"}
         aria-expanded={open}
         title={open ? "Close chat" : "Chat with Lisa"}
       >
-        {open ? <X className="h-6 w-6" /> : <MessageCircle className="h-6 w-6" />}
+        {open ? (
+          <X className="h-6 w-6" />
+        ) : (
+          <Image
+            src="/logo-gpc-64x64.png"
+            alt=""
+            width={48}
+            height={48}
+            className="h-12 w-12"
+            aria-hidden="true"
+            priority
+          />
+        )}
       </button>
     </div>
   );
@@ -593,8 +614,14 @@ export default function LisaChat() {
 
 function LisaMark() {
   return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-[#D4A574]/35 bg-[#D4A574]/10 text-[#E5BB8F]">
-      <Sparkles className="h-5 w-5" aria-hidden="true" />
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden border border-[#D4A574]/35 bg-[#071629]">
+      <Image
+        src="/logo-gpc-64x64.png"
+        alt="Gleam Pro Cleaning"
+        width={40}
+        height={40}
+        className="h-10 w-10"
+      />
     </span>
   );
 }
