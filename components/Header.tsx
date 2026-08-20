@@ -66,6 +66,7 @@ export default function Header() {
   const nav: NavItem[] = useMemo(
     () => [
       { label: "Home", href: "/" },
+      { label: "About", href: "/about" },
       { label: "Service Areas", href: "/service-areas" },
       { label: "Insights", href: "/insights" },
       {

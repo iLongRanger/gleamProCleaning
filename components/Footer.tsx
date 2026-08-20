@@ -21,6 +21,7 @@ const residentialLinks = [
 
 const companyLinks = [
   { label: "Home", href: "/" },
+  { label: "About", href: "/about" },
   { label: "Service Areas", href: "/service-areas" },
   { label: "Areas by Service", href: "/service-areas/by-service" },
   { label: "Insights", href: "/insights" },

@@ -1,6 +1,7 @@
 export type LisaAction =
   | { label: string; href: string; kind: "link" }
-  | { label: string; kind: "lead" };
+  | { label: string; kind: "lead" }
+  | { label: string; value: string; kind: "question" };
 
 export type LisaServiceIntent =
   | "restaurants"
@@ -17,6 +18,17 @@ export type LisaServiceIntent =
 
 export type LisaConversationContext = {
   serviceIntent?: LisaServiceIntent;
+  market?: "commercial" | "residential";
+  city?: string;
+  cities?: string[];
+  frequency?: string;
+  serviceWindow?: "daytime" | "after-hours" | "weekend";
+  squareFeet?: string;
+  bedrooms?: number;
+  bathrooms?: number;
+  siteCount?: number;
+  unitCount?: number;
+  requestedTiming?: string;
   unknownCount?: number;
 };
 
@@ -38,6 +50,28 @@ const walkthroughAction: LisaAction = {
   kind: "lead",
 };
 
+const marketQuickReplies: LisaAction[] = [
+  { label: "Commercial", value: "commercial cleaning", kind: "question" },
+  { label: "Residential", value: "residential cleaning", kind: "question" },
+];
+
+const facilityQuickReplies: LisaAction[] = [
+  { label: "Restaurant", value: "restaurant cleaning", kind: "question" },
+  { label: "Office", value: "office cleaning", kind: "question" },
+  { label: "Clinic", value: "clinic cleaning", kind: "question" },
+  { label: "Brewery / taproom", value: "taproom cleaning", kind: "question" },
+  { label: "School / community", value: "school cleaning", kind: "question" },
+  { label: "Managed property", value: "property management cleaning", kind: "question" },
+  { label: "Home", value: "home cleaning", kind: "question" },
+];
+
+const topicQuickReplies: LisaAction[] = [
+  { label: "Services", value: "services", kind: "question" },
+  { label: "Pricing", value: "price", kind: "question" },
+  { label: "Service areas", value: "service areas", kind: "question" },
+  { label: "Walk-through", value: "request a walkthrough", kind: "question" },
+];
+
 const knowledgeBase: KnowledgeEntry[] = [
   {
     intent: "company-about",
@@ -52,6 +86,7 @@ const knowledgeBase: KnowledgeEntry[] = [
     answer:
       "Gleam Pro is a family-owned cleaning company located in New Westminster and serving Metro Vancouver. We've been on the floor since 2019 and incorporated since 2024. Our website focuses on owner-led, recurring commercial cleaning along with residential cleaning services.",
     actions: [
+      { label: "About Gleam Pro", href: "/about", kind: "link" },
       { label: "Explore our services", href: "/commercial-cleaning", kind: "link" },
     ],
     answered: true,
@@ -71,6 +106,44 @@ const knowledgeBase: KnowledgeEntry[] = [
       "Yes, Gleam Pro has been incorporated since 2024. If you mean a specific licence, certification, or registration, please tell me which one. I won't claim a credential that isn't confirmed on our website.",
     actions: [
       { label: "Contact the team", href: "mailto:services@gleampro.ca", kind: "link" },
+    ],
+    answered: true,
+  },
+  {
+    intent: "unconfirmed-licence",
+    phrases: [
+      "are you licensed",
+      "do you have a business licence",
+      "business license",
+      "business licence",
+    ],
+    keywords: ["licensed", "license", "licence"],
+    answer:
+      "Gleam Pro's website confirms that the company has been incorporated since 2024, but it does not publish a specific business licence. Tell the team which licence your property requires and they will confirm it without assuming.",
+    actions: [
+      { label: "Contact the team", href: "mailto:services@gleampro.ca", kind: "link" },
+    ],
+    answered: false,
+  },
+  {
+    intent: "unconfirmed-gst-registration",
+    phrases: ["are you gst registered", "gst number", "gst registration"],
+    keywords: ["gst"],
+    answer:
+      "Gleam Pro's website confirms incorporation, but it does not publish or confirm a GST registration number. Please ask the team to confirm the applicable tax and registration details for your invoice or proposal.",
+    actions: [
+      { label: "Contact the team", href: "mailto:services@gleampro.ca", kind: "link" },
+    ],
+    answered: false,
+  },
+  {
+    intent: "assistant-identity",
+    phrases: ["are you a robot", "are you ai", "are you a real person", "who are you"],
+    keywords: ["robot", "assistant"],
+    answer:
+      "I'm Lisa, Gleam Pro's website assistant, not a person. I match your questions to information published on this website and can connect you with the Gleam Pro team when you need a personal or account-specific answer.",
+    actions: [
+      { label: "Contact the team", value: "talk to a person", kind: "question" },
     ],
     answered: true,
   },
@@ -130,12 +203,16 @@ const knowledgeBase: KnowledgeEntry[] = [
       "can i have an estimate",
       "i need an estimate",
       "what affects the price",
+      "how does pricing work",
       "book an estimate",
     ],
     keywords: ["quote", "estimate"],
     answer:
       "Absolutely! I can help you request a quote. Is it for a commercial space or a home? You can also open the request form below and share the details with our team.",
-    actions: [{ label: "Request a quote", kind: "lead" }],
+    actions: [
+      ...marketQuickReplies,
+      { label: "Request a quote", kind: "lead" },
+    ],
     answered: true,
   },
   {
@@ -149,7 +226,7 @@ const knowledgeBase: KnowledgeEntry[] = [
   },
   {
     intent: "commercial-services",
-    phrases: ["commercial services", "commercial spaces", "what do you clean", "what is included", "clean my business"],
+    phrases: ["commercial cleaning", "commercial services", "commercial spaces", "what do you clean", "what is included", "clean my business"],
     keywords: ["commercial", "business", "facility", "services", "included", "scope"],
     answer:
       "A typical commercial scope can include waste and recycling, washrooms, high-touch surfaces, floors, breakrooms or approved kitchen areas, and spot glass. We'll confirm the exact areas and frequency with you during the walk-through. What type of business do you have?",
@@ -169,6 +246,7 @@ const knowledgeBase: KnowledgeEntry[] = [
     keywords: ["tasks", "included", "scope"],
     answer:
       "I can give you the right checklist once I know the space. Is this for a commercial facility or a home?",
+    actions: marketQuickReplies,
     answered: false,
   },
   {
@@ -221,8 +299,16 @@ const knowledgeBase: KnowledgeEntry[] = [
   },
   {
     intent: "property-management",
-    phrases: ["property management cleaning", "strata cleaning", "apartment common areas", "building cleaning"],
-    keywords: ["property", "strata", "building", "lobby", "corridor", "elevator", "amenity"],
+    phrases: [
+      "property management cleaning",
+      "strata cleaning",
+      "apartment common areas",
+      "building cleaning",
+      "clean lobbies elevators and hallways",
+      "clean the garbage room",
+      "garbage room cleaning",
+    ],
+    keywords: ["property", "strata", "building", "lobby", "hallway", "corridor", "elevator", "amenity", "garbage"],
     answer:
       "We work with property managers on recurring common-area cleaning. That can include entrances, lobbies, corridors, elevators, shared washrooms, amenity spaces, and service areas. We can confirm the exact scope during a walk-through.",
     actions: [
@@ -308,7 +394,13 @@ const knowledgeBase: KnowledgeEntry[] = [
   },
   {
     intent: "deep-cleaning",
-    phrases: ["deep cleaning", "deep clean", "spring cleaning"],
+    phrases: [
+      "deep cleaning",
+      "deep clean",
+      "spring cleaning",
+      "are baseboards included",
+      "clean baseboards",
+    ],
     keywords: ["deep", "detailed", "buildup", "baseboards"],
     answer:
       "A deep clean is a one-time, detail-focused service for buildup-prone and harder-to-reach areas beyond regular maintenance. We'll confirm the exact inclusions based on your home's condition and priorities.",
@@ -438,7 +530,7 @@ const knowledgeBase: KnowledgeEntry[] = [
     keywords: ["minimum", "frequency", "visits"],
     answer:
       "Our website lists daily, five-times-weekly, weekly, bi-weekly, monthly, and custom schedules, but it doesn't state one universal minimum for every client. Tell me whether this is for a commercial space or home, and the team can confirm the available frequency for your scope.",
-    actions: [walkthroughAction],
+    actions: [...marketQuickReplies, walkthroughAction],
     answered: true,
   },
   {
@@ -449,6 +541,8 @@ const knowledgeBase: KnowledgeEntry[] = [
       "clean while i am away",
       "entry instructions",
       "lockbox access",
+      "use a lockbox",
+      "cleaners use a lockbox",
       "provide a key or lockbox code",
     ],
     keywords: ["present", "away", "entry", "lockbox", "access"],
@@ -478,6 +572,7 @@ const knowledgeBase: KnowledgeEntry[] = [
       "how long does cleaning take",
       "how long does deep cleaning take",
       "how long will it take",
+      "how long will the cleaning take",
       "cleaning appointment length",
       "deep cleaning time",
     ],
@@ -490,16 +585,23 @@ const knowledgeBase: KnowledgeEntry[] = [
   {
     intent: "pet-friendly",
     phrases: [
+      "are you pet friendly",
       "pet friendly cleaning",
       "safe for pets",
       "safe for children",
       "kids and pets",
       "pets in the home",
+      "i have pets",
+      "i have a dog",
+      "i have a cat",
     ],
-    keywords: ["pet", "pets", "children", "kids", "family", "allergies"],
+    keywords: ["pet", "pets", "dog", "dogs", "cat", "cats", "children", "kids", "family", "allergies"],
     answer:
-      "Yes. We can use pet-conscious, family-safe approaches and coordinate around pets in the home. We also offer eco-forward products and can accommodate specific allergies, scent sensitivities, or product preferences when you tell us in advance.",
-    actions: [walkthroughAction],
+      "Yes. We can use pet-conscious approaches and coordinate around pets in the home. Our residential pages also state that low-fragrance, child- and pet-safe products are used by default. Please share any pet, allergy, or product considerations before the appointment.",
+    actions: [
+      { label: "Residential cleaning FAQ", href: "/residential-cleaning/faq", kind: "link" },
+      walkthroughAction,
+    ],
     answered: true,
   },
   {
@@ -557,6 +659,7 @@ const knowledgeBase: KnowledgeEntry[] = [
       "work with our alarm",
       "secure areas",
       "alarm procedure",
+      "protect my alarm code",
       "key protocol",
       "access procedure",
       "lock up instructions",
@@ -574,6 +677,8 @@ const knowledgeBase: KnowledgeEntry[] = [
       "bring equipment",
       "provide equipment",
       "cleaning products",
+      "use my products",
+      "use customer products",
     ],
     keywords: ["supplies", "equipment", "products", "chemicals", "consumables", "soap", "liners", "paper"],
     answer:
@@ -591,6 +696,8 @@ const knowledgeBase: KnowledgeEntry[] = [
       "low odor products",
       "fragrance free",
       "scent sensitivity",
+      "allergic to bleach",
+      "product allergy",
     ],
     keywords: ["green", "eco", "odor", "fragrance", "scent", "sensitivity"],
     answer:
@@ -673,8 +780,18 @@ const knowledgeBase: KnowledgeEntry[] = [
   },
   {
     intent: "trial",
-    phrases: ["long term contract", "30 day trial", "no lock in", "cancel anytime", "contract length"],
-    keywords: ["trial", "contract", "commitment", "lock", "cancel"],
+    phrases: [
+      "do you require a contract",
+      "is there a minimum term",
+      "do you offer a trial",
+      "is there a trial period",
+      "long term contract",
+      "30 day trial",
+      "no lock in",
+      "cancel anytime",
+      "contract length",
+    ],
+    keywords: ["trial", "contract", "commitment", "lock", "cancel", "term"],
     answer:
       "You can start with our 30-day trial, with no long-term lock-in. Your proposal or service agreement will clearly document the scope, service terms, and cancellation requirements.",
     actions: [walkthroughAction],
@@ -718,11 +835,7 @@ const knowledgeBase: KnowledgeEntry[] = [
     intent: "move-cleaning-details",
     phrases: [
       "when should i schedule move out cleaning",
-      "clean appliances",
-      "clean inside ovens and refrigerators",
       "do you clean inside the oven for move out cleaning",
-      "inside the oven",
-      "inside the fridge",
       "carpet cleaning with move out",
     ],
     keywords: ["appliances", "oven", "fridge", "refrigerator", "move", "schedule"],
@@ -733,6 +846,110 @@ const knowledgeBase: KnowledgeEntry[] = [
       walkthroughAction,
     ],
     answered: true,
+  },
+  {
+    intent: "appliance-cleaning",
+    phrases: [
+      "clean appliances",
+      "clean inside ovens and refrigerators",
+      "clean inside the oven",
+      "inside the oven",
+      "inside the fridge",
+    ],
+    keywords: ["appliance", "appliances", "oven", "fridge", "refrigerator"],
+    answer:
+      "Inside-appliance cleaning is confirmed on our website for move-in and move-out service. For recurring or deep cleaning, please include the oven, refrigerator, or other appliance in your request so the team can confirm whether it can be included or added to your scope.",
+    actions: [walkthroughAction],
+    answered: true,
+  },
+  {
+    intent: "interior-window-cleaning",
+    phrases: [
+      "clean inside windows",
+      "clean interior windows",
+      "inside window cleaning",
+      "interior window cleaning",
+    ],
+    keywords: ["window", "windows", "interior"],
+    answer:
+      "Interior window cleaning is not listed as a standard inclusion on our residential pages. Please add it to your request so the team can confirm the accessible windows, scope, and whether it can be included or quoted separately.",
+    actions: [walkthroughAction],
+    answered: false,
+  },
+  {
+    intent: "linen-service",
+    phrases: [
+      "change bed sheets",
+      "change the bed sheets",
+      "change linens",
+      "make the beds",
+    ],
+    keywords: ["sheets", "linens", "beds"],
+    answer:
+      "Changing bed sheets or linens is not listed as a standard inclusion on our website. Add it to your request and the team will confirm whether it can be included in your residential checklist.",
+    actions: [walkthroughAction],
+    answered: false,
+  },
+  {
+    intent: "restaurant-specialty",
+    phrases: [
+      "clean grease hoods",
+      "clean kitchen hoods",
+      "clean fryers",
+      "wash dishes",
+      "clean beer tanks",
+      "food safe chemicals",
+      "food safe products",
+      "hood cleaning",
+      "duct cleaning",
+      "grease trap cleaning",
+    ],
+    keywords: ["hood", "hoods", "duct", "ducts", "grease", "trap", "fryer", "fryers", "dishes", "tanks"],
+    answer:
+      "Hoods, ducts, grease traps, fryers, dishes, production tanks, kitchen equipment, beverage lines, and food-contact sanitation are specialty items that are not included automatically. The team must review and confirm them separately during your walk-through, and a qualified specialist may be required.",
+    actions: [walkthroughAction],
+    answered: true,
+  },
+  {
+    intent: "childcare-facilities",
+    phrases: ["daycare cleaning", "clean a daycare", "clean daycares", "childcare cleaning"],
+    keywords: ["daycare", "daycares", "childcare"],
+    answer:
+      "Our website confirms school and community-facility cleaning, but it does not specifically confirm daycare or childcare facilities. I can connect you with the team to review the facility requirements and confirm whether we can provide the right scope.",
+    actions: [walkthroughAction],
+    answered: false,
+  },
+  {
+    intent: "balcony-cleaning",
+    phrases: [
+      "clean the balcony",
+      "what about the balcony",
+      "balcony cleaning",
+      "clean balconies",
+    ],
+    keywords: ["balcony", "balconies"],
+    answer:
+      "Balcony cleaning is not listed as a standard residential inclusion on our website. Add it to your request and the team will confirm the accessible area, surfaces, and whether it can be included or quoted separately.",
+    actions: [walkthroughAction],
+    answered: false,
+  },
+  {
+    intent: "patio-cleaning",
+    phrases: ["clean the patio", "patio cleaning", "clean patios"],
+    keywords: ["patio", "patios"],
+    answer:
+      "Gleam Pro's brewery and taproom page lists patios as an area that can be included in an approved scope. For another facility type, the team must review the patio's access, surfaces, and cleaning requirements before confirming it.",
+    actions: [walkthroughAction],
+    answered: true,
+  },
+  {
+    intent: "laundry-service",
+    phrases: ["do laundry", "laundry service", "wash my clothes"],
+    keywords: ["laundry", "clothes"],
+    answer:
+      "Laundry is not listed as a standard cleaning inclusion on our website. Add it to your request and the team will confirm whether that task can be included in your residential checklist.",
+    actions: [walkthroughAction],
+    answered: false,
   },
   {
     intent: "cleaning-guides",
@@ -784,6 +1001,9 @@ const knowledgeBase: KnowledgeEntry[] = [
   {
     intent: "satisfaction-policy",
     phrases: [
+      "do you guarantee your work",
+      "do you guarantee the cleaning",
+      "satisfaction guarantee",
       "what if something is missed",
       "what if you miss something",
       "not happy with cleaning",
@@ -791,8 +1011,10 @@ const knowledgeBase: KnowledgeEntry[] = [
       "satisfaction policy",
       "will you come back",
       "request a reclean",
+      "make a complaint",
+      "file a complaint",
     ],
-    keywords: ["miss", "missed", "satisfaction", "reclean", "refund", "issue"],
+    keywords: ["miss", "missed", "satisfaction", "guarantee", "reclean", "refund", "issue"],
     answer:
       "If something is missed, please tell us within 24 hours of the visit. Our terms say we'll return to make it right at no extra charge. Completed visits aren't refunded when a re-clean wasn't requested.",
     actions: [
@@ -802,11 +1024,32 @@ const knowledgeBase: KnowledgeEntry[] = [
     answered: true,
   },
   {
+    intent: "damage-policy",
+    phrases: [
+      "cleaner breaks something",
+      "cleaner damages something",
+      "what happens if something breaks",
+      "damage during cleaning",
+    ],
+    keywords: ["breaks", "broken", "damage", "damages", "negligence"],
+    answer:
+      "Our terms state that Gleam Pro will repair or replace items damaged through its negligence or a contractor's negligence during a service visit. The terms exclude pre-existing damage and normal wear, and total liability is limited as described on the terms page.",
+    actions: [
+      { label: "View terms", href: "/terms", kind: "link" },
+      { label: "Call 778 223 0719", href: "tel:+17782230719", kind: "link" },
+    ],
+    answered: true,
+  },
+  {
     intent: "cleaning-team",
     phrases: [
       "are cleaners background checked",
+      "criminal record checks",
+      "criminal background checks",
       "are cleaners vetted",
       "are cleaners employees",
+      "do you subcontract",
+      "subcontract the cleaning",
       "independent contractors",
       "who does the cleaning",
     ],
@@ -819,6 +1062,110 @@ const knowledgeBase: KnowledgeEntry[] = [
     answered: true,
   },
   {
+    intent: "unconfirmed-credential",
+    phrases: [
+      "are your cleaners bonded",
+      "are you bonded",
+      "bonded cleaners",
+    ],
+    keywords: ["bonded", "bonding"],
+    answer:
+      "Our website confirms $1 million in commercial general liability insurance and vetted independent contractors, but it does not state that Gleam Pro or every cleaner is bonded. Please contact the team if bonding is required for your property so they can confirm it accurately.",
+    actions: [
+      { label: "Call 778 223 0719", href: "tel:+17782230719", kind: "link" },
+      walkthroughAction,
+    ],
+    answered: false,
+  },
+  {
+    intent: "worksafe-credential",
+    phrases: [
+      "worksafebc clearance",
+      "worksafe clearance",
+      "wcb clearance",
+      "certificate of insurance and worksafe",
+    ],
+    keywords: ["worksafebc", "worksafe", "wcb", "clearance"],
+    answer:
+      "Gleam Pro's website confirms $1 million in commercial general liability insurance and that a certificate of insurance is available on request. It does not publish a WorkSafeBC or WCB clearance status, so the team must confirm that requirement directly before service.",
+    actions: [
+      { label: "Call 778 223 0719", href: "tel:+17782230719", kind: "link" },
+      walkthroughAction,
+    ],
+    answered: false,
+  },
+  {
+    intent: "unconfirmed-training",
+    phrases: [
+      "whmis trained",
+      "healthcare training",
+      "clinical training",
+      "special training",
+    ],
+    keywords: ["whmis", "training", "trained"],
+    answer:
+      "Gleam Pro's website does not publish a WHMIS, clinical, or facility-specific training credential. Share the exact training requirement with the team and they will confirm whether the assigned crew meets it before service.",
+    actions: [walkthroughAction],
+    answered: false,
+  },
+  {
+    intent: "clinic-disinfection",
+    phrases: [
+      "disinfect exam rooms",
+      "disinfect treatment rooms",
+      "clinic disinfection",
+      "dental disinfection",
+    ],
+    keywords: ["disinfect", "disinfection", "exam", "treatment"],
+    answer:
+      "For clinics and medical offices, the team reviews hygiene, disinfection, access, and product requirements during the walk-through. Lisa cannot confirm a clinical protocol or compliance standard, so the exact exam-room or treatment-room procedure must be approved in your written scope.",
+    actions: [walkthroughAction],
+    answered: true,
+  },
+  {
+    intent: "unpublished-account-detail",
+    phrases: [
+      "provide references",
+      "customer references",
+      "invoice each office separately",
+      "separate invoices",
+      "work on statutory holidays",
+      "holiday service",
+      "speak french",
+      "snow removal",
+      "emergency spills",
+      "turn a unit around",
+      "turnaround time",
+    ],
+    keywords: ["references", "holiday", "holidays", "french", "snow", "separate"],
+    answer:
+      "That operational or account detail is not confirmed on Gleam Pro's website, so I don't want to assume. Please leave your details or call the team so they can confirm the requirement for your location and proposed scope.",
+    actions: [
+      { label: "Call 778 223 0719", href: "tel:+17782230719", kind: "link" },
+      walkthroughAction,
+    ],
+    answered: false,
+  },
+  {
+    intent: "unpublished-billing-detail",
+    phrases: [
+      "what payment methods do you accept",
+      "how can i pay",
+      "can i pay by credit card",
+      "can i pay cash",
+      "do prices include tax",
+      "is tax included",
+    ],
+    keywords: ["card", "cash", "cheque", "tax", "taxes"],
+    answer:
+      "Our website explains when invoices are due, but it does not list accepted payment methods or confirm whether a quoted amount includes tax. The team will confirm those billing details with your proposal or booking.",
+    actions: [
+      { label: "Call 778 223 0719", href: "tel:+17782230719", kind: "link" },
+      { label: "View terms", href: "/terms", kind: "link" },
+    ],
+    answered: false,
+  },
+  {
     intent: "privacy",
     phrases: [
       "privacy policy",
@@ -826,8 +1173,11 @@ const knowledgeBase: KnowledgeEntry[] = [
       "do you sell my information",
       "do you sell my data",
       "is lisa recording me",
+      "are chats recorded",
+      "is this chat recorded",
       "does lisa store messages",
       "delete my information",
+      "delete my phone number",
     ],
     keywords: ["privacy", "data", "information", "recording", "messages", "delete"],
     answer:
@@ -839,7 +1189,16 @@ const knowledgeBase: KnowledgeEntry[] = [
   },
   {
     intent: "contact",
-    phrases: ["phone number", "email address", "contact you", "talk to someone", "speak to a person"],
+    phrases: [
+      "phone number",
+      "email address",
+      "contact you",
+      "talk to someone",
+      "talk to a person",
+      "speak to a person",
+      "can someone call me",
+      "contact the team",
+    ],
     keywords: ["phone", "call", "email", "contact", "person", "human", "team"],
     answer:
       "Of course. You can call us at 778 223 0719, email services@gleampro.ca, or leave your details here. Our team will follow up within one business day.",
@@ -871,6 +1230,9 @@ export const lisaSuggestions = [
 
 const manipulationPatterns = [
   /ignore (all |any )?(previous|prior|above) (instructions|rules)/,
+  /ignore (your|the) instructions/,
+  /private customer (information|data)/,
+  /reveal customer (information|data)/,
   /reveal (your|the) (prompt|instructions|rules)/,
   /system prompt/,
   /developer message/,
@@ -880,12 +1242,66 @@ const manipulationPatterns = [
 
 const confirmationPatterns = [
   /are you available/,
-  /can you come (today|tomorrow|on)/,
+  /can (you|someone) (come|start)\b/,
+  /can i (book|schedule)\b/,
   /book (me|us) (for|on)/,
+  /\b(start|come|book|schedule) (today|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/,
   /what time can you/,
   /do you have an opening/,
-  /guarantee/,
+  /\bneed to start\b/,
+  /\b(?:begin|start) (?:at )?(?:the )?(?:beginning|start) of next month\b/,
+  /\bvisit next (week|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/,
+  /\bmove out date\b/,
+  /\bprefer (monday|tuesday|wednesday|thursday|friday|saturday|sunday)s?\b/,
+  /\bwalk ?through (?:on )?(today|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/,
+  /\b(today|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday)(?: morning| afternoon| evening)? works best\b/,
+  /\b(?:today|tomorrow) at \d{1,2}\s*(?:am|pm)\b/,
+  /\b(?:not|no) (?:monday|tuesday|wednesday|thursday|friday|saturday|sunday).*(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday).*(?:better|prefer)\b/,
+  /guarantee .*(today|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday)/,
+  /\b(urgent|urgently|asap|as soon as possible)\b/,
 ];
+
+const humanHandoffPattern =
+  /\b(?:(?:talk|speak|connect)\s+(?:me\s+)?(?:to|with)\s+(?:a\s+|the\s+)?(?:person|human|agent|team|owner)|(?:can|have)\s+someone\s+call\s+me|call me back|request a callback|human|agent)\b/;
+const satisfactionGuaranteePattern =
+  /\bguarantee (your work|the cleaning|the service)|satisfaction guarantee\b/;
+const appliancePattern =
+  /\b(inside (the )?(oven|fridge|refrigerator)|clean (the )?(oven|fridge|refrigerator)|clean appliances?)\b/;
+const restaurantSpecialtyPattern =
+  /\b(hood|hoods|duct|ducts|grease trap|grease traps|kitchen equipment|beer line|beer lines|beverage line|beverage lines)\b/;
+const unlistedServiceAreaPattern =
+  /\b(langley|maple ridge|port coquitlam|port moody|white rock)\b/;
+const standaloneSchedulePattern =
+  /^(today|tomorrow|monday|tuesday|wednesday|thursday|friday|saturday|sunday)$/;
+const worksafePattern =
+  /\b(worksafebc|worksafe|wcb|workers compensation|worker compensation)\b/;
+const privacyRequestPattern =
+  /\b(are chats recorded|is this chat recorded|delete my (phone number|information|data)|remove my (phone number|information|data))\b/;
+const customerPhonePattern =
+  /(?:\b(?:my|our) (?:phone|telephone|mobile|cell) (?:number )?(?:is|:)\s*\d|\bcall (?:me|us) (?:at|on)\s*\d)/;
+const customerEmailPattern =
+  /\b[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}\b/i;
+const emailedQuotePattern =
+  /\b(email me (a |the )?quote|send (me )?(a |the )?quote (by|to my) email)\b/;
+const unlistedFacilityPattern =
+  /\b(nightclub|night club|gym|gyms|fitness cent(?:er|re)|retail(?: store)?|stores|warehouse|warehouses|airbnb|short term rental)\b/;
+const referenceRequestPattern = /\b(reference|references|testimonial|testimonials)\b/;
+const combinedBondingPattern = /\b(?:insured.*bonded|bonded.*insured)\b/;
+const employeeStatusPattern =
+  /\b(?:are (?:all |your )?(?:workers|cleaners|staff) employees|employees or contractors|who (?:performs|does) the cleaning)\b/;
+const ownerQuestionPattern = /\b(?:who owns (?:gleam pro|the company)|who is the owner)\b/;
+const pricingPolicyPattern =
+  /\b(?:minimum charge|minimum price|deposit required|require (?:a )?deposit|hidden fees?|budget is|budget of|charge gst|gst charged|estimate free|free estimate|walk ?through free|free walk ?through)\b/;
+const cancellationAccessPattern =
+  /\b(?:i want to cancel|cancel (?:my )?(?:service|visit|appointment|cleaning)|reschedule|locked out|lock out|denied access)\b/;
+const residentialExtraPattern =
+  /\b(?:ceiling fans?|walls?|inside (?:the )?cabinets?|cabinet interiors?|powder room)\b/;
+const unpublishedOperationsPattern =
+  /\b(?:wear uniforms?|uniformed|minimum charge|minimum price)\b/;
+const affirmativePattern =
+  /^(?:yes|yes please|sure|sounds good|okay|ok|okay book it|book it|please do|that works)$/;
+const declinePattern =
+  /^(?:no|no thanks|no thank you|actually never mind|never mind|not now)$/;
 
 const specialistPatterns = [
   /mould|mold/,
@@ -893,6 +1309,7 @@ const specialistPatterns = [
   /biohazard/,
   /crime scene/,
   /needles|sharps/,
+  /medical waste/,
   /pest control/,
   /fire damage/,
   /flood damage/,
@@ -911,7 +1328,16 @@ const serviceAliases: Record<LisaServiceIntent, string[]> = {
     "diner",
   ],
   breweries: ["brewery", "breweries", "taproom", "taprooms"],
-  clinics: ["medical office", "medical offices", "clinic", "clinics", "healthcare"],
+  clinics: [
+    "medical office",
+    "medical offices",
+    "dental office",
+    "dental clinic",
+    "dentist office",
+    "clinic",
+    "clinics",
+    "healthcare",
+  ],
   offices: ["office", "offices", "workplace", "workplaces"],
   "property-management": [
     "property management",
@@ -934,7 +1360,21 @@ const serviceAliases: Record<LisaServiceIntent, string[]> = {
     "shcools",
     "schols",
   ],
-  "residential-services": ["residential", "house", "houses", "home", "homes"],
+  "residential-services": [
+    "residential",
+    "house",
+    "houses",
+    "home",
+    "homes",
+    "condo",
+    "condos",
+    "apartment",
+    "apartments",
+    "townhouse",
+    "townhouses",
+    "townhome",
+    "townhomes",
+  ],
   "deep-cleaning": ["deep cleaning", "deep clean", "spring cleaning"],
   "move-cleaning": [
     "move in",
@@ -967,11 +1407,12 @@ const residentialServiceIntents = new Set<LisaServiceIntent>([
 ]);
 
 const pricingPattern = /\b(how much|cost|costs|price|prices|pricing|quote|estimate|rate|rates)\b/;
-const frequencyPattern = /\b(how often|frequency|daily|nightly|weekly|bi weekly|monthly)\b/;
+const frequencyPattern =
+  /\b(how often|frequency|daily|nightly|nigthly|every night|every morning|every 2 weeks|every two weeks|every second week|once every month|every month|monday to friday|monday through friday|mon to fri|mon through fri|weeknights?|monday.+wednesday.+friday|saturday and sunday|(?:[1-7]x|nights?|mornings?|evenings?|times?|days?) (?:a|per) week|twice (?:a|per) week|weekly|bi weekly|biweekly|every other week|monthly)\b/;
 const scopeFollowUpPattern =
   /\b(what is included|what s included|what do you clean|tell me more|more information|what about that)\b/;
 const ambiguousCleaningPattern =
-  /\b(can you clean|do you clean|cleaning service|clean my|clean our)\b/;
+  /\b(can you clean|do you clean|cleaning service|clean my|clean our|looking for (a )?cleaner|need (a )?cleaner)\b/;
 const companyLocationPattern =
   /\b(where (is|s) your office|where (is|s) your company located|where are you located|office address|business address|company location|visit your office)\b/;
 
@@ -983,6 +1424,7 @@ const shortPricingTerms = new Set([
   "prices",
   "pricing",
   "quote",
+  "qoute",
   "rate",
   "rates",
 ]);
@@ -993,11 +1435,14 @@ const shortServiceTerms = new Set([
   "services",
 ]);
 const strongOneWordIntents: Record<string, string> = {
+  agent: "contact",
   address: "company-location",
+  commercial: "commercial-services",
   contact: "contact",
   email: "contact",
   equipment: "supplies",
   hours: "hours",
+  human: "contact",
   incorporated: "company-registration",
   insurance: "insurance",
   location: "company-location",
@@ -1006,10 +1451,22 @@ const strongOneWordIntents: Record<string, string> = {
   registration: "company-registration",
   supplies: "supplies",
 };
+const metroCityAliases: Record<string, string[]> = {
+  Vancouver: ["vancouver"],
+  Burnaby: ["burnaby"],
+  "New Westminster": ["new westminster", "new west"],
+  Surrey: ["surrey"],
+  Richmond: ["richmond"],
+  Coquitlam: ["coquitlam"],
+  "North Vancouver": ["north vancouver"],
+  "West Vancouver": ["west vancouver"],
+  Delta: ["delta"],
+};
 
 function normalize(value: string): string {
   return value
     .toLowerCase()
+    .replace(/(\d)\.(\d)/g, "$1decimal$2")
     .replace(/[^a-z0-9$@+\s]/g, " ")
     .replace(/\s+/g, " ")
     .trim();
@@ -1050,6 +1507,227 @@ function isShortServiceInquiry(question: string): boolean {
   return ["service", "services", "cleaning"].some(
     (term) => editDistance(question, term) <= 1
   );
+}
+
+function findMentionedCities(question: string): string[] {
+  const matches: Array<{
+    city: string;
+    alias: string;
+    start: number;
+    end: number;
+  }> = [];
+
+  for (const [city, aliases] of Object.entries(metroCityAliases)) {
+    for (const alias of aliases) {
+      const pattern = new RegExp(`\\b${alias.replace(/\s+/g, "\\s+")}\\b`, "g");
+      for (const match of question.matchAll(pattern)) {
+        const start = match.index ?? 0;
+        matches.push({ city, alias, start, end: start + match[0].length });
+      }
+    }
+  }
+
+  const distinctMatches = matches.filter(
+    (match) =>
+      !matches.some(
+        (other) =>
+          other.city !== match.city &&
+          other.start <= match.start &&
+          other.end >= match.end &&
+          other.alias.length > match.alias.length
+      )
+  );
+  const positiveMatches = distinctMatches.filter((match) => {
+    const prefix = question.slice(Math.max(0, match.start - 4), match.start);
+    return !/(not|no)\s$/.test(prefix);
+  });
+
+  return positiveMatches
+    .sort((a, b) => a.start - b.start)
+    .map((match) => match.city)
+    .filter((city, index, cities) => cities.indexOf(city) === index);
+}
+
+const countWords: Record<string, number> = {
+  one: 1,
+  two: 2,
+  three: 3,
+  four: 4,
+  five: 5,
+  six: 6,
+  seven: 7,
+  eight: 8,
+  nine: 9,
+  ten: 10,
+};
+
+function parseCount(value: string): number {
+  return countWords[value] ?? Number(value);
+}
+
+function extractConversationContext(
+  question: string,
+  current: LisaConversationContext,
+  serviceIntent?: LisaServiceIntent
+): LisaConversationContext {
+  const next: LisaConversationContext = {
+    ...current,
+    serviceIntent: serviceIntent ?? current.serviceIntent,
+    unknownCount: 0,
+  };
+
+  if (serviceIntent) {
+    next.market = residentialServiceIntents.has(serviceIntent)
+      ? "residential"
+      : "commercial";
+  } else if (/\b(residential|home|house|condo|apartment|townhouse|townhome)\b/.test(question)) {
+    next.market = "residential";
+  } else if (/\b(commercial|business|facility)\b/.test(question)) {
+    next.market = "commercial";
+  }
+
+  const mentionedCities = findMentionedCities(question);
+  if (mentionedCities.length > 0) {
+    const isCorrection = /\b(actually|correction|definitely|meant|no|not|sorry)\b/.test(
+      question
+    );
+    const existingCities = next.cities ?? (next.city ? [next.city] : []);
+    next.cities = isCorrection
+      ? mentionedCities
+      : [...new Set([...existingCities, ...mentionedCities])];
+    next.city = mentionedCities[mentionedCities.length - 1];
+  }
+
+  const weeklyCountMatch = question.match(
+    /\b(one|two|three|four|five|six|seven|twice|[1-7])\s*(?:x\s*)?(?:nights?|mornings?|evenings?|times?|days?)?\s*(?:a|per)\s+week\b/
+  );
+  const weeklyCounts: Record<string, string> = {
+    one: "1",
+    two: "2",
+    three: "3",
+    four: "4",
+    five: "5",
+    six: "6",
+    seven: "7",
+    twice: "2",
+  };
+
+  const biWeeklyNegated = /\b(not|no)\s+(biweekly|bi weekly)\b/.test(question);
+  const weeklyNegated = /\b(not|no)\s+weekly\b/.test(question);
+
+  if (weeklyCountMatch) {
+    const count = weeklyCounts[weeklyCountMatch[1]] ?? weeklyCountMatch[1];
+    next.frequency = `${count}x weekly`;
+  } else if (/\b(monday to friday|monday through friday|mon to fri|mon through fri)\b/.test(question)) {
+    next.frequency = "5x weekly";
+  } else if (
+    /\bmonday\b/.test(question) &&
+    /\bwednesday\b/.test(question) &&
+    /\bfriday\b/.test(question)
+  ) {
+    next.frequency = "3x weekly";
+  } else if (/\b(saturday and sunday|saturdays and sundays)\b/.test(question)) {
+    next.frequency = "weekends";
+  } else if (/\b(5x|five times|five days)\b/.test(question)) {
+    next.frequency = "5x weekly";
+  } else if (/\b(every 2 weeks|every two weeks|every second week)\b/.test(question)) {
+    next.frequency = "bi-weekly";
+  } else if (
+    !biWeeklyNegated &&
+    /\b(bi weekly|biweekly|every other week)\b/.test(question)
+  ) {
+    next.frequency = "bi-weekly";
+  } else if (/\b(nightly|nigthly|every night|each night|weeknights?)\b/.test(question)) {
+    next.frequency = "nightly";
+  } else if (/\bdaily\b/.test(question)) {
+    next.frequency = "daily";
+  } else if (!weeklyNegated && /\bweekly\b/.test(question)) {
+    next.frequency = "weekly";
+  } else if (/\b(monthly|once every month|every month)\b/.test(question)) {
+    next.frequency = "monthly";
+  } else if (/\bevery morning\b/.test(question)) {
+    next.frequency = "daily";
+  } else if (/\bcustom (schedule|frequency)\b/.test(question)) {
+    next.frequency = "custom";
+  }
+
+  if (/\b(weekend|weekends|saturday and sunday|saturdays and sundays)\b/.test(question)) {
+    next.serviceWindow = "weekend";
+  } else if (/\b(after hours|after close|after patients leave|after \d{1,2}\s*(am|pm)|after midnight|closes? at \d{1,2}\s*(am|pm)|overnight|midnight|night|nights|nightly|nigthly|weeknight|weeknights|evening|evenings)\b/.test(question)) {
+    next.serviceWindow = "after-hours";
+  } else if (/\b(daytime|business hours|morning|mornings|before opening)\b/.test(question)) {
+    next.serviceWindow = "daytime";
+  }
+
+  const squareFeetMatch = question.match(
+    /\b(\d+(?:\s\d{3})*)\s*(?:square foot|square feet|sq feet|sq ft|sqft|sf)\b/
+  );
+  if (squareFeetMatch) {
+    next.squareFeet = `${squareFeetMatch[1].replace(/\s/g, "")} sq ft`;
+  } else {
+    const compactSquareFeetMatch = question.match(
+      /\b(\d+(?:decimal\d+)?)k\s*(?:square foot|square feet|sq feet|sq ft|sqft|sf)?\b/
+    );
+    const wordSquareFeetMatch = question.match(
+      /\b(one|two|three|four|five|six|seven|eight|nine|ten) thousand\s*(?:square foot|square feet|sq feet|sq ft|sqft|sf)\b/
+    );
+    if (compactSquareFeetMatch) {
+      next.squareFeet = `${Math.round(
+        Number(compactSquareFeetMatch[1].replace("decimal", ".")) * 1000
+      )} sq ft`;
+    } else if (wordSquareFeetMatch) {
+      next.squareFeet = `${parseCount(wordSquareFeetMatch[1]) * 1000} sq ft`;
+    }
+  }
+
+  const bedroomMatch = question.match(
+    /\b(one|two|three|four|five|six|seven|eight|nine|ten|\d+)\s*(?:bedroom|bedrooms|bed|beds)\b/
+  );
+  if (bedroomMatch) next.bedrooms = parseCount(bedroomMatch[1]);
+
+  const bathroomMatch = question.match(
+    /\b(one|two|three|four|five|six|seven|eight|nine|ten|\d+(?:decimal\d+)?)\s*(?:bathroom|bathrooms|bath|baths)\b/
+  );
+  if (bathroomMatch) {
+    next.bathrooms = Number(
+      bathroomMatch[1].includes("decimal")
+        ? bathroomMatch[1].replace("decimal", ".")
+        : parseCount(bathroomMatch[1])
+    );
+  } else if (/\bone and a half (bathroom|bathrooms|bath|baths)\b/.test(question)) {
+    next.bathrooms = 1.5;
+  }
+  if (/\bpowder room\b/.test(question)) {
+    next.bathrooms = (next.bathrooms ?? current.bathrooms ?? 0) + 0.5;
+  }
+
+  const siteCountMatch = question.match(
+    /\b(one|two|three|four|five|six|seven|eight|nine|ten|\d+)\s+(?:locations?|sites?|cafes?|restaurants?|offices?)\b/
+  );
+  if (siteCountMatch) next.siteCount = parseCount(siteCountMatch[1]);
+
+  const unitCountMatch = question.match(
+    /\b(one|two|three|four|five|six|seven|eight|nine|ten|\d+)\s+units?\b/
+  );
+  if (unitCountMatch) next.unitCount = parseCount(unitCountMatch[1]);
+
+  const correctedDayMatch = question.match(
+    /\b(?:not|no)\s+(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday)[^a-z]+(?:but\s+)?(monday|tuesday|wednesday|thursday|friday|saturday|sunday)\b/
+  );
+  const requestedTimingMatch = question.match(
+    /\b((?:next\s+)?(?:monday|tuesday|wednesday|thursday|friday|saturday|sunday|week)s?(?:\s+(?:morning|afternoon|evening))?(?:\s+at\s+\d{1,2}\s*(?:am|pm))?|(?:today|tomorrow)(?:\s+at\s+\d{1,2}\s*(?:am|pm))?|asap|(?:the\s+)?(?:beginning|start) of next month|(?:january|february|march|april|may|june|july|august|september|october|november|december)\s+\d{1,2})\b/
+  );
+  const requestedTiming = correctedDayMatch?.[1] ?? requestedTimingMatch?.[1];
+  if (
+    requestedTiming &&
+    (/\b(book|schedule|start|come|available|availability|appointment|visit|walkthrough|works best|prefer|date)\b/.test(
+      question
+    ) || standaloneSchedulePattern.test(question) || Boolean(current.serviceIntent || current.market))
+  ) {
+    next.requestedTiming = requestedTiming;
+  }
+
+  return next;
 }
 
 function findServiceIntent(question: string): LisaServiceIntent | undefined {
@@ -1100,12 +1778,10 @@ function replyFromEntry(
 
 function understoodContext(
   current: LisaConversationContext,
-  serviceIntent?: LisaServiceIntent
+  serviceIntent?: LisaServiceIntent,
+  question = ""
 ): LisaConversationContext {
-  return {
-    serviceIntent: serviceIntent ?? current.serviceIntent,
-    unknownCount: 0,
-  };
+  return extractConversationContext(question, current, serviceIntent);
 }
 
 function containsPhrase(question: string, phrase: string): boolean {
@@ -1113,7 +1789,8 @@ function containsPhrase(question: string, phrase: string): boolean {
 }
 
 function scoreEntry(question: string, entry: KnowledgeEntry): number {
-  const words = new Set(question.split(" ").filter((word) => word.length > 2));
+  const allWords = new Set(question.split(" "));
+  const words = new Set([...allWords].filter((word) => word.length > 2));
   let score = 0;
 
   const normalizedPhrases = new Set(entry.phrases.map((phrase) => normalize(phrase)));
@@ -1126,7 +1803,12 @@ function scoreEntry(question: string, entry: KnowledgeEntry): number {
     const phraseWords = normalizedPhrase
       .split(" ")
       .filter((word) => word.length > 2);
-    if (phraseWords.length >= 2 && phraseWords.every((word) => words.has(word))) {
+    const phraseTokens = normalizedPhrase.split(" ");
+    if (
+      phraseWords.length >= 2 &&
+      phraseWords.every((word) => words.has(word)) &&
+      phraseTokens.every((word) => allWords.has(word))
+    ) {
       score += 5;
     }
   }
@@ -1178,6 +1860,164 @@ export function answerLisaQuestion(
     };
   }
 
+  if (privacyRequestPattern.test(question)) {
+    const reply = replyFromEntry(
+      "privacy",
+      understoodContext(currentContext, currentContext.serviceIntent, question)
+    );
+    if (reply) return reply;
+  }
+
+  if (customerPhonePattern.test(question) || customerEmailPattern.test(rawQuestion)) {
+    return {
+      intent: "contact-details-form",
+      answer:
+        "For privacy, I don't capture a phone number from an ordinary chat message. Please open the secure request form below and enter your contact details there so the Gleam Pro team can follow up.",
+      actions: [walkthroughAction],
+      answered: false,
+      context: currentContext,
+    };
+  }
+
+  if (emailedQuotePattern.test(question)) {
+    return {
+      intent: "quote-delivery",
+      answer:
+        "Yes, the team can send your proposal to the email address you provide. Please use the request form below so your email and cleaning details are submitted securely; Lisa does not capture contact details from ordinary chat messages.",
+      actions: [walkthroughAction],
+      answered: true,
+      context: currentContext,
+    };
+  }
+
+  if (declinePattern.test(question)) {
+    return {
+      intent: "conversation-close",
+      answer: "No problem. I'm here if you need help with anything else.",
+      answered: true,
+      context: currentContext,
+    };
+  }
+
+  if (affirmativePattern.test(question)) {
+    if (currentContext.serviceIntent || currentContext.market) {
+      return {
+        intent: "lead-confirmation",
+        answer:
+          "Great. Please open the secure request form below and share your contact details. The Gleam Pro team will review your request and confirm the quote or walk-through with you.",
+        actions: [walkthroughAction],
+        answered: true,
+        context: currentContext,
+      };
+    }
+    return {
+      intent: "acknowledgement",
+      answer: "Great. What type of cleaning can I help you with?",
+      actions: facilityQuickReplies,
+      answered: true,
+      context: currentContext,
+    };
+  }
+
+  if (referenceRequestPattern.test(question)) {
+    const reply = replyFromEntry(
+      "unpublished-account-detail",
+      understoodContext(currentContext, currentContext.serviceIntent, question)
+    );
+    if (reply) return reply;
+  }
+
+  if (combinedBondingPattern.test(question)) {
+    return {
+      intent: "unconfirmed-credential",
+      answer:
+        "Gleam Pro carries $1 million in commercial general liability insurance and can provide a certificate on request. The website does not state that Gleam Pro or every cleaner is bonded, so the team must confirm bonding if your property requires it.",
+      actions: [walkthroughAction],
+      answered: false,
+      context: currentContext,
+    };
+  }
+
+  if (employeeStatusPattern.test(question)) {
+    const reply = replyFromEntry("cleaning-team", currentContext);
+    if (reply) return reply;
+  }
+
+  if (unpublishedOperationsPattern.test(question)) {
+    const reply = replyFromEntry("unpublished-account-detail", currentContext);
+    if (reply) return reply;
+  }
+
+  if (ownerQuestionPattern.test(question)) {
+    return {
+      intent: "company-owner",
+      answer:
+        "Gleam Pro is described on the website as family-owned and owner-led. The website does not publish an owner's name, so I won't guess.",
+      actions: [
+        { label: "Contact the team", href: "mailto:services@gleampro.ca", kind: "link" },
+      ],
+      answered: true,
+      context: currentContext,
+    };
+  }
+
+  if (pricingPolicyPattern.test(question)) {
+    if (/\b(?:estimate free|free estimate|walk ?through free|free walk ?through)\b/.test(question)) {
+      return {
+        intent: "free-estimate",
+        answer:
+          "Yes. Gleam Pro offers a free 15-minute walk-through for commercial cleaning and a free estimate for residential cleaning.",
+        actions: [walkthroughAction],
+        answered: true,
+        context: currentContext,
+      };
+    }
+    if (/\b(?:charge gst|gst charged)\b/.test(question)) {
+      const reply = replyFromEntry("unpublished-billing-detail", currentContext);
+      if (reply) return reply;
+    }
+    return {
+      intent: "unpublished-pricing-detail",
+      answer:
+        "That pricing detail is not published on Gleam Pro's website, so I don't want to assume. The team will confirm any deposit, minimum charge, taxes, and all quoted work before you approve a proposal. Work outside the written scope is quoted separately before it is performed.",
+      actions: [walkthroughAction],
+      answered: false,
+      context: currentContext,
+    };
+  }
+
+  if (cancellationAccessPattern.test(question)) {
+    if (/\b(?:locked out|lock out|denied access)\b/.test(question)) {
+      return {
+        intent: "access-policy",
+        answer:
+          "Gleam Pro's terms say a lockout or denied access at the scheduled time may be billed at the standard visit rate. The team will work with you to recover the visit on the next available date.",
+        actions: [{ label: "View terms", href: "/terms", kind: "link" }],
+        answered: true,
+        context: currentContext,
+      };
+    }
+    const reply = replyFromEntry(
+      "rescheduling",
+      understoodContext(currentContext, currentContext.serviceIntent, question)
+    );
+    if (reply) return reply;
+  }
+
+  if (unlistedServiceAreaPattern.test(question)) {
+    return {
+      intent: "unlisted-service-area",
+      answer:
+        "That location is not listed in Gleam Pro's published service areas. I don't want to assume route coverage, but the team can confirm whether service is available at your address.",
+      actions: [
+        { label: "View service areas", href: "/service-areas", kind: "link" },
+        walkthroughAction,
+      ],
+      answered: false,
+      context: understoodContext(currentContext, currentContext.serviceIntent, question),
+    };
+  }
+
   if (specialistPatterns.some((pattern) => pattern.test(question))) {
     return {
       intent: "guardrail-specialist",
@@ -1191,14 +2031,52 @@ export function answerLisaQuestion(
     };
   }
 
-  if (confirmationPatterns.some((pattern) => pattern.test(question))) {
+  if (unlistedFacilityPattern.test(question)) {
+    return {
+      intent: "unlisted-facility",
+      answer:
+        "That facility type is not specifically listed among Gleam Pro's published services. The team can review the space, operating hours, floors, washrooms, and any specialty areas, then confirm whether the right scope can be provided.",
+      actions: [walkthroughAction],
+      answered: false,
+      context: {
+        ...understoodContext(currentContext, undefined, question),
+        market: "commercial",
+      },
+    };
+  }
+
+  if (humanHandoffPattern.test(question)) {
+    const reply = replyFromEntry(
+      "contact",
+      understoodContext(currentContext, currentContext.serviceIntent, question)
+    );
+    if (reply) return reply;
+  }
+
+  if (satisfactionGuaranteePattern.test(question)) {
+    const reply = replyFromEntry(
+      "satisfaction-policy",
+      understoodContext(currentContext, currentContext.serviceIntent, question)
+    );
+    if (reply) return reply;
+  }
+
+  if (
+    confirmationPatterns.some((pattern) => pattern.test(question)) ||
+    (standaloneSchedulePattern.test(question) &&
+      Boolean(currentContext.serviceIntent || currentContext.market))
+  ) {
     return {
       intent: "guardrail-availability",
       answer:
         "I can help you ask the team, but I can't see the live schedule or guarantee a start date. Leave your details here and they'll confirm route availability and timing directly with you.",
       actions: [walkthroughAction],
       answered: false,
-      context: currentContext,
+      context: understoodContext(
+        currentContext,
+        currentContext.serviceIntent,
+        question
+      ),
     };
   }
 
@@ -1210,8 +2088,26 @@ export function answerLisaQuestion(
     if (reply) return reply;
   }
 
+  if (worksafePattern.test(question)) {
+    const reply = replyFromEntry(
+      "worksafe-credential",
+      understoodContext(currentContext, currentContext.serviceIntent, question)
+    );
+    if (reply) return reply;
+  }
+
   if (isShortPricingInquiry(question)) {
-    const reply = replyFromEntry("quote-request", understoodContext(currentContext));
+    const context = understoodContext(
+      currentContext,
+      currentContext.serviceIntent,
+      question
+    );
+    const pricingIntent = context.market
+      ? context.market === "residential"
+        ? "residential-pricing"
+        : "commercial-pricing"
+      : "quote-request";
+    const reply = replyFromEntry(pricingIntent, context);
     if (reply) return reply;
   }
 
@@ -1226,9 +2122,23 @@ export function answerLisaQuestion(
     };
   }
 
+  if (question === "help") {
+    return {
+      intent: "help",
+      answer:
+        "Of course. I can help with cleaning services, pricing, service areas, scheduling basics, or a walk-through request. What would you like help with?",
+      actions: topicQuickReplies,
+      answered: true,
+      context: understoodContext(currentContext),
+    };
+  }
+
   const oneWordIntent = strongOneWordIntents[question];
   if (oneWordIntent) {
-    const reply = replyFromEntry(oneWordIntent, understoodContext(currentContext));
+    const reply = replyFromEntry(
+      oneWordIntent,
+      understoodContext(currentContext, undefined, question)
+    );
     if (reply) return reply;
   }
 
@@ -1237,17 +2147,81 @@ export function answerLisaQuestion(
       intent: "clarify-service",
       answer:
         "Of course! Is this for a restaurant, office, clinic, brewery or taproom, managed property, school or community facility, or home?",
+      actions: facilityQuickReplies,
       answered: false,
       context: understoodContext(currentContext),
     };
   }
 
   const detectedServiceIntent = findServiceIntent(question);
-  const serviceIntent = detectedServiceIntent ?? currentContext.serviceIntent;
-  const nextContext = understoodContext(currentContext, detectedServiceIntent);
+  const isAddOnService =
+    detectedServiceIntent === "carpet-upholstery" &&
+    currentContext.serviceIntent === "move-cleaning" &&
+    /\b(also|add|too|as well)\b/.test(question);
+  const contextServiceIntent = isAddOnService
+    ? currentContext.serviceIntent
+    : detectedServiceIntent;
+  const serviceIntent = contextServiceIntent ?? currentContext.serviceIntent;
+  const nextContext = understoodContext(
+    currentContext,
+    contextServiceIntent,
+    question
+  );
 
-  if (pricingPattern.test(question) && serviceIntent) {
-    const pricingIntent = residentialServiceIntents.has(serviceIntent)
+  if (residentialExtraPattern.test(question)) {
+    return {
+      intent: "residential-extra-scope",
+      answer:
+        "That item is not confirmed as a standard inclusion on Gleam Pro's residential pages. Please add it to your request so the team can review the surface or area and confirm whether it can be included or quoted separately.",
+      actions: [walkthroughAction],
+      answered: false,
+      context: { ...nextContext, market: "residential" },
+    };
+  }
+
+  if (restaurantSpecialtyPattern.test(question)) {
+    const reply = replyFromEntry("restaurant-specialty", nextContext);
+    if (reply) return reply;
+  }
+
+  if (appliancePattern.test(question)) {
+    const applianceIntent =
+      nextContext.serviceIntent === "move-cleaning"
+        ? "move-cleaning-details"
+        : "appliance-cleaning";
+    const reply = replyFromEntry(applianceIntent, nextContext);
+    if (reply) return reply;
+  }
+
+  if (
+    nextContext.unitCount !== undefined &&
+    nextContext.unitCount > 1 &&
+    nextContext.unitCount !== currentContext.unitCount &&
+    currentContext.serviceIntent === "move-cleaning"
+  ) {
+    return {
+      intent: "multi-unit-clarification",
+      answer:
+        "I've noted the multi-unit request. Is this a property-management turnover account or residential cleaning for one unit at a time? The team will scope access, timing, and pricing differently for a multi-unit program.",
+      actions: [
+        {
+          label: "Managed property",
+          value: "property management cleaning",
+          kind: "question",
+        },
+        {
+          label: "Residential turnover",
+          value: "residential move out cleaning",
+          kind: "question",
+        },
+      ],
+      answered: false,
+      context: nextContext,
+    };
+  }
+
+  if (pricingPattern.test(question) && (serviceIntent || nextContext.market)) {
+    const pricingIntent = nextContext.market === "residential"
       ? "residential-pricing"
       : "commercial-pricing";
     const reply = replyFromEntry(pricingIntent, nextContext);
@@ -1256,7 +2230,7 @@ export function answerLisaQuestion(
 
   if (
     frequencyPattern.test(question) &&
-    currentContext.serviceIntent &&
+    (currentContext.serviceIntent || currentContext.market) &&
     !detectedServiceIntent
   ) {
     const reply = replyFromEntry("frequency", nextContext);
@@ -1265,6 +2239,56 @@ export function answerLisaQuestion(
 
   if (scopeFollowUpPattern.test(question) && currentContext.serviceIntent) {
     const reply = replyFromEntry(currentContext.serviceIntent, nextContext);
+    if (reply) return reply;
+  }
+
+  const qualificationUpdates = [
+    nextContext.city !== currentContext.city && nextContext.city
+      ? nextContext.city
+      : undefined,
+    nextContext.squareFeet !== currentContext.squareFeet && nextContext.squareFeet
+      ? nextContext.squareFeet
+      : undefined,
+    nextContext.bedrooms !== currentContext.bedrooms &&
+    nextContext.bedrooms !== undefined
+      ? `${nextContext.bedrooms} bedrooms`
+      : undefined,
+    nextContext.bathrooms !== currentContext.bathrooms &&
+    nextContext.bathrooms !== undefined
+      ? `${nextContext.bathrooms} bathrooms`
+      : undefined,
+    nextContext.siteCount !== currentContext.siteCount &&
+    nextContext.siteCount !== undefined
+      ? `${nextContext.siteCount} locations`
+      : undefined,
+    nextContext.unitCount !== currentContext.unitCount &&
+    nextContext.unitCount !== undefined
+      ? `${nextContext.unitCount} units`
+      : undefined,
+  ].filter((detail): detail is string => Boolean(detail));
+
+  if (
+    qualificationUpdates.length > 0 &&
+    Boolean(currentContext.serviceIntent || currentContext.market) &&
+    !/^(are|can|do|does|how|is|what|when|where|which|who|why)\b/.test(question)
+  ) {
+    return {
+      intent: "context-update",
+      answer: `Got it. I've noted ${qualificationUpdates.join(
+        ", "
+      )}. Would you like service details, pricing information, or help requesting a quote?`,
+      actions: topicQuickReplies,
+      answered: true,
+      context: nextContext,
+    };
+  }
+
+  if (
+    detectedServiceIntent &&
+    !currentContext.serviceIntent &&
+    !/^(are|can|do|does|how|is|what|when|where|which|who|why)\b/.test(question)
+  ) {
+    const reply = replyFromEntry(detectedServiceIntent, nextContext);
     if (reply) return reply;
   }
 
@@ -1282,12 +2306,61 @@ export function answerLisaQuestion(
     if (reply) return reply;
   }
 
+  const rememberedDetails = [
+    nextContext.city !== currentContext.city && nextContext.city
+      ? nextContext.city
+      : undefined,
+    nextContext.frequency !== currentContext.frequency && nextContext.frequency
+      ? `${nextContext.frequency} service`
+      : undefined,
+    nextContext.serviceWindow !== currentContext.serviceWindow &&
+    nextContext.serviceWindow
+      ? `${nextContext.serviceWindow} timing`
+      : undefined,
+    nextContext.squareFeet !== currentContext.squareFeet && nextContext.squareFeet
+      ? nextContext.squareFeet
+      : undefined,
+    nextContext.bedrooms !== currentContext.bedrooms &&
+    nextContext.bedrooms !== undefined
+      ? `${nextContext.bedrooms} bedrooms`
+      : undefined,
+    nextContext.bathrooms !== currentContext.bathrooms &&
+    nextContext.bathrooms !== undefined
+      ? `${nextContext.bathrooms} bathrooms`
+      : undefined,
+    nextContext.siteCount !== currentContext.siteCount &&
+    nextContext.siteCount !== undefined
+      ? `${nextContext.siteCount} locations`
+      : undefined,
+    nextContext.unitCount !== currentContext.unitCount &&
+    nextContext.unitCount !== undefined
+      ? `${nextContext.unitCount} units`
+      : undefined,
+    nextContext.requestedTiming !== currentContext.requestedTiming &&
+    nextContext.requestedTiming
+      ? `${nextContext.requestedTiming} requested timing`
+      : undefined,
+  ].filter((detail): detail is string => Boolean(detail));
+
+  if (rememberedDetails.length > 0) {
+    return {
+      intent: "context-update",
+      answer: `Got it. I've noted ${rememberedDetails.join(
+        ", "
+      )}. Would you like service details, pricing information, or help requesting a quote?`,
+      actions: topicQuickReplies,
+      answered: true,
+      context: nextContext,
+    };
+  }
+
   if (!bestMatch || bestMatch.score < 4) {
     if (ambiguousCleaningPattern.test(question)) {
       return {
         intent: "clarify-service",
         answer:
           "Sure! What kind of space do you need cleaned: a restaurant, office, clinic, brewery or taproom, managed property, school or community facility, or home?",
+        actions: facilityQuickReplies,
         answered: false,
         context: understoodContext(currentContext),
       };
@@ -1299,8 +2372,9 @@ export function answerLisaQuestion(
         intent: "unknown-clarify",
         answer:
           "I'm not quite sure what you mean. Are you asking about a cleaning service, pricing, service frequency, service areas, or a walk-through?",
+        actions: topicQuickReplies,
         answered: false,
-        context: { ...currentContext, unknownCount },
+        context: { ...nextContext, unknownCount },
       };
     }
 
@@ -1313,7 +2387,7 @@ export function answerLisaQuestion(
         walkthroughAction,
       ],
       answered: false,
-      context: { ...currentContext, unknownCount },
+      context: { ...nextContext, unknownCount },
     };
   }
 

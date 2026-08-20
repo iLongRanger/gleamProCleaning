@@ -15,6 +15,7 @@ import {
   lisaSuggestions,
   type LisaAction,
   type LisaConversationContext,
+  type LisaServiceIntent,
 } from "@/lib/chat/lisa";
 
 type ChatMessage = {
@@ -29,8 +30,65 @@ type LeadType = "commercial" | "residential";
 const initialMessage: ChatMessage = {
   id: 1,
   role: "lisa",
-  text: "Hi, I'm Lisa! I'd be happy to help with your cleaning needs today. I use approved Gleam Pro information, and I can connect you with the team whenever something needs a personal answer.",
+  text: "Hi, I'm Lisa, Gleam Pro's virtual assistant. Can I help you find the right cleaning service or request a quote today?",
+  actions: [
+    { label: "Commercial", value: "commercial cleaning", kind: "question" },
+    { label: "Residential", value: "residential cleaning", kind: "question" },
+  ],
 };
+
+const facilityValueByIntent: Partial<Record<LisaServiceIntent, string>> = {
+  restaurants: "restaurant",
+  breweries: "brewery",
+  clinics: "clinic",
+  offices: "office",
+  "property-management": "property",
+  "community-facilities": "community",
+};
+
+const serviceLabelByIntent: Record<LisaServiceIntent, string> = {
+  restaurants: "Restaurant cleaning",
+  breweries: "Brewery or taproom cleaning",
+  clinics: "Clinic cleaning",
+  offices: "Office cleaning",
+  "property-management": "Property-management cleaning",
+  "community-facilities": "School or community-facility cleaning",
+  "residential-services": "Residential cleaning",
+  "deep-cleaning": "Deep cleaning",
+  "move-cleaning": "Move-in or move-out cleaning",
+  "carpet-upholstery": "Carpet or upholstery cleaning",
+  "post-renovation": "Post-renovation cleaning",
+};
+
+function contextNotes(context: LisaConversationContext): string {
+  const details = [
+    context.serviceIntent
+      ? `Service interest: ${serviceLabelByIntent[context.serviceIntent]}`
+      : undefined,
+    context.frequency ? `Preferred frequency: ${context.frequency}` : undefined,
+    context.serviceWindow
+      ? `Preferred service window: ${context.serviceWindow}`
+      : undefined,
+    context.squareFeet ? `Approximate size: ${context.squareFeet}` : undefined,
+    context.bedrooms !== undefined
+      ? `Bedrooms: ${context.bedrooms}`
+      : undefined,
+    context.bathrooms !== undefined
+      ? `Bathrooms: ${context.bathrooms}`
+      : undefined,
+    context.siteCount !== undefined
+      ? `Number of locations: ${context.siteCount}`
+      : undefined,
+    context.unitCount !== undefined
+      ? `Number of units: ${context.unitCount}`
+      : undefined,
+    context.requestedTiming
+      ? `Requested timing: ${context.requestedTiming}`
+      : undefined,
+  ].filter(Boolean);
+
+  return details.join("\n");
+}
 
 const fieldClass =
   "h-10 w-full border border-white/15 bg-[#0B2545] px-3 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-[#D4A574] focus:ring-2 focus:ring-[#D4A574]/20";
@@ -74,10 +132,10 @@ export default function LisaChat() {
       if (!hasOpened && !wasDismissed) {
         setOpen(true);
         window.sessionStorage.setItem("lisa-auto-opened", "1");
-        window.sessionStorage.setItem("lisa-greeting-dismissed", "1");
         trackLisaEvent("lisa_chat_open", { trigger: "automatic" });
       }
-    }, 2000);
+    }, 3000);
+
     return () => window.clearTimeout(timer);
   }, []);
 
@@ -110,17 +168,28 @@ export default function LisaChat() {
   };
 
   const startLead = () => {
+    const context = conversationContext.current;
+    const inferredLeadType = context.market ?? "commercial";
+    setLeadType(inferredLeadType);
+    setLead((current) => ({
+      ...current,
+      facilityType:
+        current.facilityType ||
+        (context.serviceIntent
+          ? facilityValueByIntent[context.serviceIntent] ?? ""
+          : ""),
+      address:
+        current.address || context.cities?.join(", ") || context.city || "",
+      notes: current.notes || contextNotes(context),
+    }));
     setMode("lead");
     setLeadError(null);
-    trackLisaEvent("lisa_lead_started", { lead_type: leadType });
+    trackLisaEvent("lisa_lead_started", { lead_type: inferredLeadType });
   };
 
-  const handleAction = (action: LisaAction) => {
-    if (action.kind === "lead") startLead();
-  };
-
-  const askQuestion = (value: string) => {
+  const askQuestion = (value: string, displayValue = value) => {
     const trimmed = value.trim().slice(0, 300);
+    const displayedQuestion = displayValue.trim().slice(0, 300);
     if (!trimmed) return;
 
     const reply = answerLisaQuestion(trimmed, conversationContext.current);
@@ -129,7 +198,7 @@ export default function LisaChat() {
     nextMessageId.current += 2;
     setMessages((current) => [
       ...current,
-      { id: visitorMessageId, role: "visitor", text: trimmed },
+      { id: visitorMessageId, role: "visitor", text: displayedQuestion || trimmed },
       {
         id: visitorMessageId + 1,
         role: "lisa",
@@ -143,6 +212,11 @@ export default function LisaChat() {
       intent: reply.intent,
       answer_status: reply.answered ? "approved" : "handoff",
     });
+  };
+
+  const handleAction = (action: LisaAction) => {
+    if (action.kind === "lead") startLead();
+    if (action.kind === "question") askQuestion(action.value, action.label);
   };
 
   const submitQuestion = (event: FormEvent) => {
@@ -300,7 +374,11 @@ export default function LisaChat() {
                                   key={`${message.id}-${action.label}`}
                                   type="button"
                                   onClick={() => handleAction(action)}
-                                  className="bg-[#D4A574] px-3 py-1.5 text-xs font-semibold text-[#071629] transition hover:bg-[#E5BB8F]"
+                                  className={
+                                    action.kind === "question"
+                                      ? "border border-[#D4A574]/45 bg-[#D4A574]/10 px-3 py-1.5 text-xs font-medium text-[#F0C99F] transition hover:border-[#D4A574] hover:bg-[#D4A574]/18"
+                                      : "bg-[#D4A574] px-3 py-1.5 text-xs font-semibold text-[#071629] transition hover:bg-[#E5BB8F]"
+                                  }
                                 >
                                   {action.label}
                                 </button>
@@ -464,6 +542,7 @@ export default function LisaChat() {
                             <option value="brewery">Brewery / taproom</option>
                             <option value="clinic">Clinic</option>
                             <option value="community">Community facility</option>
+                            <option value="property">Managed property</option>
                             <option value="other">Other</option>
                           </select>
                         </div>

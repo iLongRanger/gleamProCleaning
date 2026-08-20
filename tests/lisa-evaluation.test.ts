@@ -93,7 +93,7 @@ const residentialBuyerCases: EvaluationCase[] = [
   { question: "Do you provide move-in and move-out cleaning?", intent: "move-cleaning" },
   { question: "Do you clean carpets and upholstery?", intent: "carpet-upholstery" },
   { question: "Do you offer post-renovation cleaning?", intent: "post-renovation" },
-  { question: "Do you clean inside ovens and refrigerators?", intent: "move-cleaning-details" },
+  { question: "Do you clean inside ovens and refrigerators?", intent: "appliance-cleaning" },
   { question: "How long will the cleaning take?", intent: "cleaning-duration" },
   { question: "Do I need to be home?", intent: "home-access" },
   { question: "Can I provide a key or lockbox code?", intent: "home-access" },
