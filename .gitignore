@@ -39,3 +39,11 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# private Google Search Console exports
+/google search console performance/
+
+# Local browser checks and screenshots
+/artifacts/website-refresh/
+/test-results/
+/playwright-report/
