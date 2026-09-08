@@ -91,16 +91,20 @@ function contextNotes(context: LisaConversationContext): string {
 }
 
 const fieldClass =
-  "h-10 w-full border border-white/15 bg-[#0B2545] px-3 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-[#D4A574] focus:ring-2 focus:ring-[#D4A574]/20";
+  "h-10 w-full border border-white/15 bg-[#10243B] px-3 text-sm text-white outline-none transition placeholder:text-white/35 focus:border-[#B59961] focus:ring-2 focus:ring-[#B59961]/20";
 const labelClass = "mb-1.5 block text-xs font-medium text-white/70";
 
 function trackLisaEvent(name: string, params?: Record<string, string>) {
   if (typeof window === "undefined" || typeof window.gtag !== "function") return;
-  window.gtag("event", name, params);
+  try {
+    window.gtag("event", name, params);
+  } catch {
+    // Analytics failures must not prevent customer support or lead capture.
+  }
 }
 
-export default function LisaChat() {
-  const [open, setOpen] = useState(false);
+export default function LisaChat({ initialOpen = false }: { initialOpen?: boolean }) {
+  const [open, setOpen] = useState(initialOpen);
   const [mode, setMode] = useState<"chat" | "lead">("chat");
   const [messages, setMessages] = useState<ChatMessage[]>([initialMessage]);
   const [question, setQuestion] = useState("");
@@ -122,22 +126,14 @@ export default function LisaChat() {
   const inputRef = useRef<HTMLInputElement>(null);
   const nextMessageId = useRef(2);
   const conversationContext = useRef<LisaConversationContext>({});
+  const initialOpenTracked = useRef(false);
 
   useEffect(() => {
-    const timer = window.setTimeout(() => {
-      const hasOpened = window.sessionStorage.getItem("lisa-auto-opened") === "1";
-      const wasDismissed =
-        window.sessionStorage.getItem("lisa-greeting-dismissed") === "1";
-
-      if (!hasOpened && !wasDismissed) {
-        setOpen(true);
-        window.sessionStorage.setItem("lisa-auto-opened", "1");
-        trackLisaEvent("lisa_chat_open", { trigger: "automatic" });
-      }
-    }, 3000);
-
-    return () => window.clearTimeout(timer);
-  }, []);
+    if (!initialOpen || initialOpenTracked.current) return;
+    initialOpenTracked.current = true;
+    trackLisaEvent("lisa_chat_open");
+    inputRef.current?.focus();
+  }, [initialOpen]);
 
   useEffect(() => {
     if (!open) return;
@@ -157,14 +153,12 @@ export default function LisaChat() {
 
   const openChat = () => {
     setOpen(true);
-    window.sessionStorage.setItem("lisa-greeting-dismissed", "1");
     trackLisaEvent("lisa_chat_open");
     window.setTimeout(() => inputRef.current?.focus(), 100);
   };
 
   const closeChat = () => {
     setOpen(false);
-    window.sessionStorage.setItem("lisa-greeting-dismissed", "1");
   };
 
   const startLead = () => {
@@ -291,9 +285,9 @@ export default function LisaChat() {
         <section
           role="dialog"
           aria-label="Chat with Lisa, Gleam Pro's virtual assistant"
-          className="absolute bottom-[68px] right-0 flex h-[min(680px,calc(100dvh-96px))] w-[min(390px,calc(100vw-24px))] flex-col overflow-hidden border border-white/15 bg-[#050E1F] text-white shadow-[0_24px_80px_rgba(0,0,0,0.55)]"
+          className="absolute bottom-[68px] right-0 flex h-[min(680px,calc(100dvh-96px))] w-[min(390px,calc(100vw-24px))] flex-col overflow-hidden border border-white/15 bg-[#0B192C] text-white shadow-[0_24px_80px_rgba(0,0,0,0.55)]"
         >
-          <header className="flex h-[70px] shrink-0 items-center justify-between border-b border-white/10 bg-[#071629] px-4">
+          <header className="flex h-[70px] shrink-0 items-center justify-between border-b border-white/10 bg-[#10243B] px-4">
             <div className="flex items-center gap-3">
               {mode === "lead" ? (
                 <button
@@ -339,12 +333,12 @@ export default function LisaChat() {
                       <div
                         className={`max-w-[88%] border px-3.5 py-3 text-sm leading-5 ${
                           message.role === "visitor"
-                            ? "border-[#D4A574]/30 bg-[#D4A574]/12 text-white"
+                            ? "border-[#B59961]/40 bg-[#B59961]/12 text-white"
                             : "border-white/10 bg-white/[0.055] text-white/80"
                         }`}
                       >
                         {message.role === "lisa" ? (
-                          <span className="mb-1.5 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#D4A574]">
+                          <span className="mb-1.5 flex items-center gap-2 text-[10px] font-semibold uppercase tracking-[0.12em] text-[#D8C08E]">
                             <Image
                               src="/logo-gpc-32x32.png"
                               alt=""
@@ -365,7 +359,7 @@ export default function LisaChat() {
                                   key={`${message.id}-${action.label}`}
                                   href={action.href}
                                   onClick={() => setOpen(false)}
-                                  className="border border-white/15 px-3 py-1.5 text-xs font-medium text-white transition hover:border-[#D4A574]/60 hover:text-[#F0C99F]"
+                                  className="border border-white/15 px-3 py-1.5 text-xs font-medium text-white transition hover:border-[#B59961]/70 hover:text-[#E2CFAB]"
                                 >
                                   {action.label}
                                 </Link>
@@ -376,8 +370,8 @@ export default function LisaChat() {
                                   onClick={() => handleAction(action)}
                                   className={
                                     action.kind === "question"
-                                      ? "border border-[#D4A574]/45 bg-[#D4A574]/10 px-3 py-1.5 text-xs font-medium text-[#F0C99F] transition hover:border-[#D4A574] hover:bg-[#D4A574]/18"
-                                      : "bg-[#D4A574] px-3 py-1.5 text-xs font-semibold text-[#071629] transition hover:bg-[#E5BB8F]"
+                                      ? "border border-[#B59961]/55 bg-[#B59961]/10 px-3 py-1.5 text-xs font-medium text-[#E2CFAB] transition hover:border-[#B59961] hover:bg-[#B59961]/18"
+                                      : "bg-[#B59961] px-3 py-1.5 text-xs font-semibold text-[#0B192C] transition hover:bg-[#C8AD78]"
                                   }
                                 >
                                   {action.label}
@@ -393,7 +387,7 @@ export default function LisaChat() {
 
                 {!hasAskedQuestion ? (
                   <div className="mt-5">
-                    <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/40">
+                    <p className="text-[10px] font-medium uppercase tracking-[0.14em] text-white/65">
                       Common questions
                     </p>
                     <div className="mt-2 grid gap-2">
@@ -402,7 +396,7 @@ export default function LisaChat() {
                           key={suggestion}
                           type="button"
                           onClick={() => askQuestion(suggestion)}
-                          className="border border-white/10 bg-white/[0.025] px-3 py-2.5 text-left text-xs leading-4 text-white/70 transition hover:border-[#D4A574]/40 hover:text-white"
+                          className="border border-white/10 bg-white/[0.025] px-3 py-2.5 text-left text-xs leading-4 text-white/70 transition hover:border-[#B59961]/50 hover:text-white"
                         >
                           {suggestion}
                         </button>
@@ -412,7 +406,7 @@ export default function LisaChat() {
                 ) : null}
               </div>
 
-              <div className="shrink-0 border-t border-white/10 bg-[#071629] p-3">
+              <div className="shrink-0 border-t border-white/10 bg-[#10243B] p-3">
                 <form onSubmit={submitQuestion} className="flex items-center gap-2">
                   <label htmlFor="lisa-question" className="sr-only">
                     Ask Lisa a question
@@ -425,12 +419,12 @@ export default function LisaChat() {
                     maxLength={300}
                     autoComplete="off"
                     placeholder="Ask about cleaning services..."
-                    className="h-11 min-w-0 flex-1 border border-white/15 bg-[#0B2545] px-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#D4A574]"
+                    className="h-11 min-w-0 flex-1 border border-white/15 bg-[#10243B] px-3 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#B59961]"
                   />
                   <button
                     type="submit"
                     disabled={!question.trim()}
-                    className="flex h-11 w-11 shrink-0 items-center justify-center bg-[#D4A574] text-[#071629] transition hover:bg-[#E5BB8F] disabled:cursor-not-allowed disabled:opacity-40"
+                    className="flex h-11 w-11 shrink-0 items-center justify-center bg-[#B59961] text-[#0B192C] transition hover:bg-[#C8AD78] disabled:cursor-not-allowed disabled:opacity-40"
                     aria-label="Send question"
                     title="Send"
                   >
@@ -438,13 +432,13 @@ export default function LisaChat() {
                   </button>
                 </form>
                 <div className="mt-2 flex items-center justify-between gap-3">
-                  <p className="flex items-center gap-1 text-[10px] text-white/38">
+                  <p className="flex items-center gap-1 text-[10px] text-white/65">
                     <ShieldCheck className="h-3 w-3" /> Approved site information only
                   </p>
                   <button
                     type="button"
                     onClick={startLead}
-                    className="text-[11px] font-medium text-[#E5BB8F] hover:text-white"
+                    className="text-[11px] font-medium text-[#D8C08E] hover:text-white"
                   >
                     Request service
                   </button>
@@ -465,14 +459,14 @@ export default function LisaChat() {
                   <button
                     type="button"
                     onClick={closeChat}
-                    className="mt-6 bg-[#D4A574] px-5 py-2.5 text-sm font-semibold text-[#071629]"
+                    className="mt-6 bg-[#B59961] px-5 py-2.5 text-sm font-semibold text-[#0B192C]"
                   >
                     Done
                   </button>
                 </div>
               ) : (
                 <>
-                  <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#D4A574]">
+                  <p className="text-[10px] font-semibold uppercase tracking-[0.16em] text-[#D8C08E]">
                     Request service
                   </p>
                   <h3 className="mt-2 font-display text-2xl text-white">
@@ -491,7 +485,7 @@ export default function LisaChat() {
                           onClick={() => setLeadType(type)}
                           className={`h-9 text-xs font-semibold capitalize transition ${
                             leadType === type
-                              ? "bg-[#D4A574] text-[#071629]"
+                              ? "bg-[#B59961] text-[#0B192C]"
                               : "text-white/60 hover:text-white"
                           }`}
                         >
@@ -599,7 +593,7 @@ export default function LisaChat() {
                         maxLength={1000}
                         value={lead.notes}
                         onChange={(event) => setLead({ ...lead, notes: event.target.value })}
-                        className="w-full resize-none border border-white/15 bg-[#0B2545] px-3 py-2.5 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#D4A574] focus:ring-2 focus:ring-[#D4A574]/20"
+                        className="w-full resize-none border border-white/15 bg-[#10243B] px-3 py-2.5 text-sm text-white outline-none placeholder:text-white/35 focus:border-[#B59961] focus:ring-2 focus:ring-[#B59961]/20"
                       />
                     </div>
 
@@ -623,11 +617,11 @@ export default function LisaChat() {
                     <button
                       type="submit"
                       disabled={leadStatus === "sending"}
-                      className="flex h-11 w-full items-center justify-center bg-[#D4A574] px-4 text-sm font-semibold text-[#071629] transition hover:bg-[#E5BB8F] disabled:cursor-wait disabled:opacity-60"
+                      className="flex h-11 w-full items-center justify-center bg-[#B59961] px-4 text-sm font-semibold text-[#0B192C] transition hover:bg-[#C8AD78] disabled:cursor-wait disabled:opacity-60"
                     >
                       {leadStatus === "sending" ? "Sending..." : "Send request"}
                     </button>
-                    <p className="text-[10px] leading-4 text-white/40">
+                    <p className="text-[10px] leading-4 text-white/65">
                       By submitting, you agree to our{" "}
                       <Link href="/privacy" onClick={() => setOpen(false)} className="underline hover:text-white">
                         Privacy Policy
@@ -645,7 +639,7 @@ export default function LisaChat() {
       <button
         type="button"
         onClick={open ? closeChat : openChat}
-        className={`relative flex h-14 w-14 items-center justify-center border border-[#D4A574]/45 bg-[#071629] text-white shadow-[0_12px_36px_rgba(0,0,0,0.38)] transition hover:border-[#E5BB8F] hover:bg-[#0B2545] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#050E1F] ${
+        className={`relative flex h-14 w-14 items-center justify-center border border-[#B59961]/55 bg-[#0B192C] text-white shadow-[0_12px_36px_rgba(0,0,0,0.38)] transition hover:border-[#D8C08E] hover:bg-[#10243B] focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-[#0B192C] ${
           open ? "" : "lisa-active-pulse"
         }`}
         aria-label={open ? "Close Lisa chat" : "Chat with Lisa"}
@@ -672,13 +666,13 @@ export default function LisaChat() {
 
 function LisaMark() {
   return (
-    <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden border border-[#D4A574]/35 bg-[#071629]">
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center overflow-hidden border border-[#B59961]/45 bg-[#0B192C]">
       <Image
         src="/logo-gpc-64x64.png"
         alt="Gleam Pro Cleaning"
         width={40}
         height={40}
-        className="h-10 w-10"
+        className="h-10 w-10 shrink-0 object-contain"
       />
     </span>
   );
