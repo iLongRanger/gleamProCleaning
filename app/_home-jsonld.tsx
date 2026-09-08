@@ -1,9 +1,11 @@
-const SITE = "https://gleampro.ca";
+import { commercialServices, site } from "@/lib/site";
+
+const SITE = site.url;
 
 export default function HomeJsonLd({ areaNames }: { areaNames: string[] }) {
   const data = {
     "@context": "https://schema.org",
-    "@type": ["LocalBusiness", "CleaningService"],
+    "@type": "LocalBusiness",
     "@id": `${SITE}/#localbusiness`,
     name: "Gleam Pro Cleaning",
     url: SITE,
@@ -17,11 +19,6 @@ export default function HomeJsonLd({ areaNames }: { areaNames: string[] }) {
       addressLocality: "New Westminster",
       addressRegion: "BC",
       addressCountry: "CA",
-    },
-    geo: {
-      "@type": "GeoCoordinates",
-      latitude: 49.2057,
-      longitude: -122.911,
     },
     areaServed: areaNames.map((name) => ({ "@type": "City", name })),
     hasMap: "https://www.google.com/maps?q=New+Westminster,+BC",
@@ -48,6 +45,22 @@ export default function HomeJsonLd({ areaNames }: { areaNames: string[] }) {
         closes: "16:00",
       },
     ],
+    description:
+      "Family-owned commercial cleaning for restaurants, breweries, offices, clinics, and community facilities across Metro Vancouver.",
+    hasOfferCatalog: {
+      "@type": "OfferCatalog",
+      name: "Commercial cleaning services",
+      itemListElement: commercialServices.map((service) => ({
+        "@type": "Offer",
+        itemOffered: {
+          "@type": "Service",
+          name: `${service.name} cleaning`,
+          url: `${SITE}${service.href}`,
+          provider: { "@id": `${SITE}/#localbusiness` },
+          areaServed: "Metro Vancouver, BC",
+        },
+      })),
+    },
   };
 
   return (
