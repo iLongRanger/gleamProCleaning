@@ -45,22 +45,18 @@ Secondary niches:
 - Residential is supported as a secondary lane (not a pricing-first offering)
 - Primary conversion action: **Lead capture** (walk-through / estimate form)
 
-### Homepage (dual-lane hero)
+### Homepage and enquiry refresh (September 6, 2026 ? local, not deployed)
 
-- Homepage is a **full-screen hero** that switches between:
-  - **Commercial** lane (default on load)
-  - **Residential** lane (second lane)
-- Background image swaps per lane:
-  - Commercial hero: `/images/home/commercial-hero.png`
-  - Residential hero: `/images/home/residential-hero.png`
-- Hero background is optimized per breakpoint using responsive `scale[...]` and `object-[x_y]` to avoid awkward cropping on tablet/mobile.
-- Premium segmented toggle (Commercial/Residential) is larger and includes a gold glow treatment.
-- Right side uses a frosted-glass lead form:
-  - Commercial collects: business name + facility type + shared fields
-  - Residential collects: shared fields only
-- Both lanes submit to the same endpoint:
-  - POST `/api/walkthrough`
-  - Includes `leadType: "commercial" | "residential"`
+- Cream-and-green homepage with the existing Newsreader font and photography.
+- Commercial services, local routes, FAQs, and free-quote/call actions.
+- Server-rendered content in `components/home/HomePage.tsx`.
+- Shared `components/LeadForm.tsx` asks for essential contact details first;
+  optional scope fields are expandable. Both service types use the existing API.
+- Success-only lead analytics, retry handling, keyboard navigation, and a
+  visitor-initiated Lisa chat. Existing Lisa answer work remains in place.
+- Canonical, title, sitemap, social image, and local schema fixes.
+- Browser checks: `npm run test:e2e`. Implementation and release notes:
+  `docs/website-refresh.md`.
 
 ### Commercial styling (standardized)
 

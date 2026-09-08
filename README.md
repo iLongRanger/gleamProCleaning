@@ -75,7 +75,7 @@ npm run dev
 
 Open:
 
-`http://localhost:3000`
+`http://localhost:3002`
 
 Build:
 
@@ -90,6 +90,25 @@ npm run start
 ```
 
 Project Structure (high-level)
+
+The homepage and enquiry experience use the cream-and-green design in
+`app/marketing.css`. Homepage content is server rendered in
+`components/home/HomePage.tsx`; `components/LeadForm.tsx` shares enquiry validation,
+submission, accessible feedback, and analytics across the homepage and quote page.
+
+Validation:
+
+```bash
+npm run lint
+npm test
+npm run test:e2e
+npm run build
+```
+
+Install Chromium for browser checks with `npx playwright install chromium` on a new
+machine. Browser tests intercept enquiries and analytics; they do not send email.
+Set `PLAYWRIGHT_BASE_URL` to test an already-running local production server.
+See `docs/website-refresh.md` for SEO changes and release notes.
 
 - app/
   - service-areas/ (hub + city pages)

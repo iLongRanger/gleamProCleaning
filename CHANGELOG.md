@@ -4,6 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Website and enquiry refresh
+
+- Added a brighter homepage with service photography, clear local coverage, customer FAQs, and direct quote and phone actions.
+- Extended the cream-and-forest editorial design across all commercial, residential, location, insight, About, quote, and legal pages.
+- Replaced unsupported city testimonials and case examples with factual commercial and residential planning guidance.
+- Simplified commercial enquiries to four required fields, with additional details optional. Shared the form, error recovery, and successful-lead analytics across the homepage and enquiry page.
+- Improved keyboard and mobile navigation, focus handling, reduced-motion support, and access without JavaScript.
+- Made Lisa chat open on visitor request and delayed the external analytics script until after the initial page load.
+- Corrected canonical URLs, repeated page-title branding, and local service structured data. Added a branded sharing image and removed inaccurate build-time sitemap modification dates.
+- Added browser checks for enquiries, responsive layouts, accessibility, and SEO. Preserved existing public page URLs and lead delivery integration.
+
 ### Added
 
 - Implemented query parameter-based lane selection for request-walkthrough form
