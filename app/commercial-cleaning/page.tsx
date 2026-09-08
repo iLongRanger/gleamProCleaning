@@ -27,7 +27,7 @@ export default function CommercialCleaningHubPage() {
     <div className={commercial.shell}>
       <div className="relative">
         <div className={commercial.glow} />
-        <main className={`relative z-10 ${commercial.page}`}>
+        <div className={`relative z-10 ${commercial.page}`}>
           <div className="max-w-3xl">
             <p className={commercial.eyebrow}>
               Commercial Cleaning • Metro Vancouver
@@ -35,7 +35,7 @@ export default function CommercialCleaningHubPage() {
 
             <h1 className={commercial.h1}>
               Commercial Cleaning Services{" "}
-              <span style={{ color: "#D4A574" }}>for Businesses</span>
+              <span style={{ color: "#055F4B" }}>for Businesses</span>
             </h1>
 
             <p className={commercial.lead}>
@@ -403,7 +403,7 @@ export default function CommercialCleaningHubPage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

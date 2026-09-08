@@ -4,21 +4,22 @@ import { commercial } from "@/components/commercial/ui";
 import { serviceAreas } from "@/lib/service-areas";
 
 export const metadata = {
-  title: "Service Areas | Gleam Pro Cleaning",
+  title: "Cleaning Service Areas in Metro Vancouver",
   description:
-    "Service coverage across Metro Vancouver for commercial and residential cleaning.",
+    "Local cleaning in Vancouver, Burnaby, New Westminster and across Metro Vancouver. Explore your city's services and request a free cleaning quote.",
+  alternates: { canonical: "/service-areas" },
 };
 
 export default function ServiceAreasPage() {
   return (
-    <main className={commercial.shell}>
+    <div className={commercial.shell}>
       <div className={commercial.page}>
         <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8">
           <div className={commercial.glow} />
           <p className={commercial.eyebrow}>Service Areas</p>
           <h1 className={commercial.h1}>
             Metro Vancouver{" "}
-            <span style={{ color: "#D4A574" }}>cleaning coverage</span>
+            <span style={{ color: "#055F4B" }}>cleaning coverage</span>
           </h1>
           <p className={commercial.lead}>
             We serve commercial and residential clients across Metro Vancouver.
@@ -93,6 +94,6 @@ export default function ServiceAreasPage() {
           </div>
         </section>
       </div>
-    </main>
+    </div>
   );
 }

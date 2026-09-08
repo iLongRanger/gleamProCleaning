@@ -2,7 +2,7 @@ import Link from "next/link";
 import { commercial } from "@/components/commercial/ui";
 
 export const metadata = {
-  title: "Community Facility Cleaning in Metro Vancouver | Gleam Pro Cleaning",
+  title: "Community Facility Cleaning in Metro Vancouver",
   description:
     "Reliable cleaning for community centres, shared facilities, and multi-use spaces across Metro Vancouver. Clear scope, repeatable checklists, and inspection-ready results.",
   alternates: {
@@ -15,7 +15,7 @@ export default function CommunityFacilitiesCleaningPage() {
     <div className={commercial.shell}>
       <div className="relative">
         <div className={commercial.glow} />
-        <main className={`relative z-10 ${commercial.page}`}>
+        <div className={`relative z-10 ${commercial.page}`}>
           {/* Hero */}
           <section className={commercial.section}>
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -25,7 +25,7 @@ export default function CommunityFacilitiesCleaningPage() {
                 </p>
                 <h1 className={commercial.h1}>
                   Cleaning support for shared spaces{" "}
-                  <span style={{ color: "#D4A574" }}>with unpredictable traffic.</span>
+                  <span style={{ color: "#055F4B" }}>with unpredictable traffic.</span>
                 </h1>
                 <p className={commercial.lead}>
                   Community facilities need a scope that adapts: high-traffic
@@ -298,7 +298,7 @@ export default function CommunityFacilitiesCleaningPage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { commercial } from "@/components/commercial/ui";
 
 export const metadata = {
-  title: "Office Cleaning in Metro Vancouver | Gleam Pro Cleaning",
+  title: "Office Cleaning in Metro Vancouver",
   description:
     "Reliable after-hours office cleaning for Metro Vancouver. Consistent checklists, quality checks, and a simple walk-through to get a tailored quote.",
   alternates: {
@@ -15,7 +15,7 @@ export default function OfficeCleaningPage() {
     <div className={commercial.shell}>
       <div className="relative">
         <div className={commercial.glow} />
-        <main className={`relative z-10 ${commercial.page}`}>
+        <div className={`relative z-10 ${commercial.page}`}>
           {/* Hero */}
           <section className={commercial.section}>
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -25,7 +25,7 @@ export default function OfficeCleaningPage() {
                 </p>
                 <h1 className={commercial.h1}>
                   Office cleaning{" "}
-                  <span style={{ color: "#D4A574" }}>that stays consistent week after week.</span>
+                  <span style={{ color: "#055F4B" }}>that stays consistent week after week.</span>
                 </h1>
                 <p className={commercial.lead}>
                   Gleam Pro Cleaning provides dependable after-hours office
@@ -287,7 +287,7 @@ export default function OfficeCleaningPage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </div>
   );

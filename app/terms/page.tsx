@@ -12,9 +12,9 @@ const updated = "May 26, 2026";
 
 export default function TermsPage() {
   return (
-    <div className="bg-[#050E1F] text-white">
+    <div className="gpc-interior bg-[#F5F1E8] text-[#0B192C]">
       <div className="max-w-3xl mx-auto px-5 sm:px-8 py-20 sm:py-28">
-        <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#C9A227]">
+        <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#055F4B]">
           Terms
         </p>
         <h1 className="mt-3 font-display text-4xl sm:text-5xl leading-[1.05]">

@@ -4,7 +4,7 @@ import { serviceCatalog } from "@/lib/service-catalog";
 import { serviceAreas } from "@/lib/service-areas";
 
 export const metadata = {
-  title: "Service Areas by Cleaning Service | Gleam Pro Cleaning",
+  title: "Service Areas by Cleaning Service",
   description:
     "Explore commercial and residential cleaning services by city across Metro Vancouver, including offices, restaurants, recurring home cleaning, and deep cleaning.",
   alternates: {
@@ -21,14 +21,14 @@ const residentialServices = serviceCatalog.filter(
 
 export default function ServiceAreasByServicePage() {
   return (
-    <main className={commercial.shell}>
+    <div className={commercial.shell}>
       <div className={commercial.page}>
         <section className="relative overflow-hidden rounded-3xl border border-white/10 bg-white/5 p-8">
           <div className={commercial.glow} />
           <p className={commercial.eyebrow}>Service Areas by Service</p>
           <h1 className={commercial.h1}>
             Find cleaning services{" "}
-            <span style={{ color: "#D4A574" }}>by city and service type</span>
+            <span style={{ color: "#055F4B" }}>by city and service type</span>
           </h1>
           <p className={commercial.lead}>
             Use this page to explore where each commercial and residential
@@ -107,6 +107,6 @@ export default function ServiceAreasByServicePage() {
           </div>
         </section>
       </div>
-    </main>
+    </div>
   );
 }

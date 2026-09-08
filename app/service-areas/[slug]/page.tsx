@@ -20,12 +20,12 @@ export async function generateMetadata({
   const { slug } = await params;
   const area = getServiceArea(slug);
   if (!area) {
-    return { title: "Service Area | Gleam Pro Cleaning" };
+    return { title: "Service Area" };
   }
 
   const ogImage = area.image || `/images/service-areas/${area.slug}.jpg`;
   return {
-    title: `${area.name} Cleaning Services | Gleam Pro Cleaning`,
+    title: `${area.name} Cleaning Services`,
     description: area.description,
     alternates: {
       canonical: `/service-areas/${area.slug}`,
@@ -40,161 +40,16 @@ export async function generateMetadata({
   };
 }
 
-const CITY_COORDINATES: Record<string, { latitude: number; longitude: number }> = {
-  vancouver: { latitude: 49.2827, longitude: -123.1207 },
-  burnaby: { latitude: 49.2488, longitude: -122.9805 },
-  "new-westminster": { latitude: 49.2057, longitude: -122.911 },
-  surrey: { latitude: 49.1913, longitude: -122.849 },
-  richmond: { latitude: 49.1666, longitude: -123.1336 },
-  coquitlam: { latitude: 49.2838, longitude: -122.7932 },
-  "north-vancouver": { latitude: 49.3209, longitude: -123.0723 },
-  "west-vancouver": { latitude: 49.328, longitude: -123.1602 },
-  delta: { latitude: 49.0847, longitude: -123.0587 },
-};
-
-const CITY_PROOF: Record<
-  string,
-  {
-    testimonial: { quote: string; source: string };
-    caseStudy: { title: string; challenge: string; outcome: string };
-  }
-> = {
-  vancouver: {
-    testimonial: {
-      quote:
-        "Our weekly office clean has stayed consistent for months, even with late meetings and changing traffic.",
-      source: "Operations Manager, Downtown Vancouver",
-    },
-    caseStudy: {
-      title: "Downtown Office + Client-Facing Lobby",
-      challenge:
-        "High foot traffic and visible glass areas needed reliable evening service.",
-      outcome:
-        "Scope was split by daily and weekly tasks, improving consistency and reducing complaints.",
-    },
-  },
-  burnaby: {
-    testimonial: {
-      quote:
-        "Communication has been fast and clear, and our washrooms are now consistently stocked and reset.",
-      source: "Facility Coordinator, Burnaby",
-    },
-    caseStudy: {
-      title: "Mixed-Use Facility Near Metrotown",
-      challenge: "Multiple washrooms and uneven traffic across floors.",
-      outcome:
-        "A zone-based checklist improved accountability and stabilized service quality.",
-    },
-  },
-  "new-westminster": {
-    testimonial: {
-      quote:
-        "They adapted quickly to our schedule changes and still kept our standards high.",
-      source: "Business Owner, New Westminster",
-    },
-    caseStudy: {
-      title: "Local Retail + Office Backroom",
-      challenge:
-        "Evening access windows were tight and required efficient turnover.",
-      outcome:
-        "The team implemented a timed sequence for front and back areas to meet closing deadlines.",
-    },
-  },
-  surrey: {
-    testimonial: {
-      quote:
-        "We run a busy site and needed dependable coverage. The quality checks made a big difference.",
-      source: "Site Supervisor, Surrey",
-    },
-    caseStudy: {
-      title: "Multi-Tenant Commercial Site",
-      challenge: "Different tenant expectations and rotating occupancy levels.",
-      outcome:
-        "Custom scopes by tenant zone reduced missed items and improved response time.",
-    },
-  },
-  richmond: {
-    testimonial: {
-      quote:
-        "After-hours cleaning has been smooth and our common spaces are always guest-ready in the morning.",
-      source: "Property Administrator, Richmond",
-    },
-    caseStudy: {
-      title: "Office + Shared Amenity Spaces",
-      challenge: "Heavy evening use of breakrooms and corridors.",
-      outcome:
-        "Rebalanced nightly focus areas to keep high-traffic zones consistently clean.",
-    },
-  },
-  coquitlam: {
-    testimonial: {
-      quote:
-        "The checklist format made expectations clear for everyone on our team.",
-      source: "Operations Lead, Coquitlam",
-    },
-    caseStudy: {
-      title: "Professional Services Office",
-      challenge:
-        "Inconsistent results from previous providers and unclear scope ownership.",
-      outcome:
-        "Documented task ownership and routine inspection notes improved consistency.",
-    },
-  },
-  "north-vancouver": {
-    testimonial: {
-      quote:
-        "Detail quality has been excellent, especially in the lobby and washroom areas.",
-      source: "Office Manager, North Vancouver",
-    },
-    caseStudy: {
-      title: "Clinic + Admin Space",
-      challenge: "High-touch surfaces and strict presentation standards.",
-      outcome:
-        "Enhanced disinfection rotation and touchpoint tracking improved daily readiness.",
-    },
-  },
-  "west-vancouver": {
-    testimonial: {
-      quote:
-        "Their team is reliable and careful in high-detail areas where presentation matters most.",
-      source: "Property Manager, West Vancouver",
-    },
-    caseStudy: {
-      title: "Premium Residential + Office Suite",
-      challenge:
-        "Demand for quiet, low-disruption service with high detail expectations.",
-      outcome:
-        "Refined checklist cadence delivered consistent results with minimal interruption.",
-    },
-  },
-  delta: {
-    testimonial: {
-      quote:
-        "Scheduling has been flexible and the quality has stayed strong across multiple visits.",
-      source: "Facility Lead, Delta",
-    },
-    caseStudy: {
-      title: "Warehouse Office + Front Reception",
-      challenge:
-        "Dust-prone traffic transitions between operations and office zones.",
-      outcome:
-        "Focused entry-point and shared-space routines improved cleanliness across shifts.",
-    },
-  },
-};
-
 export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
   const { slug } = await params;
   const area = getServiceArea(slug);
   if (!area) {
     notFound();
   }
-  const cityCoordinates = CITY_COORDINATES[area.slug];
-  const cityProof = CITY_PROOF[area.slug];
   const areaUrl = `https://gleampro.ca/service-areas/${area.slug}`;
 
   return (
-    <main className={commercial.shell}>
+    <div className={commercial.shell}>
       <div className={commercial.page}>
         <nav className="mb-6 text-sm text-white/70" aria-label="Breadcrumb">
           <ol className="flex flex-wrap items-center gap-2">
@@ -219,7 +74,7 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
           <p className={commercial.eyebrow}>Service Area</p>
           <h1 className={commercial.h1}>
             {area.name}{" "}
-            <span style={{ color: "#D4A574" }}>Cleaning Services</span>
+            <span style={{ color: "#055F4B" }}>Cleaning Services</span>
           </h1>
           <p className={commercial.lead}>{area.description}</p>
           <div className="mt-6 flex flex-wrap gap-3">
@@ -271,26 +126,21 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
 
         <section className="mt-10 grid gap-6 md:grid-cols-2">
           <div className={commercial.section}>
-            <h2 className={commercial.h2}>Local client snapshot</h2>
+            <p className={commercial.eyebrow}>Commercial planning</p>
+            <h2 className={`${commercial.h2} mt-3`}>A scope built around your site</h2>
             <p className="mt-4 text-white/80">
-              &ldquo;{cityProof.testimonial.quote}&rdquo;
-            </p>
-            <p className="mt-3 text-sm text-white/70">
-              {cityProof.testimonial.source}
+              We review access, operating hours, traffic patterns, priority
+              rooms, and cleaning frequency before preparing a proposal for
+              your {area.name} facility.
             </p>
           </div>
           <div className={commercial.sectionAlt}>
-            <h2 className={commercial.h2}>Recent {area.name} case example</h2>
-            <h3 className={`mt-4 text-base font-semibold ${commercial.accent}`}>
-              {cityProof.caseStudy.title}
-            </h3>
-            <p className="mt-2 text-sm text-white/80">
-              <span className="font-semibold text-white">Challenge:</span>{" "}
-              {cityProof.caseStudy.challenge}
-            </p>
-            <p className="mt-2 text-sm text-white/80">
-              <span className="font-semibold text-white">Outcome:</span>{" "}
-              {cityProof.caseStudy.outcome}
+            <p className={commercial.eyebrow}>Residential planning</p>
+            <h2 className={`${commercial.h2} mt-3`}>An estimate based on your home</h2>
+            <p className="mt-4 text-white/80">
+              Tell us the home size, service type, and preferred schedule. We
+              will confirm availability in {area.name} and recommend the right
+              starting service.
             </p>
           </div>
         </section>
@@ -383,87 +233,29 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
           dangerouslySetInnerHTML={{
             __html: JSON.stringify({
               "@context": "https://schema.org",
-              "@type": "LocalBusiness",
-              "@id": `${areaUrl}#localbusiness`,
-              name: "Gleam Pro Cleaning",
+              "@type": "Service",
+              "@id": `${areaUrl}#service`,
+              name: `Cleaning Services in ${area.name}`,
               url: areaUrl,
-              image: [
-                "https://gleampro.ca/logo-gpc.png",
-                `https://gleampro.ca${area.image}`,
-              ],
-              telephone: "+1-778-223-0719",
-              email: "services@gleampro.ca",
-              contactPoint: [
-                {
-                  "@type": "ContactPoint",
-                  telephone: "+1-778-223-0719",
-                  contactType: "customer service",
-                  areaServed: area.name,
-                  availableLanguage: ["English"],
+              description: area.description,
+              serviceType: ["Commercial cleaning", "Residential cleaning"],
+              provider: {
+                "@type": "LocalBusiness",
+                "@id": "https://gleampro.ca/#localbusiness",
+                name: "Gleam Pro Cleaning",
+                url: "https://gleampro.ca",
+                telephone: "+1-778-223-0719",
+                address: {
+                  "@type": "PostalAddress",
+                  addressLocality: "New Westminster",
+                  addressRegion: "BC",
+                  addressCountry: "CA",
                 },
-              ],
+              },
               areaServed: [
                 { "@type": "City", name: area.name },
-                ...area.neighborhoods.map((item) => ({ "@type": "Place", name: item })),
+                ...area.neighborhoods.map((name) => ({ "@type": "Place", name })),
               ],
-              address: {
-                "@type": "PostalAddress",
-                addressLocality: "New Westminster",
-                addressRegion: "BC",
-                postalCode: "V3M",
-                addressCountry: "CA",
-              },
-              geo: cityCoordinates
-                ? {
-                    "@type": "GeoCoordinates",
-                    latitude: cityCoordinates.latitude,
-                    longitude: cityCoordinates.longitude,
-                  }
-                : undefined,
-              hasMap: "https://www.google.com/maps?q=New+Westminster,+BC",
-              openingHoursSpecification: [
-                {
-                  "@type": "OpeningHoursSpecification",
-                  dayOfWeek: [
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                  ],
-                  opens: "08:00",
-                  closes: "18:00",
-                },
-                {
-                  "@type": "OpeningHoursSpecification",
-                  dayOfWeek: "Saturday",
-                  opens: "09:00",
-                  closes: "16:00",
-                },
-              ],
-              hasOfferCatalog: {
-                "@type": "OfferCatalog",
-                name: `Cleaning Services in ${area.name}`,
-                itemListElement: [
-                  {
-                    "@type": "Offer",
-                    itemOffered: {
-                      "@type": "Service",
-                      name: "Commercial Cleaning",
-                      areaServed: area.name,
-                    },
-                  },
-                  {
-                    "@type": "Offer",
-                    itemOffered: {
-                      "@type": "Service",
-                      name: "Residential Cleaning",
-                      areaServed: area.name,
-                    },
-                  },
-                ],
-              },
-              priceRange: "$$",
             }),
           }}
         />
@@ -497,6 +289,6 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
           }}
         />
       </div>
-    </main>
+    </div>
   );
 }

@@ -3,7 +3,7 @@ import Link from "next/link";
 import { commercial } from "@/components/commercial/ui";
 
 export const metadata: Metadata = {
-  title: "Clinic & Medical Office Cleaning in Metro Vancouver | Gleam Pro",
+  title: "Clinic & Medical Office Cleaning in Metro Vancouver",
   description:
     "Daily clinic and medical office cleaning across Metro Vancouver. Hygiene routines, disinfection protocol, discreet service, insured commercial crews.",
   alternates: {
@@ -33,7 +33,7 @@ export default function ClinicsPage() {
     <div className={commercial.shell}>
       <div className="relative">
         <div className={commercial.glow} />
-        <main className={`relative z-10 ${commercial.page}`}>
+        <div className={`relative z-10 ${commercial.page}`}>
           <section className={commercial.section}>
             <div className="grid gap-10 lg:grid-cols-12 lg:items-center">
               <div className="lg:col-span-8">
@@ -42,7 +42,7 @@ export default function ClinicsPage() {
                 </p>
                 <h1 className={commercial.h1}>
                   Daily cleaning for clinics that get inspected{" "}
-                  <span style={{ color: "#D4A574" }}>- because we already do it every day.</span>
+                  <span style={{ color: "#055F4B" }}>- because we already do it every day.</span>
                 </h1>
                 <p className={commercial.lead}>
                   Clinic cleaning needs consistent hygiene standards,
@@ -106,7 +106,7 @@ export default function ClinicsPage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </div>
   );

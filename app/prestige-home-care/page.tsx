@@ -3,7 +3,7 @@ import { Shield, Sparkles, Star, Home, Calendar, Sofa } from "lucide-react";
 import { residential } from "@/components/residential/ui";
 
 export const metadata = {
-  title: "Premium Home Cleaning in Metro Vancouver | Gleam Pro Cleaning",
+  title: "Premium Home Cleaning in Metro Vancouver",
   description:
     "Professional residential cleaning services including recurring, deep cleaning, move-in/out, and carpet care. Estimate-based pricing for your unique home needs.",
   alternates: {
@@ -16,7 +16,7 @@ export default function PrestigeHomePage() {
     <div className={residential.shell}>
       <div className="relative">
         <div className={residential.glow} />
-        <main className={`relative z-10 ${residential.page}`}>
+        <div className={`relative z-10 ${residential.page}`}>
           {/* Hero */}
           <section className={residential.section}>
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -26,7 +26,7 @@ export default function PrestigeHomePage() {
                 </p>
                 <h1 className={residential.h1}>
                   Premium home cleaning{" "}
-                  <span style={{ color: "#D4A574" }}>tailored to your space</span>
+                  <span style={{ color: "#055F4B" }}>tailored to your space</span>
                 </h1>
                 <p className={residential.lead}>
                   From recurring maintenance to deep cleans and move-in/out services,
@@ -227,7 +227,7 @@ export default function PrestigeHomePage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </div>
   );

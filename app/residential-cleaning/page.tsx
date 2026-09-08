@@ -6,7 +6,7 @@ import { serviceAreas as allServiceAreas } from "@/lib/service-areas";
 const serviceAreaNames = allServiceAreas.map((area) => area.name);
 
 export const metadata: Metadata = {
-  title: "Residential Cleaning Services | Gleam Pro Cleaning",
+  title: "Residential Cleaning Services",
   description:
     "Professional residential cleaning services in Metro Vancouver including recurring maintenance, deep cleaning, move-in/out, and carpet & upholstery care.",
   alternates: {
@@ -27,7 +27,7 @@ export default function ResidentialCleaningHubPage() {
     <div className={residential.shell}>
       <div className="relative">
         <div className={residential.glow} />
-        <main className={`relative z-10 ${residential.page}`}>
+        <div className={`relative z-10 ${residential.page}`}>
           <div className="max-w-3xl">
             <p className={residential.eyebrow}>
               Residential Cleaning • Metro Vancouver
@@ -380,7 +380,7 @@ export default function ResidentialCleaningHubPage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

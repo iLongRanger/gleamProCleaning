@@ -4,7 +4,7 @@ import Link from "next/link";
 import { ArrowUpRight, Check, MapPin, ShieldCheck } from "lucide-react";
 
 export const metadata: Metadata = {
-  title: "About Gleam Pro Cleaning",
+  title: "Our Story & Cleaning Team",
   description:
     "Meet Gleam Pro Cleaning, a family-owned, owner-led cleaning company based in New Westminster and serving Metro Vancouver since 2019.",
   alternates: {
@@ -59,9 +59,9 @@ const serviceAreas = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#050E1F] text-white antialiased">
-      <main>
-        <section className="relative min-h-[620px] overflow-hidden sm:min-h-[700px] lg:min-h-[760px]">
+    <div className="gpc-interior min-h-screen bg-[#F5F1E8] text-[#0B192C] antialiased">
+      <div>
+        <section className="gpc-interior-photo relative min-h-[620px] overflow-hidden sm:min-h-[700px] lg:min-h-[760px]">
           <Image
             src="/images/service-areas/new-westminster.jpg"
             alt="New Westminster, home of Gleam Pro Cleaning"
@@ -70,15 +70,15 @@ export default function AboutPage() {
             sizes="100vw"
             className="object-cover"
           />
-          <div className="absolute inset-0 bg-[#050E1F]/30" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#050E1F] via-[#050E1F]/65 to-[#050E1F]/10" />
+          <div className="absolute inset-0 bg-[#0B192C]/30" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#0B192C] via-[#0B192C]/65 to-[#0B192C]/10" />
 
           <div className="relative mx-auto flex min-h-[620px] max-w-[1280px] items-end px-5 pb-16 pt-24 sm:min-h-[700px] sm:px-8 sm:pb-20 lg:min-h-[760px] lg:pb-24">
             <div className="max-w-4xl">
-              <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#D4A574]">
+              <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#B59961]">
                 New Westminster · Metro Vancouver
               </p>
-              <h1 className="mt-5 font-display text-5xl font-light leading-none text-white sm:text-6xl md:text-7xl lg:text-[92px]">
+              <h1 className="mt-5 font-display text-5xl font-medium leading-[1.05] text-white sm:text-6xl md:text-7xl lg:text-[92px] lg:leading-[1.02]">
                 Gleam Pro Cleaning
               </h1>
               <p className="mt-6 max-w-2xl text-lg leading-relaxed text-white/80 sm:text-xl">
@@ -89,14 +89,14 @@ export default function AboutPage() {
               <div className="mt-8 flex flex-wrap gap-3">
                 <Link
                   href="/request-walkthrough?type=commercial"
-                  className="group inline-flex items-center gap-2 rounded-full bg-[#F4EFE6] px-6 py-3.5 text-sm font-medium text-[#0B2545] transition hover:bg-white"
+                  className="group inline-flex items-center gap-2 rounded-full bg-[#F5F1E8] px-6 py-3.5 text-sm font-medium text-[#0B192C] transition hover:bg-white"
                 >
                   Request a walk-through
                   <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
                 </Link>
                 <Link
                   href="/commercial-cleaning"
-                  className="inline-flex items-center rounded-full border border-white/25 bg-[#050E1F]/25 px-6 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition hover:border-white/50 hover:bg-[#050E1F]/45"
+                  className="inline-flex items-center rounded-full border border-white/25 bg-[#0B192C]/25 px-6 py-3.5 text-sm font-medium text-white backdrop-blur-sm transition hover:border-white/50 hover:bg-[#0B192C]/45"
                 >
                   Explore our services
                 </Link>
@@ -105,7 +105,7 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="border-b border-white/10 bg-[#F4EFE6] text-[#050E1F]">
+        <section className="border-b border-white/10 bg-[#F5F1E8] text-[#0B192C]">
           <div className="mx-auto grid max-w-[1280px] grid-cols-2 px-5 sm:px-8 lg:grid-cols-4">
             {[
               ["2019", "On the floor since"],
@@ -115,12 +115,12 @@ export default function AboutPage() {
             ].map(([value, label]) => (
               <div
                 key={label}
-                className="border-b border-[#050E1F]/10 px-2 py-7 last:border-b-0 even:border-l even:border-[#050E1F]/10 sm:py-9 lg:border-b-0 lg:border-l lg:first:border-l-0"
+                className="border-b border-[#0B192C]/10 px-2 py-7 last:border-b-0 even:border-l even:border-[#0B192C]/10 sm:py-9 lg:border-b-0 lg:border-l lg:first:border-l-0"
               >
                 <div className="font-display text-4xl leading-none sm:text-5xl">
                   {value}
                 </div>
-                <div className="mt-2 text-xs font-medium uppercase tracking-[0.18em] text-[#050E1F]/60">
+                <div className="mt-2 text-xs font-medium uppercase tracking-[0.18em] text-[#0B192C]">
                   {label}
                 </div>
               </div>
@@ -131,7 +131,7 @@ export default function AboutPage() {
         <section className="border-b border-white/10">
           <div className="mx-auto grid max-w-[1280px] gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-12 lg:gap-16">
             <div className="lg:col-span-4">
-              <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#D4A574]">
+              <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#055F4B]">
                 Our story
               </p>
               <h2 className="mt-4 font-display text-4xl leading-[1.05] sm:text-5xl">
@@ -162,10 +162,10 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-[#081A31]">
+        <section className="bg-[#FFFDF8]">
           <div className="mx-auto max-w-[1280px] px-5 py-20 sm:px-8 sm:py-28">
             <div className="max-w-2xl">
-              <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#D4A574]">
+              <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#055F4B]">
                 How we work
               </p>
               <h2 className="mt-4 font-display text-4xl leading-[1.05] sm:text-5xl">
@@ -179,7 +179,7 @@ export default function AboutPage() {
                   key={principle.number}
                   className="grid gap-4 border-b border-white/12 py-8 sm:grid-cols-[80px_1fr] lg:grid-cols-[120px_0.8fr_1.2fr] lg:items-start lg:py-10"
                 >
-                  <span className="font-display text-3xl text-[#D4A574]/60">
+                  <span className="font-display text-3xl text-[#055F4B]">
                     {principle.number}
                   </span>
                   <h3 className="font-display text-2xl text-white sm:text-3xl">
@@ -197,7 +197,7 @@ export default function AboutPage() {
         <section className="border-y border-white/10">
           <div className="mx-auto grid max-w-[1280px] gap-12 px-5 py-20 sm:px-8 sm:py-28 lg:grid-cols-2 lg:gap-20">
             <div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#D4A574]/35 text-[#D4A574]">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#B59961]/35 text-[#055F4B]">
                 <ShieldCheck className="h-5 w-5" />
               </div>
               <h2 className="mt-6 font-display text-4xl leading-[1.05] sm:text-5xl">
@@ -211,7 +211,7 @@ export default function AboutPage() {
               </p>
               <Link
                 href="/terms"
-                className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-[#D4A574] transition hover:text-white"
+                className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-[#055F4B] transition hover:text-[#014A5E]"
               >
                 Read our service terms
                 <ArrowUpRight className="h-4 w-4" />
@@ -219,7 +219,7 @@ export default function AboutPage() {
             </div>
 
             <div>
-              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#0FA36B]/40 text-[#4DD49B]">
+              <div className="flex h-12 w-12 items-center justify-center rounded-full border border-[#B59961]/40 text-[#055F4B]">
                 <MapPin className="h-5 w-5" />
               </div>
               <h2 className="mt-6 font-display text-4xl leading-[1.05] sm:text-5xl">
@@ -228,14 +228,14 @@ export default function AboutPage() {
               <div className="mt-7 grid grid-cols-1 gap-x-8 gap-y-3 sm:grid-cols-2">
                 {serviceAreas.map((area) => (
                   <div key={area} className="flex items-center gap-3 text-sm text-white/72">
-                    <Check className="h-4 w-4 shrink-0 text-[#4DD49B]" />
+                    <Check className="h-4 w-4 shrink-0 text-[#055F4B]" />
                     <span>{area}</span>
                   </div>
                 ))}
               </div>
               <Link
                 href="/service-areas"
-                className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-[#D4A574] transition hover:text-white"
+                className="mt-7 inline-flex items-center gap-2 text-sm font-medium text-[#055F4B] transition hover:text-[#014A5E]"
               >
                 View service areas
                 <ArrowUpRight className="h-4 w-4" />
@@ -244,9 +244,9 @@ export default function AboutPage() {
           </div>
         </section>
 
-        <section className="bg-[#0B2545]">
+        <section className="gpc-interior-teal bg-[#014A5E]">
           <div className="mx-auto max-w-[1280px] px-5 py-20 text-center sm:px-8 sm:py-28">
-            <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#D4A574]">
+            <p className="text-[11px] font-medium uppercase tracking-[0.28em] text-[#B59961]">
               Start with the space
             </p>
             <h2 className="mx-auto mt-4 max-w-4xl font-display text-4xl leading-[1.05] sm:text-5xl md:text-6xl">
@@ -259,7 +259,7 @@ export default function AboutPage() {
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Link
                 href="/request-walkthrough?type=commercial"
-                className="group inline-flex items-center gap-2 rounded-full bg-[#F4EFE6] px-6 py-3.5 text-sm font-medium text-[#0B2545] transition hover:bg-white"
+                className="group inline-flex items-center gap-2 rounded-full bg-[#F5F1E8] px-6 py-3.5 text-sm font-medium text-[#0B192C] transition hover:bg-white"
               >
                 Request a walk-through
                 <ArrowUpRight className="h-4 w-4 transition-transform group-hover:rotate-45" />
@@ -273,7 +273,7 @@ export default function AboutPage() {
             </div>
           </div>
         </section>
-      </main>
+      </div>
 
       <script
         type="application/ld+json"

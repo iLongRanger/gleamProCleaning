@@ -72,7 +72,7 @@ export default function RestaurantCleaningChecklistPage() {
     <div className={commercial.shell}>
       <div className="relative">
         <div className={commercial.glow} />
-        <main className="relative z-10 mx-auto max-w-[1180px] px-5 py-16 sm:px-8 sm:py-24">
+        <div className="relative z-10 mx-auto max-w-[1180px] px-5 py-16 sm:px-8 sm:py-24">
           <nav aria-label="Breadcrumb" className="text-sm text-white/55">
             <Link href="/" className="transition hover:text-white">Home</Link>
             <span className="mx-2" aria-hidden="true">/</span>
@@ -85,7 +85,7 @@ export default function RestaurantCleaningChecklistPage() {
             <div>
               <header>
                 <p className={commercial.eyebrow}>Restaurant Operations Guide</p>
-                <h1 className="font-display mt-5 text-[42px] font-light leading-[1.02] text-white sm:text-6xl lg:text-[72px]">
+                <h1 className="font-display mt-5 text-[42px] font-medium leading-[1.05] text-white sm:text-6xl lg:text-[72px] lg:leading-[1.02]">
                   Nightly Restaurant Cleaning Checklist
                 </h1>
                 <p className="mt-6 max-w-2xl text-lg leading-8 text-white/70">
@@ -160,7 +160,7 @@ export default function RestaurantCleaningChecklistPage() {
                     ["Exceptions noted", "Blocked areas, spills, damage, supply shortages, and incomplete handoffs are reported."],
                     ["Opening verifies", "A manager checks critical areas before service and raises any issue through the agreed contact path."],
                   ].map(([title, text]) => (
-                    <div key={title} className="border-l border-[#D4A574]/40 pl-4">
+                    <div key={title} className="border-l border-[#B59961]/40 pl-4">
                       <h3 className={`${commercial.h3} ${commercial.accent}`}>{title}</h3>
                       <p className="mt-2 text-sm leading-6 text-white/70">{text}</p>
                     </div>
@@ -197,8 +197,8 @@ export default function RestaurantCleaningChecklistPage() {
             </div>
 
             <aside className="lg:sticky lg:top-28">
-              <div className="border border-white/10 bg-[#081A31] p-6">
-                <ClipboardList className="h-7 w-7 text-[#D4A574]" aria-hidden="true" />
+              <div className="border border-white/10 bg-[#FFFDF8] p-6">
+                <ClipboardList className="h-7 w-7 text-[#055F4B]" aria-hidden="true" />
                 <h2 className="mt-4 font-display text-xl text-white">In this guide</h2>
                 <nav className="mt-4" aria-label="Article sections">
                   <ol className="space-y-3 text-sm text-white/65">
@@ -213,7 +213,7 @@ export default function RestaurantCleaningChecklistPage() {
                     ].map(([label, href], index) => (
                       <li key={href}>
                         <a href={href} className="flex gap-3 transition hover:text-white">
-                          <span className="text-[#D4A574]/70">{String(index + 1).padStart(2, "0")}</span>
+                          <span className="text-[#055F4B]">{String(index + 1).padStart(2, "0")}</span>
                           <span>{label}</span>
                         </a>
                       </li>
@@ -228,14 +228,14 @@ export default function RestaurantCleaningChecklistPage() {
                 </p>
                 <Link
                   href="/request-walkthrough?type=commercial"
-                  className="mt-4 inline-flex text-sm font-medium text-white underline decoration-[#D4A574] underline-offset-4"
+                  className="mt-4 inline-flex text-sm font-medium text-white underline decoration-[#B59961] underline-offset-4"
                 >
                   Request a walk-through
                 </Link>
               </div>
             </aside>
           </article>
-        </main>
+        </div>
 
         <script
           type="application/ld+json"

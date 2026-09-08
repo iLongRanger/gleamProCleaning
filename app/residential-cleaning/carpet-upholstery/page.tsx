@@ -2,7 +2,7 @@ import Link from "next/link";
 import { residential } from "@/components/residential/ui";
 
 export const metadata = {
-  title: "Carpet & Upholstery Cleaning in Metro Vancouver | Gleam Pro Cleaning",
+  title: "Carpet & Upholstery Cleaning in Metro Vancouver",
   description:
     "Professional carpet cleaning and upholstery care in Metro Vancouver. Safe extraction methods, stain removal, and fabric-safe cleaning for all furniture types.",
   alternates: {
@@ -15,7 +15,7 @@ export default function CarpetUpholsteryPage() {
     <div className={residential.shell}>
       <div className="relative">
         <div className={residential.glow} />
-        <main className={`relative z-10 ${residential.page}`}>
+        <div className={`relative z-10 ${residential.page}`}>
           {/* Hero */}
           <section className={residential.section}>
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -25,7 +25,7 @@ export default function CarpetUpholsteryPage() {
                 </p>
                 <h1 className={residential.h1}>
                   Professional fabric care{" "}
-                  <span style={{ color: "#D4A574" }}>that restores and refreshes</span>
+                  <span style={{ color: "#055F4B" }}>that restores and refreshes</span>
                 </h1>
                 <p className={residential.lead}>
                   From stubborn carpet stains to delicate upholstery cleaning, we use
@@ -235,7 +235,7 @@ export default function CarpetUpholsteryPage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </div>
   );

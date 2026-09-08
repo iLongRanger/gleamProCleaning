@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Request a Walk-Through | Gleam Pro Cleaning",
+  title: "Get a Free Cleaning Quote in Metro Vancouver",
   description:
-    "Request a commercial walk-through or residential estimate in Metro Vancouver. We will confirm scope and provide a tailored proposal.",
+    "Request a free commercial cleaning walkthrough or home estimate in Metro Vancouver. A local, owner-led team. No obligation. Reply within one business day.",
   alternates: {
     canonical: "/request-walkthrough",
   },

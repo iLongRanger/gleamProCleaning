@@ -1,227 +1,103 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { MapPin, Phone, Mail, ArrowUpRight } from "lucide-react";
-
-const commercialLinks = [
-  { label: "Overview", href: "/commercial-cleaning" },
-  { label: "Breweries & Taprooms", href: "/breweries" },
-  { label: "Clinics & Medical Offices", href: "/clinics" },
-  { label: "Restaurants", href: "/commercial-cleaning/restaurants" },
-  { label: "Offices", href: "/commercial-cleaning/offices" },
-  { label: "Property Management", href: "/commercial-cleaning/property-management" },
-  { label: "Community Facilities", href: "/commercial-cleaning/community-facilities" },
-  { label: "Commercial FAQ", href: "/commercial-cleaning/faq" },
-];
-
-const residentialLinks = [
-  { label: "Overview", href: "/residential-cleaning" },
-];
-
-const companyLinks = [
-  { label: "Home", href: "/" },
-  { label: "About", href: "/about" },
-  { label: "Service Areas", href: "/service-areas" },
-  { label: "Areas by Service", href: "/service-areas/by-service" },
-  { label: "Insights", href: "/insights" },
-  { label: "Request Walk-Through", href: "/request-walkthrough?type=commercial" },
-];
-
-const eyebrow =
-  "text-[10px] font-medium uppercase tracking-[0.28em] text-[#C9A227]";
-const colHeading = "font-display text-lg text-white";
-const linkCls =
-  "group inline-flex items-center gap-1.5 text-sm text-white/65 hover:text-white transition";
-
+import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { commercialServices, site } from "@/lib/site";
 export default function Footer() {
   return (
-    <footer
-      id="contact"
-      className="relative border-t border-white/10 bg-[#050E1F] text-white antialiased"
-    >
-      {/* atmosphere */}
-      <div
-        aria-hidden
-        className="pointer-events-none absolute inset-0 opacity-60"
-        style={{
-          background:
-            "radial-gradient(700px 320px at 8% 0%, rgba(15,163,107,0.10), transparent 60%), radial-gradient(700px 320px at 92% 0%, rgba(201,162,39,0.10), transparent 60%)",
-        }}
-      />
-      <div className="pointer-events-none absolute inset-0 bg-grain mix-blend-overlay opacity-[0.18]" />
-
-      <div className="relative max-w-[1280px] mx-auto px-5 sm:px-8 pt-20 sm:pt-24 pb-10">
-        {/* Wordmark row */}
-        <div className="flex flex-col lg:flex-row lg:items-end lg:justify-between gap-10 pb-12 border-b border-white/10">
-          <div className="max-w-xl">
-            <div className={eyebrow}>7 years of professional cleaning · Owner-operated every night</div>
-            <h2 className="mt-4 font-display text-4xl sm:text-5xl md:text-6xl leading-[1.02] text-white">
-              Spaces that open ready,{" "}
-              <span className="italic text-white/60">before the first shift.</span>
-            </h2>
-            <p className="mt-5 max-w-md text-[15px] leading-relaxed text-white/60">
+    <footer id="contact" className="site-footer">
+      <div className="gpc-container">
+        <div className="footer-grid">
+          <div className="footer-brand">
+            <Link className="brand-link" href="/">
+              <Image src="/logo-gpc.png" alt="" width={52} height={52} />
+              <span>
+                <strong>Gleam Pro.</strong>
+                <small>PROFESSIONAL CLEANING</small>
+              </span>
+            </Link>
+            <p>
+              A cleaner space. A better start.
+              <br />
               Family-owned commercial cleaning across Metro Vancouver.
-              Free walkthrough, written quote in 24 hours.
             </p>
+            <span className="footer-experience">
+              Professional experience since 2019.
+              <br />
+              Incorporated in 2024.
+            </span>
           </div>
-          <Link
-            href="/request-walkthrough?type=commercial"
-            className="group inline-flex items-center gap-2 self-start lg:self-end rounded-full px-6 py-3.5 text-[14px] font-medium tracking-wide text-[#0B2545] bg-[#F4EFE6] hover:bg-white transition shadow-[0_18px_50px_-18px_rgba(244,239,230,0.55)]"
-          >
-            Request walk-through
-            <ArrowUpRight className="w-4 h-4 transition-transform group-hover:rotate-45" />
-          </Link>
-        </div>
-
-        {/* Columns */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-12 gap-10 lg:gap-8 py-14">
-          {/* Brand + Company */}
-          <div className="lg:col-span-3 space-y-8">
-            <div className="flex items-center gap-3">
-              <Image
-                src="/logo-gpc.png"
-                alt="Gleam Pro Cleaning"
-                width={56}
-                height={56}
-                className="h-14 w-14"
-              />
-              <div>
-                <div className="font-display text-lg leading-tight text-white">
-                  Gleam Pro
-                </div>
-                <div className="text-[11px] uppercase tracking-[0.22em] text-white/50">
-                  Owner-led night crews
-                </div>
-              </div>
-            </div>
-
-            <div>
-              <div className={eyebrow}>Company</div>
-              <ul className="mt-4 space-y-2.5">
-                {companyLinks.map((link) => (
-                  <li key={link.href}>
-                    <Link href={link.href} className={linkCls}>
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          {/* Commercial */}
-          <div className="lg:col-span-3">
-            <div className={eyebrow}>Commercial</div>
-            <h3 className={`mt-2 ${colHeading}`}>For your business.</h3>
-            <ul className="mt-5 space-y-2.5">
-              {commercialLinks.map((link) => (
-                <li key={link.href}>
-                  <Link href={link.href} className={linkCls}>
-                    {link.label}
-                  </Link>
+          <div>
+            <h2>For your business</h2>
+            <ul>
+              {commercialServices.map((service) => (
+                <li key={service.href}>
+                  <Link href={service.href}>{service.name}</Link>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Residential */}
-          <div className="lg:col-span-3">
-            <div className={eyebrow}>Residential</div>
-            <h3 className={`mt-2 ${colHeading}`}>For your home.</h3>
-            <ul className="mt-5 space-y-2.5">
-              {residentialLinks.map((link) => (
+          <div>
+            <h2>Explore</h2>
+            <ul>
+              {[
+                { label: "Our story", href: "/about" },
+                { label: "Service areas", href: "/service-areas" },
+                { label: "Cleaning insights", href: "/insights" },
+                { label: "Common questions", href: "/commercial-cleaning/faq" },
+                {
+                  label: "Residential cleaning",
+                  href: "/residential-cleaning",
+                },
+                { label: "Get a free quote", href: site.quoteHref },
+              ].map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className={linkCls}>
-                    {link.label}
-                  </Link>
+                  <Link href={link.href}>{link.label}</Link>
                 </li>
               ))}
             </ul>
           </div>
-
-          {/* Contact */}
-          <div className="lg:col-span-3 space-y-7">
-            <div>
-              <div className={eyebrow}>Contact</div>
-              <ul className="mt-4 space-y-3">
-                <li className="flex items-start gap-3 text-sm text-white/75">
-                  <MapPin className="w-4 h-4 text-[#C9A227] shrink-0 mt-0.5" />
-                  <span>New Westminster, BC</span>
-                </li>
-                <li className="flex items-center gap-3 text-sm text-white/75">
-                  <Phone className="w-4 h-4 text-[#C9A227] shrink-0" />
-                  <a
-                    href="tel:+17782230719"
-                    className="tabular hover:text-white transition"
-                  >
-                    778 223 0719
-                  </a>
-                </li>
-                <li className="flex items-center gap-3 text-sm text-white/75">
-                  <Mail className="w-4 h-4 text-[#C9A227] shrink-0" />
-                  <a
-                    href="mailto:services@gleampro.ca"
-                    className="hover:text-white transition"
-                  >
-                    services@gleampro.ca
-                  </a>
-                </li>
-              </ul>
+          <div className="footer-contact">
+            <h2>Let’s talk clean</h2>
+            <a href={`tel:${site.telephone}`}>
+              <Phone size={16} aria-hidden="true" /> {site.phone}
+            </a>
+            <a href={`mailto:${site.email}`}>
+              <Mail size={16} aria-hidden="true" /> {site.email}
+            </a>
+            <p>
+              <MapPin size={16} aria-hidden="true" /> New Westminster, BC
+            </p>
+            <div className="footer-hours">
+              <span>Office hours</span>
+              <p>
+                Mon–Fri: 8 am–6 pm
+                <br />
+                Sat: 9 am–4 pm
+                <br />
+                Sun: By appointment
+              </p>
+              <span>Cleaning scheduled around your business.</span>
             </div>
-
-            <div>
-              <div className={eyebrow}>Hours</div>
-              <ul className="mt-4 space-y-2 text-sm">
-                {[
-                  ["Mon–Fri", "8:00 – 18:00"],
-                  ["Sat", "9:00 – 16:00"],
-                  ["Sun", "By appointment"],
-                ].map(([day, hours]) => (
-                  <li
-                    key={day}
-                    className="flex justify-between max-w-[220px] text-white/65"
-                  >
-                    <span>{day}</span>
-                    <span className="tabular text-white/85">{hours}</span>
-                  </li>
-                ))}
-              </ul>
-            </div>
+            <a
+              className="footer-map"
+              href="https://www.google.com/maps?q=New+Westminster,+BC"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              View our home city on Google Maps{" "}
+              <ArrowUpRight size={14} aria-hidden="true" />
+            </a>
           </div>
         </div>
-
-        {/* Map */}
-        <div className="rounded-3xl border border-white/10 bg-white/[0.025] overflow-hidden">
-          <div className="px-6 py-4 flex items-center justify-between border-b border-white/10">
-            <div>
-              <div className={eyebrow}>Service area</div>
-              <div className="mt-1 font-display text-base text-white">
-                Metro Vancouver
-              </div>
-            </div>
-            <div className="text-xs text-white/50">9 cities served</div>
-          </div>
-          <iframe
-            title="Gleam Pro Cleaning service area map"
-            src="https://www.google.com/maps?q=New%20Westminster%2C%20BC&output=embed"
-            className="h-64 w-full grayscale-[0.3] contrast-110"
-            loading="lazy"
-            referrerPolicy="no-referrer-when-downgrade"
-          />
-        </div>
-
-        {/* Legal */}
-        <div className="mt-10 pt-6 border-t border-white/10 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 text-xs text-white/50">
-          <div suppressHydrationWarning>© {new Date().getFullYear()} Gleam Pro Cleaning. All rights reserved.</div>
-          <div className="flex flex-wrap items-center gap-4">
-            <Link href="/privacy" className="hover:text-white transition">
-              Privacy
-            </Link>
-            <Link href="/terms" className="hover:text-white transition">
-              Terms
-            </Link>
-            <span className="tracking-[0.18em] uppercase">Vancouver · Burnaby · Surrey · +6</span>
+        <div className="footer-bottom">
+          <p>
+            © {new Date().getFullYear()} Gleam Pro Cleaning. All rights
+            reserved.
+          </p>
+          <div>
+            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="/terms">Terms of Service</Link>
+            <span>Made for a fresh start.</span>
           </div>
         </div>
       </div>

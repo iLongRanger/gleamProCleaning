@@ -2,7 +2,7 @@ import Link from "next/link";
 import { residential } from "@/components/residential/ui";
 
 export const metadata = {
-  title: "Deep Home Cleaning in Metro Vancouver | Gleam Pro Cleaning",
+  title: "Deep Home Cleaning in Metro Vancouver",
   description:
     "Intensive one-time deep cleaning services in Metro Vancouver. Perfect for spring refresh, before events, or when your home needs extra attention.",
   alternates: {
@@ -15,7 +15,7 @@ export default function DeepCleaningPage() {
     <div className={residential.shell}>
       <div className="relative">
         <div className={residential.glow} />
-        <main className={`relative z-10 ${residential.page}`}>
+        <div className={`relative z-10 ${residential.page}`}>
           {/* Hero */}
           <section className={residential.section}>
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -25,7 +25,7 @@ export default function DeepCleaningPage() {
                 </p>
                 <h1 className={residential.h1}>
                   Intensive home cleaning{" "}
-                  <span style={{ color: "#D4A574" }}>for a truly fresh space</span>
+                  <span style={{ color: "#055F4B" }}>for a truly fresh space</span>
                 </h1>
                 <p className={residential.lead}>
                   Sometimes your home needs more than routine maintenance. Our deep
@@ -242,7 +242,7 @@ export default function DeepCleaningPage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </div>
   );

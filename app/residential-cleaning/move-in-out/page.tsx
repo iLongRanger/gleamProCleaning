@@ -2,7 +2,7 @@ import Link from "next/link";
 import { residential } from "@/components/residential/ui";
 
 export const metadata = {
-  title: "Move-In/Out Cleaning in Metro Vancouver | Gleam Pro Cleaning",
+  title: "Move-In/Out Cleaning in Metro Vancouver",
   description:
     "Professional move-in and move-out cleaning services in Metro Vancouver. Thorough turnover cleaning for renters, homeowners, and property managers.",
   alternates: {
@@ -15,7 +15,7 @@ export default function MoveInOutPage() {
     <div className={residential.shell}>
       <div className="relative">
         <div className={residential.glow} />
-        <main className={`relative z-10 ${residential.page}`}>
+        <div className={`relative z-10 ${residential.page}`}>
           {/* Hero */}
           <section className={residential.section}>
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -25,7 +25,7 @@ export default function MoveInOutPage() {
                 </p>
                 <h1 className={residential.h1}>
                   Smooth transition cleaning{" "}
-                  <span style={{ color: "#D4A574" }}>for your next move</span>
+                  <span style={{ color: "#055F4B" }}>for your next move</span>
                 </h1>
                 <p className={residential.lead}>
                   Whether you&apos;re moving in or out, our turnover service ensures
@@ -243,7 +243,7 @@ export default function MoveInOutPage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </div>
   );

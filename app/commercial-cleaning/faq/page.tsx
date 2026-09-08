@@ -2,7 +2,7 @@ import Link from "next/link";
 import { commercial } from "@/components/commercial/ui";
 
 export const metadata = {
-  title: "Commercial Cleaning FAQ | Metro Vancouver | Gleam Pro Cleaning",
+  title: "Commercial Cleaning FAQ | Metro Vancouver",
   description:
     "Answers to the most searched commercial cleaning questions: pricing, scope, frequency, supplies, after-hours service, insurance, and onboarding.",
   alternates: {
@@ -66,12 +66,12 @@ export default function CommercialCleaningFaqPage() {
     <div className={commercial.shell}>
       <div className="relative">
         <div className={commercial.glow} />
-        <main className={`relative z-10 ${commercial.page}`}>
+        <div className={`relative z-10 ${commercial.page}`}>
           <section className={commercial.section}>
             <p className={commercial.eyebrow}>Commercial Cleaning FAQ</p>
             <h1 className={commercial.h1}>
               Most asked commercial cleaning{" "}
-              <span style={{ color: "#D4A574" }}>questions</span>
+              <span style={{ color: "#055F4B" }}>questions</span>
             </h1>
             <p className={commercial.lead}>
               This page answers the questions businesses ask most before hiring
@@ -151,7 +151,7 @@ export default function CommercialCleaningFaqPage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
       </div>
 
       <script

@@ -64,7 +64,7 @@ export default function PropertyManagementCleaningPage() {
     <div className={commercial.shell}>
       <div className="relative">
         <div className={commercial.glow} />
-        <main className={`relative z-10 ${commercial.page}`}>
+        <div className={`relative z-10 ${commercial.page}`}>
           <section className={commercial.section}>
             <div className="grid gap-10 lg:grid-cols-[minmax(0,1fr)_360px] lg:items-start">
               <div className="max-w-3xl">
@@ -73,7 +73,7 @@ export default function PropertyManagementCleaningPage() {
                 </p>
                 <h1 className={commercial.h1}>
                   Common-area cleaning that keeps your properties{" "}
-                  <span style={{ color: "#D4A574" }}>ready every day.</span>
+                  <span style={{ color: "#055F4B" }}>ready every day.</span>
                 </h1>
                 <p className={commercial.lead}>
                   We help property managers maintain clean, presentable strata,
@@ -109,7 +109,7 @@ export default function PropertyManagementCleaningPage() {
               </div>
 
               <aside className={commercial.cardSoft} aria-label="Property types served">
-                <Building2 className="h-8 w-8 text-[#D4A574]" aria-hidden="true" />
+                <Building2 className="h-8 w-8 text-[#055F4B]" aria-hidden="true" />
                 <h2 className={`mt-5 ${commercial.h3} ${commercial.accent}`}>
                   Built for managed properties
                 </h2>
@@ -237,7 +237,7 @@ export default function PropertyManagementCleaningPage() {
                   ["Responsive contact", "Managers have a direct path for questions and service follow-up."],
                   ["Multi-site planning", "Scopes can be standardized while respecting each property's needs."],
                 ].map(([title, text]) => (
-                  <div key={title} className="border-l border-[#D4A574]/40 pl-4">
+                  <div key={title} className="border-l border-[#B59961]/40 pl-4">
                     <h3 className={`${commercial.h3} ${commercial.accent}`}>{title}</h3>
                     <p className="mt-2 text-sm leading-6 text-white/70">{text}</p>
                   </div>
@@ -322,7 +322,7 @@ export default function PropertyManagementCleaningPage() {
               </a>
             </div>
           </section>
-        </main>
+        </div>
 
         <script
           type="application/ld+json"
@@ -393,7 +393,7 @@ function ScopeCard({ title, items }: { title: string; items: string[] }) {
       <ul className="mt-4 space-y-2 text-sm leading-6 text-white/75">
         {items.map((item) => (
           <li key={item} className="flex gap-3">
-            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#0FA36B]" />
+            <span className="mt-2 h-1.5 w-1.5 shrink-0 rounded-full bg-[#055F4B]" />
             <span>{item}</span>
           </li>
         ))}
@@ -415,7 +415,7 @@ function ProcessCard({
 }) {
   return (
     <article className={commercial.card}>
-      <div className="flex items-center justify-between text-[#D4A574]">
+      <div className="flex items-center justify-between text-[#055F4B]">
         {icon}
         <span className="font-display text-3xl text-white/15">{number}</span>
       </div>

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { residential } from "@/components/residential/ui";
 
 export const metadata = {
-  title: "Recurring Home Cleaning in Metro Vancouver | Gleam Pro Cleaning",
+  title: "Recurring Home Cleaning in Metro Vancouver",
   description:
     "Weekly, bi-weekly, and monthly residential cleaning services. Consistent quality, trusted team, and custom schedules for your home.",
   alternates: {
@@ -15,7 +15,7 @@ export default function RecurringCleaningPage() {
     <div className={residential.shell}>
       <div className="relative">
         <div className={residential.glow} />
-        <main className={`relative z-10 ${residential.page}`}>
+        <div className={`relative z-10 ${residential.page}`}>
           {/* Hero */}
           <section className={residential.section}>
             <div className="flex flex-col gap-6 md:flex-row md:items-center md:justify-between">
@@ -25,7 +25,7 @@ export default function RecurringCleaningPage() {
                 </p>
                 <h1 className={residential.h1}>
                   Consistent home cleaning{" "}
-                  <span style={{ color: "#D4A574" }}>tailored to your schedule</span>
+                  <span style={{ color: "#055F4B" }}>tailored to your schedule</span>
                 </h1>
                 <p className={residential.lead}>
                   Keep your home consistently clean with weekly, bi-weekly, or
@@ -242,7 +242,7 @@ export default function RecurringCleaningPage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </div>
   );

@@ -2,7 +2,7 @@ import Link from "next/link";
 import { residential } from "@/components/residential/ui";
 
 export const metadata = {
-  title: "Residential Cleaning FAQ | Metro Vancouver | Gleam Pro Cleaning",
+  title: "Residential Cleaning FAQ | Metro Vancouver",
   description:
     "Answers to common residential cleaning questions: pricing, what is included, frequency, supplies, pets, deep cleaning, move-in/out, and booking policies.",
   alternates: {
@@ -66,7 +66,7 @@ export default function ResidentialCleaningFaqPage() {
     <div className={residential.shell}>
       <div className="relative">
         <div className={residential.glow} />
-        <main className={`relative z-10 ${residential.page}`}>
+        <div className={`relative z-10 ${residential.page}`}>
           <section className={residential.section}>
             <p className={residential.eyebrow}>Residential Cleaning FAQ</p>
             <h1 className={residential.h1}>
@@ -156,7 +156,7 @@ export default function ResidentialCleaningFaqPage() {
               </Link>
             </div>
           </section>
-        </main>
+        </div>
       </div>
 
       <script

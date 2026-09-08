@@ -22,12 +22,12 @@ export default function InsightsPage() {
     <div className={commercial.shell}>
       <div className="relative">
         <div className={commercial.glow} />
-        <main className={`relative z-10 ${commercial.page}`}>
+        <div className={`relative z-10 ${commercial.page}`}>
           <header className="max-w-3xl py-6 sm:py-10">
             <p className={commercial.eyebrow}>Gleam Pro Insights</p>
             <h1 className={commercial.h1}>
               Practical guidance for{" "}
-              <span style={{ color: "#D4A574" }}>better-kept buildings.</span>
+              <span style={{ color: "#055F4B" }}>better-kept buildings.</span>
             </h1>
             <p className={commercial.lead}>
               Cleaning scopes, checklists, and operational advice for property
@@ -67,11 +67,11 @@ export default function InsightsPage() {
                 <Link
                   key={article.href}
                   href={article.href}
-                  className="group border border-white/10 bg-[#081A31] p-6 transition hover:border-white/25"
+                  className="group border border-white/10 bg-[#FFFDF8] p-6 transition hover:border-white/25"
                 >
                   <div className="flex items-start justify-between gap-5">
-                    <div className="text-[#D4A574]">{article.icon}</div>
-                    <ArrowUpRight className="h-5 w-5 text-white/40 transition group-hover:text-[#D4A574]" aria-hidden="true" />
+                    <div className="text-[#055F4B]">{article.icon}</div>
+                    <ArrowUpRight className="h-5 w-5 text-white/40 transition group-hover:text-[#055F4B]" aria-hidden="true" />
                   </div>
                   <div className="mt-7 flex flex-wrap items-center gap-3 text-xs uppercase tracking-[0.16em] text-white/50">
                     <span className={commercial.pill}>{article.category}</span>
@@ -89,7 +89,7 @@ export default function InsightsPage() {
               ))}
             </div>
           </section>
-        </main>
+        </div>
       </div>
     </div>
   );

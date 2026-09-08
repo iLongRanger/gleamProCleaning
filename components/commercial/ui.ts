@@ -1,86 +1,66 @@
-// components/commercial/ui.ts
-// Design tokens shared across the commercial section.
-// Updated to match the editorial homepage system: Fraunces display + grain + ink palette.
+// Shared editorial design tokens for service, location, and insight pages.
 
 export const brand = {
-  ink: "#050E1F",
-  navy: "#0B2545",
-  midnight: "#081A31",
-  emerald: "#0FA36B",
-  emeraldDeep: "#0B7F54",
-  gold: "#D4A574",
-  bone: "#F4EFE6",
+  ink: "#0B192C",
+  navy: "#0B192C",
+  midnight: "#071321",
+  emerald: "#055F4B",
+  emeraldDeep: "#044B3C",
+  teal: "#014A5E",
+  gold: "#B59961",
+  bone: "#F5F1E8",
 };
 
 export const commercial = {
-  /* Outer shell */
-  shell: "min-h-screen bg-[#050E1F] text-white antialiased",
+  shell: "gpc-interior min-h-screen bg-[#F5F1E8] text-[#0B192C] antialiased",
+  page:
+    "relative z-10 mx-auto max-w-[1280px] px-5 py-14 sm:px-8 sm:py-20 lg:py-24",
+  glow: "gpc-interior-glow absolute inset-0 pointer-events-none z-0 overflow-hidden",
 
-  /* Inner container */
-  page: "relative z-10 mx-auto max-w-[1280px] px-5 sm:px-8 py-16 sm:py-24",
-
-  /* Atmospheric glow for hero/top areas — pair with a relative parent and bg-grain overlay */
-  glow:
-    "absolute inset-0 pointer-events-none z-0 " +
-    "[background:radial-gradient(900px_480px_at_12%_8%,rgba(15,163,107,0.18),transparent_60%),radial-gradient(800px_500px_at_92%_12%,rgba(212,165,116,0.14),transparent_65%)] " +
-    "before:content-[''] before:absolute before:inset-0 before:bg-grain before:opacity-[0.30] before:mix-blend-overlay before:pointer-events-none",
-
-  /* Typography */
   eyebrow:
-    "text-[11px] font-medium uppercase tracking-[0.28em] text-[#D4A574]/90",
+    "gpc-interior-eyebrow text-[10px] font-semibold uppercase tracking-[0.24em] text-[#055F4B]",
   h1:
-    "font-display mt-5 text-[40px] leading-[1.02] sm:text-5xl md:text-6xl lg:text-[80px] lg:leading-[0.98] font-light text-white",
-  lead:
-    "mt-6 max-w-2xl text-[16px] sm:text-[17px] leading-[1.65] text-white/70",
-
-  h2: "font-display text-2xl sm:text-3xl leading-tight text-white",
+    "gpc-interior-heading font-display mt-5 max-w-5xl text-[44px] font-medium leading-[1.02] text-[#0B192C] sm:text-6xl md:text-7xl lg:text-[82px]",
+  lead: "mt-6 max-w-2xl text-[16px] leading-[1.75] text-[#4B5968] sm:text-[17px]",
+  h2: "gpc-interior-heading font-display text-2xl leading-tight text-[#0B192C] sm:text-3xl",
   h2Large:
-    "font-display text-3xl sm:text-4xl md:text-5xl leading-[1.05] text-white",
-  h3: "font-display text-lg sm:text-xl leading-tight text-white",
+    "gpc-interior-heading font-display text-3xl leading-[1.08] text-[#0B192C] sm:text-4xl md:text-5xl",
+  h3: "gpc-interior-heading font-display text-xl leading-tight text-[#0B192C] sm:text-2xl",
+  accent: "gpc-interior-accent text-[#055F4B]",
+  italic: "italic text-[#4B5968]",
+  muted: "text-[#4B5968]",
+  body: "mt-3 leading-relaxed text-[#4B5968]",
 
-  accent: "text-[#D4A574]",
-  italic: "italic text-white/70",
-  muted: "text-white/65",
-  body: "text-white/75 leading-relaxed",
-
-  /* Sections / Surfaces */
   section:
-    "mt-14 sm:mt-20 rounded-3xl border border-white/10 bg-[#0B2545]/35 p-8 sm:p-10 backdrop-blur-[2px]",
+    "gpc-interior-surface mt-12 rounded-[10px] border border-[#D8CEB9] bg-[#FFFDF8] p-6 shadow-[0_18px_60px_rgba(11,25,44,0.06)] sm:mt-16 sm:p-10",
   sectionAlt:
-    "mt-14 sm:mt-20 rounded-3xl border border-white/10 bg-[#081A31] p-8 sm:p-10",
+    "gpc-interior-surface mt-12 rounded-[10px] border border-[#D8CEB9] bg-[#E7EFEC] p-6 sm:mt-16 sm:p-10",
   sectionDark:
-    "mt-14 sm:mt-20 rounded-3xl border border-white/10 bg-[#050E1F] p-8 sm:p-10 text-white shadow-[0_30px_80px_-30px_rgba(0,0,0,0.5)]",
+    "gpc-interior-surface gpc-interior-teal mt-12 rounded-[10px] border border-[#B59961]/60 bg-[#014A5E] p-6 text-white shadow-[0_18px_60px_rgba(11,25,44,0.12)] sm:mt-16 sm:p-10",
 
-  /* Cards */
   card:
-    "rounded-3xl border border-white/10 bg-[#0B2545]/40 p-7 transition hover:border-white/25 hover:bg-[#0B2545]/55",
+    "gpc-interior-card rounded-[8px] border border-[#D8CEB9] bg-[#FFFDF8] p-6 transition duration-200 hover:-translate-y-0.5 hover:border-[#B59961] hover:shadow-[0_16px_38px_rgba(11,25,44,0.08)] sm:p-7",
   cardSoft:
-    "rounded-3xl border border-white/10 bg-[#081A31] p-7 transition hover:border-white/25",
+    "gpc-interior-card rounded-[8px] border border-[#D8CEB9] bg-white p-6 transition duration-200 hover:border-[#B59961] hover:shadow-[0_16px_38px_rgba(11,25,44,0.08)] sm:p-7",
   linkCard:
-    "group rounded-2xl border border-white/10 bg-white/[0.025] p-6 transition hover:border-white/30 hover:bg-white/[0.05]",
+    "gpc-interior-card group rounded-[8px] border border-[#D8CEB9] bg-[#FFFDF8] p-6 transition duration-200 hover:-translate-y-0.5 hover:border-[#B59961] hover:shadow-[0_16px_38px_rgba(11,25,44,0.08)]",
 
-  /* Pills / list items */
   pill:
-    "inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/[0.04] px-3.5 py-1.5 text-xs uppercase tracking-[0.18em] text-white/75",
+    "gpc-interior-pill inline-flex min-h-8 items-center gap-2 rounded-full border border-[#D8C7A7] bg-[#F2EBDD] px-3.5 py-1.5 text-[10px] font-semibold uppercase tracking-[0.14em] text-[#055F4B]",
   listItem:
-    "flex items-start gap-3 rounded-2xl border border-white/10 bg-white/[0.025] px-4 py-3 text-sm text-white/80",
+    "gpc-interior-list flex items-start gap-3 rounded-[6px] border border-[#D8CEB9] bg-[#FFFDF8] px-4 py-3 text-sm text-[#334354]",
 
-  /* Buttons */
   cta:
-    "inline-flex items-center justify-center gap-2 rounded-full bg-[#0FA36B] px-6 py-3.5 text-[14px] font-medium tracking-wide text-white shadow-[0_18px_50px_-18px_rgba(15,163,107,0.7)] transition hover:bg-[#0B7F54] focus:outline-none focus:ring-2 focus:ring-[#0FA36B]/60 focus:ring-offset-2 focus:ring-offset-[#050E1F]",
+    "gpc-interior-primary inline-flex min-h-12 items-center justify-center gap-2 rounded-[4px] bg-[#055F4B] px-6 py-3.5 text-[13px] font-semibold tracking-wide text-white shadow-[0_14px_35px_rgba(5,95,75,0.2)] transition hover:bg-[#044B3C] focus:outline-none focus:ring-2 focus:ring-[#014A5E] focus:ring-offset-3 focus:ring-offset-[#F5F1E8]",
   secondary:
-    "inline-flex items-center justify-center gap-2 rounded-full border border-white/20 bg-transparent px-6 py-3.5 text-[14px] font-medium tracking-wide text-white transition hover:border-white/45 hover:bg-white/[0.05]",
+    "gpc-interior-secondary inline-flex min-h-12 items-center justify-center gap-2 rounded-[4px] border border-[#B59961] bg-transparent px-6 py-3.5 text-[13px] font-semibold tracking-wide text-[#014A5E] transition hover:bg-[#F2EBDD]",
   ctaLight:
-    "inline-flex items-center justify-center gap-2 rounded-full bg-[#F4EFE6] px-6 py-3.5 text-[14px] font-medium tracking-wide text-[#0B2545] shadow-[0_18px_50px_-18px_rgba(244,239,230,0.55)] transition hover:bg-white",
+    "gpc-interior-primary inline-flex min-h-12 items-center justify-center gap-2 rounded-[4px] bg-[#055F4B] px-6 py-3.5 text-[13px] font-semibold tracking-wide text-white shadow-[0_14px_35px_rgba(5,95,75,0.2)] transition hover:bg-[#044B3C]",
 
-  /* Notice strip */
   notice:
-    "mt-10 flex flex-wrap items-center justify-between gap-4 rounded-2xl border border-emerald-400/20 bg-emerald-900/20 p-5",
-  noticeText: "text-sm font-medium text-emerald-100/95",
-
-  /* New helpers */
-  hairline: "h-px w-full bg-gradient-to-r from-transparent via-white/15 to-transparent",
-  numeral:
-    "font-display tabular text-5xl sm:text-6xl text-[#D4A574]/30 leading-none",
-  divider: "inline-block h-px w-8 bg-[#D4A574]/60 align-middle",
+    "gpc-interior-notice mt-10 flex flex-wrap items-center justify-between gap-4 rounded-[8px] border border-[#D8C7A7] bg-[#F2EBDD] p-5",
+  noticeText: "text-sm font-medium text-[#055F4B]",
+  hairline: "h-px w-full bg-gradient-to-r from-transparent via-[#B59961] to-transparent",
+  numeral: "font-display tabular text-5xl leading-none text-[#B59961]/70 sm:text-6xl",
+  divider: "inline-block h-px w-8 bg-[#B59961] align-middle",
 };

@@ -14,10 +14,10 @@ type Props = {
 
 // Brand palette
 const colors = {
-  navy: "#0B2545",
-  emerald: "#0FA36B",
-  gold: "#C9A227",
-  silver: "#E5E7EB",
+  navy: "#0B192C",
+  emerald: "#055F4B",
+  gold: "#B59961",
+  silver: "#C5C0AF",
 };
 
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/myzdvall";
