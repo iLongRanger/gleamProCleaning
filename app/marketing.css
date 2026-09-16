@@ -224,12 +224,10 @@
 .desktop-nav a[aria-current="page"] {
   color: #d8c08e;
 }
-.services-menu,
-.insights-menu {
+.services-menu {
   position: relative;
 }
-.services-menu summary,
-.insights-menu summary {
+.services-menu summary {
   display: flex;
   align-items: center;
   gap: 6px;
@@ -238,18 +236,14 @@
   list-style: none;
 }
 .services-menu summary::-webkit-details-marker,
-.insights-menu summary::-webkit-details-marker,
-.mobile-insights summary::-webkit-details-marker,
 .mobile-services summary::-webkit-details-marker,
 .faq-list summary::-webkit-details-marker {
   display: none;
 }
-.services-menu[open] summary > svg,
-.insights-menu[open] summary > svg {
+.services-menu[open] summary > svg {
   transform: rotate(180deg);
 }
-.services-dropdown,
-.insights-dropdown {
+.services-dropdown {
   position: absolute;
   top: calc(100% + 8px);
   left: -20px;
@@ -261,17 +255,11 @@
   border-radius: 10px;
   box-shadow: 0 16px 45px #0b192c1a;
 }
-.insights-dropdown {
-  left: auto;
-  right: 0;
-}
-.services-dropdown .gpc-eyebrow,
-.insights-dropdown .gpc-eyebrow {
+.services-dropdown .gpc-eyebrow {
   margin: 0 10px 12px;
   font-size: 9px;
 }
-.services-dropdown a,
-.insights-dropdown a {
+.services-dropdown a {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -279,12 +267,8 @@
   border-radius: 5px;
   font-size: 13px;
 }
-.services-dropdown a:hover,
-.insights-dropdown a:hover {
+.services-dropdown a:hover {
   background: var(--gpc-sage);
-}
-.desktop-nav :is(.services-dropdown, .insights-dropdown) a:is(:hover, [aria-current="page"]) {
-  color: var(--brand-emerald);
 }
 .header-actions {
   display: flex;
@@ -345,8 +329,7 @@
   margin-block: 24px;
 }
 .mobile-dialog nav > a,
-.mobile-services summary,
-.mobile-insights summary {
+.mobile-services summary {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -357,12 +340,10 @@
   list-style: none;
   cursor: pointer;
 }
-.mobile-services > div,
-.mobile-insights > div {
+.mobile-services > div {
   padding-block: 10px;
 }
-.mobile-services > div a,
-.mobile-insights > div a {
+.mobile-services > div a {
   display: block;
   padding: 12px;
   font-size: 14px;

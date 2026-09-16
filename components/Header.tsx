@@ -22,7 +22,6 @@ export default function Header() {
   const pathname = usePathname();
   const [mobileOpen, setMobileOpen] = useState(false);
   const servicesRef = useRef<HTMLDetailsElement>(null);
-  const insightsRef = useRef<HTMLDetailsElement>(null);
   const mobileRef = useRef<HTMLDialogElement>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   function closeMobile() {
@@ -47,18 +46,16 @@ export default function Header() {
   }
   useEffect(() => {
     function dismiss(event: PointerEvent) {
-      for (const ref of [servicesRef, insightsRef]) {
-        if (ref.current && !ref.current.contains(event.target as Node))
-          ref.current.open = false;
-      }
+      if (
+        servicesRef.current &&
+        !servicesRef.current.contains(event.target as Node)
+      )
+        servicesRef.current.open = false;
     }
     function escape(event: KeyboardEvent) {
-      if (event.key !== "Escape") return;
-      for (const ref of [servicesRef, insightsRef]) {
-        if (ref.current?.open) {
-          ref.current.open = false;
-          ref.current.querySelector("summary")?.focus();
-        }
+      if (event.key === "Escape" && servicesRef.current?.open) {
+        servicesRef.current.open = false;
+        servicesRef.current.querySelector("summary")?.focus();
       }
     }
     document.addEventListener("pointerdown", dismiss);
@@ -87,12 +84,7 @@ export default function Header() {
   const links = [
     { href: "/about", label: "Our story" },
     { href: "/service-areas", label: "Service areas" },
-  ];
-  const insightLinks = [
-    { href: "/insights", label: "All cleaning insights" },
-    { href: "/insights/commercial-cleaning-cost-vancouver", label: "Commercial cleaning costs" },
-    { href: "/insights/restaurant-cleaning-checklist", label: "Restaurant cleaning checklist" },
-    { href: "/insights/property-manager-cleaning-checklist", label: "Property manager checklist" },
+    { href: "/insights", label: "Cleaning insights" },
   ];
   return (
     <header className="site-header">
@@ -119,9 +111,7 @@ export default function Header() {
           />
         </Link>
         <nav className="desktop-nav" aria-label="Main navigation">
-          <details className="services-menu" ref={servicesRef} onToggle={(event) => {
-            if (event.currentTarget.open && insightsRef.current) insightsRef.current.open = false;
-          }}>
+          <details className="services-menu" ref={servicesRef}>
             <summary>
               Our services <ChevronDown size={14} aria-hidden="true" />
             </summary>
@@ -158,21 +148,6 @@ export default function Header() {
               {link.label}
             </Link>
           ))}
-          <details className="insights-menu" ref={insightsRef} onToggle={(event) => {
-            if (event.currentTarget.open && servicesRef.current) servicesRef.current.open = false;
-          }}>
-            <summary>Cleaning insights <ChevronDown size={14} aria-hidden="true" /></summary>
-            <div className="insights-dropdown">
-              <span className="gpc-eyebrow">GUIDES FOR YOUR SPACE</span>
-              {insightLinks.map((link) => (
-                <Link key={link.href} href={link.href}
-                  aria-current={pathname === link.href ? "page" : undefined}
-                  onClick={() => { if (insightsRef.current) insightsRef.current.open = false; }}>
-                  {link.label}
-                </Link>
-              ))}
-            </div>
-          </details>
         </nav>
         <div className="header-actions">
           <Link href={site.quoteHref} className="gpc-button header-quote">
@@ -243,17 +218,6 @@ export default function Header() {
                 {link.label}
               </Link>
             ))}
-            <details className="mobile-insights">
-              <summary>Cleaning insights <ChevronDown size={18} aria-hidden="true" /></summary>
-              <div>
-                {insightLinks.map((link) => (
-                  <Link key={link.href} href={link.href} onClick={closeMobile}
-                    aria-current={pathname === link.href ? "page" : undefined}>
-                    {link.label}
-                  </Link>
-                ))}
-              </div>
-            </details>
           </nav>
           <Link
             href={site.quoteHref}
