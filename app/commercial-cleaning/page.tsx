@@ -380,9 +380,12 @@ export default function CommercialCleaningHubPage() {
               </div>
             </div>
 
-            <div className="mt-6">
+            <div className="mt-6 flex flex-wrap gap-3">
               <Link href="/commercial-cleaning/faq" className={commercial.secondary}>
                 See full commercial FAQ
+              </Link>
+              <Link href="/insights/commercial-cleaning-cost-vancouver" className={commercial.secondary}>
+                Commercial cleaning costs & quote guide
               </Link>
             </div>
           </section>

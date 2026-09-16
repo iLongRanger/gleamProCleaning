@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { ArrowUpRight, Building2, CalendarDays, UtensilsCrossed } from "lucide-react";
+import { ArrowUpRight, Building2, CalendarDays, ClipboardList, UtensilsCrossed } from "lucide-react";
 import { commercial } from "@/components/commercial/ui";
 
 export const metadata: Metadata = {
@@ -48,12 +48,26 @@ export default function InsightsPage() {
             <div className="mt-8 grid gap-5 border-t border-white/10 pt-8 lg:grid-cols-2">
               {[
                 {
+                  href: "/insights/commercial-cleaning-cost-vancouver",
+                  category: "Pricing & planning",
+                  title: "Commercial Cleaning Costs in Metro Vancouver",
+                  description:
+                    "Understand what affects your quote, compare proposals fairly, and prepare for a free cleaning walkthrough.",
+                  date: "2026-09-16",
+                  dateLabel: "September 16, 2026",
+                  readTime: "6 minute read",
+                  icon: <ClipboardList className="h-10 w-10" aria-hidden="true" />,
+                },
+                {
                   href: "/insights/restaurant-cleaning-checklist",
                   category: "Restaurants & pubs",
                   title: "Nightly Restaurant Cleaning Checklist",
                   description:
                     "A clear nightly handoff for front-of-house, washrooms, high-touch areas, floors, and scoped back-of-house support.",
                   icon: <UtensilsCrossed className="h-10 w-10" aria-hidden="true" />,
+                  date: "2026-08-13",
+                  dateLabel: "August 13, 2026",
+                  readTime: "8 minute read",
                 },
                 {
                   href: "/insights/property-manager-cleaning-checklist",
@@ -62,6 +76,9 @@ export default function InsightsPage() {
                   description:
                     "A daily, weekly, monthly, and seasonal framework for lobbies, corridors, elevators, amenities, and service areas.",
                   icon: <Building2 className="h-10 w-10" aria-hidden="true" />,
+                  date: "2026-08-13",
+                  dateLabel: "August 13, 2026",
+                  readTime: "8 minute read",
                 },
               ].map((article) => (
                 <Link
@@ -77,9 +94,9 @@ export default function InsightsPage() {
                     <span className={commercial.pill}>{article.category}</span>
                     <span className="inline-flex items-center gap-2">
                       <CalendarDays className="h-4 w-4" aria-hidden="true" />
-                      August 13, 2026
+                      <time dateTime={article.date}>{article.dateLabel}</time>
                     </span>
-                    <span>8 minute read</span>
+                    <span>{article.readTime}</span>
                   </div>
                   <h3 className="mt-5 font-display text-3xl leading-tight text-white">
                     {article.title}
