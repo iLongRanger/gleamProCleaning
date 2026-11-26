@@ -2,7 +2,9 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { commercial } from "@/components/commercial/ui";
+import TrustSection from "@/components/TrustSection";
 import { getServiceArea, serviceAreas } from "@/lib/service-areas";
+import { localBusinessSchema } from "@/lib/structured-data";
 
 type ServiceAreaParams = {
   params: Promise<{
@@ -25,14 +27,14 @@ export async function generateMetadata({
 
   const ogImage = area.image || `/images/service-areas/${area.slug}.jpg`;
   return {
-    title: `${area.name} Cleaning Services`,
-    description: area.description,
+    title: `${area.name} Commercial Cleaning Services`,
+    description: area.metaDescription,
     alternates: {
       canonical: `/service-areas/${area.slug}`,
     },
     openGraph: {
-      title: `${area.name} Cleaning Services | Gleam Pro`,
-      description: area.description,
+      title: `${area.name} Commercial Cleaning Services | Gleam Pro Cleaning`,
+      description: area.metaDescription,
       url: `/service-areas/${area.slug}`,
       type: "website",
       images: [{ url: ogImage, width: 1200, height: 630, alt: `${area.name} — Gleam Pro Cleaning` }],
@@ -93,9 +95,49 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
           </div>
         </section>
 
-        <section className="mt-10 grid gap-6 md:grid-cols-2">
+        <section className={commercial.section}>
+          <p className={commercial.eyebrow}>
+            {area.route === "core"
+              ? "On our nightly routes"
+              : "Served by scheduled appointment"}
+          </p>
+          <h2 className={`${commercial.h2Large} mt-3`}>
+            Commercial cleaning in {area.name}
+          </h2>
+          {area.intro.map((paragraph) => (
+            <p key={paragraph} className="mt-4 max-w-3xl text-white/80">
+              {paragraph}
+            </p>
+          ))}
+        </section>
+
+        <section className={commercial.sectionAlt}>
+          <h2 className={commercial.h2Large}>
+            Who we clean for in {area.name}
+          </h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {area.focus.map((item) => (
+              <Link key={item.title} href={item.href} className={commercial.linkCard}>
+                <h3 className={`font-medium ${commercial.accent}`}>{item.title}</h3>
+                <p className="mt-2 text-sm text-white/75">{item.text}</p>
+              </Link>
+            ))}
+          </div>
+        </section>
+
+        <section className="mt-12 grid gap-6 md:grid-cols-2">
           <div className={commercial.section}>
-            <h2 className={commercial.h2}>Neighborhoods we cover</h2>
+            <h2 className={commercial.h2}>What we plan for in {area.name}</h2>
+            <ul className="mt-4 space-y-3 text-white/80">
+              {area.considerations.map((item) => (
+                <li key={item} className={commercial.listItem}>
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div className={commercial.sectionAlt}>
+            <h2 className={commercial.h2}>Neighbourhoods we cover</h2>
             <ul className="mt-4 space-y-2">
               {area.neighborhoods.map((item) => (
                 <li key={item} className={commercial.listItem}>
@@ -103,45 +145,41 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
                 </li>
               ))}
             </ul>
-          </div>
-
-          <div className={commercial.sectionAlt}>
-            <h2 className={commercial.h2}>What to expect</h2>
+            <h2 className={`${commercial.h2} mt-8`}>How it works</h2>
             <ul className="mt-4 space-y-2 text-white/80">
               <li className={commercial.listItem}>
-                Clear scopes and checklists tailored to your site.
+                Free walkthrough of your {area.name} space.
               </li>
               <li className={commercial.listItem}>
-                Consistent teams and accountable follow-through.
+                Written scope and proposal within 24 hours of the visit.
               </li>
               <li className={commercial.listItem}>
-                Daytime or after-hours scheduling based on your needs.
+                30-day trial with no lock-in.
               </li>
               <li className={commercial.listItem}>
-                Rapid response for urgent requests.
+                Missed something? Tell us within 24 hours for a free re-clean.
               </li>
             </ul>
           </div>
         </section>
 
-        <section className="mt-10 grid gap-6 md:grid-cols-2">
-          <div className={commercial.section}>
-            <p className={commercial.eyebrow}>Commercial planning</p>
-            <h2 className={`${commercial.h2} mt-3`}>A scope built around your site</h2>
-            <p className="mt-4 text-white/80">
-              We review access, operating hours, traffic patterns, priority
-              rooms, and cleaning frequency before preparing a proposal for
-              your {area.name} facility.
-            </p>
-          </div>
-          <div className={commercial.sectionAlt}>
-            <p className={commercial.eyebrow}>Residential planning</p>
-            <h2 className={`${commercial.h2} mt-3`}>An estimate based on your home</h2>
-            <p className="mt-4 text-white/80">
-              Tell us the home size, service type, and preferred schedule. We
-              will confirm availability in {area.name} and recommend the right
-              starting service.
-            </p>
+        <div className="mt-12 sm:mt-16">
+          <TrustSection tone="light" headingId="area-trust-heading" />
+        </div>
+
+        <section className={commercial.section}>
+          <h2 className={commercial.h2Large}>
+            {area.name} cleaning questions
+          </h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {area.faqs.map((faq) => (
+              <div key={faq.question} className={commercial.cardSoft}>
+                <h3 className={`text-sm font-semibold ${commercial.accent}`}>
+                  {faq.question}
+                </h3>
+                <p className="mt-2 text-sm text-white/80">{faq.answer}</p>
+              </div>
+            ))}
           </div>
         </section>
 
@@ -239,19 +277,7 @@ export default async function ServiceAreaPage({ params }: ServiceAreaParams) {
               url: areaUrl,
               description: area.description,
               serviceType: ["Commercial cleaning", "Residential cleaning"],
-              provider: {
-                "@type": "LocalBusiness",
-                "@id": "https://gleampro.ca/#localbusiness",
-                name: "Gleam Pro Cleaning",
-                url: "https://gleampro.ca",
-                telephone: "+1-778-223-0719",
-                address: {
-                  "@type": "PostalAddress",
-                  addressLocality: "New Westminster",
-                  addressRegion: "BC",
-                  addressCountry: "CA",
-                },
-              },
+              provider: localBusinessSchema(),
               areaServed: [
                 { "@type": "City", name: area.name },
                 ...area.neighborhoods.map((name) => ({ "@type": "Place", name })),
