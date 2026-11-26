@@ -16,6 +16,7 @@ import {
   UsersRound,
 } from "lucide-react";
 import LeadForm from "@/components/LeadForm";
+import TrustSection from "@/components/TrustSection";
 import { serviceAreas } from "@/lib/service-areas";
 import { commercialServices, homeFaqs, site } from "@/lib/site";
 
@@ -405,6 +406,10 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <div className="gpc-container pb-[100px]">
+        <TrustSection tone="light" headingId="home-trust-heading" />
+      </div>
 
       <section className="home-faq gpc-section" aria-labelledby="faq-heading">
         <div className="gpc-container faq-grid">

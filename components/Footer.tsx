@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { ArrowUpRight, Mail, MapPin, Phone } from "lucide-react";
+import { businessProfile } from "@/lib/business-profile";
 import { commercialServices, site } from "@/lib/site";
 export default function Footer() {
   return (
@@ -80,13 +81,29 @@ export default function Footer() {
             </div>
             <a
               className="footer-map"
-              href="https://www.google.com/maps?q=New+Westminster,+BC"
+              href={
+                businessProfile.googleBusinessProfileUrl ??
+                "https://www.google.com/maps?q=New+Westminster,+BC"
+              }
               target="_blank"
               rel="noopener noreferrer"
             >
-              View our home city on Google Maps{" "}
+              {businessProfile.googleBusinessProfileUrl
+                ? "Find us on Google"
+                : "View our home city on Google Maps"}{" "}
               <ArrowUpRight size={14} aria-hidden="true" />
             </a>
+            {businessProfile.socialProfiles.length > 0 ? (
+              <ul className="footer-social" aria-label="Gleam Pro on social media">
+                {businessProfile.socialProfiles.map((profile) => (
+                  <li key={profile.url}>
+                    <a href={profile.url} target="_blank" rel="noopener noreferrer">
+                      {profile.label}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            ) : null}
           </div>
         </div>
         <div className="footer-bottom">

@@ -1402,6 +1402,19 @@
   font-size: 9px;
   line-height: 1.6;
 }
+.footer-social {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-top: 14px;
+  font-size: 11px;
+}
+.footer-social a {
+  color: #d8c08e;
+}
+.footer-social a:hover {
+  color: #fff;
+}
 .footer-hours {
   margin-top: 22px;
   font-size: 10px;
