@@ -66,7 +66,10 @@ export default function Footer() {
               <Mail size={16} aria-hidden="true" /> {site.email}
             </a>
             <p>
-              <MapPin size={16} aria-hidden="true" /> New Westminster, BC
+              <MapPin size={16} aria-hidden="true" />{" "}
+              {businessProfile.address.streetAddress
+                ? `${businessProfile.address.streetAddress}, New Westminster, BC ${businessProfile.address.postalCode ?? ""}`.trim()
+                : "New Westminster, BC"}
             </p>
             <div className="footer-hours">
               <span>Office hours</span>

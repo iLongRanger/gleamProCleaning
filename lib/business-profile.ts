@@ -38,9 +38,9 @@ export const businessProfile = {
   legalName: "Gleam Pro Cleaning",
   address: {
     /** OWNER TO SUPPLY: street address, or leave null to stay a service-area business. */
-    streetAddress: null as string | null,
+    streetAddress: "6-1209 Fourth Avenue" as string | null,
     /** OWNER TO SUPPLY together with the street address. */
-    postalCode: null as string | null,
+    postalCode: "V3M 1T8" as string | null,
     addressLocality: "New Westminster",
     addressRegion: "BC",
     addressCountry: "CA",
