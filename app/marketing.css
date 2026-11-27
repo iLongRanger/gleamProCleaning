@@ -171,6 +171,47 @@
   align-items: center;
   gap: 7px;
 }
+[data-offer-ended] .offer-banner {
+  display: none;
+}
+.offer-banner {
+  background: var(--brand-emerald);
+  color: #fffdf8;
+  font-size: 13px;
+  line-height: 1.5;
+}
+.offer-banner .gpc-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 6px 18px;
+  padding-block: 10px;
+  text-align: center;
+}
+.offer-banner p {
+  margin: 0;
+  max-width: 760px;
+}
+.offer-banner strong {
+  font-weight: 650;
+}
+.offer-banner-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  border-radius: 999px;
+  padding: 5px 14px;
+  background: #fffdf8;
+  color: var(--brand-navy);
+  font-size: 12px;
+  font-weight: 650;
+}
+.offer-banner-cta:hover,
+.offer-banner-cta:focus-visible {
+  background: var(--gpc-paper);
+}
 .header-main {
   display: flex;
   align-items: center;

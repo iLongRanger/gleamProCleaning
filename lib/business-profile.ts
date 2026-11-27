@@ -49,7 +49,8 @@ export const businessProfile = {
    * OWNER TO SUPPLY: the public Google Business Profile (Maps) URL.
    * Must match the name, phone and address on the profile exactly.
    */
-  googleBusinessProfileUrl: null as string | null,
+  googleBusinessProfileUrl:
+    "https://maps.google.com/maps?cid=16432121775463123768" as string | null,
   /** Direct "write a review" link, already published in public/marketing/google-reviews. */
   googleReviewUrl: "https://g.page/r/CTjLcJSxnwrkEAE/review",
   /** OWNER TO SUPPLY: add Instagram / Facebook / LinkedIn URLs once the pages exist. */

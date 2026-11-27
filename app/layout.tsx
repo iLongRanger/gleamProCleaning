@@ -4,6 +4,7 @@ import { Geist, Newsreader } from "next/font/google";
 import "./globals.css";
 import "./marketing.css";
 import Header from "../components/Header";
+import OfferBanner from "../components/OfferBanner";
 import Footer from "../components/Footer";
 import GoogleAnalyticsPageView from "../components/GoogleAnalyticsPageView";
 import LisaChatLauncher from "../components/LisaChatLauncher";
@@ -76,11 +77,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${newsreader.variable} ${geistSans.variable}`}>
+    <html
+      lang="en"
+      className={`${newsreader.variable} ${geistSans.variable}`}
+      suppressHydrationWarning
+    >
       <body className="bg-[#0B192C] text-white font-sans antialiased">
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
+        <OfferBanner />
         <Header />
         <main id="main-content" tabIndex={-1}>
           {children}

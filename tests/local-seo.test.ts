@@ -44,3 +44,12 @@ test("only reviews with permission are published", () => {
     reviews.filter((item) => item.permissionToPublish).length,
   );
 });
+
+import { isOfferActive, rateLockOffer } from "../lib/offer.ts";
+
+test("rate-lock offer shows through Jan 31, 2027 Vancouver time and hides after", () => {
+  assert.equal(isOfferActive(new Date("2026-11-27T12:00:00-08:00")), true);
+  assert.equal(isOfferActive(new Date("2027-01-31T23:59:00-08:00")), true);
+  assert.equal(isOfferActive(new Date("2027-02-01T00:00:00-08:00")), false);
+  assert.ok(rateLockOffer.href.startsWith("/request-walkthrough"));
+});

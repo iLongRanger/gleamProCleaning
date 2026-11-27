@@ -109,7 +109,7 @@ export default function TrustSection({
             rel="noopener noreferrer"
             className={`inline-flex items-center gap-2 ${t.link}`}
           >
-            Read our reviews on Google
+            See us on Google
             <ArrowUpRight className="h-4 w-4" aria-hidden="true" />
           </a>
         ) : null}
