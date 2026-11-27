@@ -5,6 +5,7 @@ import "./globals.css";
 import "./marketing.css";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import OfferBanner from "../components/OfferBanner";
 import GoogleAnalyticsPageView from "../components/GoogleAnalyticsPageView";
 import LisaChatLauncher from "../components/LisaChatLauncher";
 import { site } from "@/lib/site";
@@ -81,6 +82,7 @@ export default function RootLayout({
         <a className="skip-link" href="#main-content">
           Skip to content
         </a>
+        <OfferBanner />
         <Header />
         <main id="main-content" tabIndex={-1}>
           {children}

@@ -141,6 +141,53 @@
   box-shadow: 0 0 0 4px #055f4b1f;
 }
 
+/* Time-limited offer bar above the header. It scrolls away; the header stays sticky. */
+.offer-banner {
+  background: var(--brand-gold);
+  color: var(--brand-navy);
+  font-size: 13px;
+  line-height: 1.4;
+}
+.offer-banner .gpc-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px 18px;
+  flex-wrap: wrap;
+  padding-block: 9px;
+  text-align: center;
+}
+.offer-banner p {
+  margin: 0;
+}
+.offer-banner-short {
+  display: none;
+}
+.offer-banner-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 600;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  white-space: nowrap;
+}
+.offer-banner-cta:focus-visible {
+  outline: 2px solid var(--brand-navy);
+  outline-offset: 3px;
+}
+@media (max-width: 760px) {
+  .offer-banner .gpc-container {
+    width: calc(100% - 32px);
+  }
+  .offer-banner-long {
+    display: none;
+  }
+  .offer-banner-short {
+    display: inline;
+  }
+}
+
 /* A compact header keeps the quote action in reach on every screen. */
 .site-header {
   position: sticky;
